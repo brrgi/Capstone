@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "248193378943",
+    "firebase_url": "https://msgfirebaseproject-bc593.firebaseio.com",
+    "project_id": "msgfirebaseproject-bc593",
+    "storage_bucket": "msgfirebaseproject-bc593.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248193378943:android:04e5ca45694991f2a96d4a",
+        "android_client_info": {
+          "package_name": "com.example.msg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248193378943-qqihetg2du3nvc3i9aru76g5v5gv9mt5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.msg",
+            "certificate_hash": "e8f24acd0aba4894eccf050d9a6d5051238e9eaa"
+          }
+        },
+        {
+          "client_id": "248193378943-4gidadordashpmo5iqtut9unjj60cflq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwrEf1qx0ZTRB9-QNRQCJhbjCcyerP_oE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248193378943-4gidadordashpmo5iqtut9unjj60cflq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
