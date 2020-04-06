@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/home_black_18dp"
+        android:title="홈"/>
+    <item
+        android:id="@+id/action_chat"
+        android:icon="@drawable/chat_black_18dp"
+        android:title="채팅"/>
+    <item
+        android:id="@+id/action_write"
+        android:icon="@drawable/create_black_18dp"
+        android:title="글쓰기"/>
+    <item
+        android:id="@+id/action_reservation"
+        android:icon="@drawable/bookmarks_black_18dp"
+        android:title="예약"/>
+    <item
+        android:id="@+id/action_account"
+        android:icon="@drawable/account_circle_black_18dp"
+        android:title="내정보"/>
+</menu>
