@@ -14,7 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.msg.model.RestaurantModel;
 import com.example.msg.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,7 +27,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupRestActivity extends AppCompatActivity {
 
     private static final int PICK_FROM_ALBUM = 10;
     private EditText email;
@@ -33,6 +35,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText name;
     private Button signup;
     private String splash_background;
+    private EditText phone;
     private ImageView profile;
     private Uri imageUri;
 
@@ -41,32 +44,34 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_signup_rest);
+
         FirebaseRemoteConfig mFirebaseRemoteConfig= FirebaseRemoteConfig.getInstance();
         splash_background = mFirebaseRemoteConfig.getString(getString(R.string.rc_color));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.parseColor(splash_background));
         }
 
-        profile=(ImageView)findViewById(R.id.signupActivity_imageview_profile);
+        profile=(ImageView)findViewById(R.id.signupRestActivity_imageview_profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK); //사진 가져오는 것
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 startActivityForResult(intent,PICK_FROM_ALBUM);
-
             }
         });
-        email=(EditText)findViewById(R.id.signupActivity_edittext_email);
-        password=(EditText)findViewById(R.id.signupActivity_edittext_password);
-        name=(EditText)findViewById(R.id.signupActivity_edittext_name);
-        signup=(Button)findViewById(R.id.signupActivity_button_signup);
+        phone=(EditText)findViewById(R.id.signupRestActivity_edittext_phone);
+        email=(EditText)findViewById(R.id.signupRestActivity_edittext_email);
+        password=(EditText)findViewById(R.id.signupRestActivity_edittext_password);
+        name=(EditText)findViewById(R.id.signupRestActivity_edittext_name);
+        signup=(Button)findViewById(R.id.signupRestActivity_button_signup);
         signup.setBackgroundColor(Color.parseColor(splash_background));
 
         signup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
 
                 if (email.getText().toString() == null || name.getText().toString() ==null || password.getText().toString() == null){
                     return;
@@ -74,26 +79,23 @@ public class SignupActivity extends AppCompatActivity {
 
                 FirebaseAuth.getInstance()
                         .createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
-                        .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(SignupRestActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 final String uid = task.getResult().getUser().getUid();
-                                FirebaseStorage.getInstance().getReference().child("userImages").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                FirebaseStorage.getInstance().getReference().child("restaurantImages").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                                         Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
                                         while(!imageUrl.isComplete());
 
-                                        UserModel userModel = new UserModel();
-                                        userModel.userName = name.getText().toString();
-                                        userModel.profileImageUrl=imageUrl.getResult().toString();
-                                        FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
+                                        RestaurantModel restaurantModel = new RestaurantModel();
+                                        restaurantModel.restaurantName = name.getText().toString();
+                                        restaurantModel.profileImageUrl=imageUrl.getResult().toString();
+                                        restaurantModel.restaurantPhone=phone.getText().toString();
+                                        FirebaseDatabase.getInstance().getReference().child("restaurant").child(uid).setValue(restaurantModel);
                                     }
                                 });
-
-
-
-
 
                             }
                         });
