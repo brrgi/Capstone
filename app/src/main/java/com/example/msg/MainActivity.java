@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 ft.replace(R.id.mainactivity_framelayout,accountFragment);
                 ft.commit();
                 break;
-
+//kyudong
         }
     }
 }
