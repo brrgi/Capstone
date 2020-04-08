@@ -84,10 +84,11 @@ public class SignupActivity extends AppCompatActivity {
                                         Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
                                         while(!imageUrl.isComplete());
 
+
                                         UserModel userModel = new UserModel();
                                         userModel.userName = name.getText().toString();
                                         userModel.profileImageUrl=imageUrl.getResult().toString();
-                                        FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
+                                        FirebaseDatabase.getInstance().getReference().child("jsers").child(uid).setValue(userModel);
                                     }
                                 });
 
