@@ -1,5 +1,6 @@
 package com.example.msg;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,25 +11,28 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.msg.model.RestaurantModel;
-import com.example.msg.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
+
 public class SignupRestActivity extends AppCompatActivity {
 
+    private static final String TAG = "SignupRestActivity";
     private static final int PICK_FROM_ALBUM = 10;
     private EditText email;
     private EditText password;
@@ -93,7 +97,23 @@ public class SignupRestActivity extends AppCompatActivity {
                                         restaurantModel.restaurantName = name.getText().toString();
                                         restaurantModel.profileImageUrl=imageUrl.getResult().toString();
                                         restaurantModel.restaurantPhone=phone.getText().toString();
-                                        FirebaseDatabase.getInstance().getReference().child("restaurant").child(uid).setValue(restaurantModel);
+                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                        db.collection("restaurantUsers")
+                                                .document(uid)
+                                                .set(restaurantModel)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d(TAG,"SUCCESS");
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.d(TAG,"Faliure");
+                                                    }
+                                                });
+
                                     }
                                 });
 
