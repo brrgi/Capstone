@@ -2,12 +2,30 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/writeFragment_imageview_image"
+        android:src="@drawable/add_to_photos_black"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/writeFragment_edittext_title"
+            android:hint="제목"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/writeFragment_button_enrollment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Write"
-        android:textSize="40sp"/>
+        android:text="상품 등록"/>
+
 
 </LinearLayout>
