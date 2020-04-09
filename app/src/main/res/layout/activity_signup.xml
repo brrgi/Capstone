@@ -17,6 +17,8 @@
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/signupActivity_edittext_email"
+            android:singleLine="true"
+            android:lines="1"
             android:hint="이메일"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -38,6 +40,8 @@
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/signupActivity_edittext_name"
+            android:singleLine="true"
+            android:lines="1"
             android:hint="이름"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
