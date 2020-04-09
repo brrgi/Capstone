@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.msg.R;
 import com.example.msg.model.ProductModel;
@@ -61,6 +63,10 @@ public class WriteFragment extends Fragment {
         title = (EditText) view.findViewById(R.id.writeFragment_edittext_title);
         enrollment = (Button) view.findViewById(R.id.writeFragment_button_enrollment);
 
+
+
+
+
         enrollment.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -82,7 +88,6 @@ public class WriteFragment extends Fragment {
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
-                                        //프레그먼트1(home)으로 전환?
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -91,15 +96,16 @@ public class WriteFragment extends Fragment {
 
                                     }
                                 });
+
                     }
                 });
 
             }
         });
 
-
         return view;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
