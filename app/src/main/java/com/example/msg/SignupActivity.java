@@ -48,7 +48,6 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
         FirebaseRemoteConfig mFirebaseRemoteConfig= FirebaseRemoteConfig.getInstance();
         splash_background = mFirebaseRemoteConfig.getString(getString(R.string.rc_color));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -65,7 +64,6 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
-
         email=(EditText)findViewById(R.id.signupActivity_edittext_email);
         password=(EditText)findViewById(R.id.signupActivity_edittext_password);
         name=(EditText)findViewById(R.id.signupActivity_edittext_name);
