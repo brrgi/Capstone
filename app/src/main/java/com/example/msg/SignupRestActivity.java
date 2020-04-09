@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.msg.model.RestaurantModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -104,12 +105,14 @@ public class SignupRestActivity extends AppCompatActivity {
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_LONG).show();
                                                         Log.d(TAG,"SUCCESS");
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(getApplicationContext(), "회원가입 실패", Toast.LENGTH_LONG).show();
                                                         Log.d(TAG,"Faliure");
                                                     }
                                                 });

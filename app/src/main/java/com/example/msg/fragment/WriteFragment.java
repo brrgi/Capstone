@@ -88,12 +88,16 @@ public class WriteFragment extends Fragment {
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
+
+                                        //프레그먼트1(home)으로 전환?
+                                        Toast.makeText(getActivity(), "출력할 문자열", Toast.LENGTH_LONG).show();
+
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-
+                                        Toast.makeText(getActivity(), "출력할 문자열", Toast.LENGTH_LONG).show();
                                     }
                                 });
 
@@ -101,6 +105,7 @@ public class WriteFragment extends Fragment {
                 });
 
             }
+
         });
 
         return view;
