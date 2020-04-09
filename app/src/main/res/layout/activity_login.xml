@@ -18,6 +18,8 @@
         <EditText
             android:id="@+id/loginActivity_edittext_id"
             android:hint="아이디"
+            android:singleLine="true"
+            android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -28,6 +30,8 @@
         <EditText
             android:id="@+id/loginActivity_edittext_password"
             android:hint="패스워드"
+            android:singleLine="true"
+            android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"/>

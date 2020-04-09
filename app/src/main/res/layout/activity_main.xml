@@ -14,7 +14,14 @@
         android:layout_above="@+id/mainactivity_bottomnavigationview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        ></FrameLayout>
+        >
+
+        <Button
+            android:id="@+id/mainActivity_button_backLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그인 화면" />
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

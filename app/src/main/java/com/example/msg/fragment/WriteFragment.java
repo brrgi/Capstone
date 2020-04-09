@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -83,18 +84,20 @@ public class WriteFragment extends Fragment {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
                                         //프레그먼트1(home)으로 전환?
+                                        Toast.makeText(getActivity(), "출력할 문자열", Toast.LENGTH_LONG).show();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-
+                                        Toast.makeText(getActivity(), "출력할 문자열", Toast.LENGTH_LONG).show();
                                     }
                                 });
                     }
                 });
 
             }
+
         });
 
 

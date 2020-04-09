@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {    //로그인이 정상적으로 완료되었는지 판단 (로그인 후 다른 화면으로 넘겨주는 역학이 아님)
                 if(!task.isSuccessful()){
                     //로그인 실패
-                    Toast.makeText(LoginActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"다시 로그인 해주세요",Toast.LENGTH_SHORT).show();
                 }
             }
         });
