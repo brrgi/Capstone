@@ -73,15 +73,15 @@ public class WriteFragment extends Fragment {
             public void onClick(View view) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 final String uid = user.getUid();
-                FirebaseStorage.getInstance().getReference().child("productImages").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                FirebaseStorage.getInstance().getReference().child("productImages").child(uid+title.getText().toString()).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
                         while (!imageUrl.isComplete()) ;
                         ProductModel productModel=new ProductModel();
-                        productModel.title=title.getText().toString();
-                        productModel.ImageUrl = imageUrl.getResult().toString();
-                        productModel.Uid=uid;
+                        productModel.setTitle(title.getText().toString());
+                        productModel.setImageUrl(imageUrl.getResult().toString());
+                        productModel.setUid(uid);
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                         db.collection("products")
                                 .add(productModel)
