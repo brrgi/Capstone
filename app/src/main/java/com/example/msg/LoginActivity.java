@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
+import com.example.msg.cloudmessaging.CloudMessagingActivity;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText id;
     private EditText password;
@@ -79,6 +81,16 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
+
+        Button firebasecloudmessagingbtn = (Button)findViewById(R.id.firebasecloudmessagingbtn);
+        firebasecloudmessagingbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,CloudMessagingActivity.class));
+            }
+        });
+
+
     }
 
     void loginEvent(){
