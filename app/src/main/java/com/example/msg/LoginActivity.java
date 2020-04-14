@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
+        //푸시 테스트를 위한 토큰 테스트 버튼
         Button firebasecloudmessagingbtn = (Button)findViewById(R.id.firebasecloudmessagingbtn);
         firebasecloudmessagingbtn.setOnClickListener(new View.OnClickListener() {
             @Override
