@@ -95,9 +95,9 @@ public class SignupRestActivity extends AppCompatActivity {
                                         while(!imageUrl.isComplete());
 
                                         RestaurantModel restaurantModel = new RestaurantModel();
-                                        restaurantModel.setRestaurantName(name.getText().toString());
-                                        restaurantModel.setProfileImageUrl(imageUrl.getResult().toString());
-                                        restaurantModel.setRestaurantPhone(phone.getText().toString());
+                                        restaurantModel.restaurantName = name.getText().toString();
+                                        restaurantModel.profileImageUrl=imageUrl.getResult().toString();
+                                        restaurantModel.restaurantPhone=phone.getText().toString();
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("restaurantUsers")
                                                 .document(uid)

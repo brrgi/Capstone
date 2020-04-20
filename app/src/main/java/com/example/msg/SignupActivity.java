@@ -92,8 +92,8 @@ public class SignupActivity extends AppCompatActivity {
                                         while(!imageUrl.isComplete());
 
                                         UserModel userModel = new UserModel();
-                                        userModel.setUserName(name.getText().toString());
-                                        userModel.setProfileImageUrl(imageUrl.getResult().toString());
+                                        userModel.userName = name.getText().toString();
+                                        userModel.profileImageUrl=imageUrl.getResult().toString();
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("users")
                                                 .document(uid)
