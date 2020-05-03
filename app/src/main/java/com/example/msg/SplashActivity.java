@@ -14,8 +14,11 @@ import android.widget.LinearLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.BuildConfig;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.example.msg.Domain.*;
+import com.example.msg.model.*;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -52,6 +55,12 @@ public class SplashActivity extends AppCompatActivity {
                 });
 
 
+        //FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+        //UserProductModel userProductModel = UserProductApi.makeDummy();
+        //db.collection("UserProducts").add(userProductModel);
+        //UserProductApi.postProduct(userProductModel);
     }
 
     void displayMessage() {
