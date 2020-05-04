@@ -1,8 +1,11 @@
 package com.example.msg.Domain;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.msg.model.*;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -11,12 +14,15 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+TODO: 프로덕트 ID도 돌려주도록 만들기, 이미지도 처리하도록 만들기, 에러 코드 등록.
+ */
+
 public class UserProductApi {
 
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public static int DummyCounter = 0; //더미를 만드는데 사용되는 카운터.
-
-    //private int errorCode = 1; 에러 처리가 필요한경우. 주석을 풀고 사용.
+    public static int dummyCounter = 0; //더미를 만드는데 사용되는 카운터.
+    private int errorCode = 1;
     /*
     에러코드입니다. Api에 함수를 새로 정의할 때는, 반드시 함수가 정상 동작했을 경우, errorCode를 1로 되돌려주는 작업을 해주십시오.
     1: 최근에 동작한 모든 코드가 정상 동작함.
@@ -33,9 +39,9 @@ public class UserProductApi {
                 , "소금", 3, "300g", "2020-05-03", false
         , 2.5, 2.5 );
 
-        switch(DummyCounter % 4) {
+        switch(dummyCounter % 4) {
             case 0:
-                return userProductModel;
+                break;
             case 1:
                 userProductModel.title = "참치";
                 userProductModel.p_description = "방금 낚아올린 참치입니다.";
@@ -43,7 +49,7 @@ public class UserProductApi {
                 userProductModel.categorySmall = "참치";
                 userProductModel.latitude = 5.0;
                 userProductModel.longitude = 5.0;
-                return userProductModel;
+                break;
             case 2:
                 userProductModel.title = "대구";
                 userProductModel.p_description = "방금 낚아올린 대구입니다.";
@@ -51,7 +57,7 @@ public class UserProductApi {
                 userProductModel.categorySmall = "대구";
                 userProductModel.latitude = 5.0;
                 userProductModel.longitude = 5.0;
-                return userProductModel;
+                break;
             default:
                 userProductModel.title = "설탕";
                 userProductModel.p_description = "달콤한 설탕입니다.";
@@ -59,9 +65,17 @@ public class UserProductApi {
                 userProductModel.categorySmall = "설탕";
                 userProductModel.latitude = 5.0;
                 userProductModel.longitude = 5.0;
-                return userProductModel;
+                break;
         }
+
+        UserProductApi.dummyCounter++;
+        return userProductModel;
     }
+    /*
+    입력 : 없음
+    출력 : 더미 UserProductModel
+    설명 : 간단한 더미 모델을 제공하는 함수입니다. 테스트 용도로 사용하십시오.
+     */
 
     public static void postProduct(UserProductModel userProductModel) {
         db.collection("UserProducts").add(userProductModel);
@@ -98,30 +112,48 @@ public class UserProductApi {
 
     public static ArrayList<UserProductModel> getProductList(double curLatitude, double curLongitude, double range) {
         final ArrayList<UserProductModel> modelList = new ArrayList<UserProductModel>();
+        // whereGreaterThan("longitude", curLongitude - range).whereLessThan("longitude", curLongitude + range)
+        final double finalCurLongitude = curLongitude;
+        final double finalRange = range;
 
-        db.collection("UserProducts").
-                whereGreaterThan("latitude", curLatitude - range).whereLessThan("latitude", curLatitude + range).
-                whereGreaterThan("longitude", curLongitude - range).whereLessThan("longitude", curLongitude + range)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()) {
-                            for(QueryDocumentSnapshot document : task.getResult()) {
-                                modelList.add(document.toObject(UserProductModel.class));
+
+        try {
+            db.collection("UserProducts").
+                    whereGreaterThan("latitude", curLatitude - range).whereLessThan("latitude", curLatitude + range)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            UserProductModel userProductModel = null;
+
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    userProductModel = document.toObject(UserProductModel.class);
+                                   if((userProductModel.longitude > finalCurLongitude - finalRange) && (userProductModel.longitude < finalCurLongitude + finalRange)){
+                                        modelList.add(userProductModel);
+                                   }
+                                }
+                            } else {
+                                //
                             }
-                        } else {
-                          //Eror code.
                         }
-                    }
-                });
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("Test", "Erorr: ",e);
+                }
+            });
+        } catch(Exception e) {
+            Log.d("Test", e.toString());
 
+        }
 
+        //Log.d("test", modelList.get(0).title);
         return modelList;
     }
     /*
     입력: 현재 경도와 위도, 반경.
-    출력: UserProductModel의 어레이리스트
+    출력: UserProductModel의 검색된 어레이리스트
     동작: 현재 위치로부터 일정 반경 내에 등록된 UserProduct를 모두 가져옵니다.
      */
 

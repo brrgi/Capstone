@@ -6,14 +6,25 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.msg.Domain.UserProductApi;
 import com.example.msg.fragment.AccountFragment;
 import com.example.msg.fragment.ChatFragment;
 import com.example.msg.fragment.HomeFragment;
 import com.example.msg.fragment.ReservationFragment;
 import com.example.msg.fragment.WriteFragment;
+import com.example.msg.model.UserProductModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
     private WriteFragment writeFragment;
     private ReservationFragment reservationFragment;
     private AccountFragment accountFragment;
+    public ArrayList<UserProductModel> up = UserProductApi.getProductList(5.0, 5.0, 1.0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         bottomNavigationView=findViewById(R.id.mainactivity_bottomnavigationview);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -71,14 +82,31 @@ public class MainActivity extends AppCompatActivity {
         ft=fm.beginTransaction();
         switch (n){
             case 0:
+                Log.d("databpaseTest", Integer.toString(up.size()));
+                for(int i =0; i<up.size(); i++) {
+                    Log.d("databaseTest", up.get(i).title);
+                }
+
                 ft.replace(R.id.mainactivity_framelayout,homeFragment);
                 ft.commit();
                 break;
             case 1:
+                ArrayList<UserProductModel> upm = UserProductApi.filterByCategory(up, "생선", "대구");
+                for(int i =0; i<up.size(); i++) {
+                    Log.d("databaseTest", upm.get(i).title);
+                }
+
+
                 ft.replace(R.id.mainactivity_framelayout,chatFragment);
                 ft.commit();
                 break;
             case 2:
+                ArrayList<UserProductModel> ubm = UserProductApi.filterByKeyWord(up, "달콤한");
+                for(int i =0; i<up.size(); i++) {
+                    Log.d("databaseTest", ubm.get(i).title);
+                }
+
+
                 ft.replace(R.id.mainactivity_framelayout,writeFragment);
                 ft.commit();
                 break;

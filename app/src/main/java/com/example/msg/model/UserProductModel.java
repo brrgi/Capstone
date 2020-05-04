@@ -5,6 +5,8 @@
 
 package com.example.msg.model;
 
+import com.example.msg.Domain.UserProductApi;
+
 public class UserProductModel {
     public String user_id = null;
     public String title = null;
@@ -18,6 +20,10 @@ public class UserProductModel {
     public boolean completed = false;
     public double latitude = -1;
     public double longitude = -1;
+
+    public UserProductModel() {
+
+    }
 
     public UserProductModel( String user_id, String title, String p_imageURL, String p_description, String categoryBig, String categorySmall, int quality, String quantity, String expiration_date, boolean completed, double latitude, double longitude) {
         this.user_id = user_id;

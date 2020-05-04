@@ -8,10 +8,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.BuildConfig;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -55,11 +57,10 @@ public class SplashActivity extends AppCompatActivity {
                 });
 
 
-        //FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
         //UserProductModel userProductModel = UserProductApi.makeDummy();
-        //db.collection("UserProducts").add(userProductModel);
         //UserProductApi.postProduct(userProductModel);
     }
 
