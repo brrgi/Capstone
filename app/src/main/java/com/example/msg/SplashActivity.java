@@ -55,13 +55,6 @@ public class SplashActivity extends AppCompatActivity {
                         displayMessage();
                     }
                 });
-
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
-        //UserProductModel userProductModel = UserProductApi.makeDummy();
-        //UserProductApi.postProduct(userProductModel);
     }
 
     void displayMessage() {

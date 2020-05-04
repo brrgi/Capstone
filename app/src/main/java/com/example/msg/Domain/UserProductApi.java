@@ -25,13 +25,15 @@ public class UserProductApi {
     private int errorCode = 1;
     /*
     에러코드입니다. Api에 함수를 새로 정의할 때는, 반드시 함수가 정상 동작했을 경우, errorCode를 1로 되돌려주는 작업을 해주십시오.
+    0: 어떠한 이유로 코드가 끝까지 동작하지 못함.
     1: 최근에 동작한 모든 코드가 정상 동작함.
-
+    2:
+    */
 
     public int getErrorCode() {
         return errorCode;
     }
-*/
+
 
     public static UserProductModel makeDummy() {
 
@@ -79,7 +81,6 @@ public class UserProductApi {
 
     public static void postProduct(UserProductModel userProductModel) {
         db.collection("UserProducts").add(userProductModel);
-        //TODO 이미지도 나중에 같이 넣어야함.
     }
     /*
     입력: UserProductModel.
@@ -101,7 +102,7 @@ public class UserProductApi {
                         "latitude", userProductModel.latitude,
                         "longitude", userProductModel.longitude,
                         "user_id", userProductModel.user_id
-                        );
+                );
     }
     /*
     입력: userProductModel, product Id
@@ -112,7 +113,6 @@ public class UserProductApi {
 
     public static ArrayList<UserProductModel> getProductList(double curLatitude, double curLongitude, double range) {
         final ArrayList<UserProductModel> modelList = new ArrayList<UserProductModel>();
-        // whereGreaterThan("longitude", curLongitude - range).whereLessThan("longitude", curLongitude + range)
         final double finalCurLongitude = curLongitude;
         final double finalRange = range;
 
@@ -191,4 +191,6 @@ public class UserProductApi {
     출력: 필터링된 모델 리스트
     동작: 모델 리스트에서 키워드와 매칭되는 모델만 필터링해서 반환합니다. 얕은 복사를 일으키므로 주의하십시오.
      */
+
+
 }
