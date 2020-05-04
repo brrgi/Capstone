@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.msg">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cloudmessaging.CloudMessagingActivity"></activity>
+        <activity android:name=".ReservationActivity"></activity>
+        <activity android:name=".cloudmessaging.CloudMessagingActivity" />
         <activity android:name=".SignupRestActivity" />
         <activity android:name=".SelectSignupActivity" />
         <activity android:name=".MainActivity" />
@@ -46,5 +43,8 @@
             </intent-filter>
         </service>
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

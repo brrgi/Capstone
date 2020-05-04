@@ -10,4 +10,10 @@
         android:text="Reservation"
         android:textSize="40sp"/>
 
+    <Button
+        android:id="@+id/reservation_button_reserv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
 </LinearLayout>
