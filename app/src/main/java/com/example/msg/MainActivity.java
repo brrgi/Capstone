@@ -92,31 +92,14 @@ public class MainActivity extends AppCompatActivity {
         ft=fm.beginTransaction();
         switch (n){
             case 0:
-                Log.d("databpaseTest", Integer.toString(up.size()));
-                for(int i =0; i<up.size(); i++) {
-                    Log.d("databaseTest", up.get(i).title);
-                }
-
                 ft.replace(R.id.mainactivity_framelayout,homeFragment);
                 ft.commit();
                 break;
             case 1:
-                ArrayList<UserProductModel> upm = UserProductApi.filterByCategory(up, "생선", "대구");
-                for(int i =0; i<up.size(); i++) {
-                    Log.d("databaseTest", upm.get(i).title);
-                }
-
-
                 ft.replace(R.id.mainactivity_framelayout,chatFragment);
                 ft.commit();
                 break;
             case 2:
-                ArrayList<UserProductModel> ubm = UserProductApi.filterByKeyWord(up, "달콤한");
-                for(int i =0; i<up.size(); i++) {
-                    Log.d("databaseTest", ubm.get(i).title);
-                }
-
-
                 ft.replace(R.id.mainactivity_framelayout,writeFragment);
                 ft.commit();
                 break;

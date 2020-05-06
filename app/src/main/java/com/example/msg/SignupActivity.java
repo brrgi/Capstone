@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.msg.DatabaseModel.UserModel;
+import com.example.msg.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
