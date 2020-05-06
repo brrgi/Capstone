@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.msg.MainActivity;
 import com.example.msg.R;
+import com.example.msg.model.ReservationModel;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
