@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SaleActivity">
+
+    <TextView
+        android:id="@+id/saleActivity_textView_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="제품 사진"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/saleActivity_imageView_product"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/icon_image_searching"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleActivity_textView_title" />
+
+    <TextView
+        android:id="@+id/saleActivity_textView_salesman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="판매자"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleActivity_imageView_product" />
+
+    <TextView
+        android:id="@+id/saleActivity_textView_categoryBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="카테고리"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleActivity_textView_salesman" />
+
+    <TextView
+        android:id="@+id/saleActivity_textView_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="양"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleActivity_textView_categoryBig" />
+
+    <TextView
+        android:id="@+id/saleActivity_textView_expiredDate"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:text="유통기한"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleActivity_textView_quality" />
+
+    <TextView
+        android:id="@+id/saleActivity_textView_quality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="품질"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleActivity_textView_quantity" />
+
+    <TextView
+        android:id="@+id/saleActivity_textView_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상세설명"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleActivity_textView_expiredDate" />
+
+    <Button
+        android:id="@+id/saleActivity_button_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginBottom="44dp"
+        android:text="구매"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/saleActivity_button_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="44dp"
+        android:text="채팅"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/saleActivity_button_buy" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

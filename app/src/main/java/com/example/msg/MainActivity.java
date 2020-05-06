@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private AccountFragment accountFragment;
     private Button backLogin;
 
+    private Button sale_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,16 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "로그인 화면으로 돌아갑니다.", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+
+        sale_btn = (Button)findViewById(R.id.sale_btn);
+        sale_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SaleActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

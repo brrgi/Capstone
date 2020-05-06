@@ -7,7 +7,7 @@ android {
     defaultConfig {
 
         applicationId "com.example.msg"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 29
         multiDexEnabled true
         versionCode 1
@@ -48,6 +48,7 @@ dependencies {
     implementation "com.firebaseui:firebase-ui-auth:3.0.0"
     implementation "com.firebaseui:firebase-ui-firestore:3.0.0"
     implementation 'com.google.firebase:firebase-messaging:20.1.+'
+    implementation 'com.github.bootpay:client_android_java:3.2.43'
 
 }
 

@@ -7,6 +7,7 @@ import com.example.msg.DatabaseModel.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -18,6 +19,10 @@ TODO: 프로덕트 ID도 돌려주도록 만들기, 이미지도 처리하도록
  */
 
 public class UserProductApi {
+
+    public interface MyCallback {
+        void onCallback(UserProductModel userProductModel);
+    }
 
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static int dummyCounter = 0; //더미를 만드는데 사용되는 카운터.
@@ -196,5 +201,32 @@ public class UserProductApi {
     동작: 모델 리스트에서 키워드와 매칭되는 모델만 필터링해서 반환합니다. 얕은 복사를 일으키므로 주의하십시오.
      */
 
+    public static void getUserProduct(String pid) {
+
+    }
+
+    public static void getProduct(final MyCallback myCallback, String productId) {
+        final ArrayList<UserProductModel> userProductModel = new ArrayList<UserProductModel>();
+
+        db.collection("UserProducts").document(productId).get().
+                addOnCompleteListener(
+                        new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        UserProductModel temp = document.toObject(UserProductModel.class);
+                                        myCallback.onCallback(temp);
+                                    } else {
+                                        //document no search;
+                                    }
+                                } else {
+                                    //exception of firestore
+                                }
+                            }
+                        });
+
+    }
 
 }

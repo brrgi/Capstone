@@ -34,5 +34,14 @@
         android:layout_height="wrap_content"
         android:text="예약 등록"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reservationActivity_spinner_category" />
+
+    <Spinner
+        android:id="@+id/reservationActivity_spinner_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reservationActivity_edittext_item" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

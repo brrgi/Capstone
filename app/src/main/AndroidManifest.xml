@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ProductUploadActivity"></activity>
-        <activity android:name=".ReservationActivity"></activity>
+        <activity android:name=".PayActivity"></activity>
+        <activity android:name=".SaleActivity" />
+        <activity android:name=".ProductUploadActivity" />
+        <activity android:name=".ReservationActivity" />
         <activity android:name=".cloudmessaging.CloudMessagingActivity" />
         <activity android:name=".SignupRestActivity" />
         <activity android:name=".SelectSignupActivity" />
@@ -45,8 +46,9 @@
             </intent-filter>
         </service>
     </application>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

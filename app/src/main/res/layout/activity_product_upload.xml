@@ -14,7 +14,7 @@
         android:text="사진 등록하기" />
 
     <ImageView
-        android:id="@+id/product_upload_imageView_uploadImage"
+        android:id="@+id/saleActivity_imageView_product"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@drawable/icon_image_searching"
