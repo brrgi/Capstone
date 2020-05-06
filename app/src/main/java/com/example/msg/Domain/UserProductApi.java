@@ -3,7 +3,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.msg.model.*;
+import com.example.msg.DatabaseModel.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -12,7 +12,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /*
 TODO: 프로덕트 ID도 돌려주도록 만들기, 이미지도 처리하도록 만들기, 에러 코드 등록.
@@ -22,7 +21,7 @@ public class UserProductApi {
 
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static int dummyCounter = 0; //더미를 만드는데 사용되는 카운터.
-    private int errorCode = 1;
+    private static  int errorCode = 1;
     /*
     에러코드입니다. Api에 함수를 새로 정의할 때는, 반드시 함수가 정상 동작했을 경우, errorCode를 1로 되돌려주는 작업을 해주십시오.
     0: 어떠한 이유로 코드가 끝까지 동작하지 못함.
@@ -30,14 +29,14 @@ public class UserProductApi {
     2:
     */
 
-    public int getErrorCode() {
+    public static int getErrorCode() {
         return errorCode;
     }
 
 
     public static UserProductModel makeDummy() {
 
-        UserProductModel userProductModel = new UserProductModel("0000", "핑크솔트", null, "핑크솔트입니다.", "향신료"
+        UserProductModel userProductModel = new UserProductModel(null ,"0000", "핑크솔트", null, "핑크솔트입니다.", "향신료"
                 , "소금", 3, "300g", "2020-05-03", false
         , 2.5, 2.5 );
 
@@ -112,6 +111,8 @@ public class UserProductApi {
 
 
     public static ArrayList<UserProductModel> getProductList(double curLatitude, double curLongitude, double range) {
+        errorCode = 0; //작업 시작.
+
         final ArrayList<UserProductModel> modelList = new ArrayList<UserProductModel>();
         final double finalCurLongitude = curLongitude;
         final double finalRange = range;
@@ -133,9 +134,12 @@ public class UserProductApi {
                                         modelList.add(userProductModel);
                                    }
                                 }
+                                errorCode = 1; //모든 코드가 정상동작함.
+
                             } else {
                                 //
                             }
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override

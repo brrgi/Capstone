@@ -3,9 +3,7 @@
 복잡한 기능을 따로 정의하지 않습니다. 이 모델을 직접적으로 다루는 복잡한 기능들은 Domain 패키지의 Api 항목에 정의되어있습니다.
  */
 
-package com.example.msg.model;
-
-import com.example.msg.Domain.UserProductApi;
+package com.example.msg.DatabaseModel;
 
 public class UserProductModel {
     public String user_id = null;
@@ -20,12 +18,14 @@ public class UserProductModel {
     public boolean completed = false;
     public double latitude = -1;
     public double longitude = -1;
+    public String uproduct_id = null;
 
     public UserProductModel() {
 
     }
 
-    public UserProductModel( String user_id, String title, String p_imageURL, String p_description, String categoryBig, String categorySmall, int quality, String quantity, String expiration_date, boolean completed, double latitude, double longitude) {
+    public UserProductModel( String uproduct_id, String user_id, String title, String p_imageURL, String p_description, String categoryBig, String categorySmall, int quality, String quantity, String expiration_date, boolean completed, double latitude, double longitude) {
+        this.uproduct_id = uproduct_id;
         this.user_id = user_id;
         this.title = title;
         this.p_imageURL = p_imageURL;

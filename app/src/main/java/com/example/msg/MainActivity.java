@@ -15,14 +15,8 @@ import com.example.msg.fragment.ChatFragment;
 import com.example.msg.fragment.HomeFragment;
 import com.example.msg.fragment.ReservationFragment;
 import com.example.msg.fragment.WriteFragment;
-import com.example.msg.model.UserProductModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
+import com.example.msg.DatabaseModel.UserProductModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -37,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     private ReservationFragment reservationFragment;
     private AccountFragment accountFragment;
     public ArrayList<UserProductModel> up = UserProductApi.getProductList(5.0, 5.0, 1.0);
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         reservationFragment=new ReservationFragment();
         accountFragment=new AccountFragment();
         setFrag(0); //첫 fragment 화면을 무엇으로 지정해줄 것인지 선택
+
 
     }
 

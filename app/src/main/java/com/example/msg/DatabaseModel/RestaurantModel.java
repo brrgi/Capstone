@@ -1,4 +1,4 @@
-package com.example.msg.model;
+package com.example.msg.DatabaseModel;
 
 public class RestaurantModel {
     public String resId = null;

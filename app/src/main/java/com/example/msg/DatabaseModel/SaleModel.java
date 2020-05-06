@@ -1,4 +1,4 @@
-package com.example.msg.model;
+package com.example.msg.DatabaseModel;
 
 public class SaleModel {
     public String saleId = null;
