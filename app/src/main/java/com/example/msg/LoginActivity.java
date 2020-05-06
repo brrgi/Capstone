@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
+import com.example.msg.cloudmessaging.CloudMessagingActivity;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText id;
     private EditText password;
@@ -59,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,SignupActivity.class));
+                startActivity(new Intent(LoginActivity.this,SelectSignupActivity.class));
             }
         });
 
@@ -79,6 +81,17 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
+
+        //푸시 테스트를 위한 토큰 테스트 버튼
+        Button firebasecloudmessagingbtn = (Button)findViewById(R.id.firebasecloudmessagingbtn);
+        firebasecloudmessagingbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,CloudMessagingActivity.class));
+            }
+        });
+
+
     }
 
     void loginEvent(){
@@ -87,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {    //로그인이 정상적으로 완료되었는지 판단 (로그인 후 다른 화면으로 넘겨주는 역학이 아님)
                 if(!task.isSuccessful()){
                     //로그인 실패
-                    Toast.makeText(LoginActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"다시 로그인 해주세요",Toast.LENGTH_SHORT).show();
                 }
             }
         });

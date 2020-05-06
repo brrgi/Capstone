@@ -1,5 +1,6 @@
 package com.example.msg;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.msg.DatabaseModel.UserModel;
+import com.example.msg.model.RestaurantModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,16 +31,16 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
 
+public class SignupRestActivity extends AppCompatActivity {
 
-
-public class SignupActivity extends AppCompatActivity {
-    private static final String TAG = "SignupActivity";
+    private static final String TAG = "SignupRestActivity";
     private static final int PICK_FROM_ALBUM = 10;
     private EditText email;
     private EditText password;
     private EditText name;
     private Button signup;
     private String splash_background;
+    private EditText phone;
     private ImageView profile;
     private Uri imageUri;
 
@@ -48,32 +49,34 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_signup_rest);
+
         FirebaseRemoteConfig mFirebaseRemoteConfig= FirebaseRemoteConfig.getInstance();
         splash_background = mFirebaseRemoteConfig.getString(getString(R.string.rc_color));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.parseColor(splash_background));
         }
 
-        profile=(ImageView)findViewById(R.id.signupActivity_imageview_profile);
+        profile=(ImageView)findViewById(R.id.signupRestActivity_imageview_profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK); //사진 가져오는 것
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 startActivityForResult(intent,PICK_FROM_ALBUM);
-
             }
         });
-        email=(EditText)findViewById(R.id.signupActivity_edittext_email);
-        password=(EditText)findViewById(R.id.signupActivity_edittext_password);
-        name=(EditText)findViewById(R.id.signupActivity_edittext_name);
-        signup=(Button)findViewById(R.id.signupActivity_button_signup);
+        phone=(EditText)findViewById(R.id.signupRestActivity_edittext_phone);
+        email=(EditText)findViewById(R.id.signupRestActivity_edittext_email);
+        password=(EditText)findViewById(R.id.signupRestActivity_edittext_password);
+        name=(EditText)findViewById(R.id.signupRestActivity_edittext_name);
+        signup=(Button)findViewById(R.id.signupRestActivity_button_signup);
         signup.setBackgroundColor(Color.parseColor(splash_background));
 
         signup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
 
                 if (email.getText().toString() == null || name.getText().toString() ==null || password.getText().toString() == null){
                     return;
@@ -81,24 +84,24 @@ public class SignupActivity extends AppCompatActivity {
 
                 FirebaseAuth.getInstance()
                         .createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
-                        .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(SignupRestActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 final String uid = task.getResult().getUser().getUid();
-                                FirebaseStorage.getInstance().getReference().child("userImages").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                FirebaseStorage.getInstance().getReference().child("restaurantImages").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                                         Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
                                         while(!imageUrl.isComplete());
 
-
-                                        UserModel userModel = new UserModel();
-                                        userModel.setUserName(name.getText().toString());
-                                        userModel.setProfileImageUrl(imageUrl.getResult().toString());
+                                        RestaurantModel restaurantModel = new RestaurantModel();
+                                        restaurantModel.setRestaurantName(name.getText().toString());
+                                        restaurantModel.setProfileImageUrl(imageUrl.getResult().toString());
+                                        restaurantModel.setRestaurantPhone(phone.getText().toString());
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                        db.collection("users")
+                                        db.collection("restaurantUsers")
                                                 .document(uid)
-                                                .set(userModel)
+                                                .set(restaurantModel)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
@@ -113,8 +116,10 @@ public class SignupActivity extends AppCompatActivity {
                                                         Log.d(TAG,"Faliure");
                                                     }
                                                 });
+
                                     }
                                 });
+
                             }
                         });
             }

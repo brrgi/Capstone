@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+
+
+    <ImageView
+        android:id="@+id/writeFragment_imageview_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/add_to_photos_black" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/writeFragment_edittext_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="제목" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/writeFragment_button_enrollment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Write"
-        android:textSize="40sp"/>
+        android:text="상품 등록" />
 
 </LinearLayout>

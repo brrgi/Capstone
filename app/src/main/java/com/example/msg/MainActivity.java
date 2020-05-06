@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.msg.Domain.UserProductApi;
 import com.example.msg.fragment.AccountFragment;
@@ -30,16 +34,23 @@ public class MainActivity extends AppCompatActivity {
     private WriteFragment writeFragment;
     private ReservationFragment reservationFragment;
     private AccountFragment accountFragment;
-    public ArrayList<UserProductModel> up = UserProductApi.getProductList(5.0, 5.0, 1.0);
-
-
-
-
+    private Button backLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        backLogin=(Button)findViewById(R.id.mainActivity_button_backLogin);
+        backLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "로그인 화면으로 돌아갑니다.", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
 
         bottomNavigationView=findViewById(R.id.mainactivity_bottomnavigationview);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
