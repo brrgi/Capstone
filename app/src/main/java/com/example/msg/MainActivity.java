@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.Domain.RestaurantProductApi;
 import com.example.msg.Domain.UserProductApi;
 import com.example.msg.fragment.AccountFragment;
 import com.example.msg.fragment.ChatFragment;
@@ -23,6 +25,7 @@ import com.example.msg.DatabaseModel.UserProductModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private ReservationFragment reservationFragment;
     private AccountFragment accountFragment;
     private Button backLogin;
+    private ArrayList<UserProductModel> upm = UserProductApi.getProductList(5.0, 5.0, 500);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +56,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Test Code
+        //테스트 항목, 업데이트, 물량순 정렬, 재고순 정렬 위치 긁어오기.
+        final ArrayList<RestaurantProductModel> restaurantProductModelArrayList1 = new ArrayList<RestaurantProductModel>();
+        RestaurantProductApi.getProductList(5.0, 5.0, 100, new RestaurantProductApi.MyListCallback() {
+            @Override
+            public void onSuccess(ArrayList<RestaurantProductModel> restaurantModelArrayList) {
+                backLogin.setEnabled(false);
+                restaurantProductModelArrayList1.addAll(restaurantModelArrayList);
+                RestaurantProductApi.sortByPrice(restaurantProductModelArrayList1);
+                for(int i =0; i<restaurantProductModelArrayList1.size(); i++) {
+                    Log.d("TestData", restaurantProductModelArrayList1.get(i).title);
+                }
+            }
+
+            @Override
+            public void onFail(ArrayList<RestaurantProductModel> restaurantProductModelArrayList) {
+
+            }
+        });
+
+        //Test Code
+
         bottomNavigationView=findViewById(R.id.mainactivity_bottomnavigationview);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
+                        UserProductApi.sortByDistance(upm, 5.0, 5.0);
+                        UserProductApi.getProduct(new UserProductApi.MyCallback() {
+                            @Override
+                            public void onCallback(UserProductModel userProductModel) {
+                                Log.d("MyCallBack", userProductModel.title);
+                            }
+                        }, upm.get(0).uproduct_id);
+                        try {
+
+                        } catch(Exception e) {Log.d("Test", e.toString());}
+                            for (int i = 0; i < upm.size(); i++) {
+                                Log.d("Test", upm.get(i).title);
+                            }
                         setFrag(0);
                         break;
                     case R.id.action_chat:
@@ -92,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
         ft=fm.beginTransaction();
         switch (n){
             case 0:
+
+
                 ft.replace(R.id.mainactivity_framelayout,homeFragment);
                 ft.commit();
                 break;

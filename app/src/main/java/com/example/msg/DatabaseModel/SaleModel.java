@@ -1,9 +1,8 @@
 package com.example.msg.DatabaseModel;
 
 public class SaleModel {
-    public String saleId = null;
-    public String userId = null;
-    public String productId = null;
-    public String salesDate = null;
-
+    public String sale_id = null;
+    public String user_id = null;
+    public String product_id = null;
+    public String sales_date = null;
 }

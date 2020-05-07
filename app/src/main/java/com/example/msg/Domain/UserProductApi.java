@@ -6,21 +6,34 @@ import androidx.annotation.NonNull;
 import com.example.msg.DatabaseModel.*;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 /*
 TODO: 프로덕트 ID도 돌려주도록 만들기, 이미지도 처리하도록 만들기, 에러 코드 등록.
  */
 
+
+
 public class UserProductApi {
+
+    public interface MyCallback {
+        void onCallback(UserProductModel userProductModel);
+    }
 
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
     public static int dummyCounter = 0; //더미를 만드는데 사용되는 카운터.
+    private static boolean isComplete = false;
     private static  int errorCode = 1;
     /*
     에러코드입니다. Api에 함수를 새로 정의할 때는, 반드시 함수가 정상 동작했을 경우, errorCode를 1로 되돌려주는 작업을 해주십시오.
@@ -79,7 +92,14 @@ public class UserProductApi {
      */
 
     public static void postProduct(UserProductModel userProductModel) {
-        db.collection("UserProducts").add(userProductModel);
+        db.collection("UserProducts").add(userProductModel)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        db.collection("UserProducts").document(documentReference.getId())
+                                .update("uproduct_id", documentReference.getId());
+                    }
+                });
     }
     /*
     입력: UserProductModel.
@@ -87,8 +107,38 @@ public class UserProductApi {
     동작: userProductModel을 받아서 데이터베이스에 추가합니다.
      */
 
-    public static void updateProduct(UserProductModel userProductModel, String pid) {
-        db.collection("UserProducts").document(pid).
+    public static void getProduct(final MyCallback myCallback, String productId) {
+        final ArrayList<UserProductModel> userProductModel = new ArrayList<UserProductModel>();
+        isComplete = false;
+
+        db.collection("UserProducts").document(productId).get().
+                addOnCompleteListener(
+                new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                UserProductModel temp = document.toObject(UserProductModel.class);
+                                myCallback.onCallback(temp);
+                            } else {
+                                //document no search;
+                            }
+                        } else {
+                            //exception of firestore
+                        }
+                    }
+                });
+
+    }
+    /*
+    입력: 프로덕트ID
+    출력: 프로덕트ID에 대응되는 UserProduct 모델.
+    동작: 프로덕트 ID를 이용해서 데이터베이스에 서칭을 하고, 그 결과 나온 모델을 돌려줍니다.
+     */
+
+    public static void updateProduct(UserProductModel userProductModel) {
+        db.collection("UserProducts").document(userProductModel.uproduct_id).
                 update("title", userProductModel.title,
                         "p_imageURL", userProductModel.p_imageURL,
                         "p_description", userProductModel.p_imageURL,
@@ -104,9 +154,9 @@ public class UserProductApi {
                 );
     }
     /*
-    입력: userProductModel, product Id
+    입력: userProductModel
     출력: 없음
-    동작: userProductModel을 받아서 해당 product id를 지니는 데이터베이스 자리에 값을 업데이트합니다.
+    동작: userProductModel을 받아서 해당 객체에 대응되는 데이터베이스 자리에 값을 업데이트합니다.
      */
 
 
@@ -195,6 +245,33 @@ public class UserProductApi {
     출력: 필터링된 모델 리스트
     동작: 모델 리스트에서 키워드와 매칭되는 모델만 필터링해서 반환합니다. 얕은 복사를 일으키므로 주의하십시오.
      */
+
+    public static void sortByDistance(ArrayList<UserProductModel> modelList, double curLatitude, double curLongitude) {
+        final double finalCurLatitude = curLatitude;
+        final double finalCurLongitude = curLongitude;
+
+        Comparator<UserProductModel> myComparator = new Comparator<UserProductModel>() {
+            @Override
+            public int compare(UserProductModel o1, UserProductModel o2) {
+                double distance2 = Math.abs(finalCurLatitude - o2.latitude) + Math.abs(finalCurLongitude - o2.longitude);
+                double distance1 = Math.abs(finalCurLatitude - o1.latitude) + Math.abs(finalCurLongitude - o1.longitude);
+                //성능 향상을 위해서 맨허튼 거리 계산법 사용.
+
+                return (int)(distance1 - distance2);
+            }
+        };
+
+        Collections.sort(modelList, myComparator);
+    }
+    /*
+    입력: 현재 위치의 GPS값과 userProductModel List
+    출력: 없음
+    동작 : 입력으로 들어온 UserProductModel의 리스트를 맨허튼 거리 계산법에 따라 가까운 순으로 정렬해줍니다.
+     */
+
+    //가격
+
+    //물량순
 
 
 }
