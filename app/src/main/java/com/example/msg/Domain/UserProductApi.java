@@ -93,7 +93,7 @@ public class UserProductApi {
      */
 
     public static void updateProduct(UserProductModel userProductModel, String pid) {
-        db.collection("UserProducts").document(pid).
+        db.collection("ResProducts").document(pid).
                 update("title", userProductModel.title,
                         "p_imageURL", userProductModel.p_imageURL,
                         "p_description", userProductModel.p_imageURL,

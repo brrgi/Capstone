@@ -1,5 +1,6 @@
 package com.example.msg;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,33 +16,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.msg.DatabaseModel.ReserveModel;
+import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.example.msg.DatabaseModel.UserProductModel;
+import com.example.msg.Domain.ReserveApi;
+import com.example.msg.Domain.RestaurantProductApi;
+import com.example.msg.Domain.SubscriptionApi;
 import com.example.msg.Domain.UserApi;
 import com.example.msg.Domain.UserProductApi;
+import com.example.msg.model.ProductModel;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.net.URI;
 import java.net.URL;
 
 import javax.annotation.Nullable;
 
-import kr.co.bootpay.Bootpay;
-import kr.co.bootpay.BootpayAnalytics;
-import kr.co.bootpay.enums.Method;
-import kr.co.bootpay.enums.PG;
-import kr.co.bootpay.enums.UX;
-import kr.co.bootpay.listener.CancelListener;
-import kr.co.bootpay.listener.CloseListener;
-import kr.co.bootpay.listener.ConfirmListener;
-import kr.co.bootpay.listener.DoneListener;
-import kr.co.bootpay.listener.ErrorListener;
-import kr.co.bootpay.listener.ReadyListener;
-import kr.co.bootpay.model.BootExtra;
-import kr.co.bootpay.model.BootUser;
 
 public class SaleActivity extends AppCompatActivity {
 
@@ -57,6 +57,7 @@ public class SaleActivity extends AppCompatActivity {
     private TextView txt_description;
     private TextView txt_salesman;
     private ImageView image_product;
+    private Button btn_subscription;
 
 
     @Override
@@ -74,23 +75,60 @@ public class SaleActivity extends AppCompatActivity {
         btn_buy = (Button) findViewById(R.id.saleActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
         image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
+        btn_subscription = (Button) findViewById(R.id.saleActivity_button_subscription);
 
 
-          UserProductApi.getProduct(new UserProductApi.MyCallback() {
+
+        /* RestaurantProductApi.getProduct(new RestaurantProductApi.MyCallback() {
+           @Override
+           public void onSuccess(RestaurantProductModel restaurantProductModel) {
+               txt_title.setText("제목 : " + restaurantProductModel.title);
+               txt_category.setText("카테고리 : " + restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
+               txt_salesman.setText("판매자 : 우석이네 치킨집"); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
+               txt_quantity.setText("양 : " + restaurantProductModel.quantity);
+               txt_quality.setText("품질 : " + restaurantProductModel.quality);
+               txt_expireDate.setText("유통기한 : " + restaurantProductModel.expiration_date);
+               txt_description.setText("상세설명 : " + restaurantProductModel.p_description);
+               Glide.with(getApplicationContext()).load(restaurantProductModel.p_imageURL).into(image_product);
+           }
+           @Override
+           public void onFail(int errorCode, Exception e) {
+               Log.d("sale error","error");
+           }
+         }, "1rdx4BsFHYHqtztzrPYb");*/
+
+
+        RestaurantProductModel restaurantProductModel = new RestaurantProductModel();
+        restaurantProductModel = RestaurantProductApi.makeDummy();
+        txt_title.setText("제목 : " + restaurantProductModel.title);
+        txt_category.setText("카테고리 : " + restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
+        txt_salesman.setText("판매자 : 우석이네 치킨집"); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
+        txt_quantity.setText("양 : " + restaurantProductModel.quantity);
+        txt_quality.setText("품질 : " + restaurantProductModel.quality);
+        txt_expireDate.setText("유통기한 : " + restaurantProductModel.expiration_date);
+        txt_description.setText("상세설명 : " + restaurantProductModel.p_description);
+        Glide.with(getApplicationContext()).load(restaurantProductModel.p_imageURL).into(image_product);
+
+        btn_subscription.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCallback(UserProductModel userProductModel) {
-                Log.d("kyudong", "여기까진 실행됨.");
-                txt_title.setText("제목 : " + userProductModel.title);
-                Log.d("kyudong", userProductModel.title);
-                txt_category.setText("카테고리 : " + userProductModel.categoryBig + " -> " + userProductModel.categorySmall);
-                txt_salesman.setText("판매자 : 우석이네 치킨집"); //얌시
-                txt_quantity.setText("양 : " + userProductModel.quantity);
-                txt_quality.setText("품질 : " + userProductModel.quality);
-                txt_expireDate.setText("유통기한 : " + userProductModel.expiration_date);
-                txt_description.setText("상세설명 : " + userProductModel.p_description);
-                Glide.with(getApplicationContext()).load(userProductModel.p_imageURL).into(image_product);
+            public void onClick(View view) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                final String uid = user.getUid();
+                SubscriptionModel subscriptionModel = new SubscriptionModel();
+                subscriptionModel.user_id = uid;
+                subscriptionModel.res_id = "2";// 임시 테스트 GETrestaurant에서 res_uid 받아와야함
+                SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
+                    @Override
+                    public void onSuccess(SubscriptionModel subscriptionModel) {
+                        Toast.makeText(SaleActivity.this,"구독 완료",Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+                    }
+                });
             }
-        }, "1rdx4BsFHYHqtztzrPYb");
+        });
+
 
 
         btn_buy.setOnClickListener(new View.OnClickListener() {

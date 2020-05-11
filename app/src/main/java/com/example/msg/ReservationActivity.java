@@ -72,8 +72,6 @@ public class ReservationActivity extends AppCompatActivity {
                 reserveModel.keyword = editText.getText().toString();
                 ReserveApi.postReservation(reserveModel);
 
-
-
                 FirebaseMessaging.getInstance().subscribeToTopic(reserveModel.keyword)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

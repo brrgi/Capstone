@@ -99,4 +99,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/saleActivity_button_buy" />
 
+    <Button
+        android:id="@+id/saleActivity_button_subscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="구독!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleActivity_imageView_product" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
