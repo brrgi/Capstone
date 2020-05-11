@@ -3,15 +3,18 @@ package com.example.msg;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Domain.UserApi;
 import com.example.msg.Domain.UserProductApi;
@@ -20,6 +23,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.net.URI;
+import java.net.URL;
 
 import javax.annotation.Nullable;
 
@@ -50,6 +56,7 @@ public class SaleActivity extends AppCompatActivity {
     private TextView txt_expireDate;
     private TextView txt_description;
     private TextView txt_salesman;
+    private ImageView image_product;
 
 
     @Override
@@ -66,19 +73,22 @@ public class SaleActivity extends AppCompatActivity {
         txt_title = (TextView) findViewById(R.id.saleActivity_textView_title);
         btn_buy = (Button) findViewById(R.id.saleActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
+        image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
 
-        UserProductApi.getProduct(new UserProductApi.MyCallback() {
+
+          UserProductApi.getProduct(new UserProductApi.MyCallback() {
             @Override
             public void onCallback(UserProductModel userProductModel) {
                 Log.d("kyudong", "여기까진 실행됨.");
                 txt_title.setText("제목 : " + userProductModel.title);
                 Log.d("kyudong", userProductModel.title);
                 txt_category.setText("카테고리 : " + userProductModel.categoryBig + " -> " + userProductModel.categorySmall);
-                txt_salesman.setText("판매자");
+                txt_salesman.setText("판매자 : 우석이네 치킨집"); //얌시
                 txt_quantity.setText("양 : " + userProductModel.quantity);
                 txt_quality.setText("품질 : " + userProductModel.quality);
                 txt_expireDate.setText("유통기한 : " + userProductModel.expiration_date);
                 txt_description.setText("상세설명 : " + userProductModel.p_description);
+                Glide.with(getApplicationContext()).load(userProductModel.p_imageURL).into(image_product);
             }
         }, "1rdx4BsFHYHqtztzrPYb");
 

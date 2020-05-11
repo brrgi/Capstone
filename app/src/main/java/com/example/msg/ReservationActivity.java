@@ -1,5 +1,6 @@
 package com.example.msg;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -15,9 +16,12 @@ import android.widget.Spinner;
 import com.example.msg.DatabaseModel.ReserveModel;
 import com.example.msg.Domain.ReserveApi;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class ReservationActivity extends AppCompatActivity {
 
@@ -68,6 +72,20 @@ public class ReservationActivity extends AppCompatActivity {
                 reserveModel.keyword = editText.getText().toString();
                 ReserveApi.postReservation(reserveModel);
 
+
+
+                FirebaseMessaging.getInstance().subscribeToTopic(reserveModel.keyword)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                //String msg = getString(R.string.msg_subscribed);
+                                if (!task.isSuccessful()) {
+                                    //  msg = getString(R.string.msg_subscribe_failed);
+                                }
+                                //Log.d(TAG, msg);
+                                //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
 
