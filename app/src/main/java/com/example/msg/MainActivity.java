@@ -8,13 +8,16 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.example.msg.Domain.RestaurantProductApi;
+import com.example.msg.Domain.SubscriptionApi;
 import com.example.msg.Domain.UserProductApi;
 import com.example.msg.fragment.AccountFragment;
 import com.example.msg.fragment.ChatFragment;
@@ -38,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private ReservationFragment reservationFragment;
     private AccountFragment accountFragment;
     private Button backLogin;
-    private ArrayList<UserProductModel> upm = UserProductApi.getProductList(5.0, 5.0, 500);
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,27 +60,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Test Code
-        //테스트 항목, 업데이트, 물량순 정렬, 재고순 정렬 위치 긁어오기.
-        final ArrayList<RestaurantProductModel> restaurantProductModelArrayList1 = new ArrayList<RestaurantProductModel>();
-        RestaurantProductApi.getProductList(5.0, 5.0, 100, new RestaurantProductApi.MyListCallback() {
-            @Override
-            public void onSuccess(ArrayList<RestaurantProductModel> restaurantModelArrayList) {
-                backLogin.setEnabled(false);
-                restaurantProductModelArrayList1.addAll(restaurantModelArrayList);
-                RestaurantProductApi.sortByPrice(restaurantProductModelArrayList1);
-                for(int i =0; i<restaurantProductModelArrayList1.size(); i++) {
-                    Log.d("TestData", restaurantProductModelArrayList1.get(i).title);
-                }
-            }
 
-            @Override
-            public void onFail(ArrayList<RestaurantProductModel> restaurantProductModelArrayList) {
 
-            }
-        });
-
-        //Test Code
 
         bottomNavigationView=findViewById(R.id.mainactivity_bottomnavigationview);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -84,19 +69,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
-                        UserProductApi.sortByDistance(upm, 5.0, 5.0);
-                        UserProductApi.getProduct(new UserProductApi.MyCallback() {
-                            @Override
-                            public void onCallback(UserProductModel userProductModel) {
-                                Log.d("MyCallBack", userProductModel.title);
-                            }
-                        }, upm.get(0).uproduct_id);
-                        try {
-
-                        } catch(Exception e) {Log.d("Test", e.toString());}
-                            for (int i = 0; i < upm.size(); i++) {
-                                Log.d("Test", upm.get(i).title);
-                            }
                         setFrag(0);
                         break;
                     case R.id.action_chat:
@@ -115,11 +87,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
         homeFragment=new HomeFragment();
         chatFragment=new ChatFragment();
         writeFragment=new WriteFragment();
         reservationFragment=new ReservationFragment();
         accountFragment=new AccountFragment();
+
+
         setFrag(0); //첫 fragment 화면을 무엇으로 지정해줄 것인지 선택
 
 
@@ -153,6 +129,31 @@ public class MainActivity extends AppCompatActivity {
                 ft.commit();
                 break;
 //kyudong
+        }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_search:
+                    Intent intent = new Intent(this, PopupSearchActivity.class);
+                    intent.putExtra("data", "Test Popup");
+                    startActivityForResult(intent, 156);
+                return true;
+            case R.id.action_filter:
+                return true;
+            default:
+                return super.onOptionsItemSelected((item));
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 156)  {
+            if(resultCode == RESULT_OK) {
+
+            }
         }
     }
 
