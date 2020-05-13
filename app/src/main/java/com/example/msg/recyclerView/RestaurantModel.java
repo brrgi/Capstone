@@ -1,15 +1,15 @@
 package com.example.msg.recyclerView;
 
-public class Products {
+public class RestaurantModel {
     private String title;
     private String imageUrl;
     private String uid;
 
-    public Products(){  //필수인듯
+    public RestaurantModel(){  //필수인듯
 
     }
 
-    public Products(String title, String imageUrl, String uid) {
+    public RestaurantModel(String title, String imageUrl, String uid) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.uid = uid;

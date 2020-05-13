@@ -47,6 +47,11 @@ public class SubscriptionApi {
             }
         });
     }
+    /*
+    입력: 구독DB모델과 콜백 함수.
+    출력: 없음.
+    동작: 입력으로 들어온 DB 모델을 데이터베이스에 등록합니다. 성공시 콜백함수의 onSuccess가, 실패시 onFail이 동작합니다.
+     */
 
 
     public static void getSubscriptionById(String subscriptionId, final  MyCallback myCallback) {
@@ -76,6 +81,11 @@ public class SubscriptionApi {
             }
         });
     }
+     /*
+    입력: 구독 모델의 Id값과 콜백 함수.
+    출력: 없음.
+    동작: 입력으로 들어온 Id값에 해당하는 구독 모델을 콜백 함수의 onSuccess를 통해서 돌려줍니다. 실패시 onFail함수의 로직이 동작합니다.
+     */
 
 
     public static void getSubscriptionListByUserId(final String userId, final MyListCallback myCallback) {
@@ -107,4 +117,13 @@ public class SubscriptionApi {
             }
         });
     }
+    /*
+    입력: 유저 id와 콜백 함수.
+    출력: 없음.
+    동작: 입력으로 들어온 유저 아이디를 가지는 구독 모델을 콜백 함수의 onSuccess를 통해서 리스트 형태로 돌려줍니다. 실패시 onFail함수의 로직이 동작합니다.
+     */
+
+
+    //TODO: 구독 삭제 기능 추가해야함.
+    //TODO: 식당에서 돌려주는 것도 추가해야함.
 }

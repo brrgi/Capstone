@@ -8,11 +8,16 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.SubscriptionModel;
+import com.example.msg.Domain.RestaurantProductApi;
+import com.example.msg.Domain.SubscriptionApi;
 import com.example.msg.Domain.UserProductApi;
 import com.example.msg.fragment.AccountFragment;
 import com.example.msg.fragment.ChatFragment;
@@ -26,6 +31,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,11 +99,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
         homeFragment=new HomeFragment();
         chatFragment=new ChatFragment();
         writeFragment=new WriteFragment();
         reservationFragment=new ReservationFragment();
         accountFragment=new AccountFragment();
+
+
         setFrag(0); //첫 fragment 화면을 무엇으로 지정해줄 것인지 선택
 
 
@@ -109,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
         ft=fm.beginTransaction();
         switch (n){
             case 0:
+
+
                 ft.replace(R.id.mainactivity_framelayout,homeFragment);
                 ft.commit();
                 break;
@@ -129,6 +141,31 @@ public class MainActivity extends AppCompatActivity {
                 ft.commit();
                 break;
 //kyudong
+        }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_search:
+                    Intent intent = new Intent(this, PopupSearchActivity.class);
+                    intent.putExtra("data", "Test Popup");
+                    startActivityForResult(intent, 156);
+                return true;
+            case R.id.action_filter:
+                return true;
+            default:
+                return super.onOptionsItemSelected((item));
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 156)  {
+            if(resultCode == RESULT_OK) {
+
+            }
         }
     }
 

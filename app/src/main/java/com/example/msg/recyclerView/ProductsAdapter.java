@@ -11,17 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.R;
-import com.example.msg.fragment.HomeFragment;
 
 import java.util.ArrayList;
+import com.example.msg.DatabaseModel.RestaurantModel;
+
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
 
-    private ArrayList<Products> arrayList;
+    private ArrayList<RestaurantProductModel> arrayList;
     private Context context;
 
-    public ProductsAdapter(ArrayList<Products> arrayList, Context context) {
+    public ProductsAdapter(ArrayList<RestaurantProductModel> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -37,10 +39,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     @Override
     public void onBindViewHolder(@NonNull ProductsViewHolder holder, int position) {
         Glide.with(holder.itemView)
-                .load(arrayList.get(position).getImageUrl())
+                .load(arrayList.get(position).p_imageURL)
                 .into(holder.image);
-        holder.title.setText(arrayList.get(position).getTitle());
-        holder.uid.setText(arrayList.get(position).getUid());
+        holder.title.setText(arrayList.get(position).title);
+        holder.uid.setText(arrayList.get(position).cost + "원");
     }
 
     @Override

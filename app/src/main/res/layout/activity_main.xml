@@ -8,19 +8,21 @@
 
     <FrameLayout
         android:id="@+id/mainactivity_framelayout"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_above="@+id/mainactivity_bottomnavigationview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        >
+        android:layout_above="@+id/mainactivity_bottomnavigationview"
+        android:layout_alignRight="@id/mainactivity_bottomnavigationview"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true">
 
         <Button
             android:id="@+id/mainActivity_button_backLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그인 화면" />
+            android:text="로그인 화면"
+            android:visibility="invisible" />
+
 
         <Button
             android:id="@+id/sale_btn"

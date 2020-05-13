@@ -21,7 +21,7 @@ public class UserProductModel {
     public String uproduct_id = null;
 
     public UserProductModel() {
-
+        //파이어스토어의 정상 동작을 위해 필요한 생성자.
     }
 
     public UserProductModel( String uproduct_id, String user_id, String title, String p_imageURL, String p_description, String categoryBig, String categorySmall, int quality, String quantity, String expiration_date, boolean completed, double latitude, double longitude) {

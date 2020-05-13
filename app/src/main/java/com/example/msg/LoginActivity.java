@@ -18,8 +18,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.auth.User;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-
+import com.example.msg.Domain.*;
+import com.example.msg.DatabaseModel.*;
 import com.example.msg.cloudmessaging.CloudMessagingActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -38,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseRemoteConfig =FirebaseRemoteConfig.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
         firebaseAuth.signOut();
-
         String splash_background = FirebaseRemoteConfig.getString(getString(R.string.rc_color));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.parseColor(splash_background));
@@ -78,7 +79,6 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }else{
                     //로그아웃
-
                 }
             }
         };

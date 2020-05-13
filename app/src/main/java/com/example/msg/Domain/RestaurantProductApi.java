@@ -82,7 +82,7 @@ public class RestaurantProductApi {
          성공할시에는 콜백함수 onSuccess를 호출하고, 성공한 객체를 돌려줍니다.(해당 객체는 product_id를 가진 상태)
      */
 
-    public static void getProduct(final MyCallback myCallback,String productId) {
+    public static void getProduct(String productId, final MyCallback myCallback) {
         db.collection("ResProducts").document(productId).get().
                 addOnCompleteListener(
                         new OnCompleteListener<DocumentSnapshot>() {
