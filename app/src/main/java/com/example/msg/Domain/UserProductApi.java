@@ -108,7 +108,6 @@ public class UserProductApi {
      */
 
 
-
     public static void updateProduct(UserProductModel userProductModel) {
         db.collection("UserProducts").document(userProductModel.uproduct_id).
                 update("title", userProductModel.title,
