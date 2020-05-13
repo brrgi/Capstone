@@ -39,6 +39,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.annotation.Nullable;
 
@@ -58,6 +59,8 @@ public class SaleActivity extends AppCompatActivity {
     private TextView txt_salesman;
     private ImageView image_product;
     private Button btn_subscription;
+
+    private static int current = -1;
 
 
     @Override
@@ -96,6 +99,25 @@ public class SaleActivity extends AppCompatActivity {
                Log.d("sale error","error");
            }
          }, "1rdx4BsFHYHqtztzrPYb");*/
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user.getUid();
+        SubscriptionApi.getSubscriptionListByUserId(uid, new SubscriptionApi.MyListCallback() {
+            @Override
+            public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
+                for(int i =0;i < subscriptionModelArrayList.size();i++) {
+
+                    if((subscriptionModelArrayList.get(i).res_id)=="2")
+                    {
+                        btn_subscription.setText("구독 해지");
+                    }
+                }
+                Log.d("array",String.valueOf(current));
+            }
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
 
 
         RestaurantProductModel restaurantProductModel = new RestaurantProductModel();
@@ -112,24 +134,35 @@ public class SaleActivity extends AppCompatActivity {
         btn_subscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                final String uid = user.getUid();
-                SubscriptionModel subscriptionModel = new SubscriptionModel();
-                subscriptionModel.user_id = uid;
-                subscriptionModel.res_id = "2";// 임시 테스트 GETrestaurant에서 res_uid 받아와야함
-                SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
-                    @Override
-                    public void onSuccess(SubscriptionModel subscriptionModel) {
-                        Toast.makeText(SaleActivity.this,"구독 완료",Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onFail(int errorCode, Exception e) {
-                    }
-                });
+                switch(current) {
+                    case -1:
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        final String uid = user.getUid();
+                        SubscriptionModel subscriptionModel = new SubscriptionModel();
+                        subscriptionModel.user_id = uid;
+                        subscriptionModel.res_id = "2";// 임시 테스트 GETrestaurant에서 res_uid 받아와야함
+                        SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
+                            @Override
+                            public void onSuccess(SubscriptionModel subscriptionModel) {
+                                Toast.makeText(SaleActivity.this,"구독 완료",Toast.LENGTH_SHORT).show();
+                                btn_subscription.setText("구독 해지");
+                                current = 0;
+                            }
+                            @Override
+                            public void onFail(int errorCode, Exception e) {
+                            }
+                        });
+                        break;
+                    case 0:
+                        btn_subscription.setText("구독!"); //여기에 delete들어가야 할듯
+                        current = -1;
+                        break;
+                    default:
+                        break;
+                }
+
             }
         });
-
-
 
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
