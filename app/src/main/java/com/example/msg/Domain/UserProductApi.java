@@ -107,35 +107,6 @@ public class UserProductApi {
     동작: userProductModel을 받아서 데이터베이스에 추가합니다.
      */
 
-    public static void getProduct(final MyCallback myCallback, String productId) {
-        final ArrayList<UserProductModel> userProductModel = new ArrayList<UserProductModel>();
-        isComplete = false;
-
-        db.collection("UserProducts").document(productId).get().
-                addOnCompleteListener(
-                new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                UserProductModel temp = document.toObject(UserProductModel.class);
-                                myCallback.onCallback(temp);
-                            } else {
-                                //document no search;
-                            }
-                        } else {
-                            //exception of firestore
-                        }
-                    }
-                });
-
-    }
-    /*
-    입력: 프로덕트ID
-    출력: 프로덕트ID에 대응되는 UserProduct 모델.
-    동작: 프로덕트 ID를 이용해서 데이터베이스에 서칭을 하고, 그 결과 나온 모델을 돌려줍니다.
-     */
 
     public static void updateProduct(UserProductModel userProductModel) {
         db.collection("UserProducts").document(userProductModel.uproduct_id).
