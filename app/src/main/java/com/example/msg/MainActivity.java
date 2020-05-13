@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private Button backLogin;
 
     private Button sale_btn;
+    private Button map;
+    private Button address;
 
 
 
@@ -53,6 +55,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //mainActivity_address
+        address=(Button)findViewById(R.id.mainActivity_address);
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DaumWebViewActivity.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "주소로 갑니다.", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+        //getAppKeyHash();      //키해시 구하기
+        map=(Button)findViewById(R.id.mainActivity_button_map);
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "지도로 갑니다.", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
 
         backLogin=(Button)findViewById(R.id.mainActivity_button_backLogin);
         backLogin.setOnClickListener(new View.OnClickListener() {
