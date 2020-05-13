@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView)view).setTextColor(Color.BLACK);
+
                 switch(position) {
                     case 0:
                         RestaurantProductApi.sortByDistance(arrayList, 5.0, 5.0);
