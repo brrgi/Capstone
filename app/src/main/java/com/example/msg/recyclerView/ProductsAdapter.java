@@ -38,11 +38,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull ProductsViewHolder holder, int position) {
+        String str = "";
+        if(arrayList.get(position).fast == true) str = ",구독중인 식당입니다!";
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).p_imageURL)
                 .into(holder.image);
         holder.title.setText(arrayList.get(position).title);
-        holder.uid.setText(arrayList.get(position).cost + "원");
+        holder.uid.setText(arrayList.get(position).cost + "원, " + arrayList.get(position).stock + "개" + str);
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.model.ProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -276,6 +277,38 @@ public class RestaurantProductApi {
     출력: 없음.
     동작: 입력으로 들어온 모델의 리스트를 재고가 많은 순으로 정렬해줍니다.
      */
+
+    public static void sortByFast(ArrayList<RestaurantProductModel> modelList) {
+        Comparator<RestaurantProductModel> myComparator = new Comparator<RestaurantProductModel>() {
+            @Override
+            public int compare(RestaurantProductModel o1, RestaurantProductModel o2) {
+                if(o2.fast == true && o1.fast == false) {
+                    return 1;
+                } else if(o1.fast == true && o2.fast == false) {
+                    return -1;
+                } else{
+                    return 0;
+                }
+            }
+        };
+
+        Collections.sort(modelList, myComparator);
+    }
+
+    public static void sortBySubscription(ArrayList<RestaurantProductModel> modelList, ArrayList<SubscriptionModel> subscriptionList) {
+        for(int i=0; i <modelList.size(); i++) {
+            for(int j = 0; j < subscriptionList.size(); j++) {
+
+                if(modelList.get(i).res_id.equals(subscriptionList.get(j).res_id)) {
+                    Log.d("1234", modelList.get(i).title);
+                    modelList.get(i).fast = true;
+                    Log.d("1234", Boolean.toString(modelList.get(i).fast));
+                }
+            }
+        }
+
+        sortByFast(modelList);
+    }
 
 
 }

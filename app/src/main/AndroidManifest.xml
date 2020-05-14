@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".PopupSearchActivity"></activity>
+        <activity android:name=".CategoryFilterActivity"></activity>
+        <activity android:name=".PopupSearchActivity" />
         <activity android:name=".ProductUploadActivity" />
         <activity android:name=".ReservationActivity" />
         <activity android:name=".cloudmessaging.CloudMessagingActivity" />

@@ -2,7 +2,9 @@ package com.example.msg.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +26,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.msg.CategoryFilterActivity;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.example.msg.Domain.RestaurantProductApi;
+import com.example.msg.Domain.SubscriptionApi;
+import com.example.msg.MainActivity;
 import com.example.msg.R;
 import com.example.msg.recyclerView.RestaurantModel;
 import com.example.msg.recyclerView.ProductsAdapter;
@@ -58,6 +64,7 @@ public class HomeFragment extends Fragment {
     private ArrayAdapter arrayAdapter;
     private ImageButton searchButton;
     private EditText searchText;
+    private ImageButton filterButton;
 
 
     @Nullable
@@ -78,12 +85,33 @@ public class HomeFragment extends Fragment {
 
         final ArrayList<RestaurantProductModel> arrayList = new ArrayList<RestaurantProductModel>();
 
+        final ArrayList<SubscriptionModel> subscriptionModels = new ArrayList<SubscriptionModel>();
+
+
+
+
 
         RestaurantProductApi.getProductList(5.0, 5.0, 100, new RestaurantProductApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<RestaurantProductModel> restaurantModelArrayList) {
                 arrayList.addAll(restaurantModelArrayList);
-                adapter.notifyDataSetChanged();
+                SubscriptionApi.getSubscriptionListByUserId("2", new SubscriptionApi.MyListCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
+                        subscriptionModels.addAll(subscriptionModelArrayList);
+                        RestaurantProductApi.sortBySubscription(arrayList, subscriptionModels);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+                        Log.d("1234", Integer.toString(errorCode));
+                    }
+                });
+
+
+
+
             }
 
             @Override
@@ -141,6 +169,8 @@ public class HomeFragment extends Fragment {
                     if (searchText.getText() != null) {
                         arrayListTemp.clear();
                         arrayListTemp = RestaurantProductApi.filterByKeyWord(arrayList, searchText.getText().toString());
+
+
                         arrayList.clear();
                         arrayList.addAll(arrayListTemp);
                         adapter.notifyDataSetChanged();
@@ -149,6 +179,25 @@ public class HomeFragment extends Fragment {
             });
         }catch(Exception e) {Log.d("1234", e.toString());}
 
+
+        filterButton = (ImageButton) view.findViewById(R.id.home_button_filter);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CategoryFilterActivity.class) ;
+                startActivityForResult(intent, 63);
+            }
+        });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 63) {
+            if(resultCode == 1) {
+                Log.d("1234", data.getStringExtra("smallCategory"));
+            }
+        }
+    }
 }
