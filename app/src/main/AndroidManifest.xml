@@ -18,7 +18,6 @@
         <activity android:name=".MapActivity"></activity>
         <activity android:name=".PayActivity"></activity>
         <activity android:name=".SaleActivity" />
-        android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity android:name=".PopupSearchActivity"></activity>
         <activity android:name=".ProductUploadActivity" />
         <activity android:name=".ReservationActivity" />
