@@ -36,6 +36,7 @@
             </intent-filter>
         </activity>
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        ///META DATA
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="bd86ebef3077544c3fcf0e5ff79a79b6" />

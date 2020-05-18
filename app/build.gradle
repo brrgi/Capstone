@@ -55,5 +55,4 @@ dependencies {
     implementation files('libs/libDaumMapAndroid.jar')
 
 }
-
 apply plugin: 'com.google.gms.google-services'
