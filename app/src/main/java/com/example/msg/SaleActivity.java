@@ -79,6 +79,9 @@ public class SaleActivity extends AppCompatActivity {
         btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
         image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
         btn_subscription = (Button) findViewById(R.id.saleActivity_button_subscription);
+        Intent intent = getIntent();
+        RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
+        //인탠트에서 프로덕트 모델을 받아옴.
 
 
 
@@ -120,8 +123,6 @@ public class SaleActivity extends AppCompatActivity {
         });
 
 
-        RestaurantProductModel restaurantProductModel = new RestaurantProductModel();
-        restaurantProductModel = RestaurantProductApi.makeDummy();
         txt_title.setText("제목 : " + restaurantProductModel.title);
         txt_category.setText("카테고리 : " + restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
         txt_salesman.setText("판매자 : 우석이네 치킨집"); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정

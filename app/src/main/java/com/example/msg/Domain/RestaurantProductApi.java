@@ -309,6 +309,9 @@ public class RestaurantProductApi {
 
         sortByFast(modelList);
     }
+    //TODO: 동작 방식에 문제가 있음. 다시 코딩하는 것을 권장.
+
+
 
 
 }
