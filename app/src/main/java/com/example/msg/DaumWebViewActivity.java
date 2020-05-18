@@ -42,7 +42,7 @@ public class DaumWebViewActivity extends AppCompatActivity {
         // web client 를 chrome 으로 설정
         daum_webView.setWebChromeClient(new WebChromeClient());
         // webview url load. php 파일 주소
-        daum_webView.loadUrl("capstone.dothome.co.kr");
+        daum_webView.loadUrl("http://capstone.dothome.co.kr/index.php");
     }
 
 

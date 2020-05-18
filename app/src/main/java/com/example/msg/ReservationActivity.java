@@ -86,6 +86,8 @@ public class ReservationActivity extends AppCompatActivity {
                         });
             }
         });
+        //예약과 알림 기능 -> Reservations 컬렉션에 예약정보 입력, 예약 키워드를 구독하여 Firebase server에서 새로운 상품이 입력될때마다 트리거 발생
+        //트리거 발생시 Products 컬렉션과 Reservations 컬렉션의 keyword를 쿼리하여 있으면 푸시 알림 전송
 
     }
 }
