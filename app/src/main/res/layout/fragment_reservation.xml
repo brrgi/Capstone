@@ -5,15 +5,21 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reservation"
-        android:textSize="40sp"/>
-
-    <Button
-        android:id="@+id/reservation_button_reserv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:textSize="50dp"
+        android:text="예약 현황"
+        android:textStyle="bold"
+        >
+
+    </TextView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"/>
+
+
 
 </LinearLayout>

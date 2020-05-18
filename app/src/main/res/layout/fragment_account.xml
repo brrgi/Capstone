@@ -5,9 +5,170 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Account"
-        android:textSize="40sp"/>
+        android:textSize="50dp"
+        android:text="내 정보"
+        android:textStyle="bold"
+        >
 
+    </TextView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/account_imageView_Image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/home_black_18dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/account_textView_UID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="유저이름"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/account_textView_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="동네"
+                android:textSize="15dp"
+                android:layout_margin="5dp"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/account_imageView_SellImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/home_black_18dp"/>
+            <TextView
+                android:id="@+id/account_TextView_SellText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="판매내역"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/account_imageView_BuyImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/home_black_18dp"/>
+            <TextView
+                android:id="@+id/account_TextView_BuyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="구매내역"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/account_imageView_SubscribeImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/home_black_18dp"/>
+            <TextView
+                android:id="@+id/account_TextView_SubscribeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="판매내역"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/account_textView_ex1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ex1"
+            android:textSize="30dp"
+            android:layout_margin="5dp"/>
+        <TextView
+            android:id="@+id/account_textView_ex2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ex2"
+            android:textSize="30dp"
+            android:layout_margin="5dp"/>
+        <TextView
+            android:id="@+id/account_textView_ex3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ex3"
+            android:textSize="30dp"
+            android:layout_margin="5dp"/>
+
+    </LinearLayout>
 </LinearLayout>

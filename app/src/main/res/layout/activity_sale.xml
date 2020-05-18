@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:text="카테고리"
         android:textSize="30dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saleActivity_textView_salesman" />
 
@@ -45,6 +46,7 @@
         android:id="@+id/saleActivity_textView_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="양"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +56,7 @@
         android:id="@+id/saleActivity_textView_expiredDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="유통기한"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +66,7 @@
         android:id="@+id/saleActivity_textView_quality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="품질"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +76,7 @@
         android:id="@+id/saleActivity_textView_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="상세설명"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,6 +89,9 @@
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:layout_marginBottom="44dp"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         android:text="구매"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -95,6 +103,9 @@
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="44dp"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         android:text="채팅"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/saleActivity_button_buy" />
@@ -104,6 +115,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="구독!"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saleActivity_imageView_product" />
 
