@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/signupRestActivity_imageview_profile"
-        android:src="@drawable/add_to_photos_black"
+        android:src="@drawable/iconfinder_gallery"
         android:layout_width="100dp"
         android:layout_height="100dp"/>
 
@@ -41,8 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/signupRestActivity_edittext_name"
-            android:hint="이름"
+            android:id="@+id/signupRestActivity_edittext_res_name"
+            android:hint="식당이름"
             android:singleLine="true"
             android:lines="1"
             android:layout_width="match_parent"
@@ -53,13 +53,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/signupRestActivity_edittext_phone"
+            android:id="@+id/signupRestActivity_edittext_res_phone"
             android:hint="전화번호"
             android:singleLine="true"
             android:lines="1"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signupRestActivity_edittext_res_description"
+            android:hint="식당 설명"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:id="@+id/signupRestActivity_edittext_pickupstarttime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/iconfinder_clock"
+        android:background="@android:color/transparent"
+        android:hint="픽업 가능 시작시간 입력(ex.13:00)"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/signupRestActivity_edittext_pickupendtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/iconfinder_clock"
+        android:background="@android:color/transparent"
+        android:hint="픽업 가능 끝시간 입력(ex.18:00)"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/signupRestActivity_button_signup"

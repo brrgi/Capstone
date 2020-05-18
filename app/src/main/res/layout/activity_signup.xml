@@ -3,14 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
     android:orientation="vertical"
     android:gravity="center">
-
-    <ImageView
-        android:id="@+id/signupActivity_imageview_profile"
-        android:src="@drawable/add_to_photos_black"
-        android:layout_width="100dp"
-        android:layout_height="100dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -46,6 +41,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signupActivity_edittext_phone"
+            android:hint="전화번호"
+            android:singleLine="true"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/signupActivity_radiogroup_sex"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="남자"
+            android:id="@+id/signupActivity_radiobutton_man"
+            android:layout_weight="1"
+            android:checked="true"/>
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="여자"
+            android:id="@+id/signupActivity_radiobutton_woman"
+            android:layout_weight="1"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/signupActivity_button_birthyear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/iconfinder_calendar"
+        android:background="@android:color/transparent"
+        android:onClick="OnClickHandler"
+        android:hint="생년월일"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/signupActivity_button_signup"

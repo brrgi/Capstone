@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private WriteFragment writeFragment;
     private ReservationFragment reservationFragment;
     private AccountFragment accountFragment;
+
     private Button backLogin;
 
     private Button sale_btn;
@@ -144,8 +145,6 @@ public class MainActivity extends AppCompatActivity {
         ft=fm.beginTransaction();
         switch (n){
             case 0:
-
-
                 ft.replace(R.id.mainactivity_framelayout,homeFragment);
                 ft.commit();
                 break;

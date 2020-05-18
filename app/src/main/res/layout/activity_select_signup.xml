@@ -8,6 +8,7 @@
 
     <Button
         android:id="@+id/SelectSignupActivity_button_user"
+        android:background="@drawable/rounded_rectangle_solid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -15,8 +16,9 @@
 
     <Button
         android:id="@+id/SelectSignupActivity_button_restaurant"
+        android:background="@drawable/rounded_rectangle_solid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="식당" />
+        android:text="식당 사용자" />
 </LinearLayout>

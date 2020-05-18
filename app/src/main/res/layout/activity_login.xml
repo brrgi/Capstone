@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:layout_margin="20dp"
     tools:context=".LoginActivity">
 
     <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/loading_icon"/>
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/msg"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -19,6 +21,7 @@
             android:id="@+id/loginActivity_edittext_id"
             android:hint="아이디"
             android:singleLine="true"
+            android:textColor="#ffffff"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -31,6 +34,7 @@
             android:id="@+id/loginActivity_edittext_password"
             android:hint="패스워드"
             android:singleLine="true"
+            android:textColor="#ffffff"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,6 +43,7 @@
 
     <Button
         android:id="@+id/loginActivity_button_login"
+        android:background="@drawable/rounded_rectangle_solid"
         android:text="로그인"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -46,6 +51,7 @@
     <Button
         android:id="@+id/loginActivity_button_signup"
         android:layout_marginTop="5dp"
+        android:background="@drawable/rounded_rectangle_solid"
         android:text="회원가입"
        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

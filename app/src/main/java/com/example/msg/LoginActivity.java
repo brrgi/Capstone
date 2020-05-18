@@ -7,24 +7,26 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.example.msg.Domain.*;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.example.msg.Domain.*;
-import com.example.msg.DatabaseModel.*;
 import com.example.msg.cloudmessaging.CloudMessagingActivity;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
     private EditText id;
     private EditText password;
 
@@ -74,9 +76,73 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user=firebaseAuth.getCurrentUser();
                 if(user!=null){
                     //로그인
-                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
+
+                    FirebaseFirestore db=FirebaseFirestore.getInstance();
+                    //먼저 user 검사
+                    DocumentReference docRef=db.collection("users").document(user.getUid());
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                DocumentSnapshot document=task.getResult();
+                                if(document.exists()){
+                                    Log.d(TAG,"user "+document.getData());
+
+                                    if((Boolean)document.getData().get("sanction")){
+                                        Log.d(TAG,"The user is suspended");
+                                        Toast.makeText(getApplicationContext(), "신고 누적으로 제재된 사용자입니다.", Toast.LENGTH_LONG).show();
+                                        FirebaseAuth.getInstance().signOut();
+                                    }
+                                    else{
+                                        Log.d(TAG,"user login success");
+                                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+                                }
+                                else {
+                                    //식당 사용자일때
+                                    Log.d(TAG, "Go restuser");
+                                }
+                            }
+                            else{
+                                Log.d(TAG,"User error");
+                            }
+                        }
+                    });
+
+                    //restaurant_user 검사
+                    docRef=db.collection("restaurantUsers").document(user.getUid());
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                DocumentSnapshot document=task.getResult();
+                                if(document.exists()){
+                                    Log.d(TAG,"Restuser "+document.getData());
+                                    if((Boolean) document.getData().get("approved")){
+                                        Log.d(TAG,"approved Restuser");
+                                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else{
+                                        Log.d(TAG,"not yet approved Restuser");
+                                        Toast.makeText(getApplicationContext(), "승인 완료되지 않은 사용자입니다. 조금만 기다려주시면 승인 도와드리겠습니다.", Toast.LENGTH_LONG).show();
+                                        FirebaseAuth.getInstance().signOut();
+                                    }
+
+                                }
+                                else
+                                    Log.d(TAG,"No such user");
+                            }
+                            else{
+                                Log.d(TAG,"RestaurantUser error");
+                            }
+                        }
+                    });
+
                 }else{
                     //로그아웃
                 }

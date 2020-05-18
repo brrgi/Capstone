@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.msg.model.RestaurantModel;
@@ -37,12 +39,16 @@ public class SignupRestActivity extends AppCompatActivity {
     private static final int PICK_FROM_ALBUM = 10;
     private EditText email;
     private EditText password;
-    private EditText name;
+    private EditText res_name;
+    private EditText res_description;
     private Button signup;
     private String splash_background;
-    private EditText phone;
+    private EditText res_phone;
     private ImageView profile;
     private Uri imageUri;
+    private EditText pickup_start_time;
+    private EditText pickup_end_time;
+    private TimePickerDialog.OnTimeSetListener callbackMethod;
 
 
 
@@ -66,10 +72,14 @@ public class SignupRestActivity extends AppCompatActivity {
                 startActivityForResult(intent,PICK_FROM_ALBUM);
             }
         });
-        phone=(EditText)findViewById(R.id.signupRestActivity_edittext_phone);
+        res_phone =(EditText)findViewById(R.id.signupRestActivity_edittext_res_phone);
         email=(EditText)findViewById(R.id.signupRestActivity_edittext_email);
         password=(EditText)findViewById(R.id.signupRestActivity_edittext_password);
-        name=(EditText)findViewById(R.id.signupRestActivity_edittext_name);
+        res_name =(EditText)findViewById(R.id.signupRestActivity_edittext_res_name);
+        res_description=(EditText)findViewById(R.id.signupRestActivity_edittext_res_description);
+        pickup_start_time = (EditText) findViewById(R.id.signupRestActivity_edittext_pickupstarttime);
+        pickup_end_time = (EditText) findViewById(R.id.signupRestActivity_edittext_pickupendtime);
+
         signup=(Button)findViewById(R.id.signupRestActivity_button_signup);
         signup.setBackgroundColor(Color.parseColor(splash_background));
 
@@ -78,7 +88,7 @@ public class SignupRestActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                if (email.getText().toString() == null || name.getText().toString() ==null || password.getText().toString() == null){
+                if (email.getText().toString() == null || res_name.getText().toString() ==null || password.getText().toString() == null){
                     return;
                 }
 
@@ -95,9 +105,15 @@ public class SignupRestActivity extends AppCompatActivity {
                                         while(!imageUrl.isComplete());
 
                                         RestaurantModel restaurantModel = new RestaurantModel();
-                                        restaurantModel.setRestaurantName(name.getText().toString());
+                                        restaurantModel.setRestaurantName(res_name.getText().toString());
                                         restaurantModel.setProfileImageUrl(imageUrl.getResult().toString());
-                                        restaurantModel.setRestaurantPhone(phone.getText().toString());
+                                        restaurantModel.setRestaurantPhone(res_phone.getText().toString());
+                                        restaurantModel.setDescription(res_description.getText().toString());
+                                        restaurantModel.setPickupStartTime(pickup_start_time.getText().toString());
+                                        restaurantModel.setPickupEndTime(pickup_end_time.getText().toString());
+                                        restaurantModel.setRestuser_id(uid);
+                                        restaurantModel.setApproved(false);
+
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("restaurantUsers")
                                                 .document(uid)
@@ -107,6 +123,8 @@ public class SignupRestActivity extends AppCompatActivity {
                                                     public void onSuccess(Void aVoid) {
                                                         Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_LONG).show();
                                                         Log.d(TAG,"SUCCESS");
+                                                        startActivity(new Intent(SignupRestActivity.this,LoginActivity.class));
+                                                        finish();
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
@@ -132,4 +150,22 @@ public class SignupRestActivity extends AppCompatActivity {
             profile.setImageURI(imageUri);
         }
     }
+
+//    public void InitializeListener()
+//    {
+//        callbackMethod = new TimePickerDialog.OnTimeSetListener()
+//        {
+//            @Override
+//            public void onTimeSet(TimePicker view, int hourOfDay, int minute)
+//            {
+//                pickup_start_time.setText(hourOfDay + "시" + minute + "분");
+//            }
+//        };
+//    }
+//
+//    public void OnClickHandler(View view) {
+//        TimePickerDialog dialog = new TimePickerDialog(this, callbackMethod, 8, 10, true);
+//
+//        dialog.show();
+//    }
 }
