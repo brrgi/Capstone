@@ -91,9 +91,12 @@ public class HomeFragment extends Fragment {
 
             }
         });
+        //TODO: curLatitude와 curLongitude를 지도에서 받아온 값으로 바꾸고, range 또한 받는 인터페이스가 필요함.
+
 
         adapter = new ProductsAdapter(arrayList, context);
         recyclerView.setAdapter(adapter);
+
 
         spinnerList.add("거리 순 정렬");
         spinnerList.add("가격 순 정렬");
@@ -105,6 +108,7 @@ public class HomeFragment extends Fragment {
         spinner.setAdapter(arrayAdapter);
 
 
+        //~순 정렬이 나오는 부분.
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -133,23 +137,21 @@ public class HomeFragment extends Fragment {
 
 
         searchButton = (ImageButton) view.findViewById(R.id.home_button_search);
-        searchText = (EditText)view.findViewById(R.id.home_editText_search);
-        try {
-            searchButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (searchText.getText() != null) {
-                        arrayListTemp.clear();
-                        arrayListTemp = RestaurantProductApi.filterByKeyWord(arrayList, searchText.getText().toString());
-                        arrayList.clear();
-                        arrayList.addAll(arrayListTemp);
-                        adapter.notifyDataSetChanged();
-                    }
+        searchText = (EditText) view.findViewById(R.id.home_editText_search);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (searchText.getText() != null) {
+                    arrayListTemp.clear();
+                    arrayListTemp = RestaurantProductApi.filterByKeyWord(arrayList, searchText.getText().toString());
+                    arrayList.clear();
+                    arrayList.addAll(arrayListTemp);
+                    adapter.notifyDataSetChanged();
                 }
-            });
-        }catch(Exception e) {Log.d("1234", e.toString());}
-
+            }
+        });
+        //키워드 검색
+        //TODO/HACK: 검색을 한 뒤에 재검색을 하면 제대로 나오지 않는 버그가 존재함.
     }
 
 }
-//minor test2

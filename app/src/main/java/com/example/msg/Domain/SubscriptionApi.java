@@ -123,7 +123,41 @@ public class SubscriptionApi {
     동작: 입력으로 들어온 유저 아이디를 가지는 구독 모델을 콜백 함수의 onSuccess를 통해서 리스트 형태로 돌려줍니다. 실패시 onFail함수의 로직이 동작합니다.
      */
 
+    public static void getSubscriptionListByResId(final String resId, final MyListCallback myCallback) {
+        db.collection("Subscription").
+                whereEqualTo("res_id", resId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        SubscriptionModel subscriptionModel = null;
+                        ArrayList<SubscriptionModel> subscriptionModelArrayList = new ArrayList<SubscriptionModel>();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                subscriptionModel = document.toObject(SubscriptionModel.class);
+                                subscriptionModelArrayList.add(subscriptionModel);
+                            }
+                            myCallback.onSuccess(subscriptionModelArrayList);
+
+                        } else {
+                            myCallback.onFail(1, null);
+                            //태스크 실패.
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                myCallback.onFail(0, e); //실패.
+            }
+        });
+    }
+    /*
+    입력: 레스토랑 id와 콜백 함수.
+    출력: 없음.
+    동작: 입력으로 들어온 식당 아이디값을 가지는 구독 모델을 콜백 함수의 onSuccess를 통해서 리스트 형태로 돌려줍니다. 실패시 onFail함수의 로직이 동작합니다.
+     */
 
     //TODO: 구독 삭제 기능 추가해야함.
-    //TODO: 식당에서 돌려주는 것도 추가해야함.
+
 }

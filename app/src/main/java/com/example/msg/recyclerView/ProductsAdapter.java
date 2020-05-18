@@ -1,6 +1,7 @@
 package com.example.msg.recyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.MainActivity;
 import com.example.msg.R;
 
 import java.util.ArrayList;
 import com.example.msg.DatabaseModel.RestaurantModel;
+import com.example.msg.SaleActivity;
 
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
@@ -50,6 +53,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         return (arrayList != null ? arrayList.size() : 0);
     }
 
+
     public class ProductsViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
@@ -59,6 +63,25 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             this.image=itemView.findViewById(R.id.productList_imageView_Image);
             this.title=itemView.findViewById(R.id.productList_textView_title);
             this.uid=itemView.findViewById(R.id.productList_textView_uid);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION) {
+                        RestaurantProductModel item = arrayList.get(pos);
+                        //아이템을 얻는 부분.
+                        Intent intent = new Intent(v.getContext(), SaleActivity.class);
+                        intent.putExtra("Model", item);
+                        v.getContext().startActivity(intent);
+
+
+                    }
+                }
+            });
+            //여기서 리사이클러뷰의 아이템이 클릭되는 것을 처리할 수 있음.
+            //getAdapterPosition
         }
+
     }
 }
