@@ -11,10 +11,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
 public class GuideLineApi {
 
     public interface MyCallback {
         void onSuccess(GuideLineModel guideLineModel);
+
         void onFail(int errorCode, Exception e);
     }
     /*
@@ -55,5 +58,14 @@ public class GuideLineApi {
     동작: 입력으로 들어온 이름값에 해당하는 모델을 콜백 함수의 onSuccess를 통해서 돌려줍니다. 실패시 onFail함수의 로직이 동작합니다.
      */
 
+    public static ArrayList<String> getSmallCategoryList(String bigCategory) {
+        ArrayList<String> smallCategories = new ArrayList<String>();
+        return smallCategories;
+    }
+    /*
+    입력: 대분류의 명칭
+    출력: 대분류에 해당하는 소분류 리스트
+    동작: 대분류에 해당하는 소분류의 스트링 리스트를 반환합니다.
+     */
 
 }
