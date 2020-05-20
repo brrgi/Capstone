@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/signupActivity_imageview_profile"
-        android:src="@drawable/add_to_photos_black"
+        android:src="@drawable/user"
         android:layout_width="100dp"
         android:layout_height="100dp"/>
 
@@ -43,6 +43,52 @@
             android:singleLine="true"
             android:lines="1"
             android:hint="이름"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signupActivity_edittext_age"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="성별"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/signupActivity_button_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_gravity="start"
+        android:text="주소 입력하기"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signupActivity_edittext_address"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="받은 주소"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signupActivity_edittext_phone"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="전화 번호"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>

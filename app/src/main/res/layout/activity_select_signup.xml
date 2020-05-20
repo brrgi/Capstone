@@ -4,25 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".SelectSignupActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MSG"
+        android:textColor="#F39C12"
+        android:textSize="40dp"
+        android:layout_marginBottom="100dp"/>
 
     <Button
         android:id="@+id/SelectSignupActivity_button_user"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bin_blue"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:layout_weight="1"
+        android:layout_marginBottom="50dp"
         android:text="일반 사용자" />
 
     <Button
         android:id="@+id/SelectSignupActivity_button_restaurant"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bin_blue"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:layout_weight="1"
         android:text="식당" />
 </LinearLayout>
