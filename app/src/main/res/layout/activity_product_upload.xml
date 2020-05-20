@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginTop="20dp"
     tools:context=".ProductUploadActivity">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="사진 등록하기" />
 
     <ImageView
-        android:id="@+id/saleActivity_imageView_product"
+        android:id="@+id/product_upload_imageView_product"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@drawable/icon_image_searching"
@@ -71,16 +73,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="게시 기한" />
-
-    <EditText
-        android:id="@+id/product_upload_editText_until"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
 
     <TextView
         android:layout_width="match_parent"
@@ -107,10 +99,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="제출하기" />
-
-
-
-
-
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

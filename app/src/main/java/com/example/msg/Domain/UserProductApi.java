@@ -1,4 +1,5 @@
 package com.example.msg.Domain;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,6 +46,7 @@ public class UserProductApi {
     0: onFailureListner가 호출되었습니다. Exception e를 참조해야합니다.
     1: 태스크가 실패하였습니다. 대표적으로 쿼리 도중에 쿼리가 취소된 경우가 있습니다.
     2: 다큐먼트가 null입니다.
+    10: 파일 업로드 실패.
      */
 
 /*
@@ -90,8 +95,7 @@ public class UserProductApi {
      */
 
 
-    //TODO 이미지 처리!!!!
-    public static void postProduct(final UserProductModel userProductModel, final MyCallback myCallback) {
+    public static void postProduct(final UserProductModel userProductModel, final Uri imageUri, final MyCallback myCallback) {
         db.collection("UserProducts").add(userProductModel)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -99,7 +103,8 @@ public class UserProductApi {
                         db.collection("UserProducts").document(documentReference.getId())
                                 .update("uproduct_id", documentReference.getId());
                         userProductModel.uproduct_id = documentReference.getId();
-                        myCallback.onSuccess(userProductModel);
+                        postImage(userProductModel, imageUri, myCallback);
+                        //이미지 포스트
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -112,7 +117,39 @@ public class UserProductApi {
     입력: 모델과 콜백함수.
     출력: 없음.
     동작: 모델을 받아서 데이터베이스에 추가합니다. 실패할경우 콜백함수 onFail을 호출합니다.
-         성공할시에는 콜백함수 onSuccess를 호출하고, 성공한 객체를 돌려줍니다.(해당 객체는 product_id를 가진 상태)
+         성공할시에는 콜백함수 onSuccess를 호출하고, 성공한 객체를 돌려줍니다.(해당 객체는 product_id를 얻은 상태)
+     */
+
+    public static void postImage(final UserProductModel userProductModel, final Uri imageUri, final MyCallback myCallback){
+        final String directory = "UserProducts/";
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+        StorageReference imageReference = storageReference.child( directory + userProductModel.uproduct_id);
+
+        UploadTask uploadTask = imageReference.putFile(imageUri);
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                myCallback.onFail(10 ,e);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                userProductModel.p_imageURL = directory + userProductModel.uproduct_id;
+                db.collection("UserProducts").document(userProductModel.uproduct_id)
+                        .update("p_imageURL", userProductModel.p_imageURL);
+                //사진을 올린 직후에 서버 스토리지의 사진 링크를 데이터베이스에 업데이트함.
+                myCallback.onSuccess(userProductModel);
+            }
+        });
+
+    }
+    /*
+    입력: 모델과 콜백함수.
+    출력: 없음.
+    동작: 모델을 받아서 모델의 image를 storage에 등록합니다. 실패할경우 콜백함수 onFail을 호출합니다.
+         성공할시에는 콜백함수 onSuccess를 호출하고, 성공한 객체를 돌려줍니다.(해당 객체는 image 변수를 얻은 상태)
      */
 
     public static void updateProduct(final UserProductModel userProductModel, final MyCallback myCallback) {
@@ -278,5 +315,7 @@ public class UserProductApi {
     출력: 없음
     동작 : 입력으로 들어온 UserProductModel의 리스트를 맨허튼 거리 계산법에 따라 가까운 순으로 정렬해줍니다.
      */
+
+
 
 }

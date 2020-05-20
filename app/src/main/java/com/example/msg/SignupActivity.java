@@ -120,6 +120,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){
