@@ -1,5 +1,7 @@
 package com.example.msg.Domain;
 
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 import com.example.msg.DatabaseModel.RestaurantModel;
@@ -13,6 +15,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -22,29 +26,30 @@ public class UserApi {
         void onFail(int errorCode, Exception e);
     }
 
+    /*
+    0: onFailureListner가 호출되었습니다. Exception e를 참조해야합니다.
+    1: 태스크가 실패하였습니다. 대표적으로 쿼리 도중에 쿼리가 취소된 경우가 있습니다.
+    2: 다큐먼트가 null입니다.
+     */
+
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public static void getUserById(String id, final MyCallback myCallback) {
-        db.collection("User").document(id).get().
-                addOnCompleteListener(
-                        new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot document = task.getResult();
-                                    if (document.exists()) {
-                                        UserModel temp = document.toObject(UserModel.class);
-                                        myCallback.onSuccess(temp);
-                                    } else {
-                                        myCallback.onFail(2, null);
-                                        //document no search;
-                                    }
-                                } else {
-                                    myCallback.onFail(1, null);
-                                    //exception of firestore
-                                }
+        db.collection("User").whereEqualTo("user_id", id).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        UserModel usermodel = null;
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                usermodel = documentSnapshot.toObject(UserModel.class);
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
+                            myCallback.onSuccess(usermodel);
+                        } else {
+                            myCallback.onFail(1, null);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 myCallback.onFail(0, e);
@@ -63,9 +68,6 @@ public class UserApi {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        db.collection("User").document(documentReference.getId())
-                                .update("user_id", documentReference.getId());
-                        userModel.user_id = documentReference.getId();
                         myCallback.onSuccess(userModel);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
