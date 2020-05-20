@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -11,6 +12,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -28,14 +31,11 @@ public class RestaurantApi {
     2: 다큐먼트가 null입니다.
      */
 
-    public static void postProduct(final RestaurantModel restaurantModel, final MyCallback myCallback) {
+    public static void postRestaurant(final RestaurantModel restaurantModel, final MyCallback myCallback) {
         db.collection("Restaurant").add(restaurantModel)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        db.collection("Restaurant").document(documentReference.getId())
-                                .update("res_id", documentReference.getId());
-                        restaurantModel.res_id = documentReference.getId();
                         myCallback.onSuccess(restaurantModel);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -52,33 +52,27 @@ public class RestaurantApi {
          성공할시에는 콜백함수 onSuccess를 호출하고, 성공한 객체를 돌려줍니다.(해당 객체는 id를 가진 상태)
      */
 
-    public static void getRestaurantByResId(String id, final MyCallback myCallback) {
-        db.collection("Restaurant").document(id).get().
-                addOnCompleteListener(
-                        new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot document = task.getResult();
-                                    if (document.exists()) {
-                                        RestaurantModel temp = document.toObject(RestaurantModel.class);
-                                        myCallback.onSuccess(temp);
-                                    } else {
-                                        myCallback.onFail(2, null);
-                                        //document no search;
-                                    }
-                                } else {
-                                    myCallback.onFail(1, null);
-                                    //exception of firestore
-                                }
+    public static void getUserById(String id, final MyCallback myCallback) {
+        db.collection("Restaurant").whereEqualTo("res_id", id).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        RestaurantModel restaurantModel = null;
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                restaurantModel = documentSnapshot.toObject(RestaurantModel.class);
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
+                            myCallback.onSuccess(restaurantModel);
+                        } else {
+                            myCallback.onFail(1, null);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 myCallback.onFail(0, e);
             }
         });
-
     }
     /*
     입력: ID
