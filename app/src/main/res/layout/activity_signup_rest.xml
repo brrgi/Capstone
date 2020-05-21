@@ -42,7 +42,7 @@
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/signupRestActivity_edittext_name"
-            android:hint="이름"
+            android:hint="식당이름"
             android:singleLine="true"
             android:lines="1"
             android:layout_width="match_parent"

@@ -38,7 +38,25 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="550dp"/>
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/writeFragment_button_upload"
+                android:text="상품 올리기"
+
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bin_blue"
+                android:textColor="#ffffff"
+                android:layout_gravity="bottom"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +67,7 @@
 
             <Button
                 android:id="@+id/writeFragment_button_enrollment"
-                android:text="상품 등록"
+                android:text="등록된 상품"
 
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"

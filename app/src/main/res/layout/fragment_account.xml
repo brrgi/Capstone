@@ -155,16 +155,16 @@
             android:text="내 동네 설정"
             android:textSize="30dp"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="#ffffff"
+            android:background="#00ff0000"
             android:layout_margin="5dp"/>
         <Button
             android:id="@+id/account_textView_ex2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="키워드 알림"
+            android:text="사용자 통계"
             android:textSize="30dp"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="#ffffff"
+            android:background="#00ff0000"
             android:layout_margin="5dp"/>
         <Button
             android:id="@+id/account_textView_ex3"
@@ -173,7 +173,7 @@
             android:text="모아보기"
             android:textSize="30dp"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="#ffffff"
+            android:background="#00ff0000"
             android:layout_margin="5dp"/>
 
         <Button
@@ -183,7 +183,7 @@
             android:text="공지사항"
             android:textSize="30dp"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="#ffffff"
+            android:background="#00ff0000"
             android:layout_margin="5dp"/>
         <Button
             android:id="@+id/account_textView_ex5"
@@ -192,7 +192,7 @@
             android:text="고객센터"
             android:textSize="30dp"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="#ffffff"
+            android:background="#00ff0000"
             android:layout_margin="5dp"/>
         <Button
             android:id="@+id/account_textView_ex6"
@@ -201,7 +201,7 @@
             android:text="앱설정"
             android:textSize="30dp"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="#ffffff"
+            android:background="#00ff0000"
             android:layout_margin="5dp"/>
     </LinearLayout>
 </LinearLayout>

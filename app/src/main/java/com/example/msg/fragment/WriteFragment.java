@@ -23,6 +23,8 @@ import androidx.fragment.app.FragmentManager;
 import com.example.msg.MainActivity;
 import com.example.msg.MapActivity;
 import com.example.msg.R;
+import com.example.msg.SaleActivity;
+import com.example.msg.UploadActivity;
 import com.example.msg.model.ProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,6 +45,7 @@ public class WriteFragment extends Fragment {
     private static final int PICK_FROM_ALBUM = 10;
     private View view;
     private Button enrollment;
+    private Button upload;
     private ImageView Image;
     private Uri imageUri;
     private EditText title;
@@ -58,82 +61,25 @@ public class WriteFragment extends Fragment {
         enrollment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MapActivity.class);
+                Intent intent = new Intent(getActivity(), SaleActivity.class);
                 startActivity(intent);
-                Toast.makeText(getActivity(), "지도로 갑니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "업로드로 갑니다.", Toast.LENGTH_LONG).show();
             }
         });
+
+        upload = (Button) view.findViewById(R.id.writeFragment_button_enrollment);
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), UploadActivity.class);
+                startActivity(intent);
+                Toast.makeText(getActivity(), "업로드로 갑니다.", Toast.LENGTH_LONG).show();
+            }
+        });
+
         return view;
     }
-//      아래 코드들은 버튼 눌렀을 때로 -> 새로운 activity 만들자
-//        Image = (ImageView) view.findViewById(R.id.writeFragment_imageview_image);
-//        Image.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(Intent.ACTION_PICK); //사진 가져오는 것
-//                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-//                startActivityForResult(intent, PICK_FROM_ALBUM);
-//            }
-//        });
-//        title = (EditText) view.findViewById(R.id.writeFragment_edittext_title);
-//        enrollment = (Button) view.findViewById(R.id.writeFragment_button_enrollment);
-//
-//
-//
-//
-//
-//        enrollment.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//                final String uid = user.getUid();
-//                FirebaseStorage.getInstance().getReference().child("productImages").child(uid+title.getText().toString()).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-//                        Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
-//                        while (!imageUrl.isComplete()) ;
-//                        ProductModel productModel=new ProductModel();
-//                        productModel.setTitle(title.getText().toString());
-//                        productModel.setImageUrl(imageUrl.getResult().toString());
-//                        productModel.setUid(uid);
-//                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//                        db.collection("products")
-//                                .add(productModel)
-//                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                                    @Override
-//                                    public void onSuccess(DocumentReference documentReference) {
-//
-//                                        //프레그먼트1(home)으로 전환?
-//                                        Toast.makeText(getActivity(), "출력할 문자열", Toast.LENGTH_LONG).show();
-//
-//                                    }
-//                                })
-//                                .addOnFailureListener(new OnFailureListener() {
-//                                    @Override
-//                                    public void onFailure(@NonNull Exception e) {
-//                                        Toast.makeText(getActivity(), "출력할 문자열", Toast.LENGTH_LONG).show();
-//                                    }
-//                                });
-//
-//                    }
-//                });
-//
-//            }
-//
-//        });
-//
-//        return view;
-//    }
-//
-//
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){
-//            imageUri=data.getData();    //이미지 원본 경로
-//            Image.setImageURI(imageUri);
-//        }
-//    }
+
 
 }
 

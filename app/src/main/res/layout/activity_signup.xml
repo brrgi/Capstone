@@ -47,18 +47,28 @@
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/signupActivity_edittext_age"
-            android:singleLine="true"
-            android:lines="1"
-            android:hint="성별"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/signupActivity_radiogroup_sex"
+        android:orientation="horizontal">
 
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="남자"
+            android:id="@+id/signupActivity_radiobutton_man"
+            android:layout_weight="1"
+            android:checked="true"/>
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="여자"
+            android:id="@+id/signupActivity_radiobutton_woman"
+            android:layout_weight="1"/>
+
+    </RadioGroup>
     <Button
         android:id="@+id/signupActivity_button_address"
         android:layout_width="wrap_content"

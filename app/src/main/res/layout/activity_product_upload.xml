@@ -12,36 +12,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="50dp"
-        android:text="사진 등록하기" />
+        android:text="식재료 등록" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_centerInParent="true"
-        android:background="#D3D3D3"/>
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10dp"/>
 
     <ImageView
         android:id="@+id/saleActivity_imageView_product"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
         android:src="@drawable/icon_image_searching"
+        android:layout_gravity="start"
         />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_centerInParent="true"
-        android:background="#D3D3D3"/>
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10dp"/>
 
 
     <EditText
         android:id="@+id/product_upload_editText_title"
-        android:text="제목"
+        android:hint="제목"
+        android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:background="@null"
         />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,19 +76,37 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_centerInParent="true"
-        android:background="#D3D3D3"/>
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="양(상세히 서술해주세요)"/>
+        android:hint="양(상세히 서술해주세요)"
+        android:textSize="30dp"
+        android:background="@null"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10dp"/>
 
     <EditText
         android:id="@+id/product_upload_editText_expireDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="유통기한" />
+        android:hint="유통기한"
+        android:textSize="30dp"
+        android:background="@null"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -106,7 +134,8 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_centerInParent="true"
-        android:background="#D3D3D3"/>
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10dp"/>
 
     <Spinner
         android:id="@+id/product_upload_spinner_until"
@@ -128,16 +157,19 @@
         android:id="@+id/product_upload_editText_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="상세설명"/>
+        android:textSize="30dp"
+        android:hint="상세설명"
+        android:background="@null"/>
 
     <Button
         android:id="@+id/product_upload_button_submit"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="제출하기"
+        android:text="등록"
         android:background="@drawable/bin_blue"
         android:textColor="#ffffff"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"/>
 
 
 
