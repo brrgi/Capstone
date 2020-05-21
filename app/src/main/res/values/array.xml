@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string-array name ="대분류">
+         <item>채소</item>
+         <item>육류</item>
+         <item>향신료</item>
+         <item>과일</item>
+     </string-array>
+</resources>

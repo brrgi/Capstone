@@ -8,18 +8,25 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Domain.AuthenticationApi;
+import com.example.msg.Domain.GuideLineApi;
 import com.example.msg.Domain.UserApi;
 import com.example.msg.Domain.UserProductApi;
+import com.example.msg.recyclerView.QualitySelectActivity;
 import com.firebase.ui.auth.User;
+
+import java.util.ArrayList;
 
 public class ProductUploadActivity extends AppCompatActivity {
 
@@ -27,10 +34,16 @@ public class ProductUploadActivity extends AppCompatActivity {
     private EditText categoryBig = null;
     private EditText title = null;
     private Button submitButton = null;
+    private Spinner bigSpinner = null;
+    private Spinner smallSpinner = null;
+    private EditText quality = null;
+    private EditText quantity;
+    private EditText specification = null;
 
     private Uri imageUri = null;
 
     private final int PICK_FROM_ALBUM = 100;
+    private final int QUALITY_SELECT = 101;
 
 
     private void postUserProduct(final UserProductModel userProductModel) {
@@ -55,6 +68,7 @@ public class ProductUploadActivity extends AppCompatActivity {
 
             @Override
             public void onFail(int errorCode, Exception e) {
+                Log.d("1234", Integer.toString(errorCode));
                 //유저 정보를 불러오는데 실패한 경우.
             }
         });
@@ -73,18 +87,33 @@ public class ProductUploadActivity extends AppCompatActivity {
 
         productImage = (ImageView) findViewById(R.id.product_upload_imageView_product);
         submitButton = (Button) findViewById(R.id.product_upload_button_submit);
+        smallSpinner = (Spinner)findViewById(R.id.product_upload_spinner_small);
+        bigSpinner = (Spinner)findViewById(R.id.product_upload_spinner_big);
+        quality = (EditText)findViewById(R.id.product_upload_editText_quality);
+        specification = (EditText)findViewById(R.id.product_upload_editText_description);
+        Button test = (Button)findViewById(R.id.product_upload_button_test);
+        title = (EditText)findViewById(R.id.product_upload_editText_title);
+
+        final ArrayList<String> smallCategories = new ArrayList<>();
+        final ArrayAdapter<String> smallCategoriesAdapter = new ArrayAdapter<>(getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item, smallCategories);
 
         final UserProductModel userProductModel = new UserProductModel();
-        userProductModel.categoryBig = "육류";
-        userProductModel.categorySmall = "닭고기";
-        userProductModel.completed = false;
-        userProductModel.expiration_date = "2019-02-02";
-        userProductModel.latitude = 5.0;
-        userProductModel.longitude = 5.0;
-        userProductModel.quality = 0;
-        userProductModel.quantity = "많음";
-        userProductModel.title = "싱싱한 닭고기";
-        userProductModel.p_description = "싱싱한 닭고기입니다";
+        smallSpinner.setAdapter(smallCategoriesAdapter);
+
+        bigSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                smallCategories.clear();
+                smallCategories.addAll(GuideLineApi.getSmallCategoryList((String)parent.getItemAtPosition(position)));
+                smallCategoriesAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         productImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,11 +125,35 @@ public class ProductUploadActivity extends AppCompatActivity {
         });
         //앨범에서 식재료 사진을 가져오는 부분.
 
+        quality.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    Intent intent = new Intent(ProductUploadActivity.this, QualitySelectActivity.class);
+                    intent.putExtra("category", smallSpinner.getSelectedItem().toString());
+                }
+                return false;
+            }
+        });
+
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductUploadActivity.this, QualitySelectActivity.class);
+                intent.putExtra("category", smallSpinner.getSelectedItem().toString());
+                startActivityForResult(intent, QUALITY_SELECT);
+            }
+        });
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                userProductModel.title = title.getText().toString();
+                userProductModel.p_description = specification.getText().toString();
+                userProductModel.categorySmall = smallSpinner.getSelectedItem().toString();
+                userProductModel.categoryBig = bigSpinner.getSelectedItem().toString();
+                //userProductModel.quantity
                 postUserProduct(userProductModel);
 
             }

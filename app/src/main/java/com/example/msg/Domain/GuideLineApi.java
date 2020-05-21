@@ -30,7 +30,7 @@ public class GuideLineApi {
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-    public static void getUserByName(String name, final MyCallback myCallback) {
+    public static void getGuideByName(String name, final MyCallback myCallback) {
         db.collection("GuideLine").whereEqualTo("name", name).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -60,12 +60,37 @@ public class GuideLineApi {
 
     public static ArrayList<String> getSmallCategoryList(String bigCategory) {
         ArrayList<String> smallCategories = new ArrayList<String>();
+        switch(bigCategory){
+            case "채소":
+                smallCategories.add("양파");
+                smallCategories.add("당근");
+                smallCategories.add("양배추");
+                break;
+            case "육류":
+                smallCategories.add("소고기");
+                smallCategories.add("닭고기");
+                break;
+            case "향신료":
+                smallCategories.add("소금");
+                smallCategories.add("후추");
+                smallCategories.add("설탕");
+                break;
+            case "과일":
+                smallCategories.add("바나나");
+                smallCategories.add("사과");
+                smallCategories.add("딸기");
+                break;
+
+        }
+
         return smallCategories;
     }
     /*
     입력: 대분류의 명칭
     출력: 대분류에 해당하는 소분류 리스트
     동작: 대분류에 해당하는 소분류의 스트링 리스트를 반환합니다.
-     */
+    */
+
+
 
 }
