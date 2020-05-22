@@ -91,6 +91,16 @@
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Button
+        android:id="@+id/signupActivity_button_birthyear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/iconfinder_calendar"
+        android:background="@android:color/transparent"
+        android:onClick="OnClickHandler"
+        android:hint="생년월일"
+        android:textSize="20sp" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

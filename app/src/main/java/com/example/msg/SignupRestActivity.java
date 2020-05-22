@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.msg.model.RestaurantModel;
@@ -33,17 +35,24 @@ import com.google.firebase.storage.UploadTask;
 
 public class SignupRestActivity extends AppCompatActivity {
 
+
     private static final String TAG = "SignupRestActivity";
+    private static final int SERACH_ADDRESS_ACTIVITY = 10000;
     private static final int PICK_FROM_ALBUM = 10;
     private EditText email;
     private EditText password;
-    private EditText name;
+    private EditText res_name;
+    private EditText res_description;
+    private EditText et_address;
+    private Button address;
     private Button signup;
     private String splash_background;
-    private EditText phone;
+    private EditText res_phone;
     private ImageView profile;
     private Uri imageUri;
-
+    private EditText pickup_start_time;
+    private EditText pickup_end_time;
+    private TimePickerDialog.OnTimeSetListener callbackMethod;
 
 
     @Override
@@ -51,39 +60,54 @@ public class SignupRestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_rest);
 
-        FirebaseRemoteConfig mFirebaseRemoteConfig= FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         splash_background = mFirebaseRemoteConfig.getString(getString(R.string.rc_color));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.parseColor(splash_background));
         }
 
-        profile=(ImageView)findViewById(R.id.signupRestActivity_imageview_profile);
+        profile = (ImageView) findViewById(R.id.signupRestActivity_imageview_profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK); //사진 가져오는 것
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                startActivityForResult(intent,PICK_FROM_ALBUM);
+                startActivityForResult(intent, PICK_FROM_ALBUM);
             }
         });
-        phone=(EditText)findViewById(R.id.signupRestActivity_edittext_phone);
-        email=(EditText)findViewById(R.id.signupRestActivity_edittext_email);
-        password=(EditText)findViewById(R.id.signupRestActivity_edittext_password);
-        name=(EditText)findViewById(R.id.signupRestActivity_edittext_name);
-        signup=(Button)findViewById(R.id.signupRestActivity_button_signup);
+
+        address=(Button)findViewById(R.id.signupRestActivity_button_address);
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignupRestActivity.this, DaumWebViewActivity.class);
+                startActivityForResult(intent,SERACH_ADDRESS_ACTIVITY);
+            }
+        });
+
+        et_address=(EditText)findViewById(R.id.signupRestActivity_edittext_address);
+        res_phone = (EditText) findViewById(R.id.signupRestActivity_edittext_res_phone);
+        email = (EditText) findViewById(R.id.signupRestActivity_edittext_email);
+        password = (EditText) findViewById(R.id.signupRestActivity_edittext_password);
+        res_name = (EditText) findViewById(R.id.signupRestActivity_edittext_res_name);
+        res_description = (EditText) findViewById(R.id.signupRestActivity_edittext_res_description);
+        pickup_start_time = (EditText) findViewById(R.id.signupRestActivity_edittext_pickupstarttime);
+        pickup_end_time = (EditText) findViewById(R.id.signupRestActivity_edittext_pickupendtime);
+
+        signup = (Button) findViewById(R.id.signupRestActivity_button_signup);
         signup.setBackgroundColor(Color.parseColor(splash_background));
 
-        signup.setOnClickListener(new View.OnClickListener(){
+        signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                if (email.getText().toString() == null || name.getText().toString() ==null || password.getText().toString() == null){
+                if (email.getText().toString() == null || res_name.getText().toString() == null || password.getText().toString() == null) {
                     return;
                 }
 
                 FirebaseAuth.getInstance()
-                        .createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
+                        .createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnCompleteListener(SignupRestActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -92,12 +116,19 @@ public class SignupRestActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                                         Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
-                                        while(!imageUrl.isComplete());
+                                        while (!imageUrl.isComplete()) ;
 
                                         RestaurantModel restaurantModel = new RestaurantModel();
-                                        restaurantModel.setRestaurantName(name.getText().toString());
+                                        restaurantModel.setRestaurantName(res_name.getText().toString());
                                         restaurantModel.setProfileImageUrl(imageUrl.getResult().toString());
-                                        restaurantModel.setRestaurantPhone(phone.getText().toString());
+                                        restaurantModel.setRestaurantPhone(res_phone.getText().toString());
+                                        restaurantModel.setRestaurantAddress(et_address.getText().toString());
+                                        restaurantModel.setDescription(res_description.getText().toString());
+                                        restaurantModel.setPickupStartTime(pickup_start_time.getText().toString());
+                                        restaurantModel.setPickupEndTime(pickup_end_time.getText().toString());
+                                        restaurantModel.setRestuser_id(uid);
+                                        restaurantModel.setApproved(false);
+
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("restaurantUsers")
                                                 .document(uid)
@@ -106,14 +137,16 @@ public class SignupRestActivity extends AppCompatActivity {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
                                                         Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_LONG).show();
-                                                        Log.d(TAG,"SUCCESS");
+                                                        Log.d(TAG, "SUCCESS");
+                                                        startActivity(new Intent(SignupRestActivity.this, LoginActivity.class));
+                                                        finish();
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
                                                         Toast.makeText(getApplicationContext(), "회원가입 실패", Toast.LENGTH_LONG).show();
-                                                        Log.d(TAG,"Faliure");
+                                                        Log.d(TAG, "Faliure");
                                                     }
                                                 });
 
@@ -125,11 +158,17 @@ public class SignupRestActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){
-            imageUri=data.getData();    //이미지 원본 경로
+        if (requestCode == PICK_FROM_ALBUM && resultCode == RESULT_OK) {
+            imageUri = data.getData();    //이미지 원본 경로
             profile.setImageURI(imageUri);
+        }
+        if(requestCode==SERACH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
+            String datas=data.getStringExtra("comeback");
+            if (datas!=null)
+                et_address.setText(datas);
         }
     }
 }

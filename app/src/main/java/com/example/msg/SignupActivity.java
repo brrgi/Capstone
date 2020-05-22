@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -13,8 +14,10 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.msg.model.UserModel;
@@ -35,14 +38,22 @@ import com.google.firebase.storage.UploadTask;
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
     private static final int PICK_FROM_ALBUM = 10;
+    private static final int SERACH_ADDRESS_ACTIVITY = 10000;
     private EditText email;
     private EditText password;
     private EditText name;
+    private EditText phone;
+    private EditText et_address;
+    private Button address;
     private Button signup;
     private String splash_background;
     private ImageView profile;
     private Uri imageUri;
-
+    private Button birthyear;
+    private DatePickerDialog.OnDateSetListener callbackMethod;
+    private RadioButton man;
+    private RadioButton woman;
+    private int bornyear;
 
 
     @Override
@@ -55,6 +66,7 @@ public class SignupActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.parseColor(splash_background));
         }
 
+
         profile=(ImageView)findViewById(R.id.signupActivity_imageview_profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,11 +77,26 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+        address=(Button)findViewById(R.id.signupActivity_button_address);
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignupActivity.this, DaumWebViewActivity.class);
+                startActivityForResult(intent,SERACH_ADDRESS_ACTIVITY);
+            }
+        });
+
+        et_address=(EditText)findViewById(R.id.signupActivity_edittext_address);
         email=(EditText)findViewById(R.id.signupActivity_edittext_email);
         password=(EditText)findViewById(R.id.signupActivity_edittext_password);
         name=(EditText)findViewById(R.id.signupActivity_edittext_name);
+        phone=(EditText) findViewById(R.id.signupActivity_edittext_phone);
+        birthyear = (Button) findViewById(R.id.signupActivity_button_birthyear);
         signup=(Button)findViewById(R.id.signupActivity_button_signup);
         signup.setBackgroundColor(Color.parseColor(splash_background));
+        man = (RadioButton) findViewById(R.id.signupActivity_radiobutton_man);
+        woman = (RadioButton) findViewById(R.id.signupActivity_radiobutton_woman);
+        this.InitializeListener();
 
         signup.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -120,11 +147,33 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void InitializeListener() {
+        callbackMethod = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                monthOfYear++;
+                birthyear.setText(year + "년" + monthOfYear + "월" + dayOfMonth + "일");
+                bornyear = year;
+            }
+        };
+    }
+
+    public void OnClickHandler(View view) {
+        DatePickerDialog dialog = new DatePickerDialog(this, callbackMethod, 2019, 5, 24);
+
+        dialog.show();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){
             imageUri=data.getData();    //이미지 원본 경로
             profile.setImageURI(imageUri);
+        }
+        if(requestCode==SERACH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
+            String datas=data.getStringExtra("comeback");
+            if (datas!=null)
+                et_address.setText(datas);
         }
     }
 }
