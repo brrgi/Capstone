@@ -16,8 +16,11 @@ import android.widget.Toast;
 
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
+import com.example.msg.DatabaseModel.UserModel;
+import com.example.msg.Domain.AuthenticationApi;
 import com.example.msg.Domain.RestaurantProductApi;
 import com.example.msg.Domain.SubscriptionApi;
+import com.example.msg.Domain.UserApi;
 import com.example.msg.Domain.UserProductApi;
 import com.example.msg.fragment.AccountFragment;
 import com.example.msg.fragment.ChatFragment;
@@ -56,6 +59,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*
+        dummy code in here
+        UserModel userModel = new UserModel();
+        userModel.user_id = AuthenticationApi.getCurrentUid();
+        userModel.age = 22;
+        userModel.ban_count = 0;
+        userModel.email = "test2@gmail.com";
+        userModel.is_male = true;
+        userModel.mileage = 50;
+        userModel.user_address = "";
+        userModel.user_grade = 0;
+        userModel.user_name = "한규동";
+        userModel.user_phone = "010-0000-0000";
+        UserApi.postUser(userModel, new UserApi.MyCallback() {
+            @Override
+            public void onSuccess(UserModel userModel) {
+
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+         */
+        UserApi.getUserById(AuthenticationApi.getCurrentUid(), new UserApi.MyCallback() {
+            @Override
+            public void onSuccess(UserModel userModel) {
+                Log.d("1234", userModel.user_name);
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
 
         //mainActivity_address
         address=(Button)findViewById(R.id.mainActivity_address);
@@ -113,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
                         setFrag(1);
                         break;
                     case R.id.action_write:
+                        Intent intent = new Intent(MainActivity.this, ProductUploadActivity.class);
+                        startActivity(intent);
                         setFrag(2);
                         break;
                     case R.id.action_reservation:

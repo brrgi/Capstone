@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 import com.example.msg.DatabaseModel.ReserveModel;
@@ -29,6 +30,7 @@ public class ReservationActivity extends AppCompatActivity {
     private EditText editText;
     Spinner spinner;
 
+    String msg = "예약이 완료되었습니다.";
     String tmp;
 
     String[] categories = {"육류","어류","채소","향신료","주류"};
@@ -81,7 +83,7 @@ public class ReservationActivity extends AppCompatActivity {
                                     //  msg = getString(R.string.msg_subscribe_failed);
                                 }
                                 //Log.d(TAG, msg);
-                                //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                             }
                         });
             }

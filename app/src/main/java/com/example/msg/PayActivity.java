@@ -46,7 +46,7 @@ public class PayActivity extends AppCompatActivity {
 
     public void onClick_request(View v) {
         // 결제호출
-
+        /*
         UserProductApi.getProduct(new UserProductApi.MyCallback() {
             @Override
             public void onCallback(UserProductModel userProductModel) {
@@ -109,7 +109,7 @@ public class PayActivity extends AppCompatActivity {
                         .request();
             }
         }, "1rdx4BsFHYHqtztzrPYb");
-
+        */
 
     }
 }

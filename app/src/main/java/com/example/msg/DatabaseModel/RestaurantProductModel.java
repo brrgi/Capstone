@@ -1,6 +1,8 @@
 package com.example.msg.DatabaseModel;
 
-public class RestaurantProductModel {
+import java.io.Serializable;
+
+public class RestaurantProductModel implements Serializable {
     public String rproduct_id = null;
     public String res_id = null;
     public String title = null;

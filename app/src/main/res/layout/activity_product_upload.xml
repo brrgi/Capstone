@@ -1,116 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginTop="20dp"
     tools:context=".ProductUploadActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="사진 등록하기" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/saleActivity_imageView_product"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/icon_image_searching"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사진 등록하기" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="제목" />
+        <ImageView
+            android:id="@+id/product_upload_imageView_product"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/icon_image_searching" />
 
-    <EditText
-        android:id="@+id/product_upload_editText_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="제목" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="카테고리" />
+        <EditText
+            android:id="@+id/product_upload_editText_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/product_upload_editText_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="양(상세히 서술해주세요)" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="유통기한" />
-
-    <EditText
-        android:id="@+id/product_upload_editText_expireDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="품질" />
-
-    <EditText
-        android:id="@+id/product_upload_editText_quality"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="게시 기한" />
-
-    <EditText
-        android:id="@+id/product_upload_editText_until"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="장소" />
-
-    <EditText
-        android:id="@+id/product_upload_editText_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="상세설명" />
-
-    <EditText
-        android:id="@+id/product_upload_editText_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/product_upload_button_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="제출하기" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="카테고리" />
 
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="대분류: "/>
+            <Spinner
+                android:id="@+id/product_upload_spinner_big"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/대분류" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="소분류: "/>
+            <Spinner
+                android:id="@+id/product_upload_spinner_small"
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="양(상세히 서술해주세요)" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="유통기한" />
+
+        <EditText
+            android:id="@+id/product_upload_editText_expireDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="품질" />
+
+        <EditText
+            android:id="@+id/product_upload_editText_quality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_upload_button_test"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="장소" />
+
+        <EditText
+            android:id="@+id/product_upload_editText_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상세설명" />
+
+        <EditText
+            android:id="@+id/product_upload_editText_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/product_upload_button_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="제출하기" />
+    </LinearLayout>
+</ScrollView>
