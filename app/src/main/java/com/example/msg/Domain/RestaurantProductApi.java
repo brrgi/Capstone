@@ -1,5 +1,6 @@
 package com.example.msg.Domain;
 
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.google.firebase.firestore.auth.User;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class RestaurantProductApi {
 
@@ -57,8 +61,8 @@ public class RestaurantProductApi {
     설명 : 간단한 더미 모델을 제공하는 함수입니다. 테스트 용도로 사용하십시오.
 */
 
-    //TODO 이미지 처리!!!!
-    public static void postProduct(final RestaurantProductModel restaurantProductModel, final MyCallback myCallback) {
+
+    public static void postProduct(final RestaurantProductModel restaurantProductModel, final Uri imageUri, final MyCallback myCallback) {
         db.collection("ResProducts").add(restaurantProductModel)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -66,7 +70,8 @@ public class RestaurantProductApi {
                         db.collection("ResProducts").document(documentReference.getId())
                                 .update("rproduct_id", documentReference.getId());
                         restaurantProductModel.rproduct_id = documentReference.getId();
-                        myCallback.onSuccess(restaurantProductModel);
+                        postImage(restaurantProductModel, imageUri, myCallback);
+                        //이미지 포스트
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -80,6 +85,38 @@ public class RestaurantProductApi {
     출력: 없음.
     동작: RestaurantProductModel을 받아서 데이터베이스에 추가합니다. 실패할경우 콜백함수 onFail을 호출합니다.
          성공할시에는 콜백함수 onSuccess를 호출하고, 성공한 객체를 돌려줍니다.(해당 객체는 product_id를 가진 상태)
+     */
+
+    public static void postImage(final RestaurantProductModel restaurantProductModel, final Uri imageUri, final MyCallback myCallback){
+        final String directory = "ResProducts/";
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+        StorageReference imageReference = storageReference.child( directory + restaurantProductModel.rproduct_id);
+
+        UploadTask uploadTask = imageReference.putFile(imageUri);
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                myCallback.onFail(10 ,e);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                restaurantProductModel.p_imageURL = directory + restaurantProductModel.rproduct_id;
+                db.collection("ResProducts").document(restaurantProductModel.rproduct_id)
+                        .update("p_imageURL", restaurantProductModel.p_imageURL);
+                //사진을 올린 직후에 서버 스토리지의 사진 링크를 데이터베이스에 업데이트함.
+                myCallback.onSuccess(restaurantProductModel);
+            }
+        });
+
+    }
+    /*
+    입력: 모델과 콜백함수.
+    출력: 없음.
+    동작: 모델을 받아서 모델의 image를 storage에 등록합니다. 실패할경우 콜백함수 onFail을 호출합니다.
+         성공할시에는 콜백함수 onSuccess를 호출하고, 성공한 객체를 돌려줍니다.(해당 객체는 image 변수를 얻은 상태)
      */
 
     public static void getProduct(String productId, final MyCallback myCallback) {
