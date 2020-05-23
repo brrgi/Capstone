@@ -25,7 +25,6 @@ import com.example.msg.MapActivity;
 import com.example.msg.R;
 import com.example.msg.SaleActivity;
 import com.example.msg.UploadActivity;
-import com.example.msg.model.ProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

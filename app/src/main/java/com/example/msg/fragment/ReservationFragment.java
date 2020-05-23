@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.msg.R;
 import com.example.msg.ReservationActivity;
-import com.example.msg.model.ProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
