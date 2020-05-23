@@ -37,11 +37,10 @@ public class SignupActivity extends AppCompatActivity {
     private EditText phone;
     private Button signup;
     private String splash_background;
-    private Uri imageUri;
     private Button birthyear;
     private DatePickerDialog.OnDateSetListener callbackMethod;
     private RadioButton man;
-    private RadioButton woman;
+    //private RadioButton woman;
     private int bornyear;
 
     @Override
@@ -62,7 +61,7 @@ public class SignupActivity extends AppCompatActivity {
         signup = (Button) findViewById(R.id.signupActivity_button_signup);
         signup.setBackgroundColor(Color.parseColor(splash_background));
         man = (RadioButton) findViewById(R.id.signupActivity_radiobutton_man);
-        woman = (RadioButton) findViewById(R.id.signupActivity_radiobutton_woman);
+        //woman = (RadioButton) findViewById(R.id.signupActivity_radiobutton_woman);
         this.InitializeListener();
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -79,21 +78,24 @@ public class SignupActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 final String uid = task.getResult().getUser().getUid();
-                                UserModel userModel = new UserModel();
-                                userModel.setUserName(name.getText().toString());
-                                userModel.setUser_phone(phone.getText().toString());
-                                userModel.setBan_count(0);
-                                userModel.setMileage(2);
-                                userModel.setGrade(0);
-                                userModel.setUser_id(uid);
+                                com.example.msg.DatabaseModel.UserModel userModel=new com.example.msg.DatabaseModel.UserModel();
+                                //UserModel userModel = new UserModel();
+                                userModel.user_name=(name.getText().toString());
+                                userModel.user_phone=(phone.getText().toString());
+                                userModel.ban_count=0;
+                                userModel.mileage=2;
+                                userModel.user_grade=0;
+                                userModel.user_id=uid;
+                                userModel.sanction=false;
+                                userModel.email=email.getText().toString();
                                 if (man.isChecked())
-                                    userModel.setIs_male(true);
+                                    userModel.is_male=true;
                                 else
-                                    userModel.setIs_male(false);
-                                userModel.setAge(bornyear);
+                                    userModel.is_male=false;
+                                userModel.age=bornyear;
 
                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                db.collection("users")
+                                db.collection("User")
                                         .document(uid)
                                         .set(userModel)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {

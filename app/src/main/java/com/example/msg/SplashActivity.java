@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.example.msg.model.RestaurantModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.BuildConfig;
@@ -35,6 +36,10 @@ public class SplashActivity extends AppCompatActivity {
                 .build();
         mFirebaseRemoteConfig.setConfigSettings(configSettings);
         mFirebaseRemoteConfig.setDefaults(R.xml.default_config);
+
+        RestaurantModel restaurantModel=new RestaurantModel();
+        //restaurantModel.setRestuser_id();
+
         mFirebaseRemoteConfig.fetch(0)
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override

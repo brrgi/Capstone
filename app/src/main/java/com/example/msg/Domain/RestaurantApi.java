@@ -88,7 +88,8 @@ public class RestaurantApi {
                         "res_address", restaurantModel.res_address,
                         "res_imageURL", restaurantModel.res_imageURL,
                         "res_description", restaurantModel.res_description,
-                        "pickup_time", restaurantModel.pickup_time
+                        "pickup_start_time", restaurantModel.pickup_start_time,
+                        "pickup_end_time", restaurantModel.pickup_end_time
                 ).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

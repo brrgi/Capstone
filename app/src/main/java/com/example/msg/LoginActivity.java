@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     FirebaseFirestore db=FirebaseFirestore.getInstance();
                     //먼저 user 검사
-                    DocumentReference docRef=db.collection("users").document(user.getUid());
+                    DocumentReference docRef=db.collection("User").document(user.getUid());
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -98,7 +98,6 @@ public class LoginActivity extends AppCompatActivity {
                                         Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                                         startActivity(intent);
                                         finish();
-
                                     }
                                 }
                                 else {
@@ -113,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                     });
 
                     //restaurant_user 검사
-                    docRef=db.collection("restaurantUsers").document(user.getUid());
+                    docRef=db.collection("Restaurant").document(user.getUid());
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {

@@ -11,4 +11,5 @@ public class UserModel {
     public int mileage = -1;
     public int ban_count = -1;
     public int user_grade = -1;
+    public boolean sanction;
 }

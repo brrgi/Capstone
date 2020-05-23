@@ -104,18 +104,19 @@ public class SignupRestActivity extends AppCompatActivity {
                                         Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
                                         while(!imageUrl.isComplete());
 
-                                        RestaurantModel restaurantModel = new RestaurantModel();
-                                        restaurantModel.setRestaurantName(res_name.getText().toString());
-                                        restaurantModel.setProfileImageUrl(imageUrl.getResult().toString());
-                                        restaurantModel.setRestaurantPhone(res_phone.getText().toString());
-                                        restaurantModel.setDescription(res_description.getText().toString());
-                                        restaurantModel.setPickupStartTime(pickup_start_time.getText().toString());
-                                        restaurantModel.setPickupEndTime(pickup_end_time.getText().toString());
-                                        restaurantModel.setRestuser_id(uid);
-                                        restaurantModel.setApproved(false);
+                                        com.example.msg.DatabaseModel.RestaurantModel restaurantModel=new com.example.msg.DatabaseModel.RestaurantModel();
+                                        //RestaurantModel restaurantModel = new RestaurantModel();
+                                        restaurantModel.res_name=(res_name.getText().toString());
+                                        restaurantModel.res_imageURL=(imageUrl.getResult().toString());
+                                        restaurantModel.res_phone=(res_phone.getText().toString());
+                                        restaurantModel.res_description=(res_description.getText().toString());
+                                        restaurantModel.pickup_start_time=(pickup_start_time.getText().toString());
+                                        restaurantModel.pickup_end_time=(pickup_end_time.getText().toString());
+                                        restaurantModel.res_id=uid;
+                                        restaurantModel.approved=false;
 
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                        db.collection("restaurantUsers")
+                                        db.collection("Restaurant")
                                                 .document(uid)
                                                 .set(restaurantModel)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
