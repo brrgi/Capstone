@@ -48,10 +48,14 @@ public class ProductUploadActivity extends AppCompatActivity {
 
     private void postUserProduct(final UserProductModel userProductModel) {
         UserApi.getUserById(AuthenticationApi.getCurrentUid(), new UserApi.MyCallback() {
+            //유저 모델을 가져오는 함수를 호출.
             @Override
             public void onSuccess(UserModel userModel) {
+                //성공하는 경우
                 userProductModel.user_id = userModel.user_id;
+                //userProductModel의 user_id 필드에 userModel의 user_id를 집어넣음.
                 UserProductApi.postProduct(userProductModel, imageUri, new UserProductApi.MyCallback() {
+                    //유저 프로덕트를 post하는 함수를 호출.
                    @Override
                    public void onSuccess(UserProductModel userProductModel) {
                         //유저 프로덕트 올리는데 성공함.
