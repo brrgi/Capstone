@@ -16,32 +16,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.msg.DatabaseModel.ReserveModel;
+import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
-import com.example.msg.DatabaseModel.UserProductModel;
-import com.example.msg.Domain.ReserveApi;
-import com.example.msg.Domain.RestaurantProductApi;
+
+import com.example.msg.Domain.RestaurantApi;
 import com.example.msg.Domain.SubscriptionApi;
-import com.example.msg.Domain.UserApi;
-import com.example.msg.Domain.UserProductApi;
-import com.example.msg.model.ProductModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 
-import javax.annotation.Nullable;
 
 
 public class SaleActivity extends AppCompatActivity {
@@ -61,6 +47,8 @@ public class SaleActivity extends AppCompatActivity {
     private Button btn_subscription;
 
     private static int current = -1;
+
+    String r_name = "";
 
 
     @Override
@@ -83,6 +71,17 @@ public class SaleActivity extends AppCompatActivity {
         RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
 
+        RestaurantApi.getUserById(restaurantProductModel.res_id, new RestaurantApi.MyCallback() {
+            @Override
+            public void onSuccess(RestaurantModel restaurantModel) {
+                r_name = restaurantModel.res_name;
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
 
 
         /* RestaurantProductApi.getProduct(new RestaurantProductApi.MyCallback() {
@@ -125,7 +124,7 @@ public class SaleActivity extends AppCompatActivity {
 
         txt_title.setText("제목 : " + restaurantProductModel.title);
         txt_category.setText("카테고리 : " + restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
-        txt_salesman.setText("판매자 : 우석이네 치킨집"); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
+        txt_salesman.setText("판매자 : "+r_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
         txt_quantity.setText("양 : " + restaurantProductModel.quantity);
         txt_quality.setText("품질 : " + restaurantProductModel.quality);
         txt_expireDate.setText("유통기한 : " + restaurantProductModel.expiration_date);

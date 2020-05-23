@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SaleUserActivity">
+
+    <TextView
+        android:id="@+id/saleUserActivity_textView_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="제품 사진"
+        android:textSize="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/saleUserActivity_imageView_product"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/icon_image_searching"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_title" />
+
+    <TextView
+        android:id="@+id/saleUserActivity_textView_salesman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="판매자"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_imageView_product" />
+
+    <TextView
+        android:id="@+id/saleUserActivity_textView_categoryBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="카테고리"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_salesman" />
+
+    <TextView
+        android:id="@+id/saleUserActivity_textView_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="양"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_categoryBig" />
+
+    <TextView
+        android:id="@+id/saleUserActivity_textView_expiredDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유통기한"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_quality" />
+
+    <TextView
+        android:id="@+id/saleUserActivity_textView_quality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="품질"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_quantity" />
+
+    <TextView
+        android:id="@+id/saleUserActivity_textView_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상세설명"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_expiredDate" />
+
+    <Button
+        android:id="@+id/saleUserActivity_button_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginBottom="44dp"
+        android:text="공유"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/saleUserActivity_button_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="44dp"
+        android:text="채팅"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/saleUserActivity_button_buy" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
