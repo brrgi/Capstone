@@ -14,10 +14,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.Domain.AuthenticationApi;
+import com.example.msg.Domain.RestaurantApi;
 import com.example.msg.Domain.RestaurantProductApi;
 import com.example.msg.Domain.SubscriptionApi;
 import com.example.msg.Domain.UserApi;
@@ -59,6 +61,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        RestaurantModel restaurantModel = new RestaurantModel();
+        RestaurantApi.postRestaurant(restaurantModel, new RestaurantApi.MyCallback() {
+            @Override
+            public void onSuccess(RestaurantModel restaurantModel) {
+
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
         /*
         dummy code in here
         UserModel userModel = new UserModel();

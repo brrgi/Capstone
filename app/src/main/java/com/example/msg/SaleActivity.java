@@ -17,10 +17,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.msg.DatabaseModel.ReserveModel;
+import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Domain.ReserveApi;
+import com.example.msg.Domain.RestaurantApi;
 import com.example.msg.Domain.RestaurantProductApi;
 import com.example.msg.Domain.SubscriptionApi;
 import com.example.msg.Domain.UserApi;
@@ -62,6 +64,7 @@ public class SaleActivity extends AppCompatActivity {
 
     private static int current = -1;
 
+    private String r_name = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +105,22 @@ public class SaleActivity extends AppCompatActivity {
                Log.d("sale error","error");
            }
          }, "1rdx4BsFHYHqtztzrPYb");*/
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        RestaurantApi.getUserById(restaurantProductModel.res_id, new RestaurantApi.MyCallback() {
+            @Override
+            public void onSuccess(RestaurantModel restaurantModel) {
+                r_name = restaurantModel.res_name;
+                txt_salesman.setText("판매자 : "+r_name);
+            }
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+        Log.d("Resname",r_name+ " " + restaurantProductModel.res_id);
+
+
+      /*  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
         SubscriptionApi.getSubscriptionListByUserId(uid, new SubscriptionApi.MyListCallback() {
             @Override
@@ -120,12 +138,12 @@ public class SaleActivity extends AppCompatActivity {
             public void onFail(int errorCode, Exception e) {
 
             }
-        });
+        });*/
 
 
         txt_title.setText("제목 : " + restaurantProductModel.title);
         txt_category.setText("카테고리 : " + restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
-        txt_salesman.setText("판매자 : 우석이네 치킨집"); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
+        //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
         txt_quantity.setText("양 : " + restaurantProductModel.quantity);
         txt_quality.setText("품질 : " + restaurantProductModel.quality);
         txt_expireDate.setText("유통기한 : " + restaurantProductModel.expiration_date);
@@ -173,7 +191,6 @@ public class SaleActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }
 
