@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/signupRestActivity_imageview_profile"
-        android:src="@drawable/iconfinder_gallery"
+        android:src="@drawable/chef"
         android:layout_width="100dp"
         android:layout_height="100dp"/>
 
@@ -91,9 +91,59 @@
         android:textSize="20sp" />
 
     <Button
+        android:id="@+id/signupRestActivity_button_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_gravity="start"
+        android:text="주소 입력하기"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signupRestActivity_edittext_address"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="받은 주소"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signupRestActivity_edittext_description"
+            android:hint="세부사항"
+            android:singleLine="true"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signupRestActivity_edittext_time"
+            android:hint="픽업 타임"
+            android:singleLine="true"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
         android:id="@+id/signupRestActivity_button_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         android:text="회원가입" />
 
 

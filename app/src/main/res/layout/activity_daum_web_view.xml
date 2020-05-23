@@ -1,44 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
-
     android:orientation="vertical"
-
     tools:context="com.example.msg.DaumWebViewActivity">
 
 
     <WebView
-
-        android:id="@+id/daum_webview"
-
+        android:id="@+id/webView"
         android:layout_width="match_parent"
-
         android:layout_height="0dp"
-
         android:layout_weight="4" />
 
 
     <TextView
-
         android:id="@+id/daum_result"
-
         android:layout_width="match_parent"
-
         android:layout_height="0dp"
-
         android:layout_weight="1"
-
         android:gravity="center"
-
         android:text="Result" />
 
+    <Button
+        android:id="@+id/button2"
+        android:text="위도 경도(test용)"
+        android:textStyle="bold"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"/>
 
 </LinearLayout>
