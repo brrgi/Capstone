@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/msg"/>
+        android:src="@drawable/logo"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:id="@+id/loginActivity_edittext_id"
             android:hint="아이디"
             android:singleLine="true"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -34,7 +34,7 @@
             android:id="@+id/loginActivity_edittext_password"
             android:hint="패스워드"
             android:singleLine="true"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
