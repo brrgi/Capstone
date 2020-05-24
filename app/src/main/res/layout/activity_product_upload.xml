@@ -140,19 +140,6 @@
         android:background="#D3D3D3"
         android:layout_marginBottom="10sp"/>
 
-    <Spinner
-        android:id="@+id/product_upload_spinner_until"
-        android:layout_width="150sp"
-        android:layout_height="50sp"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="10sp"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2sp"
-        android:layout_centerInParent="true"
-        android:background="#D3D3D3"/>
 
 <!--장소는 본인의 위치를 기반으로 하기에 빼도 된다고 생각한다.-->
 
