@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.d(TAG,"Restuser "+document.getData());
                                     if((Boolean) document.getData().get("approved")){
                                         Log.d(TAG,"approved Restuser");
-                                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                        Intent intent=new Intent(LoginActivity.this,ResMainActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }

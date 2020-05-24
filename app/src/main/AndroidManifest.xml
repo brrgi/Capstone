@@ -31,6 +31,7 @@
         <activity android:name=".SignupRestActivity" />
         <activity android:name=".SelectSignupActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".ResMainActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SplashActivity">
