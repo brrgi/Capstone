@@ -43,12 +43,28 @@ public class SaleActivity extends AppCompatActivity {
     private TextView txt_expireDate;
     private TextView txt_description;
     private TextView txt_salesman;
+    private TextView txt_address;
     private ImageView image_product;
     private Button btn_subscription;
 
     private static int current = -1;
 
     String r_name = "";
+
+    private void getResModelFromProduct(RestaurantProductModel restaurantProductModel) {
+        RestaurantApi.getUserById(restaurantProductModel.res_id, new RestaurantApi.MyCallback() {
+            @Override
+            public void onSuccess(RestaurantModel restaurantModel) {
+                if(restaurantModel.res_name != null) txt_salesman.setText("판매자: " + restaurantModel.res_name);
+                if(restaurantModel.res_address != null) txt_address.setText("동네: " + restaurantModel.res_address);
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+    }
 
 
     @Override
@@ -67,21 +83,12 @@ public class SaleActivity extends AppCompatActivity {
         btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
         image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
         btn_subscription = (Button) findViewById(R.id.saleActivity_button_subscription);
+        txt_address = (TextView) findViewById(R.id.saleActivity_textView_address);
         Intent intent = getIntent();
         RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
 
-        RestaurantApi.getUserById(restaurantProductModel.res_id, new RestaurantApi.MyCallback() {
-            @Override
-            public void onSuccess(RestaurantModel restaurantModel) {
-                r_name = restaurantModel.res_name;
-            }
-
-            @Override
-            public void onFail(int errorCode, Exception e) {
-
-            }
-        });
+        getResModelFromProduct(restaurantProductModel);
 
 
         /* RestaurantProductApi.getProduct(new RestaurantProductApi.MyCallback() {

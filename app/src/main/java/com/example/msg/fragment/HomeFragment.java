@@ -2,21 +2,17 @@ package com.example.msg.fragment;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,17 +21,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Domain.RestaurantProductApi;
+import com.example.msg.Domain.UserProductApi;
 import com.example.msg.R;
-import com.example.msg.recyclerView.RestaurantModel;
-import com.example.msg.recyclerView.ProductsAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.example.msg.recyclerView.ResProductsAdapter;
+import com.example.msg.recyclerView.UserProductsAdapter;
 
 import java.util.ArrayList;
 
@@ -44,46 +35,89 @@ public class HomeFragment extends Fragment {
     private View view;
     private static final String TAG = "HomeFragment";
 
-
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<RestaurantModel> arrayList;
-    private ArrayList<RestaurantProductModel> arrayListTemp = new ArrayList<RestaurantProductModel>();
-    private FirebaseUser user;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference docRef;
-    ArrayList spinnerList = new ArrayList<>();
+    //레이아웃 요소들
+    private ArrayList spinnerList = new ArrayList<>();
     private Spinner spinner;
-    private ArrayAdapter arrayAdapter;
+    private ArrayAdapter spinnerAdapter;
     private ImageButton searchButton;
     private EditText searchText;
+    private Button dummy;
 
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_home,container,false);
+    //HomeFragment에서 사용되는 수치값
+    private double defaultLongitude = 5.0;
+    private double defaultLatitude = 5.0;
+    private double range = 500;
 
-        return view;
-    }
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        final Context context = view.getContext();
+    //리사이클러뷰 공통 변수
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+
+
+    //리사이클러뷰 RestaurantProducts 전용 변수
+    private RecyclerView.Adapter resAdapter;
+    private  ArrayList<RestaurantProductModel> arrayListTemp = new ArrayList<RestaurantProductModel>();
+    private final ArrayList<RestaurantProductModel> restaurantProductModels = new ArrayList<RestaurantProductModel>();
+
+    //리사이클러뷰 UserProducts 전용 변수.
+    private RecyclerView.Adapter userAdapter;
+    private final ArrayList<UserProductModel> userProductModelArrayList = new ArrayList<UserProductModel>();
+
+    //리사이클러뷰 선택에 사용되는 변수.
+    private boolean isShowingUserProduct = true;
+
+
+
+    private void initialize(final Context context) {
+        //리사이클러뷰 관련 초기화
+        //layoutManager = new LinearLayoutManager(getActivity()); //fragment일 때 LinearLayoutManager 인자
         recyclerView = view.findViewById(R.id.home_recyclerView);
         recyclerView.setHasFixedSize(true); //리사이클러뷰 기존성능 강화
-        //layoutManager = new LinearLayoutManager(getActivity()); //fragment일 때 LinearLayoutManager 인자
         layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
 
-        final ArrayList<RestaurantProductModel> arrayList = new ArrayList<RestaurantProductModel>();
+        resAdapter = new ResProductsAdapter(restaurantProductModels, context);
+        userAdapter = new UserProductsAdapter(userProductModelArrayList, context);
 
+        //일반 레이아웃 관련 초기화.
+        spinnerList.add("거리 순 정렬");
+        spinnerList.add("가격 순 정렬");
+        spinnerList.add("재고 순 정렬");
 
-        RestaurantProductApi.getProductList(5.0, 5.0, 100, new RestaurantProductApi.MyListCallback() {
+        spinner = (Spinner) view.findViewById(R.id.home_spinner_sort);
+        searchButton = (ImageButton) view.findViewById(R.id.home_button_search);
+        searchText = (EditText) view.findViewById(R.id.home_editText_search);
+        spinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, spinnerList);
+        spinner.setAdapter(spinnerAdapter);
+        dummy = (Button) view.findViewById(R.id.home_button_dummy);
+    }
+    //해당 프래그먼트에서 사용되는 레이아웃 등을 초기화 하는 함수입니다.
+
+    private void refreshItemOfUserProducts() {
+        UserProductApi.getProductList(defaultLatitude, defaultLongitude, range, new UserProductApi.MyListCallback() {
+            @Override
+            public void onSuccess(ArrayList<UserProductModel> userProductModels) {
+                recyclerView.setAdapter(userAdapter);
+                userProductModelArrayList.clear();
+                userProductModelArrayList.addAll(userProductModels);
+                userAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+                Log.d("UserProduct Test", e.toString());
+            }
+        });
+    }
+
+    private void refreshItemOfResProducts() {
+        RestaurantProductApi.getProductList(defaultLatitude, defaultLongitude, range, new RestaurantProductApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<RestaurantProductModel> restaurantModelArrayList) {
-                arrayList.addAll(restaurantModelArrayList);
-                adapter.notifyDataSetChanged();
+                recyclerView.setAdapter(resAdapter);
+                restaurantProductModels.clear();
+                restaurantProductModels.addAll(restaurantModelArrayList);
+                resAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -94,37 +128,44 @@ public class HomeFragment extends Fragment {
         //TODO: curLatitude와 curLongitude를 지도에서 받아온 값으로 바꾸고, range 또한 받는 인터페이스가 필요함.
 
 
-        adapter = new ProductsAdapter(arrayList, context);
-        recyclerView.setAdapter(adapter);
+    }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view=inflater.inflate(R.layout.fragment_home,container,false);
 
-        spinnerList.add("거리 순 정렬");
-        spinnerList.add("가격 순 정렬");
-        spinnerList.add("재고 순 정렬");
+        return view;
+    }
 
-        spinner = (Spinner) view.findViewById(R.id.home_spinner_sort);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        final Context context = view.getContext();
+        initialize(context);
 
-        arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, spinnerList);
-        spinner.setAdapter(arrayAdapter);
+        if(isShowingUserProduct) refreshItemOfUserProducts();
+        else refreshItemOfResProducts();
 
-
-        //~순 정렬이 나오는 부분.
+        //스피너 선택
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 switch(position) {
                     case 0:
-                        RestaurantProductApi.sortByDistance(arrayList, 5.0, 5.0);
-                        adapter.notifyDataSetChanged();
+                        //거리순 정렬
+                        RestaurantProductApi.sortByDistance(restaurantProductModels, 5.0, 5.0);
+                        resAdapter.notifyDataSetChanged();
                         break;
                     case 1:
-                        RestaurantProductApi.sortByPrice(arrayList);
-                        adapter.notifyDataSetChanged();
+                        //가격순 정렬
+                        RestaurantProductApi.sortByPrice(restaurantProductModels);
+                        resAdapter.notifyDataSetChanged();
                         break;
                     case 2:
-                        RestaurantProductApi.sortByStock(arrayList);
-                        adapter.notifyDataSetChanged();
+                        //재고순 정렬
+                        RestaurantProductApi.sortByStock(restaurantProductModels);
+                        resAdapter.notifyDataSetChanged();
                         break;
                 }
             }
@@ -135,23 +176,43 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-        searchButton = (ImageButton) view.findViewById(R.id.home_button_search);
-        searchText = (EditText) view.findViewById(R.id.home_editText_search);
+        //검색 버튼
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (searchText.getText() != null) {
                     arrayListTemp.clear();
-                    arrayListTemp = RestaurantProductApi.filterByKeyWord(arrayList, searchText.getText().toString());
-                    arrayList.clear();
-                    arrayList.addAll(arrayListTemp);
-                    adapter.notifyDataSetChanged();
+                    arrayListTemp = RestaurantProductApi.filterByKeyWord(restaurantProductModels, searchText.getText().toString());
+                    restaurantProductModels.clear();
+                    restaurantProductModels.addAll(arrayListTemp);
+                    resAdapter.notifyDataSetChanged();
                 }
             }
         });
         //키워드 검색
         //TODO/HACK: 검색을 한 뒤에 재검색을 하면 제대로 나오지 않는 버그가 존재함.
+
+
+        //더미 버튼
+        dummy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isShowingUserProduct) {
+                    isShowingUserProduct = false;
+                    refreshItemOfResProducts();
+
+                }
+                else {
+                    isShowingUserProduct = true;
+                    refreshItemOfUserProducts();
+                }
+            }
+        });
+
+
     }
+
+
+
 
 }
