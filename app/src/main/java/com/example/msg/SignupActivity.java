@@ -166,10 +166,6 @@ public class SignupActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){
-            imageUri=data.getData();    //이미지 원본 경로
-            profile.setImageURI(imageUri);
-        }
         if(requestCode==SERACH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
             String datas=data.getStringExtra("comeback");
             if (datas!=null)
