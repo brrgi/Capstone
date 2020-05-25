@@ -1,6 +1,7 @@
 package com.example.msg;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -29,11 +30,14 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
+    private static final int SERACH_ADDRESS_ACTIVITY = 10000;
     private static final int PICK_FROM_ALBUM = 10;
     private EditText email;
     private EditText password;
     private EditText name;
     private EditText phone;
+    private EditText et_address;
+    private Button address;
     private Button signup;
     private String splash_background;
     private Button birthyear;
@@ -52,6 +56,16 @@ public class SignupActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.parseColor(splash_background));
         }
 
+        address=(Button)findViewById(R.id.signupActivity_button_address);
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignupActivity.this, DaumWebViewActivity.class);
+                startActivityForResult(intent,SERACH_ADDRESS_ACTIVITY);
+            }
+        });
+
+        et_address=(EditText)findViewById(R.id.signupActivity_edittext_address);
         email = (EditText) findViewById(R.id.signupActivity_edittext_email);
         password = (EditText) findViewById(R.id.signupActivity_edittext_password);
         name = (EditText) findViewById(R.id.signupActivity_edittext_name);
@@ -81,6 +95,8 @@ public class SignupActivity extends AppCompatActivity {
                                 //UserModel userModel = new UserModel();
                                 userModel.user_name=(name.getText().toString());
                                 userModel.user_phone=(phone.getText().toString());
+                                //주소추가      05-25 이레 확인좀
+                                userModel.user_address=(et_address.getText().toString());
                                 userModel.ban_count=0;
                                 userModel.mileage=2;
                                 userModel.user_grade=0;
@@ -134,6 +150,15 @@ public class SignupActivity extends AppCompatActivity {
         DatePickerDialog dialog = new DatePickerDialog(this, callbackMethod, 2019, 5, 24);
 
         dialog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==SERACH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
+            String datas=data.getStringExtra("comeback");
+            if (datas!=null)
+                et_address.setText(datas);
+        }
     }
 
 }

@@ -90,14 +90,16 @@ public class DaumWebViewActivity extends AppCompatActivity {
                                 list = geocoder.getFromLocationName(str,1);
                                 double mLat=list.get(0).getLatitude();
                                 double mLng=list.get(0).getLongitude();
-                                Toast toast = Toast.makeText(DaumWebViewActivity.this, Double.toString(mLat)+Double.toString(mLng) , Toast.LENGTH_LONG);   // Toast 를 이용하여 알림창을 띄운다
-                                toast.show();
 
-                                Intent intent = new Intent(DaumWebViewActivity.this, MapActivity.class);
-                                intent.putExtra("mLat",mLat);
-                                intent.putExtra("mLng", mLng);
-                                startActivity(intent);
-                                Toast.makeText(getApplicationContext(), "지도로 갑니다.", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent();
+                                intent.putExtra("comeback", str);
+                                setResult(RESULT_OK, intent);
+                                finish();
+
+//                                Intent intent = new Intent(DaumWebViewActivity.this, MapActivity.class);
+//                                intent.putExtra("mLat",mLat);
+//                                intent.putExtra("mLng", mLng);
+//                                startActivity(intent);
 //                finish();
 
                             } catch (IOException e) {
