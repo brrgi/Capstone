@@ -89,38 +89,6 @@ public class SaleUserActivity extends AppCompatActivity {
         txt_description.setText("상세설명 : " + userProductModel.p_description);
         Glide.with(getApplicationContext()).load(userProductModel.p_imageURL).into(image_product);
 
-        btn_subscription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch(current) {
-                    case -1:
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        final String uid = user.getUid();
-                        SubscriptionModel subscriptionModel = new SubscriptionModel();
-                        subscriptionModel.user_id = uid;
-                        subscriptionModel.res_id = "2";// 임시 테스트 GETrestaurant에서 res_uid 받아와야함
-                        SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
-                            @Override
-                            public void onSuccess(SubscriptionModel subscriptionModel) {
-                                Toast.makeText(SaleUserActivity.this,"구독 완료",Toast.LENGTH_SHORT).show();
-                                btn_subscription.setText("구독 해지");
-                                current = 0;
-                            }
-                            @Override
-                            public void onFail(int errorCode, Exception e) {
-                            }
-                        });
-                        break;
-                    case 0:
-                        btn_subscription.setText("구독!"); //여기에 delete들어가야 할듯
-                        current = -1;
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-        });
 
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
