@@ -158,13 +158,12 @@ public class SaleActivity extends AppCompatActivity {
         txt_title = (TextView) findViewById(R.id.saleActivity_textView_title);
         btn_buy = (Button) findViewById(R.id.saleActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
-        image_product = (ImageView) findViewById(R.id.product_upload_imageView_product);
+        image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
         btn_subscription = (Button) findViewById(R.id.saleActivity_button_subscription);
         txt_address = (TextView) findViewById(R.id.saleActivity_textView_address);
         Intent intent = getIntent();
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
-
         getResModelFromProduct(restaurantProductModel);
         getSubscribeCheck(restaurantProductModel);
 
@@ -175,6 +174,7 @@ public class SaleActivity extends AppCompatActivity {
         txt_quality.setText("품질 : " + restaurantProductModel.quality);
         txt_expireDate.setText("유통기한 : " + restaurantProductModel.expiration_date);
         txt_description.setText("상세설명 : " + restaurantProductModel.p_description);
+
         Glide.with(getApplicationContext()).load(restaurantProductModel.p_imageURL).into(image_product);
 
         btn_subscription.setOnClickListener(new View.OnClickListener() {
@@ -188,12 +188,12 @@ public class SaleActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SaleActivity.this, PayActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PayActivity.class);
+                intent.putExtra("Model", restaurantProductModel);
                 startActivity(intent);
             }
         });
     }
-
 
 }
 
