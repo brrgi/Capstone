@@ -98,16 +98,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //mainActivity_address
-        address=(Button)findViewById(R.id.mainActivity_address);
-        address.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DaumWebViewActivity.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(), "주소로 갑니다.", Toast.LENGTH_LONG).show();
-//                finish();
-            }
-        });
+//        address=(Button)findViewById(R.id.mainActivity_address);
+//        address.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, DaumWebViewActivity.class);
+//                startActivity(intent);
+//                Toast.makeText(getApplicationContext(), "주소로 갑니다.", Toast.LENGTH_LONG).show();
+////                finish();
+//            }
+//        });
         //getAppKeyHash();      //키해시 구하기
 //        map=(Button)findViewById(R.id.mainActivity_button_map);
 //        map.setOnClickListener(new View.OnClickListener() {
@@ -120,26 +120,26 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        backLogin=(Button)findViewById(R.id.mainActivity_button_backLogin);
-        backLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(), "로그인 화면으로 돌아갑니다.", Toast.LENGTH_LONG).show();
-//                finish();
-            }
-        });
-
-        sale_btn = (Button)findViewById(R.id.sale_btn);
-        sale_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SaleActivity.class);
-                startActivity(intent);
-//                finish();
-            }
-        });
+//        backLogin=(Button)findViewById(R.id.mainActivity_button_backLogin);
+//        backLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                startActivity(intent);
+//                Toast.makeText(getApplicationContext(), "로그인 화면으로 돌아갑니다.", Toast.LENGTH_LONG).show();
+////                finish();
+//            }
+//        });
+//
+//        sale_btn = (Button)findViewById(R.id.sale_btn);
+//        sale_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, SaleActivity.class);
+//                startActivity(intent);
+////                finish();
+//            }
+//        });
 
         bottomNavigationView=findViewById(R.id.mainactivity_bottomnavigationview);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
