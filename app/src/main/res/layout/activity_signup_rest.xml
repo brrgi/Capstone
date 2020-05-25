@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/signupRestActivity_imageview_profile"
         android:src="@drawable/chef"
-        android:layout_width="100dp"
-        android:layout_height="100dp"/>
+        android:layout_width="100sp"
+        android:layout_height="100sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

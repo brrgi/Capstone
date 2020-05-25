@@ -25,7 +25,7 @@
             android:layout_marginBottom="10sp"/>
 
         <ImageView
-            android:id="@+id/saleActivity_imageView_product"
+            android:id="@+id/product_rest_upload_imageView_product"
             android:layout_width="wrap_content"
             android:layout_height="100sp"
             android:src="@drawable/icon_image_searching"
@@ -41,7 +41,7 @@
 
 
         <EditText
-            android:id="@+id/product_upload_editText_title"
+            android:id="@+id/product_rest_upload_editText_title"
             android:hint="제목"
             android:textSize="30sp"
             android:layout_width="match_parent"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content">
 
             <Spinner
-                android:id="@+id/product_upload_spinner_categoryA"
+                android:id="@+id/product_rest_upload_spinner_categoryA"
                 android:layout_width="150sp"
                 android:layout_height="50sp"
                 android:layout_marginLeft="10sp"
@@ -69,7 +69,7 @@
                 />
 
             <Spinner
-                android:id="@+id/product_upload_spinner_categoryB"
+                android:id="@+id/product_rest_upload_spinner_categoryB"
                 android:layout_width="150sp"
                 android:layout_height="50sp" />
 
@@ -97,7 +97,7 @@
             android:layout_marginBottom="10sp"/>
 
         <EditText
-            android:id="@+id/product_upload_editText_expireDate"
+            android:id="@+id/product_rest_upload_editText_expireDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="유통기한"
@@ -124,7 +124,7 @@
                 />
 
             <Button
-                android:id="@+id/product_upload_button_quality"
+                android:id="@+id/product_rest_upload_button_quality"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="품질 기준"
@@ -143,7 +143,7 @@
         <!--장소는 본인의 위치를 기반으로 하기에 빼도 된다고 생각한다.-->
 
         <EditText
-            android:id="@+id/product_upload_editText_cost"
+            android:id="@+id/product_rest_upload_editText_cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30sp"
@@ -156,7 +156,7 @@
             android:layout_centerInParent="true"
             android:background="#D3D3D3"/>
         <EditText
-            android:id="@+id/product_upload_editText_description"
+            android:id="@+id/product_rest_upload_editText_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30sp"
@@ -179,7 +179,7 @@
 
 
             <Button
-                android:id="@+id/product_upload_button_submit"
+                android:id="@+id/product_rest_upload_button_submit"
                 android:layout_width="150sp"
                 android:layout_height="wrap_content"
                 android:text="등록"
@@ -189,7 +189,7 @@
                 android:layout_marginRight="10sp"/>
 
             <Button
-                android:id="@+id/product_upload_button_fast"
+                android:id="@+id/product_rest_upload_button_fast"
                 android:layout_width="150sp"
                 android:layout_height="wrap_content"
                 android:text="급처 기능"

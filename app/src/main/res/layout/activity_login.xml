@@ -14,12 +14,12 @@
         android:layout_height="wrap_content"
         android:text="MSG"
         android:textColor="#F39C12"
-        android:textSize="40dp"
-        android:layout_marginBottom="100dp"/>
+        android:textSize="40sp"
+        android:layout_marginBottom="100sp"/>
 
     <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="70sp"
+        android:layout_height="70sp"
         android:src="@drawable/loading_icon"/>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:hint="아이디"
             android:singleLine="true"
             android:lines="1"
-            android:layout_width="350dp"
+            android:layout_width="350sp"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,7 +43,7 @@
             android:hint="패스워드"
             android:singleLine="true"
             android:lines="1"
-            android:layout_width="350dp"
+            android:layout_width="350sp"
             android:layout_height="wrap_content"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20sp">
 
         <Button
             android:id="@+id/loginActivity_button_login"
@@ -62,7 +62,7 @@
             android:background="@drawable/bin_blue"
             android:textColor="#ffffff"
             android:textStyle="bold"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginRight="30sp"/>
 
         <Button
             android:id="@+id/loginActivity_button_signup"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bin_blue"
             android:textColor="#ffffff"
-            android:layout_marginLeft="30dp"/>
+            android:layout_marginLeft="30sp"/>
 
     </LinearLayout>
 
