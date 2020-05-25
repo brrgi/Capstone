@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,7 +18,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.UserModel;
+import com.example.msg.DatabaseModel.UserProductModel;
+import com.example.msg.Domain.AuthenticationApi;
 import com.example.msg.Domain.GuideLineApi;
+import com.example.msg.Domain.RestaurantProductApi;
+import com.example.msg.Domain.UserApi;
+import com.example.msg.Domain.UserProductApi;
 import com.example.msg.recyclerView.QualitySelectActivity;
 
 import org.w3c.dom.Text;
@@ -81,9 +88,20 @@ public class ProductRestUploadActivity extends AppCompatActivity {
     }
 
     private void postRestProduct(RestaurantProductModel restaurantProductModel) {
+        final String uid = AuthenticationApi.getCurrentUid();
+        restaurantProductModel.rproduct_id = uid;
+        RestaurantProductApi.postProduct(restaurantProductModel, imageUri, new RestaurantProductApi.MyCallback() {
+            @Override
+            public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                finish();
+            }
 
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +150,15 @@ public class ProductRestUploadActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setRestaurantProductModelFromUI();
                 restaurantProductModel.fast = false;
+                postRestProduct(restaurantProductModel);
+            }
+        });
+
+        fast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setRestaurantProductModelFromUI();
+                restaurantProductModel.fast = true;
                 postRestProduct(restaurantProductModel);
             }
         });
