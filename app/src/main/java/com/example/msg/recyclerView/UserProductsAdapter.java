@@ -12,26 +12,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.msg.DatabaseModel.RestaurantProductModel;
-import com.example.msg.MainActivity;
+import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.R;
 
 import java.util.ArrayList;
-<<<<<<< Updated upstream:app/src/main/java/com/example/msg/recyclerView/ProductsAdapter.java
-import com.example.msg.DatabaseModel.RestaurantModel;
-import com.example.msg.SaleActivity;
-=======
 
 import com.example.msg.SaleResActivity;
->>>>>>> Stashed changes:app/src/main/java/com/example/msg/recyclerView/ResProductsAdapter.java
 
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
+public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapter.ProductsViewHolder> {
 
-    private ArrayList<RestaurantProductModel> arrayList;
+    private ArrayList<UserProductModel> arrayList;
     private Context context;
 
-    public ProductsAdapter(ArrayList<RestaurantProductModel> arrayList, Context context) {
+    public UserProductsAdapter(ArrayList<UserProductModel> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -39,7 +33,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     @NonNull
     @Override
     public ProductsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.productlist_item,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.userproduct_item,parent,false);
         ProductsViewHolder holder=new ProductsViewHolder(view);
         return holder;
     }
@@ -50,7 +44,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 .load(arrayList.get(position).p_imageURL)
                 .into(holder.image);
         holder.title.setText(arrayList.get(position).title);
-        holder.uid.setText(arrayList.get(position).cost + "원");
+        holder.uid.setText(arrayList.get(position).p_description);
     }
 
     @Override
@@ -65,16 +59,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         TextView uid;
         public ProductsViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.image=itemView.findViewById(R.id.productList_imageView_Image);
-            this.title=itemView.findViewById(R.id.productList_textView_title);
-            this.uid=itemView.findViewById(R.id.productList_textView_uid);
+            this.image=itemView.findViewById(R.id.userproduct_item_imageView_image);
+            this.title=itemView.findViewById(R.id.userproduct_item_textView_title);
+            this.uid=itemView.findViewById(R.id.userproduct_item_textView_uid);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION) {
-                        RestaurantProductModel item = arrayList.get(pos);
+                        UserProductModel item = arrayList.get(pos);
                         //아이템을 얻는 부분.
                         Intent intent = new Intent(v.getContext(), SaleResActivity.class);
                         intent.putExtra("Model", item);
@@ -85,7 +79,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 }
             });
             //여기서 리사이클러뷰의 아이템이 클릭되는 것을 처리할 수 있음.
-            //getAdapterPosition
         }
 
     }

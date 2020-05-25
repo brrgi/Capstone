@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.msg.R;
+<<<<<<< Updated upstream
 import com.example.msg.model.ProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,6 +35,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
 import static android.app.Activity.RESULT_OK;
+=======
+import com.example.msg.SaleResActivity;
+import com.example.msg.UploadActivity;
+>>>>>>> Stashed changes
 
 
 public class WriteFragment extends Fragment {
@@ -70,6 +75,7 @@ public class WriteFragment extends Fragment {
         enrollment.setOnClickListener(new View.OnClickListener() {
 
             @Override
+<<<<<<< Updated upstream
             public void onClick(View view) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 final String uid = user.getUid();
@@ -104,6 +110,12 @@ public class WriteFragment extends Fragment {
                     }
                 });
 
+=======
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SaleResActivity.class);
+                startActivity(intent);
+                Toast.makeText(getActivity(), "업로드로 갑니다.", Toast.LENGTH_LONG).show();
+>>>>>>> Stashed changes
             }
 
         });

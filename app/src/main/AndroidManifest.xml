@@ -22,7 +22,12 @@
         <activity android:name=".DaumWebViewActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".PayActivity" />
+<<<<<<< Updated upstream
         <activity android:name=".SaleActivity" />
+=======
+        <activity android:name=".SaleResActivity" />
+        <activity android:name=".SaleUserActivity" />
+>>>>>>> Stashed changes
         <activity android:name=".PopupSearchActivity" />
         <activity android:name=".ProductUploadActivity" />
         <activity android:name=".ReservationActivity" />

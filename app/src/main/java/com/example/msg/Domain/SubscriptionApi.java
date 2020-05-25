@@ -159,5 +159,8 @@ public class SubscriptionApi {
      */
 
     //TODO: 구독 삭제 기능 추가해야함.
+    public static void deleteSubscription(final SubscriptionModel subscriptionModel, final MyCallback myCallback) {
+
+    }
 
 }

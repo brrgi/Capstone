@@ -1,17 +1,13 @@
 package com.example.msg;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +19,16 @@ import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Domain.ReserveApi;
 import com.example.msg.Domain.RestaurantProductApi;
 import com.example.msg.Domain.SubscriptionApi;
+<<<<<<< Updated upstream:app/src/main/java/com/example/msg/SaleActivity.java
 import com.example.msg.Domain.UserApi;
 import com.example.msg.Domain.UserProductApi;
 import com.example.msg.model.ProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+=======
+
+>>>>>>> Stashed changes:app/src/main/java/com/example/msg/SaleResActivity.java
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import javax.annotation.Nullable;
 
 
-public class SaleActivity extends AppCompatActivity {
+public class SaleResActivity extends AppCompatActivity {
 
     private int stuck = 10;
 
@@ -62,6 +62,51 @@ public class SaleActivity extends AppCompatActivity {
 
     private static int current = -1;
 
+<<<<<<< Updated upstream:app/src/main/java/com/example/msg/SaleActivity.java
+=======
+    String r_name = "";
+
+    private void getSubscribeCheck(final RestaurantProductModel restaurantProductModel) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        SubscriptionApi.getSubscriptionListByUserId(uid, new SubscriptionApi.MyListCallback() {
+            @Override
+            public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
+                for(int i =0;i < subscriptionModelArrayList.size();i++) {
+
+                    if((subscriptionModelArrayList.get(i).res_id)==restaurantProductModel.res_id)
+                    {
+                        btn_subscription.setText("구독 해지");
+                    }
+                    else {
+                        btn_subscription.setText("구독");
+                    }
+                }
+            }
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+    }
+
+
+    private void getResModelFromProduct(RestaurantProductModel restaurantProductModel) {
+        RestaurantApi.getUserById(restaurantProductModel.res_id, new RestaurantApi.MyCallback() {
+            @Override
+            public void onSuccess(RestaurantModel restaurantModel) {
+                if(restaurantModel.res_name != null) txt_salesman.setText("판매자: " + restaurantModel.res_name);
+                if(restaurantModel.res_address != null) txt_address.setText("동네: " + restaurantModel.res_address);
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+    }
+
+>>>>>>> Stashed changes:app/src/main/java/com/example/msg/SaleResActivity.java
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +125,10 @@ public class SaleActivity extends AppCompatActivity {
         image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
         btn_subscription = (Button) findViewById(R.id.saleActivity_button_subscription);
         Intent intent = getIntent();
-        RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
+        final RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
 
+<<<<<<< Updated upstream:app/src/main/java/com/example/msg/SaleActivity.java
 
 
         /* RestaurantProductApi.getProduct(new RestaurantProductApi.MyCallback() {
@@ -126,6 +172,13 @@ public class SaleActivity extends AppCompatActivity {
         txt_title.setText("제목 : " + restaurantProductModel.title);
         txt_category.setText("카테고리 : " + restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
         txt_salesman.setText("판매자 : 우석이네 치킨집"); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
+=======
+        getResModelFromProduct(restaurantProductModel);
+        getSubscribeCheck(restaurantProductModel);
+
+        txt_title.setText("제목 : " + restaurantProductModel.title);
+        txt_category.setText("카테고리 : " + restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
+>>>>>>> Stashed changes:app/src/main/java/com/example/msg/SaleResActivity.java
         txt_quantity.setText("양 : " + restaurantProductModel.quantity);
         txt_quality.setText("품질 : " + restaurantProductModel.quality);
         txt_expireDate.setText("유통기한 : " + restaurantProductModel.expiration_date);
@@ -135,40 +188,47 @@ public class SaleActivity extends AppCompatActivity {
         btn_subscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch(current) {
-                    case -1:
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        final String uid = user.getUid();
-                        SubscriptionModel subscriptionModel = new SubscriptionModel();
-                        subscriptionModel.user_id = uid;
-                        subscriptionModel.res_id = "2";// 임시 테스트 GETrestaurant에서 res_uid 받아와야함
-                        SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
-                            @Override
-                            public void onSuccess(SubscriptionModel subscriptionModel) {
-                                Toast.makeText(SaleActivity.this,"구독 완료",Toast.LENGTH_SHORT).show();
-                                btn_subscription.setText("구독 해지");
-                                current = 0;
-                            }
-                            @Override
-                            public void onFail(int errorCode, Exception e) {
-                            }
-                        });
-                        break;
-                    case 0:
-                        btn_subscription.setText("구독!"); //여기에 delete들어가야 할듯
-                        current = -1;
-                        break;
-                    default:
-                        break;
-                }
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String uid = user.getUid();
+                SubscriptionApi.getSubscriptionListByUserId(uid, new SubscriptionApi.MyListCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
+                        for(int i =0;i < subscriptionModelArrayList.size();i++) {
 
+                            if((subscriptionModelArrayList.get(i).res_id)==restaurantProductModel.res_id)
+                            {
+                                //deleteSubcription 필요!!
+                                btn_subscription.setText("구독");
+                            }
+                            else {
+                                SubscriptionModel subscriptionModel = new SubscriptionModel();
+                                SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
+                                    @Override
+                                    public void onSuccess(SubscriptionModel subscriptionModel) {
+                                        Toast.makeText(getApplicationContext(), "구독 완료", Toast.LENGTH_LONG).show();
+                                    }
+
+                                    @Override
+                                    public void onFail(int errorCode, Exception e) {
+
+                                    }
+                                });
+                                btn_subscription.setText("구독 해지");
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
             }
         });
 
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SaleActivity.this, PayActivity.class);
+                Intent intent = new Intent(SaleResActivity.this, PayActivity.class);
                 startActivity(intent);
             }
         });
