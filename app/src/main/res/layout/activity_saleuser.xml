@@ -1,102 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SaleUserActivity">
+    android:orientation="vertical"
+    tools:context=".SaleActivity">
 
-    <TextView
-        android:id="@+id/saleUserActivity_textView_title"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="제품 사진"
-        android:textSize="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/saleUserActivity_imageView_product"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/icon_image_searching"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_title" />
+        <TextView
+            android:id="@+id/saleUserActivity_textView_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="제품 사진"
+            android:textSize="40sp"/>
 
-    <TextView
-        android:id="@+id/saleUserActivity_textView_salesman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="판매자"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_imageView_product" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"/>
 
-    <TextView
-        android:id="@+id/saleUserActivity_textView_categoryBig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="카테고리"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_salesman" />
 
-    <TextView
-        android:id="@+id/saleUserActivity_textView_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="양"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_categoryBig" />
+        <ImageView
+            android:id="@+id/saleUserActivity_imageView_product"
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            android:src="@drawable/icon_image_searching"
+            />
 
-    <TextView
-        android:id="@+id/saleUserActivity_textView_expiredDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="유통기한"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_quality" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10sp">
 
-    <TextView
-        android:id="@+id/saleUserActivity_textView_quality"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="품질"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_quantity" />
+            <ImageView
+                android:layout_width="80sp"
+                android:layout_height="80sp"
+                android:src="@drawable/user"
+                />
 
-    <TextView
-        android:id="@+id/saleUserActivity_textView_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="상세설명"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saleUserActivity_textView_expiredDate" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:orientation="vertical">
 
-    <Button
-        android:id="@+id/saleUserActivity_button_buy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
-        android:layout_marginBottom="44dp"
-        android:text="공유"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <TextView
+                    android:id="@+id/saleUserActivity_textView_salesman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:text="판매자" />
 
-    <Button
-        android:id="@+id/saleUserActivity_button_chat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="44dp"
-        android:text="채팅"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/saleUserActivity_button_buy" />
+                <TextView
+                    android:id="@+id/saleUserActivity_textView_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:text="동네" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10sp"
+            android:background="#D3D3D3"/>
+
+
+
+        <TextView
+            android:id="@+id/saleUserActivity_textView_categoryBig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="카테고리"
+            android:textSize="20sp"
+            android:layout_marginTop="10sp"
+            />
+
+
+        <TextView
+            android:id="@+id/saleUserActivity_textView_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="양"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/saleUserActivity_textView_expiredDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="유통기한"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/saleUserActivity_textView_quality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="품질"
+            android:textSize="20dp"
+            />
+
+
+        <TextView
+            android:id="@+id/saleUserActivity_textView_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="상세설명"
+            android:textSize="20sp"
+            android:paddingBottom="130sp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <Button
+                android:id="@+id/saleUserActivity_button_subscription"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:background="@drawable/bin_blue"
+                android:text="구독!"
+                android:layout_marginLeft="10sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="2sp"
+                android:layout_height="50sp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:background="#D3D3D3"/>
+
+            <Button
+                android:id="@+id/saleUserActivity_button_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:background="@drawable/bin_blue"
+                android:text="공유"
+                android:layout_marginLeft="50sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/saleUserActivity_button_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:background="@drawable/bin_blue"
+                android:text="채팅"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_marginLeft="20sp"/>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp"/>
+    </LinearLayout>
+
+</ScrollView>

@@ -115,23 +115,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <EditText
-        android:id="@+id/signupRestActivity_edittext_pickupstarttime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/iconfinder_clock"
-        android:background="@android:color/transparent"
-        android:hint="픽업 가능 시작시간 입력(ex.13:00)"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/signupRestActivity_edittext_pickupendtime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/iconfinder_clock"
-        android:background="@android:color/transparent"
-        android:hint="픽업 가능 끝시간 입력(ex.18:00)"
-        android:textSize="20sp" />
     <Button
         android:id="@+id/signupRestActivity_button_signup"
         android:layout_width="match_parent"
