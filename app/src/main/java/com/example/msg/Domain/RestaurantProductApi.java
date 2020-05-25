@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
-import com.example.msg.DatabaseModel.UserProductModel;
-import com.example.msg.model.ProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

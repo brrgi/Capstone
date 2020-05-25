@@ -20,29 +20,33 @@
             android:id="@+id/mainActivity_button_backLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그인 화면"
-            android:visibility="invisible" />
+            android:background="@drawable/bin_blue"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_marginTop="520dp"
+            android:layout_gravity="right|top"
+            android:text="로그인 화면" />
 
 
         <Button
             android:id="@+id/sale_btn"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="470dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/bin_blue"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_gravity="right|top"
             android:text="Sale" />
 
-        <Button
-            android:id="@+id/mainActivity_button_map"
-            android:layout_gravity="right|top"
-            android:layout_marginTop="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="지도" />
 
         <Button
             android:id="@+id/mainActivity_address"
             android:layout_gravity="right|top"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="570dp"
+            android:background="@drawable/bin_blue"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="주소" />

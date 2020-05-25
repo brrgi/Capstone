@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.msg.R;
 import com.example.msg.ReservationActivity;
-import com.example.msg.model.ProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,16 +37,6 @@ public class ReservationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_reservation,container,false);
 
-        button = (Button)view.findViewById(R.id.reservation_button_reserv);
-
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ReservationActivity.class);
-                startActivity((intent));
-            }
-        });
 
         return view;
     }

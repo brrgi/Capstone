@@ -9,7 +9,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/productList_imageView_Image"
+            android:id="@+id/write_imageView_Image"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="5dp"
@@ -22,19 +22,18 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/productList_textView_title"
+                android:id="@+id/write_textView_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="타이틀"
+                android:text="제목"
                 android:layout_margin="5dp"/>
 
             <TextView
-                android:id="@+id/productList_textView_uid"
+                android:id="@+id/write_textView_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="UID"
+                android:text="동네"
                 android:layout_margin="5dp"/>
-
 
         </LinearLayout>
 
