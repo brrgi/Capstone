@@ -2,10 +2,12 @@ package com.example.msg.recyclerView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.RadialGradient;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -19,6 +21,9 @@ public class QualitySelectActivity extends AppCompatActivity {
     private TextView midText;
     private TextView lowText;
     private Button cancel;
+    private Button submit;
+    private RadioButton high, mid, low;
+    private int checkedValue = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,10 @@ public class QualitySelectActivity extends AppCompatActivity {
         midText = (TextView)findViewById(R.id.quality_select_textView_mid);
         lowText = (TextView)findViewById(R.id.quality_select_textView_low);
         cancel = (Button)findViewById(R.id.quality_select_button_cancel);
+        submit = (Button)findViewById(R.id.quality_select_button_submit);
+        high = (RadioButton)findViewById(R.id.quality_select_radioButton_high);
+        mid = (RadioButton)findViewById(R.id.quality_select_radioButton_mid);
+        low = (RadioButton)findViewById(R.id.quality_select_radioButton_low);
 
         String category = getIntent().getExtras().getString("category");
 
@@ -46,9 +55,55 @@ public class QualitySelectActivity extends AppCompatActivity {
             }
         });
 
+
+        high.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked == true) {
+                    mid.setChecked(false);
+                    low.setChecked(false);
+                    checkedValue = 3;
+                }
+            }
+        });
+
+        mid.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked == true) {
+                    high.setChecked(false);
+                    low.setChecked(false);
+                    checkedValue = 2;
+                }
+            }
+        });
+
+        low.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked == true) {
+                    mid.setChecked(false);
+                    high.setChecked(false);
+                    checkedValue = 1;
+                }
+            }
+        });
+
+
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("quality", checkedValue);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });

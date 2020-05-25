@@ -13,20 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
-import com.example.msg.MainActivity;
 import com.example.msg.R;
 
 import java.util.ArrayList;
-import com.example.msg.DatabaseModel.RestaurantModel;
+
 import com.example.msg.SaleActivity;
 
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
+public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.ProductsViewHolder> {
 
     private ArrayList<RestaurantProductModel> arrayList;
     private Context context;
 
-    public ProductsAdapter(ArrayList<RestaurantProductModel> arrayList, Context context) {
+    public ResProductsAdapter(ArrayList<RestaurantProductModel> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -34,7 +33,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     @NonNull
     @Override
     public ProductsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.productlist_item,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.resproduct_item,parent,false);
         ProductsViewHolder holder=new ProductsViewHolder(view);
         return holder;
     }
@@ -60,9 +59,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         TextView uid;
         public ProductsViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.image=itemView.findViewById(R.id.productList_imageView_Image);
-            this.title=itemView.findViewById(R.id.productList_textView_title);
-            this.uid=itemView.findViewById(R.id.productList_textView_uid);
+            this.image=itemView.findViewById(R.id.resproduct_item_imageView_image);
+            this.title=itemView.findViewById(R.id.resproduct_item_textView_title);
+            this.uid=itemView.findViewById(R.id.resproduct_item_textView_uid);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -80,7 +79,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 }
             });
             //여기서 리사이클러뷰의 아이템이 클릭되는 것을 처리할 수 있음.
-            //getAdapterPosition
         }
 
     }

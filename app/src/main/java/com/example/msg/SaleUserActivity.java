@@ -71,6 +71,7 @@ public class SaleUserActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UserModel userModel) {
                 u_name = userModel.user_name;
+                txt_salesman.setText(u_name);
             }
 
             @Override
@@ -81,45 +82,13 @@ public class SaleUserActivity extends AppCompatActivity {
 
         txt_title.setText("제목 : " + userProductModel.title);
         txt_category.setText("카테고리 : " + userProductModel.categoryBig + " -> " + userProductModel.categorySmall);
-        txt_salesman.setText("판매자 : "+u_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
+       // txt_salesman.setText("판매자 : "+u_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
         txt_quantity.setText("양 : " + userProductModel.quantity);
         txt_quality.setText("품질 : " + userProductModel.quality);
         txt_expireDate.setText("유통기한 : " + userProductModel.expiration_date);
         txt_description.setText("상세설명 : " + userProductModel.p_description);
         Glide.with(getApplicationContext()).load(userProductModel.p_imageURL).into(image_product);
 
-        btn_subscription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch(current) {
-                    case -1:
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        final String uid = user.getUid();
-                        SubscriptionModel subscriptionModel = new SubscriptionModel();
-                        subscriptionModel.user_id = uid;
-                        subscriptionModel.res_id = "2";// 임시 테스트 GETrestaurant에서 res_uid 받아와야함
-                        SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
-                            @Override
-                            public void onSuccess(SubscriptionModel subscriptionModel) {
-                                Toast.makeText(SaleUserActivity.this,"구독 완료",Toast.LENGTH_SHORT).show();
-                                btn_subscription.setText("구독 해지");
-                                current = 0;
-                            }
-                            @Override
-                            public void onFail(int errorCode, Exception e) {
-                            }
-                        });
-                        break;
-                    case 0:
-                        btn_subscription.setText("구독!"); //여기에 delete들어가야 할듯
-                        current = -1;
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-        });
 
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,7 @@
 package com.example.msg;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -9,11 +10,13 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -30,6 +33,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
     private static final int PICK_FROM_ALBUM = 10;
+    private static final int SERACH_ADDRESS_ACTIVITY = 10000;
     private EditText email;
     private EditText password;
     private EditText name;
@@ -41,6 +45,12 @@ public class SignupActivity extends AppCompatActivity {
     private RadioButton man;
     //private RadioButton woman;
     private int bornyear;
+    private EditText et_address;
+    private Button address;
+    private ImageView profile;
+    private Uri imageUri;
+    private RadioButton woman;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +71,28 @@ public class SignupActivity extends AppCompatActivity {
         signup.setBackgroundColor(Color.parseColor(splash_background));
         man = (RadioButton) findViewById(R.id.signupActivity_radiobutton_man);
         //woman = (RadioButton) findViewById(R.id.signupActivity_radiobutton_woman);
+
+
+
+        address=(Button)findViewById(R.id.signupActivity_button_address);
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignupActivity.this, DaumWebViewActivity.class);
+                startActivityForResult(intent,SERACH_ADDRESS_ACTIVITY);
+            }
+        });
+
+        et_address=(EditText)findViewById(R.id.signupActivity_edittext_address);
+        email=(EditText)findViewById(R.id.signupActivity_edittext_email);
+        password=(EditText)findViewById(R.id.signupActivity_edittext_password);
+        name=(EditText)findViewById(R.id.signupActivity_edittext_name);
+        phone=(EditText) findViewById(R.id.signupActivity_edittext_phone);
+        birthyear = (Button) findViewById(R.id.signupActivity_button_birthyear);
+        signup=(Button)findViewById(R.id.signupActivity_button_signup);
+        signup.setBackgroundColor(Color.parseColor(splash_background));
+        man = (RadioButton) findViewById(R.id.signupActivity_radiobutton_man);
+        woman = (RadioButton) findViewById(R.id.signupActivity_radiobutton_woman);
         this.InitializeListener();
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +113,7 @@ public class SignupActivity extends AppCompatActivity {
                                 //UserModel userModel = new UserModel();
                                 userModel.user_name=(name.getText().toString());
                                 userModel.user_phone=(phone.getText().toString());
+                                userModel.user_address=(et_address.getText().toString());       //추가 이레 5.25
                                 userModel.ban_count=0;
                                 userModel.mileage=2;
                                 userModel.user_grade=0;
@@ -135,5 +168,15 @@ public class SignupActivity extends AppCompatActivity {
 
         dialog.show();
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==SERACH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
+            String datas=data.getStringExtra("comeback");
+            if (datas!=null)
+                et_address.setText(datas);
+        }
+    }
+
+
 
 }

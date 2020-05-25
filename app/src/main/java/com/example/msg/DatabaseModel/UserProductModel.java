@@ -5,7 +5,9 @@
 
 package com.example.msg.DatabaseModel;
 
-public class UserProductModel {
+import java.io.Serializable;
+
+public class UserProductModel implements Serializable {
     public String user_id = null;
     public String title = null;
     public String p_imageURL = null;

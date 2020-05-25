@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.msg.DatabaseModel.*;
 import com.firebase.ui.auth.User;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -124,7 +125,7 @@ public class UserProductApi {
         final String directory = "UserProducts/";
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference();
-        StorageReference imageReference = storageReference.child( directory + userProductModel.uproduct_id);
+        final StorageReference imageReference = storageReference.child( directory + userProductModel.uproduct_id);
 
         UploadTask uploadTask = imageReference.putFile(imageUri);
 
@@ -136,11 +137,33 @@ public class UserProductApi {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                userProductModel.p_imageURL = directory + userProductModel.uproduct_id;
-                db.collection("UserProducts").document(userProductModel.uproduct_id)
-                        .update("p_imageURL", userProductModel.p_imageURL);
-                //사진을 올린 직후에 서버 스토리지의 사진 링크를 데이터베이스에 업데이트함.
-                myCallback.onSuccess(userProductModel);
+
+            }
+        }).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                if(task.isSuccessful()) {
+                    return imageReference.getDownloadUrl();
+
+                } else {
+                    return null;
+                }
+
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                Uri downloadUri = task.getResult();
+                if(downloadUri != null) {
+                    userProductModel.p_imageURL = task.getResult().toString();
+                    db.collection("UserProducts").document(userProductModel.uproduct_id)
+                            .update("p_imageURL", userProductModel.p_imageURL);
+                    //사진을 올린 직후에 서버 스토리지의 사진 링크를 데이터베이스에 업데이트함.
+                    myCallback.onSuccess(userProductModel);
+                } else {
+                    myCallback.onFail(11, null);
+                }
+
             }
         });
 

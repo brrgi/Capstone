@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".recyclerView.QualitySelectActivity"></activity>
+        <activity android:name=".ProductRestUploadActivity"></activity>
+        <activity android:name=".recyclerView.QualitySelectActivity" />
         <activity android:name=".DaumWebViewActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".PayActivity" />
