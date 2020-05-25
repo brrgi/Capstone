@@ -123,7 +123,7 @@ public class SignupRestActivity extends AppCompatActivity {
                                         restaurantModel.setRestaurantName(res_name.getText().toString());
                                         restaurantModel.setProfileImageUrl(imageUrl.getResult().toString());
                                         restaurantModel.setRestaurantPhone(res_phone.getText().toString());
-                                        restaurantModel.setRestaurantAddress(et_address.getText().toString());
+                                        restaurantModel.setRestaurantAddress(et_address.getText().toString());      //추가
                                         restaurantModel.setDescription(res_description.getText().toString());
                                         restaurantModel.setPickupStartTime(pickup_start_time.getText().toString());
                                         restaurantModel.setPickupEndTime(pickup_end_time.getText().toString());

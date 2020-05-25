@@ -113,6 +113,7 @@ public class SignupActivity extends AppCompatActivity {
                                 //UserModel userModel = new UserModel();
                                 userModel.user_name=(name.getText().toString());
                                 userModel.user_phone=(phone.getText().toString());
+                                userModel.user_address=(et_address.getText().toString());       //추가 이레 5.25
                                 userModel.ban_count=0;
                                 userModel.mileage=2;
                                 userModel.user_grade=0;

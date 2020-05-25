@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/saleActivity_textView_title"
+            android:id="@+id/saleRestActivity_textView_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="제품 사진"
@@ -27,7 +27,7 @@
 
 
         <ImageView
-            android:id="@+id/saleActivity_imageView_product"
+            android:id="@+id/saleRestActivity_imageView_product"
             android:layout_width="match_parent"
             android:layout_height="200sp"
             android:src="@drawable/icon_image_searching"
@@ -40,7 +40,7 @@
             android:layout_marginLeft="10sp">
 
             <ImageView
-                android:id="@+id/saleActivity_imageView_user"
+                android:id="@+id/saleRestActivity_imageView_user"
                 android:layout_width="80sp"
                 android:layout_height="80sp"
                 android:src="@drawable/user"
@@ -53,14 +53,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/saleActivity_textView_salesman"
+                    android:id="@+id/saleRestActivity_textView_salesman"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5sp"
                     android:text="판매자" />
 
                 <TextView
-                    android:id="@+id/saleActivity_textView_address"
+                    android:id="@+id/saleRestActivity_textView_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5sp"
@@ -81,7 +81,7 @@
 
 
         <TextView
-            android:id="@+id/saleActivity_textView_categoryBig"
+            android:id="@+id/saleRestActivity_textView_categoryBig"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="카테고리"
@@ -91,7 +91,7 @@
 
 
         <TextView
-            android:id="@+id/saleActivity_textView_quantity"
+            android:id="@+id/saleRestActivity_textView_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
@@ -100,7 +100,7 @@
             />
 
         <TextView
-            android:id="@+id/saleActivity_textView_expiredDate"
+            android:id="@+id/saleRestActivity_textView_expiredDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
@@ -109,7 +109,7 @@
             />
 
         <TextView
-            android:id="@+id/saleActivity_textView_quality"
+            android:id="@+id/saleRestActivity_textView_quality"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
@@ -119,13 +119,22 @@
 
 
         <TextView
-            android:id="@+id/saleActivity_textView_description"
+            android:id="@+id/saleRestActivity_textView_cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="가격"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:id="@+id/saleRestActivity_textView_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
             android:text="상세설명"
             android:textSize="20sp"
-            android:paddingBottom="130sp"
+            android:paddingBottom="90sp"
             />
 
         <View
@@ -142,7 +151,7 @@
             >
 
             <Button
-                android:id="@+id/saleActivity_button_subscription"
+                android:id="@+id/saleRestActivity_button_subscription"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
                 android:background="@drawable/bin_blue"
@@ -160,7 +169,7 @@
                 android:background="#D3D3D3"/>
 
             <Button
-                android:id="@+id/saleActivity_button_buy"
+                android:id="@+id/saleRestActivity_button_buy"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
                 android:background="@drawable/bin_blue"
@@ -170,7 +179,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/saleActivity_button_chat"
+                android:id="@+id/saleRestActivity_button_chat"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
                 android:background="@drawable/bin_blue"
