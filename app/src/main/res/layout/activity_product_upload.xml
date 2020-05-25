@@ -143,6 +143,7 @@
             android:text="품질 기준"
             android:background="@drawable/bin_blue"
             android:layout_marginLeft="10sp"
+            android:layout_marginBottom="10sp"
             android:textColor="#ffffff"/>
 
     </LinearLayout>
