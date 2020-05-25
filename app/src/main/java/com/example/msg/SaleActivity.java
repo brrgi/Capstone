@@ -49,7 +49,7 @@ public class SaleActivity extends AppCompatActivity {
     private ImageView image_product;
     private Button btn_subscription;
 
-    int state = -1;
+    static int state = -1;
     String r_sub = "";
     String r_name = "";
 
