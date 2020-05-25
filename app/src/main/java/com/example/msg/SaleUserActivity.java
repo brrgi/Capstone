@@ -71,6 +71,7 @@ public class SaleUserActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UserModel userModel) {
                 u_name = userModel.user_name;
+                txt_salesman.setText(u_name);
             }
 
             @Override
@@ -81,7 +82,7 @@ public class SaleUserActivity extends AppCompatActivity {
 
         txt_title.setText("제목 : " + userProductModel.title);
         txt_category.setText("카테고리 : " + userProductModel.categoryBig + " -> " + userProductModel.categorySmall);
-        txt_salesman.setText("판매자 : "+u_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
+       // txt_salesman.setText("판매자 : "+u_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
         txt_quantity.setText("양 : " + userProductModel.quantity);
         txt_quality.setText("품질 : " + userProductModel.quality);
         txt_expireDate.setText("유통기한 : " + userProductModel.expiration_date);

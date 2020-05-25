@@ -20,9 +20,11 @@ import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
 
+import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.Domain.RestaurantApi;
 import com.example.msg.Domain.SubscriptionApi;
 
+import com.example.msg.Domain.UserApi;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -90,24 +92,20 @@ public class SaleActivity extends AppCompatActivity {
 
         getResModelFromProduct(restaurantProductModel);
 
+        RestaurantApi.getUserById(restaurantProductModel.res_id, new RestaurantApi.MyCallback() {
+            @Override
+            public void onSuccess(RestaurantModel restaurantModel) {
+                r_name = restaurantModel.res_name;
+                txt_salesman.setText(r_name);
+            }
 
-        /* RestaurantProductApi.getProduct(new RestaurantProductApi.MyCallback() {
-           @Override
-           public void onSuccess(RestaurantProductModel restaurantProductModel) {
-               txt_title.setText("제목 : " + restaurantProductModel.title);
-               txt_category.setText("카테고리 : " + restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
-               txt_salesman.setText("판매자 : 우석이네 치킨집"); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
-               txt_quantity.setText("양 : " + restaurantProductModel.quantity);
-               txt_quality.setText("품질 : " + restaurantProductModel.quality);
-               txt_expireDate.setText("유통기한 : " + restaurantProductModel.expiration_date);
-               txt_description.setText("상세설명 : " + restaurantProductModel.p_description);
-               Glide.with(getApplicationContext()).load(restaurantProductModel.p_imageURL).into(image_product);
-           }
-           @Override
-           public void onFail(int errorCode, Exception e) {
-               Log.d("sale error","error");
-           }
-         }, "1rdx4BsFHYHqtztzrPYb");*/
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
         SubscriptionApi.getSubscriptionListByUserId(uid, new SubscriptionApi.MyListCallback() {
