@@ -25,7 +25,7 @@
             android:layout_marginBottom="10sp"/>
 
         <ImageView
-            android:id="@+id/saleActivity_imageView_product"
+            android:id="@+id/product_upload_imageView_product"
             android:layout_width="wrap_content"
             android:layout_height="100sp"
             android:src="@drawable/icon_image_searching"

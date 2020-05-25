@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
@@ -24,7 +25,6 @@ import com.example.msg.Domain.GuideLineApi;
 import com.example.msg.Domain.UserApi;
 import com.example.msg.Domain.UserProductApi;
 import com.example.msg.recyclerView.QualitySelectActivity;
-import com.firebase.ui.auth.User;
 
 import java.util.ArrayList;
 
@@ -36,9 +36,11 @@ public class ProductUploadActivity extends AppCompatActivity {
     private Button submitButton = null;
     private Spinner bigSpinner = null;
     private Spinner smallSpinner = null;
-    private EditText quality = null;
+    private Button qualityButton = null;
+    private TextView qualityText;
     private EditText quantity;
     private EditText specification = null;
+    private EditText expireDate;
 
     private Uri imageUri = null;
 
@@ -87,12 +89,18 @@ public class ProductUploadActivity extends AppCompatActivity {
 
         productImage = (ImageView) findViewById(R.id.product_upload_imageView_product);
         submitButton = (Button) findViewById(R.id.product_upload_button_submit);
-        smallSpinner = (Spinner)findViewById(R.id.product_upload_spinner_small);
-        bigSpinner = (Spinner)findViewById(R.id.product_upload_spinner_big);
-        quality = (EditText)findViewById(R.id.product_upload_editText_quality);
+        smallSpinner = (Spinner)findViewById(R.id.product_upload_spinner_categoryB);
+        bigSpinner = (Spinner)findViewById(R.id.product_upload_spinner_categoryA);
+        qualityButton = (Button)findViewById(R.id.product_upload_button_quality);
         specification = (EditText)findViewById(R.id.product_upload_editText_description);
-        Button test = (Button)findViewById(R.id.product_upload_button_test);
         title = (EditText)findViewById(R.id.product_upload_editText_title);
+        qualityText = (TextView)findViewById(R.id.product_upload_textView_quality);
+        expireDate = (EditText)findViewById(R.id.product_upload_editText_expireDate);
+        qualityText.setText("Hello World!");
+        quantity = (EditText)findViewById(R.id.product_upload_editText_quantity);
+
+        final double  defaultLongitude = 0, defaultLatitude = 0;
+
 
         final ArrayList<String> smallCategories = new ArrayList<>();
         final ArrayAdapter<String> smallCategoriesAdapter = new ArrayAdapter<>(getApplicationContext(),
@@ -115,6 +123,8 @@ public class ProductUploadActivity extends AppCompatActivity {
             }
         });
 
+
+        //앨범에서 식재료 사진을 가져오는 부분.
         productImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,20 +133,9 @@ public class ProductUploadActivity extends AppCompatActivity {
                 startActivityForResult(intent, PICK_FROM_ALBUM);
             }
         });
-        //앨범에서 식재료 사진을 가져오는 부분.
 
-        quality.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    Intent intent = new Intent(ProductUploadActivity.this, QualitySelectActivity.class);
-                    intent.putExtra("category", smallSpinner.getSelectedItem().toString());
-                }
-                return false;
-            }
-        });
 
-        test.setOnClickListener(new View.OnClickListener() {
+        qualityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProductUploadActivity.this, QualitySelectActivity.class);
@@ -146,6 +145,19 @@ public class ProductUploadActivity extends AppCompatActivity {
         });
 
 
+
+
+        /*
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductUploadActivity.this, QualitySelectActivity.class);
+                intent.putExtra("category", smallSpinner.getSelectedItem().toString());
+                startActivityForResult(intent, QUALITY_SELECT);
+            }
+        });
+*/
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,9 +165,12 @@ public class ProductUploadActivity extends AppCompatActivity {
                 userProductModel.p_description = specification.getText().toString();
                 userProductModel.categorySmall = smallSpinner.getSelectedItem().toString();
                 userProductModel.categoryBig = bigSpinner.getSelectedItem().toString();
-                //userProductModel.quantity
+                userProductModel.quantity = quantity.getText().toString();
+                userProductModel.expiration_date = expireDate.getText().toString();
+                userProductModel.completed = false;
+                userProductModel.longitude = defaultLongitude;
+                userProductModel.latitude = defaultLatitude;
                 postUserProduct(userProductModel);
-
             }
         });
 
@@ -166,6 +181,10 @@ public class ProductUploadActivity extends AppCompatActivity {
         if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){
             imageUri=data.getData();    //이미지 원본 경로
             productImage.setImageURI(imageUri);
+        } else if(requestCode == QUALITY_SELECT && resultCode == RESULT_OK) {
+            int quality = -1;
+            if(data.hasExtra("quality")) quality = data.getIntExtra("quality",-1);
+            qualityText.setText(Integer.toString(quality));
         }
     }
 

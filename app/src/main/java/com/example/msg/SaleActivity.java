@@ -1,17 +1,13 @@
 package com.example.msg;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,7 +77,7 @@ public class SaleActivity extends AppCompatActivity {
         txt_title = (TextView) findViewById(R.id.saleActivity_textView_title);
         btn_buy = (Button) findViewById(R.id.saleActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
-        image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
+        image_product = (ImageView) findViewById(R.id.product_upload_imageView_product);
         btn_subscription = (Button) findViewById(R.id.saleActivity_button_subscription);
         txt_address = (TextView) findViewById(R.id.saleActivity_textView_address);
         Intent intent = getIntent();

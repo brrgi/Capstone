@@ -1,6 +1,7 @@
 package com.example.msg;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -9,6 +10,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -45,15 +47,9 @@ public class SignupActivity extends AppCompatActivity {
     private int bornyear;
     private EditText et_address;
     private Button address;
-    private Button signup;
-    private String splash_background;
     private ImageView profile;
     private Uri imageUri;
-    private Button birthyear;
-    private DatePickerDialog.OnDateSetListener callbackMethod;
-    private RadioButton man;
     private RadioButton woman;
-    private int bornyear;
 
 
     @Override
@@ -76,16 +72,8 @@ public class SignupActivity extends AppCompatActivity {
         man = (RadioButton) findViewById(R.id.signupActivity_radiobutton_man);
         //woman = (RadioButton) findViewById(R.id.signupActivity_radiobutton_woman);
 
-        profile=(ImageView)findViewById(R.id.signupActivity_imageview_profile);
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK); //사진 가져오는 것
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                startActivityForResult(intent,PICK_FROM_ALBUM);
 
-            }
-        });
+
         address=(Button)findViewById(R.id.signupActivity_button_address);
         address.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,10 +176,6 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
-    public void OnClickHandler(View view) {
-        DatePickerDialog dialog = new DatePickerDialog(this, callbackMethod, 2019, 5, 24);
 
-        dialog.show();
-    }
 
 }

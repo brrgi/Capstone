@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.msg.R;
 import com.example.msg.SaleActivity;
-import com.example.msg.UploadActivity;
+import com.example.msg.ProductUploadActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
