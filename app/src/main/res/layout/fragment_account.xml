@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="50dp"
+        android:textSize="50sp"
         android:text="내 정보"
         android:textStyle="bold"
         >
@@ -16,7 +16,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="2sp"
         android:layout_centerInParent="true"
         android:background="#D3D3D3"/>
 
@@ -26,14 +26,14 @@
 
         <ImageView
             android:id="@+id/account_imageView_Image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
+            android:layout_width="80sp"
+            android:layout_height="80sp"
+            android:layout_margin="5sp"
             android:src="@drawable/user"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="15sp"
             android:orientation="vertical">
 
             <TextView
@@ -41,17 +41,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="유저이름"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5sp"/>
 
             <TextView
                 android:id="@+id/account_textView_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="동네"
-                android:textSize="15dp"
-                android:layout_margin="5dp"/>
+                android:textSize="15sp"
+                android:layout_margin="5sp"/>
 
         </LinearLayout>
 
@@ -61,13 +61,13 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="2sp"
         android:layout_centerInParent="true"
         android:background="#D3D3D3"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="150sp"
         android:orientation="horizontal"
         android:gravity="center">
 
@@ -80,15 +80,15 @@
 
             <ImageView
                 android:id="@+id/account_imageView_SellImage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_margin="5dp"
+                android:layout_width="45sp"
+                android:layout_height="80sp"
+                android:layout_margin="5sp"
                 android:src="@drawable/list"/>
             <TextView
                 android:id="@+id/account_TextView_SellText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:text="판매내역"/>
         </LinearLayout>
 
@@ -102,15 +102,15 @@
 
             <ImageView
                 android:id="@+id/account_imageView_BuyImage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_margin="5dp"
+                android:layout_width="60sp"
+                android:layout_height="80sp"
+                android:layout_margin="5sp"
                 android:src="@drawable/shopping"/>
             <TextView
                 android:id="@+id/account_TextView_BuyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:text="구매내역"/>
         </LinearLayout>
 
@@ -124,22 +124,22 @@
 
             <ImageView
                 android:id="@+id/account_imageView_SubscribeImage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="50sp"
+                android:layout_height="80sp"
                 android:layout_margin="5dp"
                 android:src="@drawable/bell"/>
             <TextView
                 android:id="@+id/account_TextView_SubscribeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:text="구독식당"/>
         </LinearLayout>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="10sp"
         android:layout_centerInParent="true"
         android:background="#D3D3D3"/>
 
@@ -153,55 +153,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="내 동네 설정"
-            android:textSize="30dp"
+            android:textSize="30sp"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:background="#00ff0000"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5sp"/>
         <Button
             android:id="@+id/account_textView_ex2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="사용자 통계"
-            android:textSize="30dp"
+            android:textSize="30sp"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:background="#00ff0000"
-            android:layout_margin="5dp"/>
-        <Button
-            android:id="@+id/account_textView_ex3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="모아보기"
-            android:textSize="30dp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="#00ff0000"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5sp"/>
 
-        <Button
-            android:id="@+id/account_textView_ex4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="공지사항"
-            android:textSize="30dp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="#00ff0000"
-            android:layout_margin="5dp"/>
-        <Button
-            android:id="@+id/account_textView_ex5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="고객센터"
-            android:textSize="30dp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="#00ff0000"
-            android:layout_margin="5dp"/>
-        <Button
-            android:id="@+id/account_textView_ex6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="앱설정"
-            android:textSize="30dp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="#00ff0000"
-            android:layout_margin="5dp"/>
     </LinearLayout>
 </LinearLayout>
