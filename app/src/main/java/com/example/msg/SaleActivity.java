@@ -158,7 +158,7 @@ public class SaleActivity extends AppCompatActivity {
         txt_title = (TextView) findViewById(R.id.saleActivity_textView_title);
         btn_buy = (Button) findViewById(R.id.saleActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
-        image_product = (ImageView) findViewById(R.id.product_upload_imageView_product);
+        image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
         btn_subscription = (Button) findViewById(R.id.saleActivity_button_subscription);
         txt_address = (TextView) findViewById(R.id.saleActivity_textView_address);
         Intent intent = getIntent();
@@ -175,6 +175,7 @@ public class SaleActivity extends AppCompatActivity {
         txt_quality.setText("품질 : " + restaurantProductModel.quality);
         txt_expireDate.setText("유통기한 : " + restaurantProductModel.expiration_date);
         txt_description.setText("상세설명 : " + restaurantProductModel.p_description);
+
         Glide.with(getApplicationContext()).load(restaurantProductModel.p_imageURL).into(image_product);
 
         btn_subscription.setOnClickListener(new View.OnClickListener() {
