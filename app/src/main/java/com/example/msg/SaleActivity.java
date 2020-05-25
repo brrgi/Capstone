@@ -74,10 +74,11 @@ public class SaleActivity extends AppCompatActivity {
 
     private void subscribeClick(final RestaurantProductModel restaurantProductModel) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
+        final String uid = user.getUid();
         SubscriptionApi.getSubscriptionListByUserId(uid, new SubscriptionApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
+                SubscriptionModel subscriptionModel = new SubscriptionModel();
                 for(int i =0;i < subscriptionModelArrayList.size();i++) {
 
                     if((subscriptionModelArrayList.get(i).res_id)==restaurantProductModel.res_id)
@@ -86,7 +87,8 @@ public class SaleActivity extends AppCompatActivity {
                         btn_subscription.setText("구독");
                     }
                     else {
-                        SubscriptionModel subscriptionModel = new SubscriptionModel();
+                        subscriptionModel.user_id = uid;
+                        subscriptionModel.res_id = restaurantProductModel.res_id;
                         SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
                             @Override
                             public void onSuccess(SubscriptionModel subscriptionModel) {
