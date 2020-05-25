@@ -164,7 +164,6 @@ public class SaleActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
-
         getResModelFromProduct(restaurantProductModel);
         getSubscribeCheck(restaurantProductModel);
 
@@ -189,12 +188,12 @@ public class SaleActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SaleActivity.this, PayActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PayActivity.class);
+                intent.putExtra("Model", restaurantProductModel);
                 startActivity(intent);
             }
         });
     }
-
 
 }
 
