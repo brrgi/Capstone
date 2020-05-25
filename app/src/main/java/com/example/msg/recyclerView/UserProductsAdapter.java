@@ -19,6 +19,7 @@ import com.example.msg.R;
 import java.util.ArrayList;
 
 import com.example.msg.SaleActivity;
+import com.example.msg.SaleUserActivity;
 
 
 public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapter.ProductsViewHolder> {
@@ -71,7 +72,7 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
                     if(pos != RecyclerView.NO_POSITION) {
                         UserProductModel item = arrayList.get(pos);
                         //아이템을 얻는 부분.
-                        Intent intent = new Intent(v.getContext(), SaleActivity.class);
+                        Intent intent = new Intent(v.getContext(), SaleUserActivity.class);
                         intent.putExtra("Model", item);
                         v.getContext().startActivity(intent);
 
