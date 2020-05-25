@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="20sp"
+    tools:context=".ProductUploadActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:text="식당 식재료 등록" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginBottom="10sp"/>
+
+        <ImageView
+            android:id="@+id/saleActivity_imageView_product"
+            android:layout_width="wrap_content"
+            android:layout_height="100sp"
+            android:src="@drawable/icon_image_searching"
+            android:layout_gravity="start"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginBottom="10sp"/>
+
+
+        <EditText
+            android:id="@+id/product_upload_editText_title"
+            android:hint="제목"
+            android:textSize="30sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginBottom="10sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/product_upload_spinner_categoryA"
+                android:layout_width="150sp"
+                android:layout_height="50sp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                />
+
+            <Spinner
+                android:id="@+id/product_upload_spinner_categoryB"
+                android:layout_width="150sp"
+                android:layout_height="50sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginBottom="10sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="양(상세히 서술해주세요)"
+            android:textSize="30sp"
+            android:background="@null"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginBottom="10sp"/>
+
+        <EditText
+            android:id="@+id/product_upload_editText_expireDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="유통기한"
+            android:textSize="30sp"
+            android:background="@null"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginBottom="10sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/product_upload_spinner_quality"
+                android:layout_width="150sp"
+                android:layout_height="50sp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="50sp"
+                />
+
+            <Button
+                android:id="@+id/product_upload_button_quality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="품질 기준"
+                android:background="@drawable/bin_blue"
+                android:textColor="#ffffff"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginBottom="10sp"/>
+
+        <!--장소는 본인의 위치를 기반으로 하기에 빼도 된다고 생각한다.-->
+
+        <EditText
+            android:id="@+id/product_upload_editText_cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:hint="가격"
+            android:background="@null"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"/>
+        <EditText
+            android:id="@+id/product_upload_editText_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:paddingBottom="50sp"
+            android:hint="상세설명"
+            android:background="@null"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginBottom="10sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+
+            <Button
+                android:id="@+id/product_upload_button_submit"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:text="등록"
+                android:background="@drawable/bin_blue"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:layout_marginRight="10sp"/>
+
+            <Button
+                android:id="@+id/product_upload_button_fast"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:text="급처 기능"
+                android:background="@drawable/bin_blue"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10sp"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</ScrollView>

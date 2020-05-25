@@ -4,98 +4,173 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
+    android:orientation="vertical"
+    android:layout_marginTop="20sp"
     tools:context=".ProductUploadActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        android:text="식재료 등록" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"/>
+
+    <ImageView
+        android:id="@+id/saleActivity_imageView_product"
+        android:layout_width="wrap_content"
+        android:layout_height="100sp"
+        android:src="@drawable/icon_image_searching"
+        android:layout_gravity="start"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"/>
+
+
+    <EditText
+        android:id="@+id/product_upload_editText_title"
+        android:hint="제목"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="사진 등록하기" />
+        <Spinner
+            android:id="@+id/product_upload_spinner_categoryA"
+            android:layout_width="150sp"
+            android:layout_height="50sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            />
 
-        <ImageView
-            android:id="@+id/product_upload_imageView_product"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/icon_image_searching" />
+        <Spinner
+            android:id="@+id/product_upload_spinner_categoryB"
+            android:layout_width="150sp"
+            android:layout_height="50sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="제목" />
 
-        <EditText
-            android:id="@+id/product_upload_editText_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="카테고리" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="양(상세히 서술해주세요)"
+        android:textSize="30sp"
+        android:background="@null"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"/>
 
+    <EditText
+        android:id="@+id/product_upload_editText_expireDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="유통기한"
+        android:textSize="30sp"
+        android:background="@null"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="대분류: "/>
-            <Spinner
-                android:id="@+id/product_upload_spinner_big"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:entries="@array/대분류" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="소분류: "/>
-            <Spinner
-                android:id="@+id/product_upload_spinner_small"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="양(상세히 서술해주세요)" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="유통기한" />
-
-        <EditText
-            android:id="@+id/product_upload_editText_expireDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="품질" />
 
-        <EditText
-            android:id="@+id/product_upload_editText_quality"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/product_upload_spinner_quality"
+            android:layout_width="150sp"
+            android:layout_height="50sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="50sp"
+            />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/product_upload_button_test"/>
+            android:text="품질 기준"
+            android:background="@drawable/bin_blue"
+            android:textColor="#ffffff"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"/>
+
+
+<!--장소는 본인의 위치를 기반으로 하기에 빼도 된다고 생각한다.-->
+
+    <EditText
+        android:id="@+id/product_upload_editText_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:hint="상세설명"
+        android:background="@null"
+        android:paddingBottom="50sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"/>
+
+    <Button
+        android:id="@+id/product_upload_button_submit"
+        android:layout_width="150sp"
+        android:layout_height="wrap_content"
+        android:text="등록"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -107,20 +182,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="상세설명" />
+    </LinearLayout>
 
         <EditText
             android:id="@+id/product_upload_editText_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/product_upload_button_submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="제출하기" />
-    </LinearLayout>
 </ScrollView>

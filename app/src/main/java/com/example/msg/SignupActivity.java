@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
     private static final int PICK_FROM_ALBUM = 10;
+    private static final int SERACH_ADDRESS_ACTIVITY = 10000;
     private EditText email;
     private EditText password;
     private EditText name;
@@ -41,6 +43,18 @@ public class SignupActivity extends AppCompatActivity {
     private RadioButton man;
     //private RadioButton woman;
     private int bornyear;
+    private EditText et_address;
+    private Button address;
+    private Button signup;
+    private String splash_background;
+    private ImageView profile;
+    private Uri imageUri;
+    private Button birthyear;
+    private DatePickerDialog.OnDateSetListener callbackMethod;
+    private RadioButton man;
+    private RadioButton woman;
+    private int bornyear;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +75,36 @@ public class SignupActivity extends AppCompatActivity {
         signup.setBackgroundColor(Color.parseColor(splash_background));
         man = (RadioButton) findViewById(R.id.signupActivity_radiobutton_man);
         //woman = (RadioButton) findViewById(R.id.signupActivity_radiobutton_woman);
+
+        profile=(ImageView)findViewById(R.id.signupActivity_imageview_profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK); //사진 가져오는 것
+                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                startActivityForResult(intent,PICK_FROM_ALBUM);
+
+            }
+        });
+        address=(Button)findViewById(R.id.signupActivity_button_address);
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignupActivity.this, DaumWebViewActivity.class);
+                startActivityForResult(intent,SERACH_ADDRESS_ACTIVITY);
+            }
+        });
+
+        et_address=(EditText)findViewById(R.id.signupActivity_edittext_address);
+        email=(EditText)findViewById(R.id.signupActivity_edittext_email);
+        password=(EditText)findViewById(R.id.signupActivity_edittext_password);
+        name=(EditText)findViewById(R.id.signupActivity_edittext_name);
+        phone=(EditText) findViewById(R.id.signupActivity_edittext_phone);
+        birthyear = (Button) findViewById(R.id.signupActivity_button_birthyear);
+        signup=(Button)findViewById(R.id.signupActivity_button_signup);
+        signup.setBackgroundColor(Color.parseColor(splash_background));
+        man = (RadioButton) findViewById(R.id.signupActivity_radiobutton_man);
+        woman = (RadioButton) findViewById(R.id.signupActivity_radiobutton_woman);
         this.InitializeListener();
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +172,20 @@ public class SignupActivity extends AppCompatActivity {
                 bornyear = year;
             }
         };
+    }
+
+    public void OnClickHandler(View view) {
+        DatePickerDialog dialog = new DatePickerDialog(this, callbackMethod, 2019, 5, 24);
+
+        dialog.show();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==SERACH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
+            String datas=data.getStringExtra("comeback");
+            if (datas!=null)
+                et_address.setText(datas);
+        }
     }
 
     public void OnClickHandler(View view) {
