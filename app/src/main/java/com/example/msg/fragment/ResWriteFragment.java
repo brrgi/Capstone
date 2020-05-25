@@ -21,7 +21,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.msg.R;
-import com.example.msg.model.ProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -73,36 +72,8 @@ public class ResWriteFragment extends Fragment {
             public void onClick(View view) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 final String uid = user.getUid();
-                FirebaseStorage.getInstance().getReference().child("productImages").child(uid+title.getText().toString()).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
-                        while (!imageUrl.isComplete()) ;
-                        ProductModel productModel=new ProductModel();
-                        productModel.setTitle(title.getText().toString());
-                        productModel.setImageUrl(imageUrl.getResult().toString());
-                        productModel.setUid(uid);
-                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-                        db.collection("products")
-                                .add(productModel)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
 
-                                        //프레그먼트1(home)으로 전환?
-                                        Toast.makeText(getActivity(), "출력할 문자열", Toast.LENGTH_LONG).show();
 
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(getActivity(), "출력할 문자열", Toast.LENGTH_LONG).show();
-                                    }
-                                });
-
-                    }
-                });
 
             }
 
