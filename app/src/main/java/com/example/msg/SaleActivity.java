@@ -1,5 +1,6 @@
 package com.example.msg;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,8 +22,11 @@ import com.example.msg.Domain.RestaurantApi;
 import com.example.msg.Domain.SubscriptionApi;
 
 import com.example.msg.Domain.UserApi;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 
@@ -45,25 +49,33 @@ public class SaleActivity extends AppCompatActivity {
     private ImageView image_product;
     private Button btn_subscription;
 
-
+    int state = -1;
+    String r_sub = "";
     String r_name = "";
 
-    private void getSubscribeCheck(final RestaurantProductModel restaurantProductModel) {
+    private void getSubscribeCheck(RestaurantProductModel restaurantProductModel) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("subs3","구독");
+
+
+        btn_subscription.setText("구독 해지");
         String uid = user.getUid();
+        r_sub = restaurantProductModel.res_id;
         SubscriptionApi.getSubscriptionListByUserId(uid, new SubscriptionApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
                 for(int i =0;i < subscriptionModelArrayList.size();i++) {
 
-                    if((subscriptionModelArrayList.get(i).res_id)==restaurantProductModel.res_id)
+                    if((subscriptionModelArrayList.get(i).res_id)==r_sub)
                     {
-                        btn_subscription.setText("구독 해지");
+                       state = 1;
                     }
                     else {
-                        btn_subscription.setText("구독");
+
                     }
                 }
+                if(state == 1) btn_subscription.setText("구독 해지");
+                else btn_subscription.setText("구독");
             }
             @Override
             public void onFail(int errorCode, Exception e) {
@@ -74,41 +86,44 @@ public class SaleActivity extends AppCompatActivity {
 
     private void subscribeClick(final RestaurantProductModel restaurantProductModel) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("subs2","구독");
         final String uid = user.getUid();
-        SubscriptionApi.getSubscriptionListByUserId(uid, new SubscriptionApi.MyListCallback() {
-            @Override
-            public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
-                SubscriptionModel subscriptionModel = new SubscriptionModel();
-                for(int i =0;i < subscriptionModelArrayList.size();i++) {
-
-                    if((subscriptionModelArrayList.get(i).res_id)==restaurantProductModel.res_id)
-                    {
-                        //deleteApi 필요!!
-                        btn_subscription.setText("구독");
-                    }
-                    else {
-                        subscriptionModel.user_id = uid;
-                        subscriptionModel.res_id = restaurantProductModel.res_id;
-                        SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
-                            @Override
-                            public void onSuccess(SubscriptionModel subscriptionModel) {
-                                Toast.makeText(getApplicationContext(),"구독 완료",Toast.LENGTH_LONG).show();
-                            }
-
-                            @Override
-                            public void onFail(int errorCode, Exception e) {
-
-                            }
-                        });
-                        btn_subscription.setText("구독 해지");
-                    }
+        r_sub = restaurantProductModel.res_id;
+        final SubscriptionModel subscriptionModel = new SubscriptionModel();
+        if(state==-1) {
+            subscriptionModel.res_id = restaurantProductModel.res_id;
+            subscriptionModel.user_id = uid;
+            state=1;
+            btn_subscription.setText("구독 해지");
+            SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
+                @Override
+                public void onSuccess(SubscriptionModel subscriptionModel) {
+                    Toast.makeText(getApplicationContext(), "구독 완료!", Toast.LENGTH_LONG).show();
+                    FirebaseMessaging.getInstance().subscribeToTopic(restaurantProductModel.res_id)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    //String msg = getString(R.string.msg_subscribed);
+                                    if (!task.isSuccessful()) {
+                                        //  msg = getString(R.string.msg_subscribe_failed);
+                                    }
+                                    //Log.d(TAG, msg);
+                                }
+                            });
                 }
-            }
-            @Override
-            public void onFail(int errorCode, Exception e) {
 
-            }
-        });
+                @Override
+                public void onFail(int errorCode, Exception e) {
+
+                }
+            });
+        }
+        else {
+            //deleteSubscription!!
+            state=-1;
+            btn_subscription.setText("구독");
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(restaurantProductModel.res_id);
+        }
     }
 
 
@@ -166,6 +181,7 @@ public class SaleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 subscribeClick(restaurantProductModel);
+                Log.d("subs4","구독");
             }
         });
 
