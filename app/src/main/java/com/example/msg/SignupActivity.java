@@ -43,7 +43,6 @@ public class SignupActivity extends AppCompatActivity {
     private Button birthyear;
     private DatePickerDialog.OnDateSetListener callbackMethod;
     private RadioButton man;
-    //private RadioButton woman;
     private int bornyear;
     private EditText et_address;
     private Button address;

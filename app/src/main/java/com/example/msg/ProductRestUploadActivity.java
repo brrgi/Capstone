@@ -3,41 +3,39 @@ package com.example.msg;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.msg.DatabaseModel.RestaurantProductModel;
-import com.example.msg.DatabaseModel.UserModel;
-import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Domain.AuthenticationApi;
 import com.example.msg.Domain.GuideLineApi;
 import com.example.msg.Domain.RestaurantProductApi;
-import com.example.msg.Domain.UserApi;
-import com.example.msg.Domain.UserProductApi;
 import com.example.msg.recyclerView.QualitySelectActivity;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class ProductRestUploadActivity extends AppCompatActivity {
 
     private ImageView productImage;
-    private EditText title, quantity, expireDate, cost, description;
+    private EditText title, quantity, cost, description;
     private Spinner bigCategory, smallCategory;
     private TextView qualityText;
     private Button qualityButton, submit, fast;
+    private Button expireDate;
+    private DatePickerDialog.OnDateSetListener callbackMethod;
+
 
     private final ArrayList<String> smallCategories = new ArrayList<>();
     private  ArrayAdapter<String> smallCategoriesAdapter;
@@ -53,9 +51,9 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         productImage = (ImageView)findViewById(R.id.product_rest_imageView_product);
         title = (EditText)findViewById(R.id.product_rest_editText_title);
         quantity = (EditText)findViewById(R.id.product_rest_editText_quantity);
-        expireDate = (EditText)findViewById(R.id.product_rest_editText_expireDate);
         cost = (EditText)findViewById(R.id.product_rest_editText_cost);
         description = (EditText)findViewById(R.id.product_rest_editText_description);
+        expireDate =(Button)findViewById(R.id.product_rest_button_expireDate);
 
         bigCategory = (Spinner)findViewById(R.id.product_rest_spinner_categoryA);
         smallCategory = (Spinner)findViewById(R.id.product_rest_spinner_categoryB);
@@ -108,7 +106,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_rest_upload);
         initialize();
-
+        this.InitializeListener();
         //대분류를 바꿀 때 소분류도 맞춰서 바꾸는 부분.
         bigCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -176,5 +174,21 @@ public class ProductRestUploadActivity extends AppCompatActivity {
             restaurantProductModel.quality = quality;
             qualityText.setText(Integer.toString(quality));
         }
+    }
+
+    public void InitializeListener() {
+        callbackMethod = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                monthOfYear++;
+                expireDate.setText(year + "년" + monthOfYear + "월" + dayOfMonth + "일");
+            }
+        };
+    }
+
+    public void OnClickHandler(View view) {
+        DatePickerDialog dialog = new DatePickerDialog(this, callbackMethod, 2019, 5, 24);
+
+        dialog.show();
     }
 }
