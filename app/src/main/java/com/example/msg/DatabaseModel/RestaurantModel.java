@@ -10,4 +10,5 @@ public class RestaurantModel {
     public String pickup_start_time;
     public String pickup_end_time;
     public boolean approved;
+    public String res_token = null;
 }

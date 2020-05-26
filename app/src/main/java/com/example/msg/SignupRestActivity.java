@@ -19,8 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.msg.cloudmessaging.CloudMessagingActivity;
-import com.example.msg.model.RestaurantModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -142,6 +140,7 @@ public class SignupRestActivity extends AppCompatActivity {
                                         restaurantModel.pickup_end_time=(pickup_end_time.getText().toString());
                                         restaurantModel.res_id=uid;
                                         restaurantModel.approved=false;
+                                        restaurantModel.res_token=token;
 
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("Restaurant")
