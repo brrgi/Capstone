@@ -1,9 +1,12 @@
 package com.example.msg.Domain;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -95,13 +98,16 @@ public class SubscriptionApi {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        Log.d("10011", "start in OnComplete");
                         SubscriptionModel subscriptionModel = null;
                         ArrayList<SubscriptionModel> subscriptionModelArrayList = new ArrayList<SubscriptionModel>();
                         if (task.isSuccessful()) {
+                            Log.d("10011", "start in isSuccess");
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 subscriptionModel = document.toObject(SubscriptionModel.class);
                                 subscriptionModelArrayList.add(subscriptionModel);
                             }
+                            Log.d("10011", subscriptionModelArrayList.get(0).res_id);
                             myCallback.onSuccess(subscriptionModelArrayList);
 
                         } else {
@@ -114,6 +120,16 @@ public class SubscriptionApi {
             @Override
             public void onFailure(@NonNull Exception e) {
                 myCallback.onFail(0, e); //실패.
+            }
+        }).addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+            }
+        }).addOnCanceledListener(new OnCanceledListener() {
+            @Override
+            public void onCanceled() {
+
             }
         });
     }
@@ -165,9 +181,8 @@ public class SubscriptionApi {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        SubscriptionModel subscriptionModel = null;
                         if(task.isSuccessful()) {
-                            myCallback.onSuccess(subscriptionModel);
+                            myCallback.onSuccess(null);
                         }
                         else {
                             myCallback.onFail(1,null);
@@ -177,7 +192,7 @@ public class SubscriptionApi {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                myCallback.onFail(1,null);
+                myCallback.onFail(3,e);
 
             }
         });
