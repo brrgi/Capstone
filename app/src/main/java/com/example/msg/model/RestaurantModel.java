@@ -11,6 +11,15 @@ public class RestaurantModel {
     private String pickupEndTime;
     private boolean approved;
 
+    public String getRest_token() {
+        return rest_token;
+    }
+
+    public void setRest_token(String rest_token) {
+        this.rest_token = rest_token;
+    }
+
+    private String rest_token;
 
     public String getPickupStartTime() {
         return pickupStartTime;
