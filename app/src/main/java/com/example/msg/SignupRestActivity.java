@@ -17,10 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.msg.model.RestaurantModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -118,17 +116,17 @@ public class SignupRestActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                                         Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
                                         while (!imageUrl.isComplete()) ;
+                                        com.example.msg.DatabaseModel.RestaurantModel restaurantModel=new com.example.msg.DatabaseModel.RestaurantModel();
 
-                                        RestaurantModel restaurantModel = new RestaurantModel();
-                                        restaurantModel.setRestaurantName(res_name.getText().toString());
-                                        restaurantModel.setProfileImageUrl(imageUrl.getResult().toString());
-                                        restaurantModel.setRestaurantPhone(res_phone.getText().toString());
-                                        restaurantModel.setRestaurantAddress(et_address.getText().toString());      //추가
-                                        restaurantModel.setDescription(res_description.getText().toString());
-                                        restaurantModel.setPickupStartTime(pickup_start_time.getText().toString());
-                                        restaurantModel.setPickupEndTime(pickup_end_time.getText().toString());
-                                        restaurantModel.setRestuser_id(uid);
-                                        restaurantModel.setApproved(false);
+                                        restaurantModel.res_name=(res_name.getText().toString());
+                                        restaurantModel.res_imageURL=(imageUrl.getResult().toString());
+                                        restaurantModel.res_phone=(res_phone.getText().toString());
+                                        restaurantModel.res_address=(et_address.getText().toString());      //추가
+                                        restaurantModel.res_description=(res_description.getText().toString());
+                                        restaurantModel.pickup_start_time=(pickup_start_time.getText().toString());
+                                        restaurantModel.pickup_end_time=(pickup_end_time.getText().toString());
+                                        restaurantModel.res_id=uid;
+                                        restaurantModel.approved=false;
 
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("Restaurant")
