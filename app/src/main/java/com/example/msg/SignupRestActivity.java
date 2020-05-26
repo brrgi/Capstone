@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.msg.cloudmessaging.CloudMessagingActivity;
 import com.example.msg.model.RestaurantModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,6 +29,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
@@ -54,6 +57,7 @@ public class SignupRestActivity extends AppCompatActivity {
     private EditText pickup_end_time;
     private TimePickerDialog.OnTimeSetListener callbackMethod;
 
+    String token = "";
 
 
     @Override
@@ -107,6 +111,16 @@ public class SignupRestActivity extends AppCompatActivity {
                     return;
                 }
 
+                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(!task.isSuccessful()) {
+                            Log.d("ParkKyudong","getInstanceId failed",task.getException());
+                            return;
+                        }
+                        token = task.getResult().getToken();
+                    }
+                });
                 FirebaseAuth.getInstance()
                         .createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnCompleteListener(SignupRestActivity.this, new OnCompleteListener<AuthResult>() {
@@ -129,6 +143,7 @@ public class SignupRestActivity extends AppCompatActivity {
                                         restaurantModel.setPickupEndTime(pickup_end_time.getText().toString());
                                         restaurantModel.setRestuser_id(uid);
                                         restaurantModel.setApproved(false);
+                                        restaurantModel.setRest_token(token);
 
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("Restaurant")
