@@ -64,20 +64,20 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, DaumWebViewActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "주소로 갑니다.", Toast.LENGTH_LONG).show();
-                finish();
+//                finish();
             }
         });
         //getAppKeyHash();      //키해시 구하기
-        map=(Button)findViewById(R.id.mainActivity_button_map);
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(), "지도로 갑니다.", Toast.LENGTH_LONG).show();
-                finish();
-            }
-        });
+//        map=(Button)findViewById(R.id.mainActivity_button_map);
+//        map.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+//                startActivity(intent);
+//                Toast.makeText(getApplicationContext(), "지도로 갑니다.", Toast.LENGTH_LONG).show();
+////                finish();
+//            }
+//        });
 
         backLogin=(Button)findViewById(R.id.mainActivity_button_backLogin);
         backLogin.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "로그인 화면으로 돌아갑니다.", Toast.LENGTH_LONG).show();
-                finish();
+//                finish();
             }
         });
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SaleActivity.class);
                 startActivity(intent);
-                finish();
+//                finish();
             }
         });
 

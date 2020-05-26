@@ -29,7 +29,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="5dp"
-            android:src="@drawable/home_black_18dp"/>
+            android:src="@drawable/user"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
-                android:src="@drawable/home_black_18dp"/>
+                android:src="@drawable/list"/>
             <TextView
                 android:id="@+id/account_TextView_SellText"
                 android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
-                android:src="@drawable/home_black_18dp"/>
+                android:src="@drawable/shopping"/>
             <TextView
                 android:id="@+id/account_TextView_BuyText"
                 android:layout_width="wrap_content"
@@ -127,13 +127,13 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
-                android:src="@drawable/home_black_18dp"/>
+                android:src="@drawable/bell"/>
             <TextView
                 android:id="@+id/account_TextView_SubscribeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:text="판매내역"/>
+                android:text="구독식당"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -148,27 +148,60 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <Button
             android:id="@+id/account_textView_ex1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ex1"
+            android:text="내 동네 설정"
             android:textSize="30dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
             android:layout_margin="5dp"/>
-        <TextView
+        <Button
             android:id="@+id/account_textView_ex2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ex2"
+            android:text="사용자 통계"
             android:textSize="30dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
             android:layout_margin="5dp"/>
-        <TextView
+        <Button
             android:id="@+id/account_textView_ex3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ex3"
+            android:text="모아보기"
             android:textSize="30dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
             android:layout_margin="5dp"/>
 
+        <Button
+            android:id="@+id/account_textView_ex4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공지사항"
+            android:textSize="30dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
+            android:layout_margin="5dp"/>
+        <Button
+            android:id="@+id/account_textView_ex5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="고객센터"
+            android:textSize="30dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
+            android:layout_margin="5dp"/>
+        <Button
+            android:id="@+id/account_textView_ex6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="앱설정"
+            android:textSize="30dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
+            android:layout_margin="5dp"/>
     </LinearLayout>
 </LinearLayout>
