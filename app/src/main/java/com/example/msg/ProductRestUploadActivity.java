@@ -3,6 +3,7 @@ package com.example.msg;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -34,7 +36,7 @@ import java.util.ArrayList;
 public class ProductRestUploadActivity extends AppCompatActivity {
 
     private ImageView productImage;
-    private EditText title, quantity, expireDate, cost, description;
+    private EditText title, quantity, cost, description;
     private Spinner bigCategory, smallCategory;
     private TextView qualityText;
     private Button qualityButton, submit, fast;
@@ -42,7 +44,8 @@ public class ProductRestUploadActivity extends AppCompatActivity {
     private final ArrayList<String> smallCategories = new ArrayList<>();
     private  ArrayAdapter<String> smallCategoriesAdapter;
     private final RestaurantProductModel restaurantProductModel = new RestaurantProductModel();
-
+    private Button expireDate;
+    private DatePickerDialog.OnDateSetListener callbackMethod;
 
     private final double defaultLatitude = 0, defaultLongitude = 0;
     private Uri imageUri = null;
@@ -53,7 +56,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         productImage = (ImageView)findViewById(R.id.product_rest_imageView_product);
         title = (EditText)findViewById(R.id.product_rest_editText_title);
         quantity = (EditText)findViewById(R.id.product_rest_editText_quantity);
-        expireDate = (EditText)findViewById(R.id.product_rest_editText_expireDate);
+        expireDate = (Button)findViewById(R.id.product_rest_editText_expireDate);
         cost = (EditText)findViewById(R.id.product_rest_editText_cost);
         description = (EditText)findViewById(R.id.product_rest_editText_description);
 
@@ -165,6 +168,23 @@ public class ProductRestUploadActivity extends AppCompatActivity {
 
     }
 
+
+    public void InitializeListener() {
+        callbackMethod = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                monthOfYear++;
+                expireDate.setText(year + "년" + monthOfYear + "월" + dayOfMonth + "일");
+
+            }
+        };
+    }
+
+    public void OnClickHandler(View view) {
+        DatePickerDialog dialog = new DatePickerDialog(this, callbackMethod, 2019, 5, 24);
+
+        dialog.show();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){

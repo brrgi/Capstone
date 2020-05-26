@@ -93,6 +93,9 @@ public class DaumWebViewActivity extends AppCompatActivity {
 
                                 Intent intent = new Intent();
                                 intent.putExtra("comeback", str);
+
+                                intent.putExtra("comebacks", mLat);
+                                intent.putExtra("comebackss", mLng);
                                 setResult(RESULT_OK, intent);
                                 finish();
                                 //이거는 지도로 보낼때

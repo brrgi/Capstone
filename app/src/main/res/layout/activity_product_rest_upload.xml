@@ -98,13 +98,16 @@
             android:background="#D3D3D3"
             android:layout_marginBottom="10sp"/>
 
-        <EditText
+
+        <Button
             android:id="@+id/product_rest_editText_expireDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/iconfinder_calendar"
+            android:background="@android:color/transparent"
+            android:onClick="OnClickHandler"
             android:hint="유통기한"
-            android:textSize="30sp"
-            android:background="@null"/>
+            android:textSize="20sp" />
 
         <View
             android:layout_width="match_parent"
