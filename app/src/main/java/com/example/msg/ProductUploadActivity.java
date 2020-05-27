@@ -167,7 +167,7 @@ public class ProductUploadActivity extends AppCompatActivity {
                 userProductModel.categoryBig = bigSpinner.getSelectedItem().toString();
                 userProductModel.quantity = quantity.getText().toString();
                 userProductModel.expiration_date = expireDate.getText().toString();
-                userProductModel.completed = false;
+                userProductModel.completed = -1;
                 userProductModel.longitude = defaultLongitude;
                 userProductModel.latitude = defaultLatitude;
                 postUserProduct(userProductModel);

@@ -247,6 +247,7 @@ public class UserProductApi {
     public static void getProductList(final double curLatitude, final double curLongitude, final double range, final MyListCallback myCallback) {
         db.collection("UserProducts").
                 whereGreaterThan("latitude", curLatitude - range).whereLessThan("latitude", curLatitude + range)
+                .whereEqualTo("completed", -1)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -48,7 +48,7 @@ public class ResMainActivity extends AppCompatActivity {
                         setFrag(0);
                         break;
                     case R.id.action_write:
-                        Intent intent = new Intent(ResMainActivity.this, ProductUploadActivity.class);
+                        Intent intent = new Intent(ResMainActivity.this, ProductRestUploadActivity.class);
                         startActivity(intent);
                         setFrag(1);
                         break;

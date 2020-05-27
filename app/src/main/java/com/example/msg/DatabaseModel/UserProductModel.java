@@ -17,7 +17,7 @@ public class UserProductModel implements Serializable {
     public int quality = -1;
     public String quantity = null;
     public String expiration_date = null;
-    public boolean completed = false;
+    public int completed = -1;
     public double latitude = -1;
     public double longitude = -1;
     public String uproduct_id = null;
@@ -26,7 +26,7 @@ public class UserProductModel implements Serializable {
         //파이어스토어의 정상 동작을 위해 필요한 생성자.
     }
 
-    public UserProductModel( String uproduct_id, String user_id, String title, String p_imageURL, String p_description, String categoryBig, String categorySmall, int quality, String quantity, String expiration_date, boolean completed, double latitude, double longitude) {
+    public UserProductModel( String uproduct_id, String user_id, String title, String p_imageURL, String p_description, String categoryBig, String categorySmall, int quality, String quantity, String expiration_date, int completed, double latitude, double longitude) {
         this.uproduct_id = uproduct_id;
         this.user_id = user_id;
         this.title = title;

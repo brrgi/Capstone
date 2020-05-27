@@ -51,7 +51,7 @@ public class RestaurantProductApi {
     public static RestaurantProductModel makeDummy() {
         RestaurantProductModel restaurantProductModel = new RestaurantProductModel(null, "1234", "핑크솔트", null,"분홍색 소금입니다."
                 ,"향신료", "소금", 1, "100g", null, 500, false
-                ,100, false, 5.0, 5.0);
+                ,100, -1, 5.0, 5.0);
 
         return restaurantProductModel;
     }
@@ -215,6 +215,7 @@ public class RestaurantProductApi {
     public static void getProductList(final double curLatitude, final double curLongitude, final double range, final MyListCallback myCallback) {
         db.collection("ResProducts").
                 whereGreaterThan("latitude", curLatitude - range).whereLessThan("latitude", curLatitude + range)
+                .whereEqualTo("completed", -1)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
