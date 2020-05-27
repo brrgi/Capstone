@@ -2,13 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.msg">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -17,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProductRestUploadActivity"></activity>
+        <activity android:name=".RatingActivity"></activity>
+        <activity android:name=".ProductRestUploadActivity" />
         <activity android:name=".recyclerView.QualitySelectActivity" />
         <activity android:name=".DaumWebViewActivity" />
         <activity android:name=".MapActivity" />
@@ -42,13 +36,10 @@
             </intent-filter>
         </activity>
 
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
-
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="bd86ebef3077544c3fcf0e5ff79a79b6" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />
@@ -58,7 +49,6 @@
         <meta-data
             android:name="com.google.firebase.messaging:default_notification_channel_id"
             android:value="1" />
-
         <service
             android:name=".cloudmessaging.MyFirebaseMessagingService"
             android:enabled="true"
@@ -67,6 +57,17 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

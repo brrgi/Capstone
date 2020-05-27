@@ -40,7 +40,7 @@ public class SaleUserActivity extends AppCompatActivity {
     private TextView txt_salesman;
     private TextView txt_address;
     private ImageView image_product;
-    private Button btn_subscription;
+    private Button btn_rating;
 
     String u_name = "";
     String u_address="";
@@ -63,6 +63,7 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_buy = (Button) findViewById(R.id.saleUserActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleUserActivity_button_chat);
         image_product = (ImageView) findViewById(R.id.saleUserActivity_imageView_product);
+        btn_rating = (Button) findViewById(R.id.saleUserActivity_button_rating);
         Intent intent = getIntent();
         UserProductModel userProductModel = (UserProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
