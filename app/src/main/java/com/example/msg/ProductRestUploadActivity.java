@@ -68,7 +68,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         qualityButton = (Button) findViewById(R.id.product_rest_button_quality);
         submit = (Button) findViewById(R.id.product_rest_button_submit);
         fast = (Button) findViewById(R.id.product_rest_button_fast);
-
+        this.InitializeListener();
         smallCategoriesAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, smallCategories);
         smallCategory.setAdapter(smallCategoriesAdapter);
 

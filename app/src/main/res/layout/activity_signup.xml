@@ -74,6 +74,7 @@
         android:onClick="OnClickHandler"
         android:hint="생년월일"
         android:textSize="20sp" />
+
     <Button
         android:id="@+id/signupActivity_button_address"
         android:layout_width="wrap_content"

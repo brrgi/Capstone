@@ -141,7 +141,7 @@ public class SignupActivity extends AppCompatActivity {
                                             public void onSuccess(Void aVoid) {
                                                 Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_LONG).show();
                                                 Log.d(TAG, "SUCCESS");
-                                                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                                                        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                                                 finish();
                                             }
                                         })
