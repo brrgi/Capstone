@@ -250,6 +250,42 @@ public class RestaurantProductApi {
     동작: 현재 위치로부터 일정 반경 내에 등록된 Product를 모두 가져옵니다. 그 결과는 myCallback의 onSuccess 안에서 참조할 수 있습니다.
      */
 
+    public static void getProductListById(final String id, final int completed , final MyListCallback myCallback) {
+        db.collection("ResProducts")
+                .whereEqualTo("res_id", id)
+                .whereEqualTo("completed", completed)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        RestaurantProductModel restaurantProductModel = null;
+                        ArrayList<RestaurantProductModel> restaurantProductModelArrayList = new ArrayList<RestaurantProductModel>();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                restaurantProductModel = document.toObject(RestaurantProductModel.class);
+                                restaurantProductModelArrayList.add(restaurantProductModel);
+                            }
+                            myCallback.onSuccess(restaurantProductModelArrayList);
+
+                        } else {
+                            myCallback.onFail(1, null);
+                            //태스크 실패.
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                myCallback.onFail(0, e); //실패.
+            }
+        });
+    }
+    /*
+    입력: uid와 completed 상태.
+    출력: 없음.
+    동작: 특정 uid와 특정 completed 상태를 가지는 모델들을 가져옵니다. 그 결과는 myCallback의 onSuccess 안에서 참조할 수 있습니다.
+     */
+
     public static ArrayList<RestaurantProductModel> filterByCategory(ArrayList<RestaurantProductModel> modelList, String categoryBig, String categorySmall) {
         ArrayList<RestaurantProductModel> newModelList = new ArrayList<RestaurantProductModel>();
         for(int i = 0; i < modelList.size(); i++) {
