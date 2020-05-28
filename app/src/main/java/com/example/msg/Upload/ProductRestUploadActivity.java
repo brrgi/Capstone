@@ -50,7 +50,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         productImage = (ImageView)findViewById(R.id.product_rest_imageView_product);
         title = (EditText)findViewById(R.id.product_rest_editText_title);
         quantity = (EditText)findViewById(R.id.product_rest_editText_quantity);
-        expireDate = (EditText)findViewById(R.id.product_rest_editText_expireDate);
+        //expireDate = (EditText)findViewById(R.id.product_rest_editText_expireDate);
         cost = (EditText)findViewById(R.id.product_rest_editText_cost);
         description = (EditText)findViewById(R.id.product_rest_editText_description);
 
@@ -78,7 +78,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         restaurantProductModel.categoryBig = bigCategory.getSelectedItem().toString();
         restaurantProductModel.categorySmall = smallCategory.getSelectedItem().toString();
 
-        restaurantProductModel.completed = false;
+        restaurantProductModel.completed = -1;
 
         restaurantProductModel.longitude = defaultLongitude;
         restaurantProductModel.latitude = defaultLatitude;
