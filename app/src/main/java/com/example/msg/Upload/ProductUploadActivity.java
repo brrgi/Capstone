@@ -112,7 +112,7 @@ public class ProductUploadActivity extends AppCompatActivity {
         quantity = (EditText)findViewById(R.id.product_upload_editText_quantity);
         address1=(Button)findViewById(R.id.product_upload_button_address);
         address2=(Button)findViewById(R.id.product_upload_button_address2);
-        txtResult = (TextView)findViewById(R.id.txtResult);
+        txtResult = (TextView)findViewById(R.id.product_upload_TextView_txtResult);
 
         this.InitializeListener();
         final double  defaultLongitude = 0, defaultLatitude = 0;
@@ -203,16 +203,7 @@ public class ProductUploadActivity extends AppCompatActivity {
         });
 
 
-        /*
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProductUploadActivity.this, QualitySelectActivity.class);
-                intent.putExtra("category", smallSpinner.getSelectedItem().toString());
-                startActivityForResult(intent, QUALITY_SELECT);
-            }
-        });
-*/
+
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
