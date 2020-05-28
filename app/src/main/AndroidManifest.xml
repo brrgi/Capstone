@@ -34,6 +34,7 @@
         <activity android:name=".ResMainActivity" />
         <activity android:name=".SignUp.SignupActivity" />
         <activity android:name=".Login.LoginActivity" />
+        <activity android:name=".SalesHistoryActivity"/>
         <activity android:name=".Login.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

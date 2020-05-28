@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.msg.R;
+import com.example.msg.Upload.ProductRestUploadActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -70,11 +71,8 @@ public class ResWriteFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                final String uid = user.getUid();
-
-
-
+                Intent intent = new Intent(getActivity(), ProductRestUploadActivity.class);
+                startActivity(intent);
             }
 
         });

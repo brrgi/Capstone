@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -42,8 +43,10 @@ public class ProductRestUploadActivity extends AppCompatActivity {
     private ImageView productImage;
     private EditText title, quantity, expireDate, cost, description;
     private Spinner bigCategory, smallCategory;
-    private TextView qualityText;
-    private Button qualityButton, submit, fast;
+    private TextView qualityText,txtResult;
+    private Button qualityButton, submit, fast,address1,address2;
+    private DatePickerDialog.OnDateSetListener callbackMethod;
+
 
     private final ArrayList<String> smallCategories = new ArrayList<>();
     private  ArrayAdapter<String> smallCategoriesAdapter;

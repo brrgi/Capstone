@@ -141,16 +141,12 @@ public class MainActivity extends AppCompatActivity {
                         setFrag(1);
                         break;
                     case R.id.action_write:
-                        Intent intent = new Intent(MainActivity.this, ProductUploadActivity.class);
-                        startActivity(intent);
                         setFrag(2);
                         break;
                     case R.id.action_reservation:
                         setFrag(3);
                         break;
                     case R.id.action_account:
-                        Intent intent2 = new Intent(MainActivity.this, ProductRestUploadActivity.class);
-                        startActivity(intent2);
                         setFrag(4);
                         break;
                 }

@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.msg.R;
 import com.example.msg.Sale.SaleActivity;
+import com.example.msg.Upload.ProductUploadActivity;
 
 
 public class WriteFragment extends Fragment {
@@ -37,6 +38,15 @@ public class WriteFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_write, container, false);
+
+        upload = (Button)view.findViewById(R.id.writeFragment_button_upload);
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ProductUploadActivity.class);
+                startActivity(intent);
+            }
+        });
 
         enrollment = (Button) view.findViewById(R.id.writeFragment_button_enrollment);
         enrollment.setOnClickListener(new View.OnClickListener() {
