@@ -69,6 +69,7 @@ public class RestaurantProductApi {
                         db.collection("ResProducts").document(documentReference.getId())
                                 .update("rproduct_id", documentReference.getId());
                         restaurantProductModel.rproduct_id = documentReference.getId();
+                        Log.d("resTest", restaurantProductModel.rproduct_id);
                         postImage(restaurantProductModel, imageUri, myCallback);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
