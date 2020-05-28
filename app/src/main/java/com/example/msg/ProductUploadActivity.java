@@ -107,7 +107,7 @@ public class ProductUploadActivity extends AppCompatActivity {
         specification = (EditText)findViewById(R.id.product_upload_editText_description);
         title = (EditText)findViewById(R.id.product_upload_editText_title);
         qualityText = (TextView)findViewById(R.id.product_upload_textView_quality);
-        expireDate = (Button)findViewById(R.id.product_upload_editText_expireDate);
+        expireDate = (Button)findViewById(R.id.product_upload_button_expireDate);
         qualityText.setText("Hello World!");
         quantity = (EditText)findViewById(R.id.product_upload_editText_quantity);
         address1=(Button)findViewById(R.id.product_upload_button_address);
@@ -287,6 +287,5 @@ public class ProductUploadActivity extends AppCompatActivity {
     };
 
 
-        dialog.show();
-    }
 }
+

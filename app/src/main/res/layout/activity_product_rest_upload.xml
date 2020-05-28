@@ -99,15 +99,6 @@
             android:layout_marginBottom="10sp"/>
 
 
-        <Button
-            android:id="@+id/product_rest_editText_expireDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/iconfinder_calendar"
-            android:background="@android:color/transparent"
-            android:onClick="OnClickHandler"
-            android:hint="유통기한"
-            android:textSize="20sp" />
 
         <Button
             android:id="@+id/product_rest_button_expireDate"
