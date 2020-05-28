@@ -285,7 +285,7 @@ public class UserProductApi {
     public static void getProductListById(final String id, int completed , final MyListCallback myCallback) {
         db.collection("UserProducts")
                 .whereEqualTo("user_id", id)
-                .whereEqualTo("completed", -1)
+                .whereEqualTo("completed", completed)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
