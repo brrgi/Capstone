@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
 
 
 
-    private void initialize(final Context context) {
+    private void initializeLayout(final Context context) {
         //리사이클러뷰 관련 초기화
         //layoutManager = new LinearLayoutManager(getActivity()); //fragment일 때 LinearLayoutManager 인자
         recyclerView = view.findViewById(R.id.home_recyclerView);
@@ -91,6 +91,9 @@ public class HomeFragment extends Fragment {
         spinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, spinnerList);
         spinner.setAdapter(spinnerAdapter);
         dummy = (Button) view.findViewById(R.id.home_button_dummy);
+
+        if(isShowingUserProduct) refreshItemOfUserProducts();
+        else refreshItemOfResProducts();
     }
     //해당 프래그먼트에서 사용되는 레이아웃 등을 초기화 하는 함수입니다.
 
@@ -112,6 +115,11 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+    /*
+    입력:
+    출력:
+    동작:
+     */
 
     private void refreshItemOfResProducts() {
         RestaurantProductApi.getProductList(defaultLatitude, defaultLongitude, range, new RestaurantProductApi.MyListCallback() {
@@ -146,10 +154,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         final Context context = view.getContext();
-        initialize(context);
-
-        if(isShowingUserProduct) refreshItemOfUserProducts();
-        else refreshItemOfResProducts();
+        initializeLayout(context);
 
         //스피너 선택
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
