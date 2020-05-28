@@ -89,7 +89,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
 
     private void postRestProduct(RestaurantProductModel restaurantProductModel) {
         final String uid = AuthenticationApi.getCurrentUid();
-        restaurantProductModel.rproduct_id = uid;
+        restaurantProductModel.res_id = uid;
         RestaurantProductApi.postProduct(restaurantProductModel, imageUri, new RestaurantProductApi.MyCallback() {
             @Override
             public void onSuccess(RestaurantProductModel restaurantProductModel) {
