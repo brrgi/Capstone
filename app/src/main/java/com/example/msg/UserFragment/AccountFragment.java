@@ -1,37 +1,25 @@
 package com.example.msg.UserFragment;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Domain.AuthenticationApi;
 import com.example.msg.Domain.UserApi;
 import com.example.msg.Domain.UserProductApi;
 import com.example.msg.R;
 import com.example.msg.SaleActivity;
-import com.example.msg.SalesHistoryActivity;
+import com.example.msg.Sale.SalesHistoryActivity;
 import com.example.msg.recyclerView.ResProductsAdapter;
 import com.example.msg.recyclerView.UserProductsAdapter;
-
-import java.util.ArrayList;
 
 
 public class AccountFragment extends Fragment {

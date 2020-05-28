@@ -1,4 +1,4 @@
-package com.example.msg;
+package com.example.msg.Sale;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,9 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.msg.DatabaseModel.UserProductModel;
-import com.example.msg.Domain.AuthenticationApi;
-import com.example.msg.Domain.UserProductApi;
-import com.example.msg.recyclerView.UserProductsAdapter;
 
 import java.util.ArrayList;
 
