@@ -1,4 +1,4 @@
-package com.example.msg;
+package com.example.msg.Sale;
 
 import android.content.Context;
 import android.os.Bundle;
