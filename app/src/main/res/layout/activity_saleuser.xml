@@ -141,24 +141,6 @@
             >
 
             <Button
-                android:id="@+id/saleUserActivity_button_subscription"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:background="@drawable/bin_blue"
-                android:text="구독!"
-                android:layout_marginLeft="10sp"
-                android:textColor="#ffffff"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="2sp"
-                android:layout_height="50sp"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="10sp"
-                android:layout_marginRight="10sp"
-                android:background="#D3D3D3"/>
-
-            <Button
                 android:id="@+id/saleUserActivity_button_buy"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
