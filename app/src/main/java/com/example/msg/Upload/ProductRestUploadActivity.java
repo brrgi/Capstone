@@ -41,10 +41,10 @@ import java.util.ArrayList;
 public class ProductRestUploadActivity extends AppCompatActivity {
 
     private ImageView productImage;
-    private EditText title, quantity, expireDate, cost, description;
+    private EditText title, quantity, cost, description;
     private Spinner bigCategory, smallCategory;
     private TextView qualityText,txtResult;
-    private Button qualityButton, submit, fast,address1,address2;
+    private Button qualityButton, submit, fast,address1,address2,expireDate;
     private DatePickerDialog.OnDateSetListener callbackMethod;
 
 
@@ -62,7 +62,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         productImage = (ImageView)findViewById(R.id.product_rest_imageView_product);
         title = (EditText)findViewById(R.id.product_rest_editText_title);
         quantity = (EditText)findViewById(R.id.product_rest_editText_quantity);
-        //expireDate = (EditText)findViewById(R.id.product_rest_editText_expireDate);
+        expireDate = (Button)findViewById(R.id.product_rest_button_expireDate);
         cost = (EditText)findViewById(R.id.product_rest_editText_cost);
         description = (EditText)findViewById(R.id.product_rest_editText_description);
 

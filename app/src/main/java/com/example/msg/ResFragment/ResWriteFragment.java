@@ -63,12 +63,7 @@ public class ResWriteFragment extends Fragment {
         title = (EditText) view.findViewById(R.id.writeFragment_edittext_title);
         enrollment = (Button) view.findViewById(R.id.writeFragment_button_enrollment);
 
-
-
-
-
         enrollment.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ProductRestUploadActivity.class);
