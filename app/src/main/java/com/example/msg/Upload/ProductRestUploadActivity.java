@@ -121,7 +121,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_rest_upload);
         initialize();
-
+        this.InitializeListener();
         //대분류를 바꿀 때 소분류도 맞춰서 바꾸는 부분.
         bigCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

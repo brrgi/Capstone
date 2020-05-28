@@ -62,7 +62,7 @@ public class SalesHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_history);
         initialize();
-
+        SalesHistory();
 
     }
 }
