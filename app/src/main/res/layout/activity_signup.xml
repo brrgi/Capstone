@@ -102,6 +102,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/signupActivity_edittext_address_detail"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="상세 주소"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
             android:id="@+id/signupActivity_edittext_phone"
             android:singleLine="true"
             android:lines="1"

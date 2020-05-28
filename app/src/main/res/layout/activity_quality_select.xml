@@ -5,33 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".recyclerView.QualitySelectActivity">
+    tools:context=".RecyclerView.QualitySelectActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="2">
+        android:layout_marginBottom="20sp"
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/quality_select_radioButton_high" />
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="상"/>
+                android:layout_height="wrap_content"
+                android:text="상"
+                android:gravity="center"/>
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/quality_select_textView_high"
             android:text="내용 불러오는 중."
+            android:layout_marginLeft="10sp"
             />
 
     </LinearLayout>
@@ -40,11 +44,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="2">
+        android:layout_marginBottom="20sp"
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <RadioButton
                 android:layout_width="wrap_content"
@@ -52,8 +57,9 @@
                 android:id="@+id/quality_select_radioButton_mid" />
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="중"/>
+                android:layout_height="wrap_content"
+                android:text="중"
+                android:gravity="center"/>
         </LinearLayout>
 
         <TextView
@@ -61,6 +67,7 @@
             android:layout_height="match_parent"
             android:id="@+id/quality_select_textView_mid"
             android:text="내용 불러오는 중."
+            android:layout_marginLeft="10sp"
             />
 
     </LinearLayout>
@@ -69,11 +76,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="2">
+        android:layout_marginBottom="20sp"
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <RadioButton
                 android:layout_width="wrap_content"
@@ -81,16 +89,17 @@
                 android:id="@+id/quality_select_radioButton_low" />
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="하"/>
+                android:layout_height="wrap_content"
+                android:text="하"
+                android:gravity="center"/>
         </LinearLayout>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/quality_select_textView_low"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="내용 불러오는 중."
-            />
+            android:layout_marginLeft="10sp"/>
 
     </LinearLayout>
 
@@ -98,21 +107,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="1">
+        android:gravity="center"
+        >
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/quality_select_button_submit"
-            android:layout_weight="1"
-            android:text="제출하기"/>
+            android:background="@drawable/bin_blue"
+            android:textColor="#ffffff"
+            android:text="제출하기"
+            android:layout_marginRight="10sp"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/quality_select_button_cancel"
-            android:layout_weight="1"
-            android:text="취소하기"/>
+            android:background="@drawable/bin_blue"
+            android:textColor="#ffffff"
+            android:text="취소하기"
+            android:layout_marginLeft="10sp"/>
 
     </LinearLayout>
 

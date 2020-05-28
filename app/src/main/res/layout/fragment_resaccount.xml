@@ -5,9 +5,119 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Account"
-        android:textSize="40sp"/>
+        android:textSize="50sp"
+        android:text="내 정보"
+        android:textStyle="bold"
+        >
+
+    </TextView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/reaccount_imageView_Image"
+            android:layout_width="80sp"
+            android:layout_height="80sp"
+            android:layout_margin="5sp"
+            android:src="@drawable/chef"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/reaccount_textView_UID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="유저이름"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="5sp"/>
+
+            <TextView
+                android:id="@+id/reaccount_textView_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="동네"
+                android:textSize="15sp"
+                android:layout_margin="5sp"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150sp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/reaccount_imageView_SellImage"
+                android:layout_width="45sp"
+                android:layout_height="80sp"
+                android:layout_margin="5sp"
+                android:src="@drawable/list"/>
+            <TextView
+                android:id="@+id/reaccount_TextView_SellText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="판매내역"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/reaccount_textView_ex2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사용자 통계"
+            android:textSize="30sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
+            android:layout_margin="5sp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

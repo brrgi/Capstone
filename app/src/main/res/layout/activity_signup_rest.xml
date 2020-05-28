@@ -106,6 +106,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/signupRestActivity_edittext_address_detail"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="상세 주소"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
             android:id="@+id/signupRestActivity_edittext_res_description"
             android:hint="식당 설명"
             android:singleLine="true"
