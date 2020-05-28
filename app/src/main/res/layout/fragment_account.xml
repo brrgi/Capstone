@@ -67,20 +67,22 @@
         android:gravity="center">
 
         <LinearLayout
+            android:id="@+id/account_linearLayout_saleshistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:clickable="true">
 
             <ImageView
-                android:id="@+id/account_imageView_SellImage"
+
                 android:layout_width="45sp"
                 android:layout_height="80sp"
                 android:layout_margin="5sp"
                 android:src="@drawable/list"/>
             <TextView
-                android:id="@+id/account_TextView_SellText"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
@@ -89,20 +91,22 @@
 
 
         <LinearLayout
+            android:id="@+id/account_linearLayout_purchasehistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:clickable="true">
 
             <ImageView
-                android:id="@+id/account_imageView_BuyImage"
+
                 android:layout_width="60sp"
                 android:layout_height="80sp"
                 android:layout_margin="5sp"
                 android:src="@drawable/shopping"/>
             <TextView
-                android:id="@+id/account_TextView_BuyText"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
@@ -111,20 +115,20 @@
 
 
         <LinearLayout
+            android:id="@+id/account_linearLayout_subscribehistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:clickable="true">
 
             <ImageView
-                android:id="@+id/account_imageView_SubscribeImage"
                 android:layout_width="50sp"
                 android:layout_height="80sp"
                 android:layout_margin="5dp"
                 android:src="@drawable/bell"/>
             <TextView
-                android:id="@+id/account_TextView_SubscribeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
