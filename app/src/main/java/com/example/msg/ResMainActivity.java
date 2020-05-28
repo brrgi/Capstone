@@ -11,10 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.msg.fragment.ResAccountBookFragment;
-import com.example.msg.fragment.ResAccountFragment;
-import com.example.msg.fragment.ResChatFragment;
-import com.example.msg.fragment.ResWriteFragment;
+import com.example.msg.Upload.ProductRestUploadActivity;
+import com.example.msg.ResFragment.ResAccountBookFragment;
+import com.example.msg.ResFragment.ResAccountFragment;
+import com.example.msg.ResFragment.ResChatFragment;
+import com.example.msg.ResFragment.ResWriteFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ResMainActivity extends AppCompatActivity {

@@ -8,33 +8,21 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.msg.DatabaseModel.RestaurantProductModel;
-import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.example.msg.DatabaseModel.UserModel;
-import com.example.msg.Domain.AuthenticationApi;
-import com.example.msg.Domain.RestaurantProductApi;
-import com.example.msg.Domain.SubscriptionApi;
-import com.example.msg.Domain.UserApi;
-import com.example.msg.Domain.UserProductApi;
-import com.example.msg.fragment.AccountFragment;
-import com.example.msg.fragment.ChatFragment;
-import com.example.msg.fragment.HomeFragment;
-import com.example.msg.fragment.ReservationFragment;
-import com.example.msg.fragment.WriteFragment;
-import com.example.msg.DatabaseModel.UserProductModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.Api.UserApi;
+import com.example.msg.Sale.PopupSearchActivity;
+import com.example.msg.Upload.ProductRestUploadActivity;
+import com.example.msg.Upload.ProductUploadActivity;
+import com.example.msg.UserFragment.AccountFragment;
+import com.example.msg.UserFragment.ChatFragment;
+import com.example.msg.UserFragment.HomeFragment;
+import com.example.msg.UserFragment.ReservationFragment;
+import com.example.msg.UserFragment.WriteFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.messaging.FirebaseMessaging;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
