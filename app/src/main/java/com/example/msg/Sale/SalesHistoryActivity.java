@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.UserProductApi;
+import com.example.msg.R;
 import com.example.msg.RecyclerView.UserProductsAdapter;
 
 import java.util.ArrayList;
