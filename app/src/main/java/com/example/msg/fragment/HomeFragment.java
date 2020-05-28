@@ -56,12 +56,13 @@ public class HomeFragment extends Fragment {
 
     //리사이클러뷰 RestaurantProducts 전용 변수
     private RecyclerView.Adapter resAdapter;
-    private  ArrayList<RestaurantProductModel> arrayListTemp = new ArrayList<RestaurantProductModel>();
+    private  ArrayList<RestaurantProductModel> filteredResModels = new ArrayList<RestaurantProductModel>();
     private final ArrayList<RestaurantProductModel> restaurantProductModels = new ArrayList<RestaurantProductModel>();
 
     //리사이클러뷰 UserProducts 전용 변수.
     private RecyclerView.Adapter userAdapter;
     private final ArrayList<UserProductModel> userProductModelArrayList = new ArrayList<UserProductModel>();
+    private ArrayList<UserProductModel> filteredUserModels = new ArrayList<UserProductModel>();
 
     //리사이클러뷰 선택에 사용되는 변수.
     private boolean isShowingUserProduct = true;
@@ -76,8 +77,8 @@ public class HomeFragment extends Fragment {
         layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
 
-        resAdapter = new ResProductsAdapter(restaurantProductModels, context);
-        userAdapter = new UserProductsAdapter(userProductModelArrayList, context);
+        resAdapter = new ResProductsAdapter(filteredResModels, context);
+        userAdapter = new UserProductsAdapter(filteredUserModels, context);
 
         //일반 레이아웃 관련 초기화.
         spinnerList.add("거리 순 정렬");
@@ -100,6 +101,8 @@ public class HomeFragment extends Fragment {
                 recyclerView.setAdapter(userAdapter);
                 userProductModelArrayList.clear();
                 userProductModelArrayList.addAll(userProductModels);
+                filteredUserModels.clear();
+                filteredUserModels.addAll(userProductModels);
                 userAdapter.notifyDataSetChanged();
             }
 
@@ -117,6 +120,8 @@ public class HomeFragment extends Fragment {
                 recyclerView.setAdapter(resAdapter);
                 restaurantProductModels.clear();
                 restaurantProductModels.addAll(restaurantModelArrayList);
+                filteredResModels.clear();
+                filteredResModels.addAll(restaurantProductModels);
                 resAdapter.notifyDataSetChanged();
             }
 
@@ -154,17 +159,17 @@ public class HomeFragment extends Fragment {
                 switch(position) {
                     case 0:
                         //거리순 정렬
-                        RestaurantProductApi.sortByDistance(restaurantProductModels, 5.0, 5.0);
+                        RestaurantProductApi.sortByDistance(filteredResModels, 5.0, 5.0);
                         resAdapter.notifyDataSetChanged();
                         break;
                     case 1:
                         //가격순 정렬
-                        RestaurantProductApi.sortByPrice(restaurantProductModels);
+                        RestaurantProductApi.sortByPrice(filteredResModels);
                         resAdapter.notifyDataSetChanged();
                         break;
                     case 2:
                         //재고순 정렬
-                        RestaurantProductApi.sortByStock(restaurantProductModels);
+                        RestaurantProductApi.sortByStock(filteredResModels);
                         resAdapter.notifyDataSetChanged();
                         break;
                 }
@@ -181,16 +186,20 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (searchText.getText() != null) {
-                    arrayListTemp.clear();
-                    arrayListTemp = RestaurantProductApi.filterByKeyWord(restaurantProductModels, searchText.getText().toString());
-                    restaurantProductModels.clear();
-                    restaurantProductModels.addAll(arrayListTemp);
-                    resAdapter.notifyDataSetChanged();
+                    if(isShowingUserProduct) {
+                        filteredUserModels.clear();
+                        filteredUserModels.addAll(UserProductApi.filterByKeyWord(userProductModelArrayList, searchText.getText().toString()));
+                    }
+                    else {
+                        filteredResModels.clear();
+                        filteredResModels.addAll(RestaurantProductApi.filterByKeyWord(restaurantProductModels, searchText.getText().toString()));
+                        resAdapter.notifyDataSetChanged();
+                    }
+
                 }
             }
         });
         //키워드 검색
-        //TODO/HACK: 검색을 한 뒤에 재검색을 하면 제대로 나오지 않는 버그가 존재함.
 
 
         //더미 버튼

@@ -79,15 +79,15 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         restaurantProductModel.categoryBig = bigCategory.getSelectedItem().toString();
         restaurantProductModel.categorySmall = smallCategory.getSelectedItem().toString();
 
-        restaurantProductModel.completed = false;
+        restaurantProductModel.completed = -1;
 
         restaurantProductModel.longitude = defaultLongitude;
         restaurantProductModel.latitude = defaultLatitude;
     }
 
     private void postRestProduct(RestaurantProductModel restaurantProductModel) {
-        final String uid = AuthenticationApi.getCurrentUid();
-        restaurantProductModel.rproduct_id = uid;
+        String uid = AuthenticationApi.getCurrentUid();
+        restaurantProductModel.res_id = uid;
         RestaurantProductApi.postProduct(restaurantProductModel, imageUri, new RestaurantProductApi.MyCallback() {
             @Override
             public void onSuccess(RestaurantProductModel restaurantProductModel) {

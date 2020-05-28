@@ -48,7 +48,7 @@ public class SaleActivity extends AppCompatActivity {
     private TextView txt_address;
     private ImageView image_product;
     private Button btn_subscription;
-
+    private final SubscriptionModel subscriptionModel = new SubscriptionModel();
     static int state = -1;
     String r_sub = "";
     String r_name = "";
@@ -57,29 +57,39 @@ public class SaleActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Log.d("subs3","구독");
 
-
-        btn_subscription.setText("구독 해지");
         String uid = user.getUid();
+        Log.d("uid1234", uid);
+
         r_sub = restaurantProductModel.res_id;
         SubscriptionApi.getSubscriptionListByUserId(uid, new SubscriptionApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
+                Log.d("subfailnew", Integer.toString(subscriptionModelArrayList.size()));
                 for(int i =0;i < subscriptionModelArrayList.size();i++) {
-
-                    if((subscriptionModelArrayList.get(i).res_id)==r_sub)
+                    Log.d("subfailnew", subscriptionModelArrayList.get(0).res_id +"/" + r_sub);
+                    Log.d("subfailnew",Boolean.toString(subscriptionModelArrayList.get(i).res_id.equals(r_sub)));
+                    if((subscriptionModelArrayList.get(i).res_id).equals(r_sub))
                     {
-                       state = 1;
+                        Log.d("subfailnew", "if state start");
+                        subscriptionModel.user_id = subscriptionModelArrayList.get(i).user_id;
+                        subscriptionModel.res_id = subscriptionModelArrayList.get(i).res_id;
+                        subscriptionModel.subs_id = subscriptionModelArrayList.get(i).subs_id;
+                        state = 1;
+
+
                     }
                     else {
-
+                        Log.d("subfailnew", "else state");
                     }
+                    Log.d("subfailnew", "for state end");
                 }
+
                 if(state == 1) btn_subscription.setText("구독 해지");
                 else btn_subscription.setText("구독");
             }
             @Override
             public void onFail(int errorCode, Exception e) {
-
+                Log.d("subfail", Integer.toString(errorCode));
             }
         });
     }
@@ -88,8 +98,7 @@ public class SaleActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Log.d("subs2","구독");
         final String uid = user.getUid();
-        r_sub = restaurantProductModel.res_id;
-        final SubscriptionModel subscriptionModel = new SubscriptionModel();
+
         if(state==-1) {
             subscriptionModel.res_id = restaurantProductModel.res_id;
             subscriptionModel.user_id = uid;
@@ -114,12 +123,22 @@ public class SaleActivity extends AppCompatActivity {
 
                 @Override
                 public void onFail(int errorCode, Exception e) {
-
+                    Log.d("subfail2", Integer.toString(errorCode));
                 }
             });
         }
         else {
-            //deleteSubscription!!
+            SubscriptionApi.deleteSubscriptionBySubsId(subscriptionModel.subs_id, new SubscriptionApi.MyCallback() {
+                @Override
+                public void onSuccess(SubscriptionModel subscriptionModel) {
+                    Log.d("subSuccess", "success");
+                }
+
+                @Override
+                public void onFail(int errorCode, Exception e) {
+                    Log.d("subfail3", Integer.toString(errorCode));
+                }
+            });
             state=-1;
             btn_subscription.setText("구독");
             FirebaseMessaging.getInstance().unsubscribeFromTopic(restaurantProductModel.res_id);
@@ -164,6 +183,7 @@ public class SaleActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
+
         getResModelFromProduct(restaurantProductModel);
         getSubscribeCheck(restaurantProductModel);
 
