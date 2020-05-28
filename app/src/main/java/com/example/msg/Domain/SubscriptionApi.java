@@ -176,7 +176,7 @@ public class SubscriptionApi {
 
     //TODO: 구독 삭제 기능 추가해야함.
     public static void deleteSubscriptionBySubsId(final String subsId, final MyCallback myCallback) {
-        db.collection("Subsciption").document(subsId)
+        db.collection("Subscription").document(subsId)
                 .delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
