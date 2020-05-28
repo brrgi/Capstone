@@ -40,7 +40,8 @@ public class ProductRestUploadActivity extends AppCompatActivity {
     private final ArrayList<String> smallCategories = new ArrayList<>();
     private  ArrayAdapter<String> smallCategoriesAdapter;
     private final RestaurantProductModel restaurantProductModel = new RestaurantProductModel();
-
+    private Button expireDate;
+    private DatePickerDialog.OnDateSetListener callbackMethod;
 
     private final double defaultLatitude = 0, defaultLongitude = 0;
     private Uri imageUri = null;
@@ -63,7 +64,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         qualityButton = (Button) findViewById(R.id.product_rest_button_quality);
         submit = (Button) findViewById(R.id.product_rest_button_submit);
         fast = (Button) findViewById(R.id.product_rest_button_fast);
-
+        this.InitializeListener();
         smallCategoriesAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, smallCategories);
         smallCategory.setAdapter(smallCategoriesAdapter);
 
@@ -163,6 +164,23 @@ public class ProductRestUploadActivity extends AppCompatActivity {
 
     }
 
+
+    public void InitializeListener() {
+        callbackMethod = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                monthOfYear++;
+                expireDate.setText(year + "년" + monthOfYear + "월" + dayOfMonth + "일");
+
+            }
+        };
+    }
+
+    public void OnClickHandler(View view) {
+        DatePickerDialog dialog = new DatePickerDialog(this, callbackMethod, 2019, 5, 24);
+
+        dialog.show();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){

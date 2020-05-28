@@ -44,6 +44,7 @@ public class SignupRestActivity extends AppCompatActivity {
     private EditText res_name;
     private EditText res_description;
     private EditText et_address;
+    private EditText et_address_detail;
     private Button address;
     private Button signup;
     private String splash_background;
@@ -53,6 +54,8 @@ public class SignupRestActivity extends AppCompatActivity {
     private EditText pickup_start_time;
     private EditText pickup_end_time;
     private TimePickerDialog.OnTimeSetListener callbackMethod;
+    private Double lati;
+    private Double longi;
 
     String token = "";
 
@@ -88,6 +91,7 @@ public class SignupRestActivity extends AppCompatActivity {
         });
 
         et_address=(EditText)findViewById(R.id.signupRestActivity_edittext_address);
+        et_address_detail=(EditText)findViewById(R.id.signupRestActivity_edittext_address_detail);
         res_phone = (EditText) findViewById(R.id.signupRestActivity_edittext_res_phone);
         email = (EditText) findViewById(R.id.signupRestActivity_edittext_email);
         password = (EditText) findViewById(R.id.signupRestActivity_edittext_password);
@@ -135,12 +139,15 @@ public class SignupRestActivity extends AppCompatActivity {
                                         restaurantModel.res_imageURL=(imageUrl.getResult().toString());
                                         restaurantModel.res_phone=(res_phone.getText().toString());
                                         restaurantModel.res_address=(et_address.getText().toString());      //추가
+                                        restaurantModel.res_address_detail=(et_address_detail.getText().toString());
                                         restaurantModel.res_description=(res_description.getText().toString());
                                         restaurantModel.pickup_start_time=(pickup_start_time.getText().toString());
                                         restaurantModel.pickup_end_time=(pickup_end_time.getText().toString());
                                         restaurantModel.res_id=uid;
                                         restaurantModel.approved=false;
                                         restaurantModel.res_token=token;
+                                        restaurantModel.res_latitude=lati;
+                                        restaurantModel.res_longitude=longi;
 
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("Restaurant")
@@ -182,6 +189,12 @@ public class SignupRestActivity extends AppCompatActivity {
             String datas=data.getStringExtra("comeback");
             if (datas!=null)
                 et_address.setText(datas);
+            Double lat=data.getDoubleExtra("comebacks",0);
+            Double lon=data.getDoubleExtra("comebackss",0);
+            if (datas!=null){
+                lati=lat;
+                longi=lon;
+            }
         }
     }
 

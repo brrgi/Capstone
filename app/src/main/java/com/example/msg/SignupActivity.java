@@ -45,11 +45,13 @@ public class SignupActivity extends AppCompatActivity {
     private RadioButton man;
     private int bornyear;
     private EditText et_address;
+    private EditText et_address_detail;
     private Button address;
     private ImageView profile;
     private Uri imageUri;
     private RadioButton woman;
-
+    private Double lati;
+    private Double longi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,7 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         et_address=(EditText)findViewById(R.id.signupActivity_edittext_address);
+        et_address_detail=(EditText)findViewById(R.id.signupActivity_edittext_address_detail);
         email=(EditText)findViewById(R.id.signupActivity_edittext_email);
         password=(EditText)findViewById(R.id.signupActivity_edittext_password);
         name=(EditText)findViewById(R.id.signupActivity_edittext_name);
@@ -113,12 +116,15 @@ public class SignupActivity extends AppCompatActivity {
                                 userModel.user_name=(name.getText().toString());
                                 userModel.user_phone=(phone.getText().toString());
                                 userModel.user_address=(et_address.getText().toString());       //추가 이레 5.25
+                                userModel.user_address_detail=(et_address_detail.getText().toString());
                                 userModel.ban_count=0;
                                 userModel.mileage=2;
                                 userModel.user_grade=0;
                                 userModel.user_id=uid;
                                 userModel.sanction=false;
                                 userModel.email=email.getText().toString();
+                                userModel.latitude=lati;
+                                userModel.longitude=longi;
                                 if (man.isChecked())
                                     userModel.is_male=true;
                                 else
@@ -134,7 +140,7 @@ public class SignupActivity extends AppCompatActivity {
                                             public void onSuccess(Void aVoid) {
                                                 Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_LONG).show();
                                                 Log.d(TAG, "SUCCESS");
-                                                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                                                        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                                                 finish();
                                             }
                                         })
@@ -173,6 +179,12 @@ public class SignupActivity extends AppCompatActivity {
             String datas=data.getStringExtra("comeback");
             if (datas!=null)
                 et_address.setText(datas);
+            Double lat=data.getDoubleExtra("comebacks",0);
+            Double lon=data.getDoubleExtra("comebackss",0);
+            if (datas!=null){
+                lati=lat;
+                longi=lon;
+            }
         }
     }
 
