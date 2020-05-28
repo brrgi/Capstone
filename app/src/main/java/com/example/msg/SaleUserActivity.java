@@ -12,12 +12,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.SaleModel;
+import com.example.msg.DatabaseModel.ShareModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
+import com.example.msg.Domain.AuthenticationApi;
+import com.example.msg.Domain.ShareApi;
 import com.example.msg.Domain.SubscriptionApi;
 import com.example.msg.Domain.UserApi;
+import com.example.msg.Domain.UserProductApi;
 import com.firebase.ui.auth.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,7 +50,49 @@ public class SaleUserActivity extends AppCompatActivity {
 
     String u_name = "";
     String u_address="";
+    String u_uid;
     private static int current = -1;
+
+    private void processShare(final UserProductModel userProductModel, UserModel userModel) {
+        ShareModel shareModel = new ShareModel();
+        shareModel.share_from = userModel.user_id;
+        shareModel.share_to = AuthenticationApi.getCurrentUid();
+        shareModel.uproduct_id = userProductModel.uproduct_id;
+        userProductModel.completed = 0;
+
+        ShareApi.postShare(shareModel, new ShareApi.MyCallback() {
+            @Override
+            public void onSuccess(ShareModel shareModel) {
+                //성공
+                UserProductApi.updateProduct(userProductModel, new UserProductApi.MyCallback() {
+                    @Override
+                    public void onSuccess(UserProductModel userProductModel) {
+                        finish();
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+                //실패
+            }
+        });
+
+    }
+
+    private void processSale(RestaurantProductModel restaurantProductModel, RestaurantModel restaurantModel) {
+        SaleModel saleModel = new SaleModel();
+        saleModel.res_id = restaurantModel.res_id;
+        saleModel.user_id = AuthenticationApi.getCurrentUid();
+        saleModel.product_id = restaurantProductModel.rproduct_id;
+    }
+
+
 
 
     @Override
@@ -64,7 +112,7 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_chat = (Button) findViewById(R.id.saleUserActivity_button_chat);
         image_product = (ImageView) findViewById(R.id.saleUserActivity_imageView_product);
         Intent intent = getIntent();
-        UserProductModel userProductModel = (UserProductModel)intent.getSerializableExtra("Model");
+        final UserProductModel userProductModel = (UserProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -74,6 +122,7 @@ public class SaleUserActivity extends AppCompatActivity {
             public void onSuccess(UserModel userModel) {
                 u_name = userModel.user_name;
                 u_address=userModel.user_address;
+                u_uid = userModel.user_id;
                 txt_salesman.setText(u_name);
                 txt_address.setText(u_address);
             }
@@ -97,8 +146,11 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SaleUserActivity.this, PayActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(SaleUserActivity.this, PayActivity.class);
+                //startActivity(intent);
+                UserModel userModel = new UserModel();
+                userModel.user_id = u_uid;
+                processShare(userProductModel, userModel);
             }
         });
     }

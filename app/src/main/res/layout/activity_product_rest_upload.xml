@@ -98,13 +98,17 @@
             android:background="#D3D3D3"
             android:layout_marginBottom="10sp"/>
 
-        <EditText
-            android:id="@+id/product_rest_editText_expireDate"
+
+
+        <Button
+            android:id="@+id/product_rest_button_expireDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/iconfinder_calendar"
+            android:background="@android:color/transparent"
+            android:onClick="OnClickHandler"
             android:hint="유통기한"
-            android:textSize="30sp"
-            android:background="@null"/>
+            android:textSize="30sp" />
 
         <View
             android:layout_width="match_parent"
@@ -115,7 +119,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp">
 
             <TextView
                 android:id="@+id/product_rest_textView_quality"
@@ -173,12 +178,59 @@
             android:background="#D3D3D3"
             android:layout_marginBottom="10sp"/>
 
+        <Button
+            android:id="@+id/product_rest_button_fast"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:text="급처 기능"
+            android:background="@drawable/bin_blue"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="10sp"
+            android:layout_marginBottom="10sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginBottom="10sp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginBottom="10sp">
 
+            <Button
+                android:id="@+id/product_rest_button_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="현재 장소 유지"
+                android:background="@drawable/bin_blue"
+                android:textColor="#ffffff"
+                android:layout_marginRight="10sp">
+
+            </Button>
+
+
+            <Button
+                android:id="@+id/product_rest_button_address2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="장소 변경"
+                android:background="@drawable/bin_blue"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="10sp">
+
+            </Button>
+
+            <View
+                android:layout_width="2sp"
+                android:layout_height="50sp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:background="#D3D3D3"/>
 
             <Button
                 android:id="@+id/product_rest_button_submit"
@@ -188,18 +240,11 @@
                 android:background="@drawable/bin_blue"
                 android:textColor="#ffffff"
                 android:layout_gravity="center"
-                android:layout_marginRight="10sp"/>
+                android:layout_marginLeft="30sp"/>
 
-            <Button
-                android:id="@+id/product_rest_button_fast"
-                android:layout_width="150sp"
-                android:layout_height="wrap_content"
-                android:text="급처 기능"
-                android:background="@drawable/bin_blue"
-                android:textColor="#ffffff"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10sp"/>
         </LinearLayout>
+
+
 
 
 

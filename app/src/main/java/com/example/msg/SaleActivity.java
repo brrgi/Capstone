@@ -128,6 +128,7 @@ public class SaleActivity extends AppCompatActivity {
             });
         }
         else {
+
             SubscriptionApi.deleteSubscriptionBySubsId(subscriptionModel.subs_id, new SubscriptionApi.MyCallback() {
                 @Override
                 public void onSuccess(SubscriptionModel subscriptionModel) {

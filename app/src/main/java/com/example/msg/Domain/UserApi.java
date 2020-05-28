@@ -91,11 +91,15 @@ public class UserApi {
                         "age", userModel.age,
                         "is_male", userModel.is_male,
                         "user_address", userModel.user_address,
+                        "user_address_detail", userModel.user_address_detail,
                         "user_phone", userModel.user_phone,
                         "email", userModel.email,
                         "mileage", userModel.mileage,
                         "ban_count", userModel.ban_count,
-                        "user_grade", userModel.user_grade
+                        "user_grade", userModel.user_grade,
+                        "latitude", userModel.latitude,
+                        "longitude", userModel.longitude
+
                 ).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

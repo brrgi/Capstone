@@ -247,6 +247,7 @@ public class UserProductApi {
     public static void getProductList(final double curLatitude, final double curLongitude, final double range, final MyListCallback myCallback) {
         db.collection("UserProducts").
                 whereGreaterThan("latitude", curLatitude - range).whereLessThan("latitude", curLatitude + range)
+                .whereEqualTo("completed", -1)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -280,6 +281,43 @@ public class UserProductApi {
     출력: 없음.
     동작: 현재 위치로부터 일정 반경 내에 등록된 Product를 모두 가져옵니다. 그 결과는 myCallback의 onSuccess 안에서 참조할 수 있습니다.
      */
+
+    public static void getProductListById(final String id, int completed , final MyListCallback myCallback) {
+        db.collection("UserProducts")
+                .whereEqualTo("user_id", id)
+                .whereEqualTo("completed", -1)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        UserProductModel userProductModel = null;
+                        ArrayList<UserProductModel> userProductModels = new ArrayList<UserProductModel>();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                userProductModel = document.toObject(UserProductModel.class);
+                                userProductModels.add(userProductModel);
+                            }
+                            myCallback.onSuccess(userProductModels);
+
+                        } else {
+                            myCallback.onFail(1, null);
+                            //태스크 실패.
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                myCallback.onFail(0, e); //실패.
+            }
+        });
+    }
+    /*
+    입력: id와 completed 상태.
+    출력: 없음.
+    동작: id와 completed와 일치하는 Product를 모두 가져옵니다. 그 결과는 myCallback의 onSuccess 안에서 참조할 수 있습니다.
+     */
+
 
     public static ArrayList<UserProductModel> filterByCategory(ArrayList<UserProductModel> modelList, String categoryBig, String categorySmall) {
         ArrayList<UserProductModel> newModelList = new ArrayList<UserProductModel>();
