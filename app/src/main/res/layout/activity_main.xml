@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/mainactivity_bottomnavigationview"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorPrimary"
+        app:itemBackground="@drawable/oragne"
         app:itemTextColor="@android:color/white"
         app:itemIconTint="@android:color/white"
         app:menu="@menu/bottom_navigation_main"

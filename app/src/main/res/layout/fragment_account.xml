@@ -113,7 +113,6 @@
                 android:text="구매내역"/>
         </LinearLayout>
 
-
         <LinearLayout
             android:id="@+id/account_linearLayout_subscribehistory"
             android:layout_width="wrap_content"

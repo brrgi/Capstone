@@ -13,15 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
-import com.example.msg.DatabaseModel.UserProductModel;
-import com.example.msg.Api.AuthenticationApi;
-import com.example.msg.Api.UserApi;
-import com.example.msg.Api.UserProductApi;
 import com.example.msg.R;
-import com.example.msg.Sale.SaleActivity;
-import com.example.msg.Sale.SalesHistoryActivity;
-import com.example.msg.RecyclerView.ResProductsAdapter;
-import com.example.msg.RecyclerView.UserProductsAdapter;
 
 
 public class AccountFragment extends Fragment {
