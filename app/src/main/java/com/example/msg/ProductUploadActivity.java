@@ -3,6 +3,7 @@ package com.example.msg;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -40,9 +42,11 @@ public class ProductUploadActivity extends AppCompatActivity {
     private TextView qualityText;
     private EditText quantity;
     private EditText specification = null;
-    private EditText expireDate;
+    private Button expireDate;
 
     private Uri imageUri = null;
+    private DatePickerDialog.OnDateSetListener callbackMethod;
+
 
     private final int PICK_FROM_ALBUM = 100;
     private final int QUALITY_SELECT = 101;
@@ -95,10 +99,10 @@ public class ProductUploadActivity extends AppCompatActivity {
         specification = (EditText)findViewById(R.id.product_upload_editText_description);
         title = (EditText)findViewById(R.id.product_upload_editText_title);
         qualityText = (TextView)findViewById(R.id.product_upload_textView_quality);
-        expireDate = (EditText)findViewById(R.id.product_upload_editText_expireDate);
+        expireDate = (Button) findViewById(R.id.product_upload_button_expireDate);
         qualityText.setText("Hello World!");
         quantity = (EditText)findViewById(R.id.product_upload_editText_quantity);
-
+        InitializeListener();
         final double  defaultLongitude = 0, defaultLatitude = 0;
 
 
@@ -189,5 +193,19 @@ public class ProductUploadActivity extends AppCompatActivity {
     }
 
 
+    public void InitializeListener() {
+        callbackMethod = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                monthOfYear++;
+                expireDate.setText(year + "년" + monthOfYear + "월" + dayOfMonth + "일");
+            }
+        };
+    }
 
+    public void OnClickHandler(View view) {
+        DatePickerDialog dialog = new DatePickerDialog(this, callbackMethod, 2019, 5, 24);
+
+        dialog.show();
+    }
 }

@@ -106,6 +106,16 @@
             android:textSize="30sp"
             android:background="@null"/>
 
+        <Button
+            android:id="@+id/product_rest_button_expireDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/iconfinder_calendar"
+            android:background="@android:color/transparent"
+            android:onClick="OnClickHandler"
+            android:hint="유통기한"
+            android:textSize="30sp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2sp"
