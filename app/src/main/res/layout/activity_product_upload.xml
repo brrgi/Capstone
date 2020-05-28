@@ -180,17 +180,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginBottom="10sp">
 
         <Button
             android:id="@+id/product_upload_button_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="현재 장소 유지"
+            android:layout_marginRight="10sp"
             android:background="@drawable/bin_blue"
-            android:textColor="#ffffff"
-            android:layout_marginRight="10sp">
+            android:text="내 정보 위치"
+            android:textColor="#ffffff">
 
         </Button>
 
@@ -199,7 +198,7 @@
             android:id="@+id/product_upload_button_address2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="장소 변경"
+            android:text="GPS 위치"
             android:background="@drawable/bin_blue"
             android:textColor="#ffffff"
             android:layout_marginLeft="10sp">
@@ -226,9 +225,9 @@
 
     </LinearLayout>
         <TextView
-            android:id="@+id/txtResult"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        android:id="@+id/product_upload_TextView_txtResult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     </LinearLayout>
 

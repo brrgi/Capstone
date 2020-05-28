@@ -205,7 +205,7 @@
                 android:id="@+id/product_rest_button_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="현재 장소 유지"
+                android:text="내 정보 위치"
                 android:background="@drawable/bin_blue"
                 android:textColor="#ffffff"
                 android:layout_marginRight="10sp">
@@ -217,7 +217,7 @@
                 android:id="@+id/product_rest_button_address2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="장소 변경"
+                android:text="GPS 위치"
                 android:background="@drawable/bin_blue"
                 android:textColor="#ffffff"
                 android:layout_marginLeft="10sp">
@@ -244,7 +244,10 @@
 
         </LinearLayout>
 
-
+        <TextView
+            android:id="@+id/product_rest_TextView_txtResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
 

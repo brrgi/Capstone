@@ -45,10 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseRemoteConfig =FirebaseRemoteConfig.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
         firebaseAuth.signOut();
-        String splash_background = FirebaseRemoteConfig.getString(getString(R.string.rc_color));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor(splash_background));
-        }
 
         id=(EditText)findViewById(R.id.loginActivity_edittext_id);
         password=(EditText)findViewById(R.id.loginActivity_edittext_password);
@@ -56,8 +52,6 @@ public class LoginActivity extends AppCompatActivity {
 
         login=(Button)findViewById(R.id.loginActivity_button_login);
         signup =(Button)findViewById(R.id.loginActivity_button_signup);
-        login.setBackgroundColor(Color.parseColor(splash_background));
-        signup.setBackgroundColor(Color.parseColor(splash_background));
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,14 +145,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
-        //푸시 테스트를 위한 토큰 테스트 버튼
-        Button firebasecloudmessagingbtn = (Button)findViewById(R.id.firebasecloudmessagingbtn);
-        firebasecloudmessagingbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,CloudMessagingActivity.class));
-            }
-        });
+
 
 
     }
