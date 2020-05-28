@@ -50,51 +50,6 @@ public class UserProductApi {
     10: 파일 업로드 실패.
      */
 
-/*
-    public static UserProductModel makeDummy() {
-
-        UserProductModel userProductModel = new UserProductModel(null ,"0000", "핑크솔트", null, "핑크솔트입니다.", "향신료"
-                , "소금", 3, "300g", "2020-05-03", false
-        , 2.5, 2.5 );
-
-        switch(dummyCounter % 4) {
-            case 0:
-                break;
-            case 1:
-                userProductModel.title = "참치";
-                userProductModel.p_description = "방금 낚아올린 참치입니다.";
-                userProductModel.categoryBig = "생선";
-                userProductModel.categorySmall = "참치";
-                userProductModel.latitude = 5.0;
-                userProductModel.longitude = 5.0;
-                break;
-            case 2:
-                userProductModel.title = "대구";
-                userProductModel.p_description = "방금 낚아올린 대구입니다.";
-                userProductModel.categoryBig = "생선";
-                userProductModel.categorySmall = "대구";
-                userProductModel.latitude = 5.0;
-                userProductModel.longitude = 5.0;
-                break;
-            default:
-                userProductModel.title = "설탕";
-                userProductModel.p_description = "달콤한 설탕입니다.";
-                userProductModel.categoryBig = "향신료";
-                userProductModel.categorySmall = "설탕";
-                userProductModel.latitude = 5.0;
-                userProductModel.longitude = 5.0;
-                break;
-        }
-
-        UserProductApi.dummyCounter++;
-        return userProductModel;
-    }
-    /*
-    입력 : 없음
-    출력 : 더미 UserProductModel
-    설명 : 간단한 더미 모델을 제공하는 함수입니다. 테스트 용도로 사용하십시오.
-     */
-
 
     public static void postProduct(final UserProductModel userProductModel, final Uri imageUri, final MyCallback myCallback) {
         db.collection("UserProducts").add(userProductModel)
