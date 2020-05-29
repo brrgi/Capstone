@@ -95,7 +95,6 @@ public class SaleActivity extends AppCompatActivity {
 
     private void subscribeClick(final RestaurantProductModel restaurantProductModel) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d("subs2","구독");
         final String uid = user.getUid();
 
         if(state==-1) {
@@ -127,7 +126,6 @@ public class SaleActivity extends AppCompatActivity {
             });
         }
         else {
-
             SubscriptionApi.deleteSubscriptionBySubsId(subscriptionModel.subs_id, new SubscriptionApi.MyCallback() {
                 @Override
                 public void onSuccess(SubscriptionModel subscriptionModel) {
@@ -140,7 +138,9 @@ public class SaleActivity extends AppCompatActivity {
                 }
             });
             state=-1;
+            Log.d("subSuccess2", Integer.toString(state));
             btn_subscription.setText("구독");
+
             FirebaseMessaging.getInstance().unsubscribeFromTopic(restaurantProductModel.res_id);
         }
     }

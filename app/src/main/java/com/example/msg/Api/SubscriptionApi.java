@@ -106,7 +106,6 @@ public class SubscriptionApi {
                                 subscriptionModel = document.toObject(SubscriptionModel.class);
                                 subscriptionModelArrayList.add(subscriptionModel);
                             }
-                            Log.d("10011", subscriptionModelArrayList.get(0).res_id);
                             myCallback.onSuccess(subscriptionModelArrayList);
 
                         } else {
@@ -173,19 +172,12 @@ public class SubscriptionApi {
     동작: 입력으로 들어온 식당 아이디값을 가지는 구독 모델을 콜백 함수의 onSuccess를 통해서 리스트 형태로 돌려줍니다. 실패시 onFail함수의 로직이 동작합니다.
      */
 
-    //TODO: 구독 삭제 기능 추가해야함.
     public static void deleteSubscriptionBySubsId(final String subsId, final MyCallback myCallback) {
         db.collection("Subscription").document(subsId)
                 .delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()) {
-                            myCallback.onSuccess(null);
-                        }
-                        else {
-                            myCallback.onFail(1,null);
-                        }
+                    public void onSuccess(Void aVoid) {
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {

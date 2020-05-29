@@ -39,6 +39,7 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="bd86ebef3077544c3fcf0e5ff79a79b6" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />
@@ -48,7 +49,6 @@
         <meta-data
             android:name="com.google.firebase.messaging:default_notification_channel_id"
             android:value="1" />
-
         <service
             android:name=".cloudmessaging.MyFirebaseMessagingService"
             android:enabled="true"
