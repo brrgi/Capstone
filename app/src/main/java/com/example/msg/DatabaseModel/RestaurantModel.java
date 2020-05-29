@@ -14,4 +14,6 @@ public class RestaurantModel {
     public String res_token = null;
     public double res_latitude = -1;    //추가0526
     public double res_longitude = -1;   //추가0526
+    public float res_rating = 0; //0529
+    public int ratingCount = 1;
 }

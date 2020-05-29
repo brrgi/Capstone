@@ -151,6 +151,16 @@
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/test_ratingbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:background="@drawable/bin_blue"
+                android:text="평가"
+                android:layout_marginLeft="10sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
             <View
                 android:layout_width="2sp"
                 android:layout_height="50sp"

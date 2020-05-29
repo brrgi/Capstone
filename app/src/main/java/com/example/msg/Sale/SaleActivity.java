@@ -21,6 +21,7 @@ import com.example.msg.Api.RestaurantApi;
 import com.example.msg.Api.SubscriptionApi;
 
 import com.example.msg.R;
+import com.example.msg.RatingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,6 +50,7 @@ public class SaleActivity extends AppCompatActivity {
     private Button btn_subscription;
     private final SubscriptionModel subscriptionModel = new SubscriptionModel();
     static int state = -1;
+    private Button test;
     String r_sub = "";
     String r_name = "";
 
@@ -184,6 +186,8 @@ public class SaleActivity extends AppCompatActivity {
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
 
+        test = (Button) findViewById(R.id.test_ratingbtn);
+
         getResModelFromProduct(restaurantProductModel);
         getSubscribeCheck(restaurantProductModel);
 
@@ -209,6 +213,15 @@ public class SaleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PayActivity.class);
+                intent.putExtra("Model", restaurantProductModel);
+                startActivity(intent);
+            }
+        });
+
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RatingActivity.class);
                 intent.putExtra("Model", restaurantProductModel);
                 startActivity(intent);
             }

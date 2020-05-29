@@ -177,7 +177,13 @@ public class SubscriptionApi {
                 .delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            myCallback.onSuccess(null);
+                        }
+                        else {
+                            myCallback.onFail(1,null);
+                        }
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
