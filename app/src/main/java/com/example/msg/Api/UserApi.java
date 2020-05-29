@@ -90,7 +90,9 @@ public class UserApi {
                         "ban_count", userModel.ban_count,
                         "user_grade", userModel.user_grade,
                         "latitude", userModel.latitude,
-                        "longitude", userModel.longitude
+                        "longitude", userModel.longitude,
+                        "user_rating", userModel.user_rating,
+                        "ratingCount", userModel.ratingCount
 
                 ).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
