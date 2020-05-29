@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:layout_margin="20dp"
-    tools:context=".LoginActivity">
+    android:layout_margin="20sp"
+    tools:context=".Login.LoginActivity">
 
 
     <TextView
@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:text="MSG"
         android:textColor="#F39C12"
-        android:textSize="40sp"
-        android:layout_marginBottom="100dp"/>
+        android:textSize="40dp"
+        android:layout_marginBottom="100sp"/>
 
     <ImageView
         android:layout_width="150sp"
@@ -31,7 +31,6 @@
             android:id="@+id/loginActivity_edittext_id"
             android:hint="아이디"
             android:singleLine="true"
-            android:textColor="#000000"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -45,10 +44,9 @@
             android:id="@+id/loginActivity_edittext_password"
             android:hint="패스워드"
             android:singleLine="true"
-            android:textColor="#000000"
             android:lines="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,14 +78,5 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/firebasecloudmessagingbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="push"
-        android:textStyle="bold"
-        android:background="@drawable/bin_blue"
-        android:textColor="#ffffff"
-        android:layout_marginTop="20sp"/>
 
 </LinearLayout>
