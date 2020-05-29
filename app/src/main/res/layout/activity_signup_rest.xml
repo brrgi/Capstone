@@ -62,16 +62,6 @@
             android:inputType="phone"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/signupRestActivity_edittext_res_description"
-            android:hint="식당 설명"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
     <EditText
         android:id="@+id/signupRestActivity_edittext_pickupstarttime"
         android:layout_width="match_parent"
@@ -116,26 +106,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/signupRestActivity_edittext_description"
-            android:hint="세부사항"
+            android:id="@+id/signupRestActivity_edittext_address_detail"
             android:singleLine="true"
             android:lines="1"
+            android:hint="상세 주소"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/signupRestActivity_edittext_time"
-            android:hint="픽업 타임"
+            android:id="@+id/signupRestActivity_edittext_res_description"
+            android:hint="식당 설명"
             android:singleLine="true"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/signupRestActivity_button_signup"
@@ -145,6 +135,5 @@
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:text="회원가입" />
-
 
 </LinearLayout>

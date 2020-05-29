@@ -16,7 +16,7 @@ public class RestaurantProductModel implements Serializable {
     public int cost = -1;
     public boolean fast = false;
     public int stock = -1;
-    public boolean completed = false;
+    public int completed = -1;
     public double longitude = -1;
     public double latitude = -1;
 
@@ -26,7 +26,7 @@ public class RestaurantProductModel implements Serializable {
 
     public RestaurantProductModel(String rproduct_id, String res_id, String title, String p_imageURL, String p_description
             ,String categoryBig, String categorySmall, int quality, String quantity, String expiration_date, int cost, boolean fast
-            ,int stock, boolean completed, double longitude, double latitude) {
+            ,int stock, int completed, double longitude, double latitude) {
         this.rproduct_id = rproduct_id;
         this.res_id = res_id;
         this.title = title;

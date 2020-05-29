@@ -74,6 +74,7 @@
         android:onClick="OnClickHandler"
         android:hint="생년월일"
         android:textSize="20sp" />
+
     <Button
         android:id="@+id/signupActivity_button_address"
         android:layout_width="wrap_content"
@@ -92,6 +93,19 @@
             android:singleLine="true"
             android:lines="1"
             android:hint="받은 주소"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signupActivity_edittext_address_detail"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="상세 주소"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>

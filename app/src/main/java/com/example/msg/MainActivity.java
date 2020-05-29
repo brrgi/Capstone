@@ -8,33 +8,21 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.msg.DatabaseModel.RestaurantProductModel;
-import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.example.msg.DatabaseModel.UserModel;
-import com.example.msg.Domain.AuthenticationApi;
-import com.example.msg.Domain.RestaurantProductApi;
-import com.example.msg.Domain.SubscriptionApi;
-import com.example.msg.Domain.UserApi;
-import com.example.msg.Domain.UserProductApi;
-import com.example.msg.fragment.AccountFragment;
-import com.example.msg.fragment.ChatFragment;
-import com.example.msg.fragment.HomeFragment;
-import com.example.msg.fragment.ReservationFragment;
-import com.example.msg.fragment.WriteFragment;
-import com.example.msg.DatabaseModel.UserProductModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.Api.UserApi;
+import com.example.msg.Sale.PopupSearchActivity;
+import com.example.msg.Upload.ProductRestUploadActivity;
+import com.example.msg.Upload.ProductUploadActivity;
+import com.example.msg.UserFragment.AccountFragment;
+import com.example.msg.UserFragment.ChatFragment;
+import com.example.msg.UserFragment.HomeFragment;
+import com.example.msg.UserFragment.ReservationFragment;
+import com.example.msg.UserFragment.WriteFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.messaging.FirebaseMessaging;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -98,16 +86,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //mainActivity_address
-        address=(Button)findViewById(R.id.mainActivity_address);
-        address.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DaumWebViewActivity.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(), "주소로 갑니다.", Toast.LENGTH_LONG).show();
-//                finish();
-            }
-        });
+//        address=(Button)findViewById(R.id.mainActivity_address);
+//        address.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, DaumWebViewActivity.class);
+//                startActivity(intent);
+//                Toast.makeText(getApplicationContext(), "주소로 갑니다.", Toast.LENGTH_LONG).show();
+////                finish();
+//            }
+//        });
         //getAppKeyHash();      //키해시 구하기
 //        map=(Button)findViewById(R.id.mainActivity_button_map);
 //        map.setOnClickListener(new View.OnClickListener() {
@@ -120,26 +108,26 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        backLogin=(Button)findViewById(R.id.mainActivity_button_backLogin);
-        backLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(), "로그인 화면으로 돌아갑니다.", Toast.LENGTH_LONG).show();
-//                finish();
-            }
-        });
-
-        sale_btn = (Button)findViewById(R.id.sale_btn);
-        sale_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SaleActivity.class);
-                startActivity(intent);
-//                finish();
-            }
-        });
+//        backLogin=(Button)findViewById(R.id.mainActivity_button_backLogin);
+//        backLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                startActivity(intent);
+//                Toast.makeText(getApplicationContext(), "로그인 화면으로 돌아갑니다.", Toast.LENGTH_LONG).show();
+////                finish();
+//            }
+//        });
+//
+//        sale_btn = (Button)findViewById(R.id.sale_btn);
+//        sale_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, SaleActivity.class);
+//                startActivity(intent);
+////                finish();
+//            }
+//        });
 
         bottomNavigationView=findViewById(R.id.mainactivity_bottomnavigationview);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -153,8 +141,6 @@ public class MainActivity extends AppCompatActivity {
                         setFrag(1);
                         break;
                     case R.id.action_write:
-                        Intent intent = new Intent(MainActivity.this, ProductUploadActivity.class);
-                        startActivity(intent);
                         setFrag(2);
                         break;
                     case R.id.action_reservation:

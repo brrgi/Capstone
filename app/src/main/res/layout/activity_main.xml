@@ -16,40 +16,40 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true">
 
-        <Button
-            android:id="@+id/mainActivity_button_backLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bin_blue"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:layout_marginTop="520dp"
-            android:layout_gravity="right|top"
-            android:text="로그인 화면" />
+<!--        <Button-->
+<!--            android:id="@+id/mainActivity_button_backLogin"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/bin_blue"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_marginTop="520dp"-->
+<!--            android:layout_gravity="right|top"-->
+<!--            android:text="로그인 화면" />-->
 
 
-        <Button
-            android:id="@+id/sale_btn"
-            android:layout_marginTop="470dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bin_blue"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:layout_gravity="right|top"
-            android:text="Sale" />
+<!--        <Button-->
+<!--            android:id="@+id/sale_btn"-->
+<!--            android:layout_marginTop="470dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/bin_blue"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_gravity="right|top"-->
+<!--            android:text="Sale" />-->
 
 
-        <Button
-            android:id="@+id/mainActivity_address"
-            android:layout_gravity="right|top"
-            android:layout_marginTop="570dp"
-            android:background="@drawable/bin_blue"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="주소" />
+<!--        <Button-->
+<!--            android:id="@+id/mainActivity_address"-->
+<!--            android:layout_gravity="right|top"-->
+<!--            android:layout_marginTop="570dp"-->
+<!--            android:background="@drawable/bin_blue"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="주소" />-->
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/mainactivity_bottomnavigationview"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorPrimary"
+        app:itemBackground="@drawable/oragne"
         app:itemTextColor="@android:color/white"
         app:itemIconTint="@android:color/white"
         app:menu="@menu/bottom_navigation_main"
