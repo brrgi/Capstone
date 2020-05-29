@@ -13,6 +13,7 @@ import android.os.Bundle;
 import com.example.msg.R;
 import com.example.msg.accountFragment.CompletedSaleFagment;
 import com.example.msg.accountFragment.OnSaleFagment;
+import com.example.msg.accountFragment.TradingFagment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class SalesHistoryActivity extends AppCompatActivity {
 
     private OnSaleFagment onSaleFagment;
     private CompletedSaleFagment completedSaleFagment;
+    private TradingFagment tradingFagment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +36,14 @@ public class SalesHistoryActivity extends AppCompatActivity {
         tabLayout=findViewById(R.id.saleshistory_tablayout);
 
         onSaleFagment=new OnSaleFagment();
+        tradingFagment=new TradingFagment();
         completedSaleFagment=new CompletedSaleFagment();
 
         tabLayout.setupWithViewPager(viewPager);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),0);
         viewPagerAdapter.addFragment(onSaleFagment,"판매중");
+        viewPagerAdapter.addFragment(tradingFagment,"거래중");
         viewPagerAdapter.addFragment(completedSaleFagment,"판매완료");
         viewPager.setAdapter(viewPagerAdapter);
     }
