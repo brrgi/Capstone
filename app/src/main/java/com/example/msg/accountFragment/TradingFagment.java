@@ -20,9 +20,9 @@ import com.example.msg.R;
 
 import java.util.ArrayList;
 
-public class OnSaleFagment extends Fragment {
+public class TradingFagment extends Fragment {
     private View view;
-    private static final String TAG = "OnSaleFagment";
+    private static final String TAG = "TradingFagment";
 
     //리사이클러뷰 공통 변수
     private RecyclerView recyclerView;
@@ -34,7 +34,7 @@ public class OnSaleFagment extends Fragment {
 
     private void initializeLayout(final Context context) {
         //리사이클러뷰 관련 초기화
-        recyclerView = view.findViewById(R.id.onsale_recyclerView);
+        recyclerView = view.findViewById(R.id.trading_recyclerView);
         recyclerView.setHasFixedSize(true); //리사이클러뷰 기존성능 강화
         layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
@@ -43,7 +43,7 @@ public class OnSaleFagment extends Fragment {
     }
 
     private void SalesHistory() {
-        UserProductApi.getProductListById(AuthenticationApi.getCurrentUid(), -1, new UserProductApi.MyListCallback() {
+        UserProductApi.getProductListById(AuthenticationApi.getCurrentUid(), 0, new UserProductApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<UserProductModel> userProductModels) {
                 recyclerView.setAdapter(userAdapter);
@@ -63,7 +63,7 @@ public class OnSaleFagment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_onsale,container,false);
+        view=inflater.inflate(R.layout.fragment_trading,container,false);
         SalesHistory();
         initializeLayout(container.getContext());
         return view;
