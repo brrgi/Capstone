@@ -132,7 +132,7 @@ public class UserProductApi {
                 update(
                         "title", userProductModel.title,
                         "p_imageURL", userProductModel.p_imageURL,
-                        "p_description", userProductModel.p_imageURL,
+                        "p_description", userProductModel.p_description,
                         "categoryBig", userProductModel.categoryBig,
                         "categorySmall", userProductModel.categorySmall,
                         "quality", userProductModel.quality,

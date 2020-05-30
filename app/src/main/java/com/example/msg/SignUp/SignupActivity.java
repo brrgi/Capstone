@@ -117,16 +117,16 @@ public class SignupActivity extends AppCompatActivity {
                                 //UserModel userModel = new UserModel();
                                 userModel.user_name=(name.getText().toString());
                                 userModel.user_phone=(phone.getText().toString());
-                                userModel.user_address=(et_address.getText().toString());       //추가 이레 5.25
-                                userModel.user_address_detail=(et_address_detail.getText().toString());
+                               // userModel.user_address=(et_address.getText().toString());       //추가 이레 5.25
+                               // userModel.user_address_detail=(et_address_detail.getText().toString());
                                 userModel.ban_count=0;
                                 userModel.mileage=2;
                                 userModel.user_grade=0;
                                 userModel.user_id=uid;
                                 userModel.sanction=false;
                                 userModel.email=email.getText().toString();
-                                userModel.latitude=lati;
-                                userModel.longitude=longi;
+                               // userModel.latitude=lati;
+                               // userModel.longitude=longi;
                                 if (man.isChecked())
                                     userModel.is_male=true;
                                 else
@@ -177,15 +177,16 @@ public class SignupActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==SERACH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
-            String datas=data.getStringExtra("comeback");
-            if (datas!=null)
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SERACH_ADDRESS_ACTIVITY && resultCode == RESULT_OK) {
+            String datas = data.getStringExtra("comeback");
+            if (datas != null)
                 et_address.setText(datas);
-            Double lat=data.getDoubleExtra("comebacks",0);
-            Double lon=data.getDoubleExtra("comebackss",0);
-            if (datas!=null){
-                lati=lat;
-                longi=lon;
+            Double lat = data.getDoubleExtra("comebacks", 0);
+            Double lon = data.getDoubleExtra("comebackss", 0);
+            if (datas != null) {
+                lati = lat;
+                longi = lon;
             }
         }
     }

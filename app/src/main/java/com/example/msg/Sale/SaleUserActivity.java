@@ -21,6 +21,7 @@ import com.example.msg.Api.ShareApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.Api.UserProductApi;
 import com.example.msg.R;
+import com.example.msg.RatingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -102,12 +103,20 @@ public class SaleUserActivity extends AppCompatActivity {
         txt_salesman = (TextView) findViewById(R.id.saleUserActivity_textView_salesman);
         txt_address = (TextView)findViewById(R.id.saleUserActivity_textView_address);
         txt_title = (TextView) findViewById(R.id.saleUserActivity_textView_title);
+        image_product = (ImageView) findViewById(R.id.saleUserActivity_imageView_product);
+
         btn_buy = (Button) findViewById(R.id.saleUserActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleUserActivity_button_chat);
-        image_product = (ImageView) findViewById(R.id.saleUserActivity_imageView_product);
+        btn_rating = (Button)findViewById(R.id.saleUserActivity_button_evaluate);
         Intent intent = getIntent();
         final UserProductModel userProductModel = (UserProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
+
+        if(userProductModel.completed!=-1) {
+            btn_chat.setVisibility(View.INVISIBLE);
+            btn_buy.setVisibility(View.INVISIBLE);
+        }
+        if(userProductModel.completed==0) btn_rating.setVisibility(View.VISIBLE);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -145,6 +154,16 @@ public class SaleUserActivity extends AppCompatActivity {
                 UserModel userModel = new UserModel();
                 userModel.user_id = u_uid;
                 processShare(userProductModel, userModel);
+            }
+        });
+
+        btn_rating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RatingActivity.class);
+                intent.putExtra("Model", userProductModel);
+                startActivity(intent);
+                finish();
             }
         });
     }

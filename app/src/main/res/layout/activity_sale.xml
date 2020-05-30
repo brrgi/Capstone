@@ -151,16 +151,6 @@
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/test_ratingbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:background="@drawable/bin_blue"
-                android:text="평가"
-                android:layout_marginLeft="10sp"
-                android:textColor="#ffffff"
-                android:textStyle="bold" />
-
             <View
                 android:layout_width="2sp"
                 android:layout_height="50sp"
@@ -171,7 +161,7 @@
 
             <Button
                 android:id="@+id/saleActivity_button_buy"
-                android:layout_width="wrap_content"
+                android:layout_width="60sp"
                 android:layout_height="50sp"
                 android:background="@drawable/bin_blue"
                 android:text="구매"
@@ -181,13 +171,25 @@
 
             <Button
                 android:id="@+id/saleActivity_button_chat"
-                android:layout_width="wrap_content"
+                android:layout_width="60sp"
                 android:layout_height="50sp"
                 android:background="@drawable/bin_blue"
                 android:text="채팅"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
                 android:layout_marginLeft="20sp"/>
+
+            <Button
+                android:id="@+id/test_ratingbtn"
+                android:layout_width="60sp"
+                android:layout_height="50sp"
+                android:background="@drawable/bin_blue"
+                android:text="평가"
+                android:visibility="invisible"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
 
 
 

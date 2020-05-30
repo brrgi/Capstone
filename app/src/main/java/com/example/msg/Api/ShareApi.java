@@ -87,7 +87,9 @@ public class ShareApi {
     동작: ID를 이용해서 데이터베이스에 서칭을 하고, 그 결과 나온 모델들의 리스트를 돌려줍니다. 콜백함수 onSuccess를 통해서 돌려줍니다. 실패시 onFail이 호출됩니다.
      */
 
-    public static void getShareByToId(final String id,  final MyListCallback myCallback) {
+
+
+    public static void getShareByToId(final String id, final MyListCallback myCallback) {
         db.collection("Share")
                 .whereEqualTo("share_to", id)
                 .get()

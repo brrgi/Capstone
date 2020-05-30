@@ -18,6 +18,7 @@ import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
+import com.example.msg.Sale.SaleUserActivity;
 
 public class RatingActivity extends AppCompatActivity {
 
@@ -150,6 +151,7 @@ public class RatingActivity extends AppCompatActivity {
                         public void onFail(int errorCode, Exception e) { }
                     });
                     finish();
+
                 }
             }
         });
