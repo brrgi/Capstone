@@ -57,12 +57,13 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
         ImageView image;
         TextView title;
         TextView uid;
+       // TextView grade;
         public ProductsViewHolder(@NonNull View itemView) {
             super(itemView);
             this.image=itemView.findViewById(R.id.userproduct_item_imageView_image);
             this.title=itemView.findViewById(R.id.userproduct_item_textView_title);
             this.uid=itemView.findViewById(R.id.userproduct_item_textView_uid);
-
+           // this.grade=itemView.findViewById(R.id.userproduct_item_textView_grade);
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {

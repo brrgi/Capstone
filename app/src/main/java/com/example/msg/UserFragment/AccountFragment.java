@@ -35,8 +35,8 @@ public class AccountFragment extends Fragment {
         saleshistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SalesHistoryActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), SalesHistoryActivity.class);
+//                startActivity(intent);
             }
         });
 

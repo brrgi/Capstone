@@ -244,12 +244,13 @@ public class ProductRestUploadActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){
-            imageUri=data.getData();    //이미지 원본 경로
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_FROM_ALBUM && resultCode == RESULT_OK) {
+            imageUri = data.getData();    //이미지 원본 경로
             productImage.setImageURI(imageUri);
-        } else if(requestCode == QUALITY_SELECT && resultCode == RESULT_OK) {
+        } else if (requestCode == QUALITY_SELECT && resultCode == RESULT_OK) {
             int quality = -1;
-            if(data.hasExtra("quality")) quality = data.getIntExtra("quality",-1);
+            if (data.hasExtra("quality")) quality = data.getIntExtra("quality", -1);
             restaurantProductModel.quality = quality;
             qualityText.setText(Integer.toString(quality));
         }
