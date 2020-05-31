@@ -12,6 +12,7 @@ import com.google.firebase.Timestamp;
 public class ChatModel {
     public String chat_from;
     public String chat_to;
-    public Timestamp date;
+    public String date;
     public Boolean read;
+    public String content;
 }

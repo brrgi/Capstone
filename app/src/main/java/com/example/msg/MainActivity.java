@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.example.msg.ChatRoom.ChatRoomActivity;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.UserApi;
@@ -40,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
     private Button sale_btn;
     private Button map;
     private Button address;
+
+    private void testCode() {
+        Intent intent = new Intent(MainActivity.this, ChatRoomActivity.class);
+        startActivity(intent);
+    }
 
 
 
@@ -147,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
                         setFrag(3);
                         break;
                     case R.id.action_account:
+                        testCode();
                         setFrag(4);
                         break;
                 }

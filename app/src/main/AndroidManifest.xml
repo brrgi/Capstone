@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Upload.ProductRestUploadActivity"></activity>
+        <activity android:name=".ChatRoom.ChatRoomActivity"></activity>
+        <activity android:name=".Upload.ProductRestUploadActivity" />
         <activity android:name=".RecyclerView.QualitySelectActivity" />
         <activity android:name=".Map.DaumWebViewActivity" />
         <activity android:name=".Map.MapActivity" />
@@ -34,7 +35,7 @@
         <activity android:name=".ResMainActivity" />
         <activity android:name=".SignUp.SignupActivity" />
         <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".Sale.SalesHistoryActivity"/>
+        <activity android:name=".Sale.SalesHistoryActivity" />
         <activity android:name=".Login.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
