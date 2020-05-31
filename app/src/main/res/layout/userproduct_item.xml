@@ -27,6 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="타이틀"
+                android:background="#00ffffff"
                 android:layout_margin="5dp"/>
 
             <TextView
@@ -34,15 +35,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:background="#00ffffff"
                 android:text="UID" />
 
             <TextView
                 android:id="@+id/userproduct_item_textView_grade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:layout_margin="5dp"
-                android:text="grade"
-                android:layout_gravity="end"/>
+                android:background="#00ffffff"
+                android:text="grade" />
 
         </LinearLayout>
     </LinearLayout>

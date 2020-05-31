@@ -70,7 +70,6 @@ public class HomeFragment extends Fragment  {
     //리사이클러뷰 공통 변수
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    final LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
 
     //리사이클러뷰 RestaurantProducts 전용 변수
@@ -85,6 +84,8 @@ public class HomeFragment extends Fragment  {
 
     //리사이클러뷰 선택에 사용되는 변수.
     private boolean isShowingUserProduct = true;
+
+
 
     private void getAddress(String uid){
         UserApi.getUserById(uid, new UserApi.MyCallback() {
@@ -190,6 +191,7 @@ public class HomeFragment extends Fragment  {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         final Context context = view.getContext();
+        final LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         initializeLayout(context);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
