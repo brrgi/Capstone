@@ -16,13 +16,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.Api.RestaurantProductApi;
+import com.example.msg.Api.SaleApi;
 import com.example.msg.Api.ShareApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.Api.UserProductApi;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.SaleModel;
 import com.example.msg.DatabaseModel.ShareModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.R;
+import com.example.msg.RecyclerView.ResProductsAdapter;
+import com.example.msg.RecyclerView.UserProductsAdapter;
 
 import java.util.ArrayList;
 
@@ -40,10 +45,12 @@ public class OnPurchaseFragment extends Fragment {
     private ArrayList<UserProductModel> userProductModels = new ArrayList<UserProductModel>();
 
     private RecyclerView.Adapter resAdapter;
-    private final ArrayList<RestaurantProductModel> restaurantProductModelArrayList = new ArrayList<RestaurantProductModel>();
+    private ArrayList<RestaurantProductModel> restaurantProductModelArrayList = new ArrayList<RestaurantProductModel>();
+    private ArrayList<RestaurantProductModel> restaurantProductModels = new ArrayList<RestaurantProductModel>();
 
     private Button btn_switch;
 
+    private boolean isUserProduct = true;
 
 
     private void initializeLayout(final Context context) {
@@ -53,10 +60,19 @@ public class OnPurchaseFragment extends Fragment {
         layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
 
-        userAdapter = new com.example.msg.RecyclerView.UserProductsAdapter(userProductModelArrayList, context);
+
+        resAdapter = new ResProductsAdapter(restaurantProductModelArrayList, context);
+        userAdapter = new UserProductsAdapter(userProductModelArrayList, context);
+
+        btn_switch = view.findViewById(R.id.onpurchasefragment_switch_button);
+
+    //    userAdapter = new com.example.msg.RecyclerView.UserProductsAdapter(userProductModelArrayList, context);
+        if(isUserProduct) PurchaseUserHistory();
+        else PurchaseResHistory();
     }
 
     private void PurchaseUserHistory() {
+        userProductModelArrayList.clear();
         final String uid = AuthenticationApi.getCurrentUid();
         ShareApi.getShareByToId(uid, new ShareApi.MyListCallback() {
             @Override
@@ -90,14 +106,67 @@ public class OnPurchaseFragment extends Fragment {
             }
         });
     }
+
+    private void PurchaseResHistory() {
+        restaurantProductModelArrayList.clear();
+        final String uid = AuthenticationApi.getCurrentUid();
+        SaleApi.getSaleByUserId(uid, new SaleApi.MyListCallback() {
+            @Override
+            public void onSuccess(ArrayList<SaleModel> saleModels) {
+                for(int i=0;i<saleModels.size();i++) {
+                    RestaurantProductApi.getProduct((saleModels.get(i).product_id), new RestaurantProductApi.MyCallback() {
+                        @Override
+                        public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                            if(restaurantProductModel.completed==0) {
+                                restaurantProductModels.add(restaurantProductModel);
+                            }
+                            recyclerView.setAdapter(resAdapter);
+                            restaurantProductModelArrayList.clear();
+                            Log.d("Purchase 2: ",Integer.toString(userProductModels.size()));
+
+                            restaurantProductModelArrayList.addAll(restaurantProductModels);
+                            resAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onFail(int errorCode, Exception e) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_on_purchase,container,false);
-        //여기서 버튼 추가부터 시작
-        PurchaseUserHistory();
-        initializeLayout(container.getContext());
+        initializeLayout(getContext());
         return view;
+    }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+
+        btn_switch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isUserProduct) {
+                    PurchaseResHistory();
+                    isUserProduct=false;
+                }
+                else  {
+                    isUserProduct=true;
+                    PurchaseUserHistory();
+                }
+            }
+        });
     }
 
 }
