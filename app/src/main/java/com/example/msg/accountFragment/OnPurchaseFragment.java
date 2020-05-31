@@ -41,12 +41,14 @@ public class OnPurchaseFragment extends Fragment {
 
     //리사이클러뷰 UserProducts 전용 변수.
     private RecyclerView.Adapter userAdapter;
-    private ArrayList<UserProductModel> userProductModelArrayList = new ArrayList<UserProductModel>();
-    private ArrayList<UserProductModel> userProductModels = new ArrayList<UserProductModel>();
+    private final ArrayList<UserProductModel> userProductModelArrayList = new ArrayList<UserProductModel>();
+    private final ArrayList<UserProductModel> userProductModels = new ArrayList<UserProductModel>();
 
     private RecyclerView.Adapter resAdapter;
-    private ArrayList<RestaurantProductModel> restaurantProductModelArrayList = new ArrayList<RestaurantProductModel>();
-    private ArrayList<RestaurantProductModel> restaurantProductModels = new ArrayList<RestaurantProductModel>();
+    private final ArrayList<RestaurantProductModel> restaurantProductModelArrayList = new ArrayList<RestaurantProductModel>();
+    private final ArrayList<RestaurantProductModel> restaurantProductModels = new ArrayList<RestaurantProductModel>();
+
+    final String uid = AuthenticationApi.getCurrentUid();
 
     private Button btn_switch;
 
@@ -72,11 +74,11 @@ public class OnPurchaseFragment extends Fragment {
     }
 
     private void PurchaseUserHistory() {
-        userProductModelArrayList.clear();
-        final String uid = AuthenticationApi.getCurrentUid();
         ShareApi.getShareByToId(uid, new ShareApi.MyListCallback() {
             @Override
             public void onSuccess(final ArrayList<ShareModel> shareModelArrayList) {
+                restaurantProductModelArrayList.clear();
+                restaurantProductModels.clear();
                 for(int i=0;i<shareModelArrayList.size();i++) {
                     UserProductApi.getProduct((shareModelArrayList.get(i).uproduct_id), new UserProductApi.MyCallback() {
                         @Override
@@ -108,11 +110,11 @@ public class OnPurchaseFragment extends Fragment {
     }
 
     private void PurchaseResHistory() {
-        restaurantProductModelArrayList.clear();
-        final String uid = AuthenticationApi.getCurrentUid();
         SaleApi.getSaleByUserId(uid, new SaleApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<SaleModel> saleModels) {
+                userProductModelArrayList.clear();
+                userProductModels.clear();
                 for(int i=0;i<saleModels.size();i++) {
                     RestaurantProductApi.getProduct((saleModels.get(i).product_id), new RestaurantProductApi.MyCallback() {
                         @Override
