@@ -19,9 +19,13 @@ import com.example.msg.Api.ReserveApi;
 import com.example.msg.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ReservationActivity extends AppCompatActivity {
 
@@ -32,7 +36,7 @@ public class ReservationActivity extends AppCompatActivity {
     String msg = "예약이 완료되었습니다.";
     String tmp;
 
-    String[] categories = {"육류","어류","채소","향신료","주류"};
+    String[] categories = {"육류","어류","채소","향신료"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +63,6 @@ public class ReservationActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,24 +72,42 @@ public class ReservationActivity extends AppCompatActivity {
                 reserveModel.user_id = uid;
                 reserveModel.category = tmp;
                 reserveModel.keyword = editText.getText().toString();
-                ReserveApi.postReservation(reserveModel);
+                reserveModel.time = makeCurrentTimeString();
 
-                FirebaseMessaging.getInstance().subscribeToTopic(reserveModel.keyword)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                //String msg = getString(R.string.msg_subscribed);
-                                if (!task.isSuccessful()) {
-                                    //  msg = getString(R.string.msg_subscribe_failed);
-                                }
-                                //Log.d(TAG, msg);
-                                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                ReserveApi.postReservation(reserveModel, new ReserveApi.MyCallback() {
+                    @Override
+                    public void onSuccess(ReserveModel reserveModel) {
+                        FirebaseMessaging.getInstance().subscribeToTopic(reserveModel.keyword)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        //String msg = getString(R.string.msg_subscribed);
+                                        if (!task.isSuccessful()) {
+                                            //  msg = getString(R.string.msg_subscribe_failed);
+                                        }
+                                        //Log.d(TAG, msg);
+                                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+
+
             }
         });
         //예약과 알림 기능 -> Reservations 컬렉션에 예약정보 입력, 예약 키워드를 구독하여 Firebase server에서 새로운 상품이 입력될때마다 트리거 발생
         //트리거 발생시 Products 컬렉션과 Reservations 컬렉션의 keyword를 쿼리하여 있으면 푸시 알림 전송
 
+
+    }
+    private static String makeCurrentTimeString() {
+        Date now = new Date();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("YY.MM.D");
+        return timeFormat.format(now);
     }
 }

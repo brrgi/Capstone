@@ -25,6 +25,7 @@ import com.example.msg.R;
 import com.example.msg.RatingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 
 public class SaleUserActivity extends AppCompatActivity {
@@ -56,6 +57,7 @@ public class SaleUserActivity extends AppCompatActivity {
         shareModel.uproduct_id = userProductModel.uproduct_id;
         userProductModel.completed = 0;
 
+
         ShareApi.postShare(shareModel, new ShareApi.MyCallback() {
             @Override
             public void onSuccess(ShareModel shareModel) {
@@ -63,6 +65,7 @@ public class SaleUserActivity extends AppCompatActivity {
                 UserProductApi.updateProduct(userProductModel, new UserProductApi.MyCallback() {
                     @Override
                     public void onSuccess(UserProductModel userProductModel) {
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic(userProductModel.title);
                         finish();
                     }
 
