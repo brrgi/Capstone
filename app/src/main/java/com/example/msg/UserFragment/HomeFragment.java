@@ -3,11 +3,14 @@ package com.example.msg.UserFragment;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +46,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.example.msg.Api.UserApi;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 
 public class HomeFragment extends Fragment  {
@@ -67,6 +73,7 @@ public class HomeFragment extends Fragment  {
     private double defaultLatitude = 0;
     private double range = 500;
     static int state = -1;
+
 
     //리사이클러뷰 공통 변수
     private RecyclerView recyclerView;
@@ -94,6 +101,8 @@ public class HomeFragment extends Fragment  {
             public void onSuccess(UserModel userModel) {
                 defaultLatitude=userModel.latitude;
                 defaultLongitude=userModel.longitude;
+                //Toast.makeText(getActivity(), defaultLatitude+" "+defaultLongitude, Toast.LENGTH_LONG).show();
+
             }
 
             @Override
@@ -197,9 +206,10 @@ public class HomeFragment extends Fragment  {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
-//    UserApi
         getAddress(uid);
 
+//    UserApi
+        //getLocation(defaultLatitude,defaultLongitude);
         //스피너 선택
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -275,9 +285,19 @@ public class HomeFragment extends Fragment  {
                 UserApi.getUserById(uid, new UserApi.MyCallback() {
                     @Override
                     public void onSuccess(UserModel userModel) {
+
                         defaultLatitude=userModel.latitude;
                         defaultLongitude=userModel.longitude;
                         Toast.makeText(getActivity(), defaultLatitude+" "+defaultLongitude, Toast.LENGTH_LONG).show();
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                //여기에 딜레이 후 시작할 작업들을 입력
+                                getLocation(defaultLatitude,defaultLongitude);
+                            }
+                        }, 1000);
                     }
 
                     @Override
@@ -285,6 +305,7 @@ public class HomeFragment extends Fragment  {
 
                     }
                 });
+
             }
         });
 
@@ -309,7 +330,7 @@ public class HomeFragment extends Fragment  {
 //                            "위도 : " + longitude + "\n" +
 //                            "경도 : " + latitude + "\n" +
 //                            "고도  : " + altitude);
-
+                    getLocation(defaultLatitude,defaultLongitude);
                     lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                             1000,
                             1,
@@ -354,5 +375,21 @@ public class HomeFragment extends Fragment  {
         public void onProviderDisabled(String provider) {
         }
     };
+
+    final void getLocation(double lat, double lng){
+        String addressString = null;
+        Geocoder geocoder = new Geocoder(getContext(), Locale.KOREAN);
+
+        try {
+            List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+            if (addresses.size() > 0) {
+                addressString = addresses.get(0).getThoroughfare();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Toast.makeText(getActivity(), addressString, Toast.LENGTH_LONG).show();
+
+    }
 
 }

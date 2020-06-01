@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.msg.Api.UserApi;
+import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.R;
 
@@ -39,12 +42,27 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ProductsViewHolder holder, final int position) {
+
+        UserApi.getUserById(arrayList.get(position).user_id, new UserApi.MyCallback() {
+            @Override
+            public void onSuccess(UserModel userModel) {
+                holder.name.setText(userModel.user_name);
+                holder.grade.setRating(userModel.user_rating);
+                holder.ban.setText("신고 횟수 "+userModel.ban_count+"회");
+                //holder.dong.setText(arrayList.get(position).p_description); //이레 추가부탁 6월01일
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).p_imageURL)
                 .into(holder.image);
         holder.title.setText(arrayList.get(position).title);
-        holder.uid.setText(arrayList.get(position).p_description);
     }
 
     @Override
@@ -56,14 +74,18 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
     public class ProductsViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
-        TextView uid;
-       // TextView grade;
+        TextView dong;
+        TextView name;
+        RatingBar grade;
+        TextView ban;
         public ProductsViewHolder(@NonNull View itemView) {
             super(itemView);
             this.image=itemView.findViewById(R.id.userproduct_item_imageView_image);
             this.title=itemView.findViewById(R.id.userproduct_item_textView_title);
-            this.uid=itemView.findViewById(R.id.userproduct_item_textView_uid);
-           // this.grade=itemView.findViewById(R.id.userproduct_item_textView_grade);
+            this.dong=itemView.findViewById(R.id.userproduct_item_textView_dong);
+            this.name=itemView.findViewById(R.id.userproduct_item_textView_name);
+            this.grade=itemView.findViewById(R.id.userproduct_item_ratingBar_grade);
+            this.ban=itemView.findViewById(R.id.userproduct_item_textView_ban);
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
