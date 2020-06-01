@@ -160,10 +160,14 @@ public class OnPurchaseFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(isUserProduct) {
+                    userProductModelArrayList.clear();
+                    userProductModels.clear();
                     PurchaseResHistory();
                     isUserProduct=false;
                 }
                 else  {
+                    restaurantProductModelArrayList.clear();
+                    restaurantProductModels.clear();
                     isUserProduct=true;
                     PurchaseUserHistory();
                 }
