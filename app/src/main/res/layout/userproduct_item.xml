@@ -80,7 +80,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:fontFamily="@font/font_baemin"
-
                     android:layout_weight="1"
                     android:background="#00ffffff"
                     android:text="ban" />
@@ -90,21 +89,17 @@
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:fontFamily="@font/font_baemin"
-
                     android:layout_weight="4"
                     android:background="#00ffffff" />
 
-                <TextView
-                    android:id="@+id/userproduct_item_textView_grade"
+                <RatingBar
+                    android:id="@+id/userproduct_item_ratingBar_grade"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    android:numStars="5"
+                    style="?android:attr/ratingBarStyleSmall"
+                    />
 
-                    android:layout_weight="1"
-                    android:background="#00ffffff"
-                    android:fontFamily="@font/font_baemin"
-                    android:text="grade"
-                    android:textSize="15sp" />
             </LinearLayout>
 
         </LinearLayout>
