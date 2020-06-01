@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
-    private String myId = "2";
-    private String opponentId = "1";
+    private String myId = "1";
+    private String opponentId = "2";
 
     //리사이클러뷰 관련 요소들.
     private ArrayList<Chat> chats;
