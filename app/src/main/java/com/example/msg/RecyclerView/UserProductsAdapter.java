@@ -48,7 +48,6 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
             @Override
             public void onSuccess(UserModel userModel) {
                 holder.name.setText(userModel.user_name);
-                //holder.grade.setText("등급 "+userModel.user_grade+" / 5");
                 holder.grade.setRating(userModel.user_rating);
                 holder.ban.setText("신고 횟수 "+userModel.ban_count+"회");
                 //holder.dong.setText(arrayList.get(position).p_description); //이레 추가부탁 6월01일
@@ -77,7 +76,6 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
         TextView title;
         TextView dong;
         TextView name;
-        //TextView grade;
         RatingBar grade;
         TextView ban;
         public ProductsViewHolder(@NonNull View itemView) {
@@ -86,7 +84,6 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
             this.title=itemView.findViewById(R.id.userproduct_item_textView_title);
             this.dong=itemView.findViewById(R.id.userproduct_item_textView_dong);
             this.name=itemView.findViewById(R.id.userproduct_item_textView_name);
-            //this.grade=itemView.findViewById(R.id.userproduct_item_textView_grade);
             this.grade=itemView.findViewById(R.id.userproduct_item_ratingBar_grade);
             this.ban=itemView.findViewById(R.id.userproduct_item_textView_ban);
             itemView.setOnClickListener(new View.OnClickListener(){

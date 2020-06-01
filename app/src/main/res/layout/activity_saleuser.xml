@@ -33,17 +33,13 @@
             android:src="@drawable/icon_image_searching"
             />
 
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10sp">
-
-            <ImageView
-                android:layout_width="80sp"
-                android:layout_height="80sp"
-                android:src="@drawable/user"
-                />
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,24 +47,66 @@
                 android:layout_marginLeft="20sp"
                 android:orientation="vertical">
 
+
+
+                    <TextView
+                        android:id="@+id/saleUserActivity_textView_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/font_baemin"
+                        android:background="#00ffffff"
+                        android:text="dong" />
+
+
+
                 <TextView
                     android:id="@+id/saleUserActivity_textView_salesman"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    android:text="판매자" />
+                    android:textSize="13sp"
 
-                <TextView
-                    android:id="@+id/saleUserActivity_textView_address"
-                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/font_baemin"
+                    android:background="#00ffffff"
+                    android:text="name" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    android:text="동네" />
+                    android:orientation="horizontal"
+                    android:weightSum="6">
+
+                    <TextView
+                        android:id="@+id/saleUserActivity_textView_ban"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/font_baemin"
+                        android:layout_weight="1"
+                        android:background="#00ffffff"
+                        android:text="ban" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/font_baemin"
+                        android:layout_weight="4"
+                        android:background="#00ffffff" />
+
+                    <RatingBar
+                        android:id="@+id/saleUserActivity_ratingBar_grade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        />
+
+                </LinearLayout>
 
 
             </LinearLayout>
 
-        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

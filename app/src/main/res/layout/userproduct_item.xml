@@ -42,7 +42,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
-
                     android:fontFamily="@font/font_baemin"
                     android:background="#00ffffff"
                     android:text="dong" />
@@ -54,7 +53,7 @@
 
                     android:fontFamily="@font/font_baemin"
                     android:background="#00ffffff"
-                    android:text="●" />
+                    android:text=" ● " />
 
                 <TextView
                     android:id="@+id/userproduct_item_textView_name"
