@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChatRoom.ChatRoomActivity"></activity>
+        <activity android:name=".ChatRoom.ChatRoomActivity" android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".Upload.ProductRestUploadActivity" />
         <activity android:name=".RecyclerView.QualitySelectActivity" />
         <activity android:name=".Map.DaumWebViewActivity" />

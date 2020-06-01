@@ -23,7 +23,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     //리사이클러뷰 관련 요소들.
     private ArrayList<Chat> chats;
     private RecyclerView recyclerView;
-    private ChatAdapter adapter;
+    private ChatAdapter chatAdapter;
 
 
     private Button sendButton;
@@ -39,10 +39,17 @@ public class ChatRoomActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.chatRoomActivity_recyclerView_chatViewer);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ChatAdapter chatAdapter = new ChatAdapter(chats);
+        chatAdapter = new ChatAdapter(chats);
         recyclerView.setAdapter(chatAdapter);
 
-        ChatApi.setChatListener(chats, chatAdapter, myId, opponentId);
+        ChatApi.setChatListener(chats, myId, opponentId, new ChatApi.MyCallback() {
+            @Override
+            public void execute() {
+                chatAdapter.notifyDataSetChanged();
+                scrollToEnd();
+            }
+        });
+
     }
 
 
@@ -58,9 +65,17 @@ public class ChatRoomActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ChatApi.postChat(myId, opponentId, sendEditText.getText().toString());
+                scrollToEnd();
+                sendEditText.setText("");
             }
         });
 
 
+
+    }
+
+
+    private void scrollToEnd() {
+        if(chatAdapter.getItemCount() != 0) recyclerView.scrollToPosition(chatAdapter.getItemCount()-1);
     }
 }

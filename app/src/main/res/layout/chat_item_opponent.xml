@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5sp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -9,37 +12,38 @@
         android:orientation="horizontal"
         >
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <TextView
-                android:paddingBottom="50sp"
-                android:paddingTop="30sp"
-                android:paddingLeft="30sp"
-                android:paddingRight="30sp"
+                android:paddingBottom="15sp"
+                android:paddingTop="15sp"
+                android:paddingLeft="15sp"
+                android:paddingRight="15sp"
                 android:id="@+id/chat_item_opponent_textView_content"
-                android:layout_width="match_parent"
+                android:maxWidth="300dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/message_opponent"
-                android:text="" />
+                android:background="@drawable/out_message"
+                android:textColor="#FFFFFF"
+                android:text="안녕하안녕하세" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:layout_gravity="bottom"
+            android:gravity="bottom"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/chat_item_opponent_textView_time"
-                android:layout_marginTop="15sp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="3sp"
                 android:text="00:00" />
 
 

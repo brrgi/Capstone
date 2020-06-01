@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import com.example.msg.ChatRoom.Chat;
 import com.example.msg.ChatRoom.ChatAdapter;
 import com.example.msg.DatabaseModel.ChatModel;
+import com.example.msg.DatabaseModel.ReserveModel;
 import com.example.msg.DatabaseModel.ShareModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +33,10 @@ import java.util.Date;
 public class ChatApi {
     private static DatabaseReference realTime = FirebaseDatabase.getInstance().getReference();
     private final static String childName = "chat";
+
+    public interface MyCallback {
+        void execute();
+    }
 
     public static String makeChatRoomId(String myId, String opponentId) {
         if(myId.compareTo(opponentId) > 0) {
@@ -64,7 +69,7 @@ public class ChatApi {
         realTime.child(childName).child(chatRoomId).push().setValue(chatModel);
     }
 
-    public static void setChatListener(final ArrayList<Chat> chats, final ChatAdapter chatAdapter, final String myId, final String opponentId) {
+    public static void setChatListener(final ArrayList<Chat> chats, final String myId, final String opponentId, final MyCallback myCallback) {
         String chatRoomId = makeChatRoomId(myId, opponentId);
 
         realTime.child(childName).child(chatRoomId).addChildEventListener(new ChildEventListener() {
@@ -73,7 +78,7 @@ public class ChatApi {
                 ChatModel chatModel = dataSnapshot.getValue(ChatModel.class);
                 Chat chat = new Chat(chatModel, s);
                 chats.add(chat);
-                chatAdapter.notifyDataSetChanged();
+                myCallback.execute();
             }
 
             @Override
