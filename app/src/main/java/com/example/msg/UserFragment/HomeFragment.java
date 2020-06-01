@@ -10,6 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,7 +101,7 @@ public class HomeFragment extends Fragment  {
             public void onSuccess(UserModel userModel) {
                 defaultLatitude=userModel.latitude;
                 defaultLongitude=userModel.longitude;
-                Toast.makeText(getActivity(), defaultLatitude+" "+defaultLongitude, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), defaultLatitude+" "+defaultLongitude, Toast.LENGTH_LONG).show();
 
             }
 
@@ -206,8 +207,9 @@ public class HomeFragment extends Fragment  {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
         getAddress(uid);
+
 //    UserApi
-        getLocation(defaultLatitude,defaultLongitude);
+        //getLocation(defaultLatitude,defaultLongitude);
         //스피너 선택
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -283,11 +285,19 @@ public class HomeFragment extends Fragment  {
                 UserApi.getUserById(uid, new UserApi.MyCallback() {
                     @Override
                     public void onSuccess(UserModel userModel) {
-                        int c=0;
+
                         defaultLatitude=userModel.latitude;
                         defaultLongitude=userModel.longitude;
                         Toast.makeText(getActivity(), defaultLatitude+" "+defaultLongitude, Toast.LENGTH_LONG).show();
-                        getLocation(defaultLatitude,defaultLongitude);
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                //여기에 딜레이 후 시작할 작업들을 입력
+                                getLocation(defaultLatitude,defaultLongitude);
+                            }
+                        }, 1000);
                     }
 
                     @Override
@@ -366,7 +376,7 @@ public class HomeFragment extends Fragment  {
         }
     };
 
-    public void getLocation(double lat, double lng){
+    final void getLocation(double lat, double lng){
         String addressString = null;
         Geocoder geocoder = new Geocoder(getContext(), Locale.KOREAN);
 
@@ -378,7 +388,7 @@ public class HomeFragment extends Fragment  {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Toast.makeText(getActivity(), addressString+" 씨발", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), addressString, Toast.LENGTH_LONG).show();
 
     }
 
