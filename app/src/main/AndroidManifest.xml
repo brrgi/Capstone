@@ -12,6 +12,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Sale.PurchaseHistoryActivity"></activity>
         <activity android:name=".Sale.SalesHistoryActivity" />
+        <activity android:name=".Sale.ResSalesHistoryActivity"></activity>
         <activity android:name=".Upload.ProductRestUploadActivity" />
         <activity android:name=".RecyclerView.QualitySelectActivity" />
         <activity android:name=".Map.DaumWebViewActivity" />

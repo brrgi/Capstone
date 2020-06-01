@@ -25,7 +25,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/reaccount_imageView_Image"
+            android:id="@+id/resaccount_imageView_Image"
             android:layout_width="80sp"
             android:layout_height="80sp"
             android:layout_margin="5sp"
@@ -37,7 +37,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/reaccount_textView_UID"
+                android:id="@+id/resaccount_textView_UID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="유저이름"
@@ -46,7 +46,7 @@
                 android:layout_margin="5sp"/>
 
             <TextView
-                android:id="@+id/reaccount_textView_address"
+                android:id="@+id/resaccount_textView_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="동네"
@@ -72,6 +72,7 @@
         android:gravity="center">
 
         <LinearLayout
+            android:id="@+id/resaccount_linearLayout_saleshistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -79,33 +80,12 @@
             android:layout_weight="1">
 
             <ImageView
-                android:layout_width="45sp"
-                android:layout_height="80sp"
-                android:layout_margin="5sp"
-                android:src="@drawable/icon_food"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="재고관리"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/reaccount_imageView_SellImage"
                 android:layout_width="45sp"
                 android:layout_height="80sp"
                 android:layout_margin="5sp"
                 android:src="@drawable/list"/>
             <TextView
-                android:id="@+id/reaccount_TextView_SellText"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
