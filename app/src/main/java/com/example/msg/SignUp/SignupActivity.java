@@ -1,4 +1,4 @@
-package com.example.msg;
+package com.example.msg.SignUp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +18,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.msg.Login.LoginActivity;
+import com.example.msg.Map.DaumWebViewActivity;
+import com.example.msg.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,6 +40,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText name;
     private EditText phone;
     private EditText et_address;
+    private EditText et_address_detail;
     private Button address;
     private Button signup;
     private String splash_background;
@@ -45,6 +49,8 @@ public class SignupActivity extends AppCompatActivity {
     private RadioButton man;
     //private RadioButton woman;
     private int bornyear;
+    private Double lati;
+    private Double longi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,7 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         et_address=(EditText)findViewById(R.id.signupActivity_edittext_address);
+        et_address_detail=(EditText)findViewById(R.id.signupActivity_edittext_address_detail);
         email = (EditText) findViewById(R.id.signupActivity_edittext_email);
         password = (EditText) findViewById(R.id.signupActivity_edittext_password);
         name = (EditText) findViewById(R.id.signupActivity_edittext_name);
@@ -95,8 +102,8 @@ public class SignupActivity extends AppCompatActivity {
                                 //UserModel userModel = new UserModel();
                                 userModel.user_name=(name.getText().toString());
                                 userModel.user_phone=(phone.getText().toString());
-                                //주소추가      05-25 이레 확인좀
-                                userModel.user_address=(et_address.getText().toString());
+                                userModel.user_address=(et_address.getText().toString());       //추가 이레 5.25
+                                userModel.user_address_detail=(et_address_detail.getText().toString());
                                 userModel.ban_count=0;
                                 userModel.mileage=2;
                                 userModel.user_grade=0;
@@ -107,6 +114,8 @@ public class SignupActivity extends AppCompatActivity {
                                     userModel.is_male=true;
                                 else
                                     userModel.is_male=false;
+                                userModel.latitude=lati;
+                                userModel.longitude=longi;
                                 userModel.age=bornyear;
 
                                 FirebaseFirestore db = FirebaseFirestore.getInstance();

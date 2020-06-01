@@ -152,12 +152,12 @@
                 android:textStyle="bold" />
 
             <View
-                android:layout_width="2sp"
+                android:layout_width="1dp"
                 android:layout_height="50sp"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="10sp"
-                android:background="#D3D3D3"/>
+                android:background="#D3D3D3" />
 
             <Button
                 android:id="@+id/saleActivity_button_buy"

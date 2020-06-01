@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,6 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="타이틀"
+                android:background="#00ffffff"
                 android:layout_margin="5dp"/>
 
             <TextView
@@ -33,11 +35,44 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UID"
+                android:background="#00ffffff"
                 android:layout_margin="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/resproduct_item_textView_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="가격"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    />
+
+                <TextView
+                    android:id="@+id/resproduct_item_textView_grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="평가"
+                    android:layout_margin="5dp"
+                    android:background="#00ffffff"
+                    />
+            </LinearLayout>
 
 
         </LinearLayout>
 
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10sp"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"
+        />
 </LinearLayout>

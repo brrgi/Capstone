@@ -1,13 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Accountbook"
-        android:textSize="40sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장부"
+            android:textSize="40sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginBottom="10sp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/resaccountbook_textView_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="가게이름"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="2sp"
+                android:layout_height="25sp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:layout_gravity="center"
+                android:background="#D3D3D3" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/resaccountbook_textView_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="오늘날짜"
+            android:textSize="30sp"
+            android:layout_marginTop="15sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="가게 매출 정보를 알려드려요."
+            android:textSize="30sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="매출요약"
+            android:textSize="30sp"
+            android:layout_marginTop="40sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bf_ex"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="30sp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="어제 전체 매출"
+                    android:textSize="25sp"
+                    >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/resaccountbook_textView_yesterdayDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="날짜"
+                    android:textSize="25sp"
+                    android:layout_marginLeft="10sp"
+                    >
+                </TextView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/resaccountbook_textView_yesterdayCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="10sp"
+                android:text="0,000원"
+                android:textSize="35sp"
+                android:textColor="#87CEFA"
+                android:textStyle="bold"></TextView>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bf_ex"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="5sp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="오늘 전체 입금"
+                    android:textSize="25sp"
+                    >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/resaccountbook_textView_todayDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="날짜"
+                    android:textSize="25sp"
+                    android:layout_marginLeft="10sp"
+                    >
+                </TextView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/resaccountbook_textView_todayCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0,000원"
+                android:textSize="35sp"
+                android:layout_marginLeft="10sp"
+                android:layout_gravity="end"
+                android:textColor="#87CEFA"
+                android:textStyle="bold"
+                >
+            </TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bf_ex"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="80sp"
+            android:orientation="vertical"
+            android:layout_gravity="bottom">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이번 달 매출"
+                android:textSize="25sp"
+                >
+            </TextView>
+
+            <TextView
+                android:id="@+id/resaccountbook_textView_monthCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="10sp"
+                android:text="0,000원"
+                android:textSize="35sp"
+                android:textColor="#87CEFA"
+                android:textStyle="bold"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bf_ex"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="5sp"
+            android:orientation="vertical"
+            android:layout_gravity="bottom">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="총 매출"
+                android:textSize="25sp"
+                >
+            </TextView>
+
+            <TextView
+                android:id="@+id/resaccountbook_textView_allCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="10sp"
+                android:text="0,000원"
+                android:textSize="35sp"
+                android:textColor="#87CEFA"
+                android:textStyle="bold"></TextView>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

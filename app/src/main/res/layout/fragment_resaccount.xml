@@ -79,6 +79,26 @@
             android:layout_weight="1">
 
             <ImageView
+                android:layout_width="45sp"
+                android:layout_height="80sp"
+                android:layout_margin="5sp"
+                android:src="@drawable/icon_food"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="재고관리"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
                 android:id="@+id/reaccount_imageView_SellImage"
                 android:layout_width="45sp"
                 android:layout_height="80sp"
@@ -91,7 +111,6 @@
                 android:textSize="15sp"
                 android:text="판매내역"/>
         </LinearLayout>
-
 
 
     </LinearLayout>
@@ -109,10 +128,10 @@
 
 
         <Button
-            android:id="@+id/reaccount_textView_ex2"
+            android:id="@+id/reaccount_textView_myAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사용자 통계"
+            android:text="내 정보 수정"
             android:textSize="30sp"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:background="#00ff0000"

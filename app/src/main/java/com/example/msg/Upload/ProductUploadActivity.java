@@ -35,6 +35,8 @@ import com.example.msg.Api.UserApi;
 import com.example.msg.Api.UserProductApi;
 import com.example.msg.R;
 import com.example.msg.RecyclerView.QualitySelectActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -58,7 +60,9 @@ public class ProductUploadActivity extends AppCompatActivity {
     private Button address2;
     private final int PICK_FROM_ALBUM = 100;
     private final int QUALITY_SELECT = 101;
-
+    private double longitude;
+    private double latitude;
+    private double altitude;
 
     private void postUserProduct(final UserProductModel userProductModel) {
         UserApi.getUserById(AuthenticationApi.getCurrentUid(), new UserApi.MyCallback() {
@@ -161,10 +165,25 @@ public class ProductUploadActivity extends AppCompatActivity {
         });
 
 
+
+
         address1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                final String uid = user.getUid();
+                UserApi.getUserById(uid, new UserApi.MyCallback() {
+                    @Override
+                    public void onSuccess(UserModel userModel) {
+                        latitude=userModel.latitude;
+                        longitude=userModel.longitude;
+                    }
 
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
             }
         });
 
@@ -179,9 +198,9 @@ public class ProductUploadActivity extends AppCompatActivity {
                 else{
                     Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                     String provider = location.getProvider();
-                    double longitude = location.getLongitude();
-                    double latitude = location.getLatitude();
-                    double altitude = location.getAltitude();
+                    longitude = location.getLongitude();
+                    latitude = location.getLatitude();
+                    altitude = location.getAltitude();
 
                     txtResult.setText("위치정보 : " + provider + "\n" +
                             "위도 : " + longitude + "\n" +
@@ -215,8 +234,8 @@ public class ProductUploadActivity extends AppCompatActivity {
                 userProductModel.quantity = quantity.getText().toString();
                 userProductModel.expiration_date = expireDate.getText().toString();
                 userProductModel.completed = -1;
-                userProductModel.longitude = defaultLongitude;
-                userProductModel.latitude = defaultLatitude;
+                userProductModel.longitude = longitude;
+                userProductModel.latitude = latitude;
                 postUserProduct(userProductModel);
             }
         });
@@ -241,12 +260,13 @@ public class ProductUploadActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){
-            imageUri=data.getData();    //이미지 원본 경로
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_FROM_ALBUM && resultCode == RESULT_OK) {
+            imageUri = data.getData();    //이미지 원본 경로
             productImage.setImageURI(imageUri);
-        } else if(requestCode == QUALITY_SELECT && resultCode == RESULT_OK) {
+        } else if (requestCode == QUALITY_SELECT && resultCode == RESULT_OK) {
             int quality = -1;
-            if(data.hasExtra("quality")) quality = data.getIntExtra("quality",-1);
+            if (data.hasExtra("quality")) quality = data.getIntExtra("quality", -1);
             qualityText.setText(Integer.toString(quality));
         }
     }
@@ -256,9 +276,9 @@ public class ProductUploadActivity extends AppCompatActivity {
         public void onLocationChanged(Location location) {
 
             String provider = location.getProvider();
-            double longitude = location.getLongitude();
-            double latitude = location.getLatitude();
-            double altitude = location.getAltitude();
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
+            altitude = location.getAltitude();
 
             txtResult.setText("위치정보 : " + provider + "\n" +
                     "위도 : " + longitude + "\n" +

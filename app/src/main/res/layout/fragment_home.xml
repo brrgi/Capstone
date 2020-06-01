@@ -7,46 +7,105 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_weight="10"
         android:orientation="horizontal">
 
         <View
             android:layout_width="0sp"
-            android:layout_height="0sp"
-            android:layout_weight="1"/>
+            android:layout_height="0sp" />
 
         <Spinner
             android:id="@+id/home_spinner_sort"
             android:layout_width="150sp"
-            android:layout_height="match_parent" />
+            android:layout_height="50sp"
+            android:layout_weight="1"/>
 
         <EditText
             android:id="@+id/home_editText_search"
             android:layout_width="150sp"
-            android:layout_height="match_parent"/>
+            android:layout_height="50sp"
+            android:layout_weight="3"
+            android:layout_gravity="center"/>
 
         <ImageButton
             android:id="@+id/home_button_search"
-            android:src="@drawable/icon_search_322497"
             android:layout_width="60sp"
+            android:layout_height="50sp"
+            android:background="#00ffffff"
             android:scaleType="centerInside"
-            android:layout_height="match_parent">
-        </ImageButton>
+            android:src="@drawable/search1"
+            android:layout_weight="1"
+
+            ></ImageButton>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10sp"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp">
 
         <Button
             android:id="@+id/home_button_dummy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/btn_bf_ex"
+            android:layout_marginLeft="10sp"
+            android:text="공유 상품"
             />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="50sp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:background="#D3D3D3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/home_button_address1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:background="@drawable/btn_bf_ex"
+                android:text="내 정보 위치" />
+
+            <Button
+                android:id="@+id/home_button_address2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:background="@drawable/btn_bf_ex"
+                android:text="현재 위치" />
 
 
-
-
+        </LinearLayout>
 
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

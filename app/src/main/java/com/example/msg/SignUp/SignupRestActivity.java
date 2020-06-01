@@ -1,4 +1,4 @@
-package com.example.msg;
+package com.example.msg.SignUp;
 
 
 import androidx.annotation.NonNull;
@@ -20,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.msg.Login.LoginActivity;
+import com.example.msg.Map.DaumWebViewActivity;
+import com.example.msg.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,6 +45,7 @@ public class SignupRestActivity extends AppCompatActivity {
     private EditText res_name;
     private EditText res_description;
     private EditText et_address;
+    private EditText et_address_detail;
     private Button address;
     private Button signup;
     private String splash_background;
@@ -51,7 +55,8 @@ public class SignupRestActivity extends AppCompatActivity {
     private EditText pickup_start_time;
     private EditText pickup_end_time;
     private TimePickerDialog.OnTimeSetListener callbackMethod;
-
+    private Double lati;
+    private Double longi;
 
 
     @Override
@@ -85,6 +90,7 @@ public class SignupRestActivity extends AppCompatActivity {
         });
 
         et_address=(EditText)findViewById(R.id.signupRestActivity_edittext_address);
+        et_address_detail=(EditText)findViewById(R.id.signupRestActivity_edittext_address_detail);
         res_phone =(EditText)findViewById(R.id.signupRestActivity_edittext_res_phone);
         email=(EditText)findViewById(R.id.signupRestActivity_edittext_email);
         password=(EditText)findViewById(R.id.signupRestActivity_edittext_password);
@@ -123,11 +129,12 @@ public class SignupRestActivity extends AppCompatActivity {
                                         restaurantModel.res_imageURL=(imageUrl.getResult().toString());
                                         restaurantModel.res_phone=(res_phone.getText().toString());
                                         restaurantModel.res_address=(et_address.getText().toString());
+                                        restaurantModel.res_address_detail=(et_address_detail.getText().toString());
                                         restaurantModel.res_description=(res_description.getText().toString());
                                         restaurantModel.pickup_start_time=(pickup_start_time.getText().toString());
                                         restaurantModel.pickup_end_time=(pickup_end_time.getText().toString());
-                                        restaurantModel.res_id=uid;
-                                        restaurantModel.approved=false;
+                                        restaurantModel.res_latitude=lati;
+                                        restaurantModel.res_longitude=longi;
 
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("Restaurant")
@@ -138,7 +145,7 @@ public class SignupRestActivity extends AppCompatActivity {
                                                     public void onSuccess(Void aVoid) {
                                                         Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_LONG).show();
                                                         Log.d(TAG,"SUCCESS");
-                                                        startActivity(new Intent(SignupRestActivity.this,LoginActivity.class));
+                                                        startActivity(new Intent(SignupRestActivity.this, LoginActivity.class));
                                                         finish();
                                                     }
                                                 })
@@ -160,14 +167,21 @@ public class SignupRestActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==PICK_FROM_ALBUM && resultCode==RESULT_OK){
-            imageUri=data.getData();    //이미지 원본 경로
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_FROM_ALBUM && resultCode == RESULT_OK) {
+            imageUri = data.getData();    //이미지 원본 경로
             profile.setImageURI(imageUri);
         }
-        if(requestCode==SERACH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
-            String datas=data.getStringExtra("comeback");
-            if (datas!=null)
+        if (requestCode == SERACH_ADDRESS_ACTIVITY && resultCode == RESULT_OK) {
+            String datas = data.getStringExtra("comeback");
+            if (datas != null)
                 et_address.setText(datas);
+            Double lat=data.getDoubleExtra("comebacks",0);
+            Double lon=data.getDoubleExtra("comebackss",0);
+            if (datas!=null){
+                lati=lat;
+                longi=lon;
+            }
         }
     }
 
