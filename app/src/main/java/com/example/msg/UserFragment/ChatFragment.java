@@ -20,6 +20,11 @@ import com.example.msg.RecyclerView.ChatDataAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -39,6 +44,9 @@ public class ChatFragment extends Fragment {
     private FirebaseUser user;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference docRef;
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
 
     @Nullable
     @Override
