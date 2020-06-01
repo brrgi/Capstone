@@ -154,10 +154,17 @@ public class SignupActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==SERACH_ADDRESS_ACTIVITY && resultCode==RESULT_OK){
-            String datas=data.getStringExtra("comeback");
-            if (datas!=null)
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SERACH_ADDRESS_ACTIVITY && resultCode == RESULT_OK) {
+            String datas = data.getStringExtra("comeback");
+            if (datas != null)
                 et_address.setText(datas);
+            Double lat = data.getDoubleExtra("comebacks", 0);
+            Double lon = data.getDoubleExtra("comebackss", 0);
+            if (datas != null) {
+                lati = lat;
+                longi = lon;
+            }
         }
     }
 

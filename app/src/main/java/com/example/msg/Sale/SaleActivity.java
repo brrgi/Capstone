@@ -13,14 +13,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.Api.RestaurantProductApi;
+import com.example.msg.Api.SaleApi;
+import com.example.msg.Api.ShareApi;
+import com.example.msg.Api.UserProductApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.SaleModel;
+import com.example.msg.DatabaseModel.ShareModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
 
 import com.example.msg.Api.RestaurantApi;
 import com.example.msg.Api.SubscriptionApi;
 
+import com.example.msg.DatabaseModel.UserModel;
+import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.R;
+import com.example.msg.RatingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,8 +59,40 @@ public class SaleActivity extends AppCompatActivity {
     private Button btn_subscription;
     private final SubscriptionModel subscriptionModel = new SubscriptionModel();
     static int state = -1;
+    private Button btn_evaluate;
     String r_sub = "";
     String r_name = "";
+
+
+    private void processSale(final RestaurantProductModel restaurantProductModel) {
+        SaleModel saleModel = new SaleModel();
+        saleModel.res_id = restaurantProductModel.res_id;
+        saleModel.user_id = AuthenticationApi.getCurrentUid();
+        saleModel.product_id = restaurantProductModel.rproduct_id;
+        restaurantProductModel.completed = 0;
+
+        SaleApi.postSale(saleModel, new SaleApi.MyCallback() {
+            @Override
+            public void onSuccess(SaleModel saleModel) {
+                RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
+                    @Override
+                    public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                        finish();
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+    }
 
     private void getSubscribeCheck(RestaurantProductModel restaurantProductModel) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -63,10 +105,7 @@ public class SaleActivity extends AppCompatActivity {
         SubscriptionApi.getSubscriptionListByUserId(uid, new SubscriptionApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
-                Log.d("subfailnew", Integer.toString(subscriptionModelArrayList.size()));
                 for(int i =0;i < subscriptionModelArrayList.size();i++) {
-                    Log.d("subfailnew", subscriptionModelArrayList.get(0).res_id +"/" + r_sub);
-                    Log.d("subfailnew",Boolean.toString(subscriptionModelArrayList.get(i).res_id.equals(r_sub)));
                     if((subscriptionModelArrayList.get(i).res_id).equals(r_sub))
                     {
                         Log.d("subfailnew", "if state start");
@@ -95,7 +134,6 @@ public class SaleActivity extends AppCompatActivity {
 
     private void subscribeClick(final RestaurantProductModel restaurantProductModel) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d("subs2","구독");
         final String uid = user.getUid();
 
         if(state==-1) {
@@ -127,7 +165,6 @@ public class SaleActivity extends AppCompatActivity {
             });
         }
         else {
-
             SubscriptionApi.deleteSubscriptionBySubsId(subscriptionModel.subs_id, new SubscriptionApi.MyCallback() {
                 @Override
                 public void onSuccess(SubscriptionModel subscriptionModel) {
@@ -140,7 +177,9 @@ public class SaleActivity extends AppCompatActivity {
                 }
             });
             state=-1;
+            Log.d("subSuccess2", Integer.toString(state));
             btn_subscription.setText("구독");
+
             FirebaseMessaging.getInstance().unsubscribeFromTopic(restaurantProductModel.res_id);
         }
     }
@@ -175,14 +214,23 @@ public class SaleActivity extends AppCompatActivity {
         txt_quantity = (TextView) findViewById(R.id.saleActivity_textView_quantity);
         txt_salesman = (TextView) findViewById(R.id.saleActivity_textView_salesman);
         txt_title = (TextView) findViewById(R.id.saleActivity_textView_title);
-        btn_buy = (Button) findViewById(R.id.saleActivity_button_buy);
-        btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
         image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
         btn_subscription = (Button) findViewById(R.id.saleActivity_button_subscription);
         txt_address = (TextView) findViewById(R.id.saleActivity_textView_address);
         Intent intent = getIntent();
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
+
+        btn_buy = (Button) findViewById(R.id.saleActivity_button_buy);
+        btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
+        btn_evaluate = (Button) findViewById(R.id.test_ratingbtn);
+
+        if(restaurantProductModel.completed!=-1) {
+            btn_buy.setVisibility(View.INVISIBLE);
+            btn_chat.setVisibility(View.INVISIBLE);
+        }
+
+        if(restaurantProductModel.completed==0) btn_evaluate.setVisibility(View.VISIBLE);
 
         getResModelFromProduct(restaurantProductModel);
         getSubscribeCheck(restaurantProductModel);
@@ -208,9 +256,21 @@ public class SaleActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PayActivity.class);
+                /*Intent intent = new Intent(getApplicationContext(), PayActivity.class);
+                intent.putExtra("Model", restaurantProductModel);
+                startActivity(intent);*/
+                processSale(restaurantProductModel);
+                finish();
+            }
+        });
+
+        btn_evaluate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RatingActivity.class);
                 intent.putExtra("Model", restaurantProductModel);
                 startActivity(intent);
+                finish();
             }
         });
     }

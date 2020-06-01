@@ -14,5 +14,7 @@ public class UserModel {
     public int user_grade = -1;
     public boolean sanction;
     public double latitude = -1;    //추가0526
-    public double longitude = -1;   //추가0526
+    public double longitude = -1; //추가0526
+    public float user_rating = 0; //0529
+    public int ratingCount = 1; //0529
 }
