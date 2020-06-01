@@ -10,9 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Sale.PurchaseHistoryActivity"></activity>
+        <activity android:name=".ban.BanActivity"/>
+        <activity android:name=".Profile.UserProfileActivity"/>
+        <activity android:name=".Sale.PurchaseHistoryActivity"/>
         <activity android:name=".Sale.SalesHistoryActivity" />
-        <activity android:name=".Sale.ResSalesHistoryActivity"></activity>
+        <activity android:name=".Sale.ResSalesHistoryActivity"/>
         <activity android:name=".Upload.ProductRestUploadActivity" />
         <activity android:name=".RecyclerView.QualitySelectActivity" />
         <activity android:name=".Map.DaumWebViewActivity" />

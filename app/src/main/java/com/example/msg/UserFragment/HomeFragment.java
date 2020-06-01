@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -276,6 +277,7 @@ public class HomeFragment extends Fragment  {
                     public void onSuccess(UserModel userModel) {
                         defaultLatitude=userModel.latitude;
                         defaultLongitude=userModel.longitude;
+                        Toast.makeText(getActivity(), defaultLatitude+" "+defaultLongitude, Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -293,6 +295,8 @@ public class HomeFragment extends Fragment  {
                         ContextCompat.checkSelfPermission( getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
                     ActivityCompat.requestPermissions( getActivity(), new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
                             0 );
+                    Toast.makeText(getActivity(), "", Toast.LENGTH_LONG).show();
+
                 }
                 else{
                     Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -300,7 +304,7 @@ public class HomeFragment extends Fragment  {
                     defaultLongitude = location.getLongitude();
                     defaultLatitude = location.getLatitude();
                     altitude = location.getAltitude();
-
+                    Toast.makeText(getActivity(), defaultLatitude+" "+defaultLongitude, Toast.LENGTH_LONG).show();
 //                    txtResult.setText("위치정보 : " + provider + "\n" +
 //                            "위도 : " + longitude + "\n" +
 //                            "경도 : " + latitude + "\n" +
