@@ -15,6 +15,7 @@
             android:singleLine="true"
             android:lines="1"
             android:hint="이메일"
+            android:fontFamily="@font/font_baemin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -25,6 +26,7 @@
         <EditText
             android:id="@+id/signupActivity_edittext_password"
             android:hint="패스워드"
+            android:fontFamily="@font/font_baemin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"/>
@@ -38,6 +40,7 @@
             android:singleLine="true"
             android:lines="1"
             android:hint="이름"
+            android:fontFamily="@font/font_baemin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -52,6 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="남자"
+            android:fontFamily="@font/font_baemin"
             android:id="@+id/signupActivity_radiobutton_man"
             android:layout_weight="1"
             android:checked="true"/>
@@ -60,6 +64,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="여자"
+            android:fontFamily="@font/font_baemin"
             android:id="@+id/signupActivity_radiobutton_woman"
             android:layout_weight="1"/>
 
@@ -73,6 +78,7 @@
         android:background="@android:color/transparent"
         android:onClick="OnClickHandler"
         android:hint="생년월일"
+        android:fontFamily="@font/font_baemin"
         android:textSize="20sp" />
 
     <Button
@@ -82,6 +88,7 @@
         android:background="@drawable/bin_blue"
         android:textColor="#ffffff"
         android:textStyle="bold"
+        android:fontFamily="@font/font_baemin"
         android:layout_gravity="start"
         android:text="주소 입력하기"/>
 
@@ -92,6 +99,7 @@
             android:id="@+id/signupActivity_edittext_address"
             android:singleLine="true"
             android:lines="1"
+            android:fontFamily="@font/font_baemin"
             android:hint="받은 주소"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -105,6 +113,7 @@
             android:id="@+id/signupActivity_edittext_address_detail"
             android:singleLine="true"
             android:lines="1"
+            android:fontFamily="@font/font_baemin"
             android:hint="상세 주소"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -118,6 +127,7 @@
             android:singleLine="true"
             android:lines="1"
             android:hint="전화 번호"
+            android:fontFamily="@font/font_baemin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -129,6 +139,7 @@
         android:background="@drawable/bin_blue"
         android:textColor="#ffffff"
         android:textStyle="bold"
+        android:fontFamily="@font/font_baemin"
         android:text="회원가입"/>
 
 

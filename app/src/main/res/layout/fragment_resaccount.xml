@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:textSize="50sp"
         android:text="내 정보"
+        android:fontFamily="@font/font_baemin"
         android:textStyle="bold"
         >
 
@@ -41,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="유저이름"
+                android:fontFamily="@font/font_baemin"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_margin="5sp"/>
@@ -51,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="동네"
                 android:textSize="15sp"
+                android:fontFamily="@font/font_baemin"
                 android:layout_margin="5sp"/>
 
         </LinearLayout>
@@ -89,6 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
+                android:fontFamily="@font/font_baemin"
                 android:text="판매내역"/>
         </LinearLayout>
 
@@ -112,6 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="내 정보 수정"
+            android:fontFamily="@font/font_baemin"
             android:textSize="30sp"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:background="#00ff0000"

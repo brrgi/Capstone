@@ -57,10 +57,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-        splash_background = mFirebaseRemoteConfig.getString(getString(R.string.rc_color));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor(splash_background));
-        }
+
 
         address=(Button)findViewById(R.id.signupActivity_button_address);
         address.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +76,6 @@ public class SignupActivity extends AppCompatActivity {
         phone=(EditText) findViewById(R.id.signupActivity_edittext_phone);
         birthyear = (Button) findViewById(R.id.signupActivity_button_birthyear);
         signup = (Button) findViewById(R.id.signupActivity_button_signup);
-        signup.setBackgroundColor(Color.parseColor(splash_background));
         man = (RadioButton) findViewById(R.id.signupActivity_radiobutton_man);
         //woman = (RadioButton) findViewById(R.id.signupActivity_radiobutton_woman);
         this.InitializeListener();

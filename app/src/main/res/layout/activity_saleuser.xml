@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="제품 사진"
+            android:fontFamily="@font/font_baemin"
             android:textSize="40sp"/>
 
         <View
@@ -56,14 +57,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5sp"
-                    android:text="판매자" />
+                    android:text="판매자"
+                    android:fontFamily="@font/font_baemin"/>
 
                 <TextView
                     android:id="@+id/saleUserActivity_textView_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5sp"
-                    android:text="동네" />
+                    android:text="동네"
+                    android:fontFamily="@font/font_baemin"/>
 
 
             </LinearLayout>
@@ -84,6 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="카테고리"
+            android:fontFamily="@font/font_baemin"
             android:textSize="20sp"
             android:layout_marginTop="10sp"
             />
@@ -95,6 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
             android:text="양"
+            android:fontFamily="@font/font_baemin"
             android:textSize="20sp"
             />
 
@@ -104,6 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
             android:text="유통기한"
+            android:fontFamily="@font/font_baemin"
             android:textSize="20sp"
             />
 
@@ -113,6 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
             android:text="품질"
+            android:fontFamily="@font/font_baemin"
             android:textSize="20dp"
             />
 
@@ -124,6 +131,7 @@
             android:layout_marginTop="10sp"
             android:text="상세설명"
             android:textSize="20sp"
+            android:fontFamily="@font/font_baemin"
             android:paddingBottom="130sp"
             />
 
@@ -146,6 +154,7 @@
                 android:layout_height="50sp"
                 android:background="@drawable/bin_blue"
                 android:text="공유"
+                android:fontFamily="@font/font_baemin"
                 android:layout_marginLeft="50sp"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
@@ -155,6 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
                 android:background="@drawable/bin_blue"
+                android:fontFamily="@font/font_baemin"
                 android:text="채팅"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -166,6 +176,7 @@
                 android:layout_height="50sp"
                 android:background="@drawable/bin_blue"
                 android:text="평가"
+                android:fontFamily="@font/font_baemin"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
                 android:visibility="invisible"

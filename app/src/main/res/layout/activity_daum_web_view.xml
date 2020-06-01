@@ -22,11 +22,13 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Result" />
+        android:text="Result"
+        android:fontFamily="@font/font_baemin"/>
 
     <Button
         android:id="@+id/button2"
         android:text="확인"
+        android:fontFamily="@font/font_baemin"
         android:textStyle="bold"
         android:layout_width="120dp"
         android:layout_height="wrap_content"

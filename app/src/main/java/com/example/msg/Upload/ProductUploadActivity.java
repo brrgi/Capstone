@@ -55,7 +55,6 @@ public class ProductUploadActivity extends AppCompatActivity {
     private Button expireDate;
     private DatePickerDialog.OnDateSetListener callbackMethod;
     private Uri imageUri = null;
-    private TextView txtResult;
     private Button address1;
     private Button address2;
     private final int PICK_FROM_ALBUM = 100;
@@ -116,7 +115,6 @@ public class ProductUploadActivity extends AppCompatActivity {
         quantity = (EditText)findViewById(R.id.product_upload_editText_quantity);
         address1=(Button)findViewById(R.id.product_upload_button_address);
         address2=(Button)findViewById(R.id.product_upload_button_address2);
-        txtResult = (TextView)findViewById(R.id.product_upload_TextView_txtResult);
 
         this.InitializeListener();
         final double  defaultLongitude = 0, defaultLatitude = 0;
@@ -202,10 +200,7 @@ public class ProductUploadActivity extends AppCompatActivity {
                     latitude = location.getLatitude();
                     altitude = location.getAltitude();
 
-                    txtResult.setText("위치정보 : " + provider + "\n" +
-                            "위도 : " + longitude + "\n" +
-                            "경도 : " + latitude + "\n" +
-                            "고도  : " + altitude);
+
 
                     lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                             1000,
@@ -280,10 +275,6 @@ public class ProductUploadActivity extends AppCompatActivity {
             latitude = location.getLatitude();
             altitude = location.getAltitude();
 
-            txtResult.setText("위치정보 : " + provider + "\n" +
-                    "위도 : " + longitude + "\n" +
-                    "경도 : " + latitude + "\n" +
-                    "고도  : " + altitude);
 
         }
 

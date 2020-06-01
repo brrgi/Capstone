@@ -19,6 +19,7 @@
             android:id="@+id/signupRestActivity_edittext_email"
             android:hint="이메일"
             android:singleLine="true"
+            android:fontFamily="@font/font_baemin"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -30,6 +31,7 @@
         <EditText
             android:id="@+id/signupRestActivity_edittext_password"
             android:hint="패스워드"
+            android:fontFamily="@font/font_baemin"
             android:singleLine="true"
             android:lines="1"
             android:layout_width="match_parent"
@@ -43,6 +45,7 @@
         <EditText
             android:id="@+id/signupRestActivity_edittext_res_name"
             android:hint="식당이름"
+            android:fontFamily="@font/font_baemin"
             android:singleLine="true"
             android:lines="1"
             android:layout_width="match_parent"
@@ -56,6 +59,7 @@
             android:id="@+id/signupRestActivity_edittext_res_phone"
             android:hint="전화번호"
             android:singleLine="true"
+            android:fontFamily="@font/font_baemin"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,6 +72,7 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/iconfinder_clock"
         android:background="@android:color/transparent"
+        android:fontFamily="@font/font_baemin"
         android:hint="픽업 가능 시작시간 입력(ex.13:00)"
         android:textSize="20sp" />
 
@@ -77,6 +82,7 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/iconfinder_clock"
         android:background="@android:color/transparent"
+        android:fontFamily="@font/font_baemin"
         android:hint="픽업 가능 끝시간 입력(ex.18:00)"
         android:textSize="20sp" />
 
@@ -86,6 +92,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bin_blue"
         android:textColor="#ffffff"
+        android:fontFamily="@font/font_baemin"
         android:textStyle="bold"
         android:layout_gravity="start"
         android:text="주소 입력하기"/>
@@ -97,6 +104,7 @@
             android:id="@+id/signupRestActivity_edittext_address"
             android:singleLine="true"
             android:lines="1"
+            android:fontFamily="@font/font_baemin"
             android:hint="받은 주소"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -109,6 +117,7 @@
             android:id="@+id/signupRestActivity_edittext_address_detail"
             android:singleLine="true"
             android:lines="1"
+            android:fontFamily="@font/font_baemin"
             android:hint="상세 주소"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -121,6 +130,7 @@
             android:id="@+id/signupRestActivity_edittext_res_description"
             android:hint="식당 설명"
             android:singleLine="true"
+            android:fontFamily="@font/font_baemin"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -134,6 +144,7 @@
         android:background="@drawable/bin_blue"
         android:textColor="#ffffff"
         android:textStyle="bold"
+        android:fontFamily="@font/font_baemin"
         android:text="회원가입" />
 
 </LinearLayout>

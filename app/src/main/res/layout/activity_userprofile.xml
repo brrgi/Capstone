@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:textSize="50sp"
         android:text="프로필"
+        android:fontFamily="@font/font_baemin"
         android:textStyle="bold"
         >
 
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
                 android:text="유저이름"
+                android:fontFamily="@font/font_baemin"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -45,6 +47,7 @@
                 android:id="@+id/account_textView_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/font_baemin"
                 android:text="동네"
                 android:textSize="15sp"
                 android:layout_margin="5sp"/>
@@ -62,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="등급"
+                android:fontFamily="@font/font_baemin"
                 android:textSize="15sp"
                 android:layout_margin="5sp"/>
 
@@ -84,19 +88,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="신고하기"
+                android:fontFamily="@font/font_baemin"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:background="@android:color/white"
+                android:background="00#ffffff"
                 android:layout_margin="5sp"/>
 
             <Button
                 android:id="@+id/profile_button_products"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/font_baemin"
                 android:text="판매물품보기"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:background="@android:color/white"
+                android:background="00#ffffff"
                 android:layout_margin="5sp"/>
 
         </LinearLayout>
