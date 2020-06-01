@@ -27,12 +27,14 @@ public class RatingActivity extends AppCompatActivity {
     private float ratingScore = 0;
     private TextView saleRating;
     private TextView salesman;
+    private float ratingSum = 0;
 
     private void ratingUserCalculate(UserProductModel userProductModel, final float ratingScore) {
         UserApi.getUserById(userProductModel.user_id, new UserApi.MyCallback() {
             @Override
             public void onSuccess(UserModel userModel) {
-                userModel.user_rating = Math.round(((userModel.user_rating + ratingScore)/(userModel.ratingCount))*10)/10;
+                ratingSum = (userModel.user_rating)*((userModel.ratingCount)-1);
+                userModel.user_rating = Math.round(((ratingSum + ratingScore)/(userModel.ratingCount))*10)/10;
                 userModel.ratingCount++;
                 UserApi.updateUser(userModel, new UserApi.MyCallback() {
                     @Override
@@ -50,7 +52,8 @@ public class RatingActivity extends AppCompatActivity {
         RestaurantApi.getUserById(restaurantProductModel.res_id, new RestaurantApi.MyCallback() {
             @Override
             public void onSuccess(RestaurantModel restaurantModel) {
-                restaurantModel.res_rating = Math.round(((restaurantModel.res_rating + ratingScore)/(restaurantModel.ratingCount))*10)/10;
+                ratingSum = (restaurantModel.res_rating)*((restaurantModel.ratingCount)-1);
+                restaurantModel.res_rating = Math.round(((ratingSum + ratingScore)/(restaurantModel.ratingCount))*10)/10;
                 restaurantModel.ratingCount++;
                 RestaurantApi.updateRestaurant(restaurantModel, new RestaurantApi.MyCallback() {
                     @Override
