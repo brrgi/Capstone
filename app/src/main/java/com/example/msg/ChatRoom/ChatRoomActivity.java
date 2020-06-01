@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.ChatApi;
 import com.example.msg.R;
 
@@ -31,6 +33,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     private void initializeLayout() {
 
+
         sendButton = findViewById(R.id.chatRoomActivity_button_send);
         sendEditText = findViewById(R.id.chatRoomActivity_editText_send);
 
@@ -52,12 +55,19 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     }
 
+    private void initializeId() {
+        myId = AuthenticationApi.getCurrentUid();
+        Intent intent = getIntent();
+
+        opponentId = intent.getExtras().getString("id");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
+        initializeId();
         initializeLayout();
 
         //버튼을 누르면 EditText의 내용을 채팅서버로 전송한다.
@@ -78,4 +88,5 @@ public class ChatRoomActivity extends AppCompatActivity {
     private void scrollToEnd() {
         if(chatAdapter.getItemCount() != 0) recyclerView.scrollToPosition(chatAdapter.getItemCount()-1);
     }
+    //리사이클러뷰의 스크롤을 현재 마지막 아이템으로 내려주는 시스템.
 }
