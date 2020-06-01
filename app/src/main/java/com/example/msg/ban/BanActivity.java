@@ -52,6 +52,7 @@ public class BanActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(getApplicationContext(), "사용자 신고가 완료되었습니다.", Toast.LENGTH_LONG).show();
+
                                 Log.d(TAG,"ban success");
                                 startActivity(new Intent(BanActivity.this, UserProfileActivity.class));
                                 finish();
