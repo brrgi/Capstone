@@ -3,6 +3,7 @@ package com.example.msg.Api;
 import androidx.annotation.NonNull;
 
 import com.example.msg.DatabaseModel.ShareModel;
+import com.example.msg.DatabaseModel.UserProductModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,6 +27,11 @@ public class ShareApi {
 
     public interface MyListCallback{
         void onSuccess(ArrayList<ShareModel> shareModelArrayList);
+        void onFail(int errorCode, Exception e);
+    }
+
+    public interface MyUserProductListCallback{
+        void onSuccess(ArrayList<UserProductModel> userProductModelArrayList);
         void onFail(int errorCode, Exception e);
     }
 
@@ -123,4 +129,6 @@ public class ShareApi {
     출력: 없음.
     동작: ID를 이용해서 데이터베이스에 서칭을 하고, 그 결과 나온 모델들의 리스트를 돌려줍니다. 콜백함수 onSuccess를 통해서 돌려줍니다. 실패시 onFail이 호출됩니다.
      */
+
+
 }

@@ -15,6 +15,7 @@
         <activity android:name=".Sale.PurchaseHistoryActivity"/>
         <activity android:name=".Sale.SalesHistoryActivity" />
         <activity android:name=".Sale.ResSalesHistoryActivity"/>
+        <activity android:name=".ChatRoom.ChatRoomActivity" android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".Upload.ProductRestUploadActivity" />
         <activity android:name=".RecyclerView.QualitySelectActivity" />
         <activity android:name=".Map.DaumWebViewActivity" />
