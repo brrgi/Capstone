@@ -147,16 +147,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/saleRestActivity_button_subscription"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
+                android:layout_marginLeft="10sp"
                 android:background="@drawable/bin_blue"
                 android:text="구독!"
-                android:layout_marginLeft="10sp"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
@@ -166,15 +165,15 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="10sp"
-                android:background="#D3D3D3"/>
+                android:background="#D3D3D3" />
 
             <Button
                 android:id="@+id/saleRestActivity_button_buy"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
+                android:layout_marginLeft="50sp"
                 android:background="@drawable/bin_blue"
                 android:text="구매"
-                android:layout_marginLeft="50sp"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
@@ -182,12 +181,11 @@
                 android:id="@+id/saleRestActivity_button_chat"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
+                android:layout_marginLeft="20sp"
                 android:background="@drawable/bin_blue"
                 android:text="채팅"
                 android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:layout_marginLeft="20sp"/>
-
+                android:textStyle="bold" />
 
 
         </LinearLayout>
