@@ -20,6 +20,7 @@ import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.ShareApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.Api.UserProductApi;
+import com.example.msg.Profile.UserProfileActivity;
 import com.example.msg.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -136,6 +137,15 @@ public class SaleUserActivity extends AppCompatActivity {
         txt_description.setText("상세설명 : " + userProductModel.p_description);
         Glide.with(getApplicationContext()).load(userProductModel.p_imageURL).into(image_product);
 
+
+        txt_salesman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(SaleUserActivity.this, UserProfileActivity.class);
+                intent.putExtra("reported_user_id",u_uid);
+                startActivity(intent);
+            }
+        });
 
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override

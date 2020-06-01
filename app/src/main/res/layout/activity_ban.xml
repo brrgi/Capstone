@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="신고하는 이유를 적어주세요"
+        android:textSize="20sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="4dp"
+        android:background="#D3D3D3"/>
+
+    <EditText
+        android:id="@+id/ban_editText_description"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:hint="신고 사유"
+        android:gravity="top"
+        />
+    <Button
+        android:id="@+id/ban_button_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:text="제출하기"
+        />
+</LinearLayout>
