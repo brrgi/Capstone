@@ -30,6 +30,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
@@ -58,6 +60,7 @@ public class SignupRestActivity extends AppCompatActivity {
     private Double lati;
     private Double longi;
 
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +110,17 @@ public class SignupRestActivity extends AppCompatActivity {
                     return;
                 }
 
+                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(!task.isSuccessful()) {
+                            Log.d("ParkKyudong","getInstanceId failed",task.getException());
+                            return;
+                        }
+                        token = task.getResult().getToken();
+                    }
+                });
+
                 FirebaseAuth.getInstance()
                         .createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
                         .addOnCompleteListener(SignupRestActivity.this, new OnCompleteListener<AuthResult>() {
@@ -131,6 +145,7 @@ public class SignupRestActivity extends AppCompatActivity {
                                         restaurantModel.pickup_end_time=(pickup_end_time.getText().toString());
                                         restaurantModel.res_latitude=lati;
                                         restaurantModel.res_longitude=longi;
+                                        restaurantModel.res_token = token;
 
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("Restaurant")
@@ -155,6 +170,7 @@ public class SignupRestActivity extends AppCompatActivity {
 
                                     }
                                 });
+
 
                             }
                         });
