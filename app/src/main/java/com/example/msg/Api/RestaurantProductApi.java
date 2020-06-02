@@ -46,19 +46,6 @@ public class RestaurantProductApi {
 
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public static RestaurantProductModel makeDummy() {
-        RestaurantProductModel restaurantProductModel = new RestaurantProductModel(null, "1234", "핑크솔트", null,"분홍색 소금입니다."
-                ,"향신료", "소금", 1, "100g", null, 500, false
-                ,100, -1, 5.0, 5.0);
-
-        return restaurantProductModel;
-    }
-/*
-    입력 : 없음
-    출력 : 더미 ProductModel
-    설명 : 간단한 더미 모델을 제공하는 함수입니다. 테스트 용도로 사용하십시오.
-*/
-
 
 
     public static void postProduct(final RestaurantProductModel restaurantProductModel, final Uri imageUri, final MyCallback myCallback) {

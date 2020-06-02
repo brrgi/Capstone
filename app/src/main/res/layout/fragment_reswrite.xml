@@ -7,23 +7,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/writeFragment_imageview_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/add_to_photos_black" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/writeFragment_edittext_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_baemin"
-            android:hint="제목" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/writeFragment_button_enrollment"

@@ -43,6 +43,7 @@ public class SaleUserActivity extends AppCompatActivity {
     private TextView txt_description;
     private TextView txt_salesman;
     private TextView txt_address;
+    private TextView txt_rating;
     private ImageView image_product;
     private Button btn_rating;
     private TextView ban;
@@ -117,7 +118,7 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_rating = (Button)findViewById(R.id.saleUserActivity_button_evaluate);
         ban = (TextView) findViewById(R.id.saleUserActivity_textView_ban);
         grade=(RatingBar)findViewById(R.id.saleUserActivity_ratingBar_grade);
-
+        txt_rating=(TextView) findViewById(R.id.saleUserActivity_textView_ratingText);
         Intent intent = getIntent();
         final UserProductModel userProductModel = (UserProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
@@ -149,12 +150,23 @@ public class SaleUserActivity extends AppCompatActivity {
         });
 
         txt_title.setText(userProductModel.title);
-        txt_category.setText("카테고리 : " + userProductModel.categoryBig + " -> " + userProductModel.categorySmall);
+        txt_category.setText(userProductModel.categoryBig + " -> " + userProductModel.categorySmall);
        // txt_salesman.setText("판매자 : "+u_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
-        txt_quantity.setText("양 : " + userProductModel.quantity);
-        txt_quality.setText("품질 : " + userProductModel.quality);
-        txt_expireDate.setText("유통기한 : " + userProductModel.expiration_date);
-        txt_description.setText("상세설명 : " + userProductModel.p_description);
+        txt_quantity.setText(userProductModel.quantity);
+
+        if (userProductModel.quality==1){
+            txt_quality.setText("하");
+        }
+        else if (userProductModel.quality==2){
+            txt_quality.setText("중");
+        }
+        else if (userProductModel.quality==3){
+            txt_quality.setText("상");
+        }
+        txt_expireDate.setText(userProductModel.expiration_date);
+        txt_description.setText(userProductModel.p_description);
+        grade.setRating(4);
+        txt_rating.setText("4.0");
         Glide.with(getApplicationContext()).load(userProductModel.p_imageURL).into(image_product);
 
 

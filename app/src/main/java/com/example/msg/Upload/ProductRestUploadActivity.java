@@ -27,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.msg.Api.RestaurantApi;
+import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.GuideLineApi;
@@ -44,7 +46,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
     private EditText title, quantity, cost, description;
     private Spinner bigCategory, smallCategory;
     private TextView qualityText,txtResult;
-    private Button qualityButton, submit, fast,address1,address2,expireDate;
+    private Button qualityButton, submit, fast,expireDate;
     private DatePickerDialog.OnDateSetListener callbackMethod;
 
 
@@ -53,7 +55,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
     private final RestaurantProductModel restaurantProductModel = new RestaurantProductModel();
 
 
-    private final double defaultLatitude = 0, defaultLongitude = 0;
+    private double defaultLatitude = 0, defaultLongitude = 0;
     private Uri imageUri = null;
 
     private final int PICK_FROM_ALBUM =100, QUALITY_SELECT = 101;
@@ -77,9 +79,6 @@ public class ProductRestUploadActivity extends AppCompatActivity {
 
         smallCategoriesAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, smallCategories);
         smallCategory.setAdapter(smallCategoriesAdapter);
-
-        address1=(Button)findViewById(R.id.product_rest_button_address);
-        address2=(Button)findViewById(R.id.product_rest_button_address2);
         txtResult = (TextView)findViewById(R.id.product_rest_TextView_txtResult);
 
     }
@@ -95,6 +94,22 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         restaurantProductModel.categorySmall = smallCategory.getSelectedItem().toString();
 
         restaurantProductModel.completed = -1;
+        Integer i = Integer.parseInt(qualityText.getText().toString());
+        restaurantProductModel.quality=i;
+
+        final String uid = AuthenticationApi.getCurrentUid();
+        RestaurantApi.getUserById(uid, new RestaurantApi.MyCallback() {
+            @Override
+            public void onSuccess(RestaurantModel restaurantModel) {
+                defaultLatitude=restaurantModel.res_latitude;
+                defaultLongitude=restaurantModel.res_longitude;
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
 
         restaurantProductModel.longitude = defaultLongitude;
         restaurantProductModel.latitude = defaultLatitude;
@@ -139,46 +154,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
 
         final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        address1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-
-        address2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if ( Build.VERSION.SDK_INT >= 23 &&
-                        ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-                    ActivityCompat.requestPermissions( ProductRestUploadActivity.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
-                            0 );
-                }
-                else{
-                    Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    String provider = location.getProvider();
-                    double longitude = location.getLongitude();
-                    double latitude = location.getLatitude();
-                    double altitude = location.getAltitude();
-
-                    txtResult.setText("위치정보 : " + provider + "\n" +
-                            "위도 : " + longitude + "\n" +
-                            "경도 : " + latitude + "\n" +
-                            "고도  : " + altitude);
-
-                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                            1000,
-                            1,
-                            gpsLocationListener);
-                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                            1000,
-                            1,
-                            gpsLocationListener);
-                }
-
-
-            }
-        });
 
 
         //앨범에서 식재료 사진을 가져오는 부분
@@ -260,14 +236,10 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         public void onLocationChanged(Location location) {
 
             String provider = location.getProvider();
-            double longitude = location.getLongitude();
-            double latitude = location.getLatitude();
+            defaultLatitude = location.getLongitude();
+            defaultLongitude = location.getLatitude();
             double altitude = location.getAltitude();
 
-            txtResult.setText("위치정보 : " + provider + "\n" +
-                    "위도 : " + longitude + "\n" +
-                    "경도 : " + latitude + "\n" +
-                    "고도  : " + altitude);
 
         }
 

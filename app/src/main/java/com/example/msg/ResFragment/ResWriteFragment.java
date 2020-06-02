@@ -51,16 +51,7 @@ public class ResWriteFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_reswrite, container, false);
 
-        Image = (ImageView) view.findViewById(R.id.writeFragment_imageview_image);
-        Image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK); //사진 가져오는 것
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                startActivityForResult(intent, PICK_FROM_ALBUM);
-            }
-        });
-        title = (EditText) view.findViewById(R.id.writeFragment_edittext_title);
+
         enrollment = (Button) view.findViewById(R.id.writeFragment_button_enrollment);
 
         enrollment.setOnClickListener(new View.OnClickListener() {
