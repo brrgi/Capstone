@@ -12,7 +12,7 @@
         android:orientation="vertical">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/completedpurchase_recyclerView"
-            android:fontFamily="@font/font_baemin"
+            android:fontFamily="@font/font_baemin5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:textSize="50dp"
         android:text="채팅"
-        android:fontFamily="@font/font_baemin"
+        android:fontFamily="@font/font_baemin5"
         android:textStyle="bold"
         >
 
@@ -32,7 +32,7 @@
             android:id="@+id/chat_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="636dp"
-            android:fontFamily="@font/font_baemin"
+            android:fontFamily="@font/font_baemin5"
             android:layout_weight="11"/>
 
 

@@ -14,7 +14,7 @@
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:text="홈으로 되돌아갑니다"
-        android:fontFamily="@font/font_baemin"
+        android:fontFamily="@font/font_baemin5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

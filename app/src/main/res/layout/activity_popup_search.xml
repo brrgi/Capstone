@@ -12,6 +12,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        android:fontFamily="@font/font_baemin"/>
+        android:fontFamily="@font/font_baemin5"/>
 </LinearLayout>
 
