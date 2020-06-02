@@ -7,30 +7,93 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="50dp"
         android:text="예약 현황"
-        android:textStyle="bold"
+        android:fontFamily="@font/font_baemin"
+        android:textSize="40sp"
         >
 
     </TextView>
 
-    <Button
-        android:id="@+id/fragment_reservation_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="새 예약" />
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:background="#D3D3D3"/>
 
+    <Button
+        android:id="@+id/fragment_reservation_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/font_baemin"
+        android:text="예약 추가" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:text="키워드"
+            android:layout_weight="1"
+            android:fontFamily="@font/font_baemin"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="40sp"
+            android:layout_height="wrap_content"
+            android:text="카테고리"
+            android:layout_weight="1"
+            android:fontFamily="@font/font_baemin"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="40sp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:fontFamily="@font/font_baemin"
+            android:background="#00ffffff" />
+
+            <TextView
+                android:layout_width="40sp"
+                android:layout_height="wrap_content"
+                android:text="예약 날짜"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_baemin"
+                android:textSize="20sp"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#D3D3D3"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reserve_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
+
 
 
 

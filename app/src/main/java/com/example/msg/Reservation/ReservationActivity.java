@@ -107,7 +107,7 @@ public class ReservationActivity extends AppCompatActivity {
     }
     private static String makeCurrentTimeString() {
         Date now = new Date();
-        SimpleDateFormat timeFormat = new SimpleDateFormat("YY.MM.D");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("YY.MM.dd");
         return timeFormat.format(now);
     }
 }
