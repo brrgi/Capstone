@@ -20,7 +20,6 @@ import com.example.msg.ChatRoom.ChatRoomModel;
 import com.example.msg.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.example.msg.RecyclerView.ChatData;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,7 +35,6 @@ public class ChatFragment extends Fragment {
 
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<ChatData> arrayList;
     private FirebaseUser user;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference docRef;

@@ -248,7 +248,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         if (requestCode == PICK_FROM_ALBUM && resultCode == RESULT_OK) {
             imageUri = data.getData();    //이미지 원본 경로
             productImage.setImageURI(imageUri);
-        } else if (requestCode == QUALITY_SELECT && resultCode == RESULT_OK) {
+        } else if (requestCode == QUALITY_SELECT) {
             int quality = -1;
             if (data.hasExtra("quality")) quality = data.getIntExtra("quality", -1);
             restaurantProductModel.quality = quality;
