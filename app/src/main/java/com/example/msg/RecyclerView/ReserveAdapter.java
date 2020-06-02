@@ -78,10 +78,10 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.Reserves
                         ReserveApi.deleteReservationByReserveId(arrayList.get(getAdapterPosition()).reservation_id, new ReserveApi.MyCallback() {
                             @Override
                             public void onSuccess(ReserveModel reserveModel) {
+                                FirebaseMessaging.getInstance().unsubscribeFromTopic(arrayList.get(getAdapterPosition()).keyword);
                                 arrayList.remove(getAdapterPosition());
                                 notifyItemRemoved(getAdapterPosition());
                                 notifyItemRangeChanged(getAdapterPosition(),arrayList.size());
-                                FirebaseMessaging.getInstance().unsubscribeFromTopic(arrayList.get(getAdapterPosition()).keyword);
                             }
                             @Override
                             public void onFail(int errorCode, Exception e) {
