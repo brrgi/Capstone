@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FilterSelectActivity">
+
+    <TextView
+        android:layout_marginBottom="3sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DDD5D5"
+        android:fontFamily="@font/font_baemin4"
+        android:text="정렬 기준"
+        android:gravity="center"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80sp"
+        android:gravity="center"
+        android:layout_marginTop="3sp"
+        android:layout_marginBottom="3sp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/filterSelectActivity_btn_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:layout_marginRight="30sp"
+            android:background="@drawable/bin_blue"
+            android:fontFamily="@font/font_baemin5"
+            android:text="거리"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/filterSelectActivity_btn_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:background="@drawable/bin_blue"
+            android:fontFamily="@font/font_baemin5"
+            android:text="가격"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+
+            />
+
+        <Button
+            android:id="@+id/filterSelectActivity_btn_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:layout_marginLeft="30sp"
+            android:background="@drawable/bin_blue"
+            android:fontFamily="@font/font_baemin5"
+            android:text="물량"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="3sp"
+        android:layout_marginBottom="3sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DDD5D5"
+        android:fontFamily="@font/font_baemin4"
+        android:text="카테고리"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_marginTop="3sp"
+        android:layout_marginBottom="3sp"
+        android:layout_width="match_parent"
+        android:layout_height="90sp"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <Spinner
+            android:id="@+id/filterSelectActivity_spinner_categoryA"
+            android:entries="@array/대분류"
+            android:layout_width="150sp"
+            android:layout_height="60sp"
+            android:fontFamily="@font/font_baemin5"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30sp"
+            />
+
+        <Spinner
+            android:id="@+id/filterSelectActivity_spinner_categoryB"
+            android:layout_width="150sp"
+            android:layout_height="60sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30sp"
+            android:fontFamily="@font/font_baemin5"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="3sp"
+        android:layout_marginBottom="3sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DDD5D5"
+        android:fontFamily="@font/font_baemin4"
+        android:text="거리 범위"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
+
+    <SeekBar
+        android:id="@+id/filterSelectActivity_seekbar_distance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:layout_marginBottom="10sp"
+        android:backgroundTint="#000000"
+        android:max="1000"
+        android:progress="500"
+        android:thumb="@drawable/seekbar_thumb1"
+        />
+
+    <TextView
+        android:layout_marginTop="3sp"
+        android:layout_marginBottom="3sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DDD5D5"
+        android:fontFamily="@font/font_baemin4"
+        android:text="가격"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
+
+    <SeekBar
+        android:id="@+id/filterSelectActivity_seekbar_cost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:layout_marginBottom="10sp"
+        android:backgroundTint="#000000"
+        android:max="10000"
+        android:progress="5000"
+        android:thumb="@drawable/seekbar_thumb1"
+        />
+
+
+    <TextView
+        android:layout_marginTop="3sp"
+        android:layout_marginBottom="3sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DDD5D5"
+        android:fontFamily="@font/font_baemin4"
+        android:text="품질"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10sp"
+        android:id="@+id/filterSelectActivity_ratidgroup_guideline">
+        <RadioButton
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="상"
+            android:textSize="20sp"
+            android:id="@+id/filterSelectActivity_ratidbtn_high"/>
+        <RadioButton
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="중"
+            android:textSize="20sp"
+            android:id="@+id/filterSelectActivity_ratidbtn_middle"/>
+        <RadioButton
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="하"
+            android:textSize="20sp"
+            android:id="@+id/filterSelectActivity_ratidbtn_low"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/filterSelectActivity_btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_gravity="center"
+        android:background="@drawable/bin_blue"
+        android:fontFamily="@font/font_baemin5"
+        android:text="저장"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_marginTop="30sp"
+        />
+
+
+
+</LinearLayout>

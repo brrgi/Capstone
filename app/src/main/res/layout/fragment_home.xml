@@ -114,12 +114,12 @@
         android:layout_marginBottom="10sp"
         />
 
-    <Spinner
-        android:id="@+id/home_spinner_sort"
-        android:layout_width="150sp"
+    <ImageButton
+        android:id="@+id/home_btn_sort"
+        android:layout_width="50sp"
         android:layout_height="50sp"
-        android:fontFamily="@font/font_baemin5"
         android:layout_marginBottom="10sp"
+        android:src="@drawable/filter"
         />
 
 

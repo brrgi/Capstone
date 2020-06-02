@@ -10,12 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ban.BanActivity"/>
-        <activity android:name=".Profile.UserProfileActivity"/>
-        <activity android:name=".Sale.PurchaseHistoryActivity"/>
+        <activity android:name=".FilterSelectActivity"></activity>
+        <activity android:name=".ban.BanActivity" />
+        <activity android:name=".Profile.UserProfileActivity" />
+        <activity android:name=".Sale.PurchaseHistoryActivity" />
         <activity android:name=".Sale.SalesHistoryActivity" />
-        <activity android:name=".Sale.ResSalesHistoryActivity"/>
-        <activity android:name=".ChatRoom.ChatRoomActivity" android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".Sale.ResSalesHistoryActivity" />
+        <activity
+            android:name=".ChatRoom.ChatRoomActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Upload.ProductRestUploadActivity" />
         <activity android:name=".RecyclerView.QualitySelectActivity" />
         <activity android:name=".Map.DaumWebViewActivity" />
@@ -29,7 +32,7 @@
         <activity android:name=".cloudmessaging.CloudMessagingActivity" />
         <activity android:name=".SignUp.SignupRestActivity" />
         <activity android:name=".SignUp.SelectSignupActivity" />
-        <activity android:name=".RatingActivity"/>
+        <activity android:name=".RatingActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ResMainActivity" />
         <activity android:name=".SignUp.SignupActivity" />
@@ -69,11 +72,11 @@
             android:required="false" />
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

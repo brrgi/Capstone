@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_gravity="bottom"
+        android:layout_marginTop="2sp"
         android:orientation="vertical">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trading_recyclerView"

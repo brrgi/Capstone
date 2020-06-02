@@ -2,6 +2,7 @@ package com.example.msg.UserFragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -38,10 +39,13 @@ import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Api.RestaurantProductApi;
 import com.example.msg.Api.UserProductApi;
+import com.example.msg.FilterSelectActivity;
+import com.example.msg.Profile.UserProfileActivity;
 import com.example.msg.R;
 import com.example.msg.RecyclerView.ResProductsAdapter;
 import com.example.msg.RecyclerView.UserProductsAdapter;
 import com.example.msg.Upload.ProductUploadActivity;
+import com.example.msg.ban.BanActivity;
 import com.firebase.ui.auth.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -69,6 +73,7 @@ public class HomeFragment extends Fragment  {
     private Button address2;
     private double altitude;
     private TextView address;
+    private ImageButton filter;
 
     //HomeFragment에서 사용되는 수치값
     private double defaultLongitude = 0;
@@ -135,12 +140,9 @@ public class HomeFragment extends Fragment  {
         spinnerList.add("재고 순 정렬");
 
 
-        spinner = (Spinner) view.findViewById(R.id.home_spinner_sort);
         searchButton = (ImageButton) view.findViewById(R.id.home_button_search);
         searchText = (EditText) view.findViewById(R.id.home_editText_search);
-
-        spinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, spinnerList);
-        spinner.setAdapter(spinnerAdapter);
+        filter = (ImageButton)view.findViewById(R.id.home_btn_sort);
         dummy = (Button) view.findViewById(R.id.home_button_dummy);
         address1=(Button)view.findViewById(R.id.home_button_address1);
         address2=(Button)view.findViewById(R.id.home_button_address2);
@@ -207,7 +209,6 @@ public class HomeFragment extends Fragment  {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         final Context context = view.getContext();
         final LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        if(spinnerAdapter!=null) spinnerAdapter.clear();
         initializeLayout(context);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -217,35 +218,14 @@ public class HomeFragment extends Fragment  {
 //    UserApi
         getLocation(defaultLatitude,defaultLongitude);
         //스피너 선택
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        filter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                switch(position) {
-                    case 0:
-                        //거리순 정렬
-                        RestaurantProductApi.sortByDistance(filteredResModels, defaultLatitude, defaultLongitude);
-                        resAdapter.notifyDataSetChanged();
-                        break;
-                    case 1:
-                        //가격순 정렬
-                        RestaurantProductApi.sortByPrice(filteredResModels);
-                        resAdapter.notifyDataSetChanged();
-                        break;
-                    case 2:
-                        //재고순 정렬
-                        RestaurantProductApi.sortByStock(filteredResModels);
-                        resAdapter.notifyDataSetChanged();
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), FilterSelectActivity.class);
+                startActivity(intent);
             }
         });
-
         //검색 버튼
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
@@ -34,6 +35,8 @@ public class RatingActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UserModel userModel) {
                 ratingSum = (userModel.user_rating)*((userModel.ratingCount)-1);
+                Log.d("RatingSum",Float.toString(ratingSum));
+                Log.d("RatingSum1",Float.toString(ratingScore));
                 userModel.user_rating = Math.round(((ratingSum + ratingScore)/(userModel.ratingCount))*10)/10;
                 userModel.ratingCount++;
                 UserApi.updateUser(userModel, new UserApi.MyCallback() {

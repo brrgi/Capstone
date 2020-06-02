@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -107,7 +108,7 @@ public class ReservationActivity extends AppCompatActivity {
     }
     private static String makeCurrentTimeString() {
         Date now = new Date();
-        SimpleDateFormat timeFormat = new SimpleDateFormat("YY.MM.D");
+        DateFormat timeFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
         return timeFormat.format(now);
     }
 }
