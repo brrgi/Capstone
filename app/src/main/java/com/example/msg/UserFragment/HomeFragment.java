@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -67,11 +68,13 @@ public class HomeFragment extends Fragment  {
     private Button address1;
     private Button address2;
     private double altitude;
+    private TextView address;
 
     //HomeFragment에서 사용되는 수치값
     private double defaultLongitude = 0;
     private double defaultLatitude = 0;
     private double range = 500;
+    private String dong="";
     static int state = -1;
 
 
@@ -139,6 +142,7 @@ public class HomeFragment extends Fragment  {
         dummy = (Button) view.findViewById(R.id.home_button_dummy);
         address1=(Button)view.findViewById(R.id.home_button_address1);
         address2=(Button)view.findViewById(R.id.home_button_address2);
+        address=(TextView)view.findViewById(R.id.home_TextView_dong);
         if(isShowingUserProduct) refreshItemOfUserProducts();
         else refreshItemOfResProducts();
     }
@@ -209,7 +213,7 @@ public class HomeFragment extends Fragment  {
         getAddress(uid);
 
 //    UserApi
-        //getLocation(defaultLatitude,defaultLongitude);
+        getLocation(defaultLatitude,defaultLongitude);
         //스피너 선택
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -288,16 +292,8 @@ public class HomeFragment extends Fragment  {
 
                         defaultLatitude=userModel.latitude;
                         defaultLongitude=userModel.longitude;
-                        Toast.makeText(getActivity(), defaultLatitude+" "+defaultLongitude, Toast.LENGTH_LONG).show();
-                        new Handler().postDelayed(new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-                                //여기에 딜레이 후 시작할 작업들을 입력
-                                getLocation(defaultLatitude,defaultLongitude);
-                            }
-                        }, 1000);
+                        getLocation(defaultLatitude,defaultLongitude);
+
                     }
 
                     @Override
@@ -316,7 +312,6 @@ public class HomeFragment extends Fragment  {
                         ContextCompat.checkSelfPermission( getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
                     ActivityCompat.requestPermissions( getActivity(), new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
                             0 );
-                    Toast.makeText(getActivity(), "", Toast.LENGTH_LONG).show();
 
                 }
                 else{
@@ -325,11 +320,7 @@ public class HomeFragment extends Fragment  {
                     defaultLongitude = location.getLongitude();
                     defaultLatitude = location.getLatitude();
                     altitude = location.getAltitude();
-                    Toast.makeText(getActivity(), defaultLatitude+" "+defaultLongitude, Toast.LENGTH_LONG).show();
-//                    txtResult.setText("위치정보 : " + provider + "\n" +
-//                            "위도 : " + longitude + "\n" +
-//                            "경도 : " + latitude + "\n" +
-//                            "고도  : " + altitude);
+
                     getLocation(defaultLatitude,defaultLongitude);
                     lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                             1000,
@@ -376,19 +367,22 @@ public class HomeFragment extends Fragment  {
         }
     };
 
-    final void getLocation(double lat, double lng){
+    public void getLocation(double lat, double lng){
         String addressString = null;
         Geocoder geocoder = new Geocoder(getContext(), Locale.KOREAN);
-
+        Log.d("GOS", lat+" "+lng);
         try {
-            List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
-            if (addresses.size() > 0) {
-                addressString = addresses.get(0).getThoroughfare();
+            List<Address> addresses = geocoder.getFromLocation(lat, lng, 10);
+            for (int i=0; i<addresses.size(); i++) {
+                if(addresses.get(i).getThoroughfare() != null ) {
+                    dong = addresses.get(i).getThoroughfare();
+                    address.setText(dong);
+                }
+//                    Log.d("GOS", addresses.get(i).getThoroughfare());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Toast.makeText(getActivity(), addressString, Toast.LENGTH_LONG).show();
 
     }
 

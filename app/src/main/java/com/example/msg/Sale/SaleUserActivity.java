@@ -115,8 +115,8 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_buy = (Button) findViewById(R.id.saleUserActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleUserActivity_button_chat);
         btn_rating = (Button)findViewById(R.id.saleUserActivity_button_evaluate);
-        ban = (TextView) findViewById(R.id.saleUserActivity_textView_ban);
-        grade=(RatingBar)findViewById(R.id.saleUserActivity_ratingBar_grade);
+//        ban = (TextView) findViewById(R.id.saleUserActivity_textView_ban);
+//        grade=(RatingBar)findViewById(R.id.saleUserActivity_ratingBar_grade);
 
         Intent intent = getIntent();
         final UserProductModel userProductModel = (UserProductModel)intent.getSerializableExtra("Model");

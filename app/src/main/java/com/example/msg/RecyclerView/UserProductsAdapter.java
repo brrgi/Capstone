@@ -2,6 +2,9 @@ package com.example.msg.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +21,10 @@ import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import com.example.msg.Sale.SaleUserActivity;
 
@@ -51,6 +57,22 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
                 holder.grade.setRating(userModel.user_rating);
                 holder.ban.setText("신고 횟수 "+userModel.ban_count+"회");
                 //holder.dong.setText(arrayList.get(position).p_description); //이레 추가부탁 6월01일
+                String addressString = null;
+                Geocoder geocoder = new Geocoder(context, Locale.KOREAN);
+//                Log.d("GOS", lat+" "+lng);
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(userModel.latitude, userModel.longitude, 10);
+                    for (int i=0; i<addresses.size(); i++) {
+                        if(addresses.get(i).getThoroughfare() != null ) {
+                            holder.dong.setText(addresses.get(i).getThoroughfare());
+                        }
+//                    Log.d("GOS", addresses.get(i).getThoroughfare());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
             }
 
             @Override
@@ -105,4 +127,6 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
         }
 
     }
+
+
 }
