@@ -5,4 +5,20 @@
         android:fontWeight="200"
         android:font="@font/font_baemin"
         />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="200"
+        android:font="@font/font_baemin2"
+        />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="200"
+        android:font="@font/font_baemin3"
+        />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="200"
+        android:font="@font/font_baemin4"
+        />
+
 </font-family>
