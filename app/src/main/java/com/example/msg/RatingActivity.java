@@ -135,7 +135,7 @@ public class RatingActivity extends AppCompatActivity {
                     userProductModel.completed = 1;
                     UserProductApi.updateProduct(userProductModel, new UserProductApi.MyCallback() {
                         @Override
-                        public void onSuccess(UserProductModel userProductModel) { }
+                        public void onSuccess(UserProductModel userProductModel) { finish();}
 
                         @Override
                         public void onFail(int errorCode, Exception e) { }
@@ -148,12 +148,12 @@ public class RatingActivity extends AppCompatActivity {
                     restaurantProductModel.completed = 1;
                     RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
                         @Override
-                        public void onSuccess(RestaurantProductModel restaurantProductModel) { }
+                        public void onSuccess(RestaurantProductModel restaurantProductModel) { finish();}
 
                         @Override
                         public void onFail(int errorCode, Exception e) { }
                     });
-                    finish();
+
 
                 }
             }
