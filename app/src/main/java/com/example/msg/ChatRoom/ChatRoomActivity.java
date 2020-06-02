@@ -22,6 +22,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     private String myId = "1";
     private String opponentId = "2";
+    private String opponentName = "김철수";
 
     //리사이클러뷰 관련 요소들.
     private ArrayList<Chat> chats;
@@ -94,7 +95,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         chatRoomModel.lastDate = chats.get(chats.size() -1).getDate();
         chatRoomModel.myId = myId;
         chatRoomModel.opponentId = opponentId;
-        chatRoomModel.opponentName = opponentId;
+        chatRoomModel.opponentName = opponentName;
         chatRoomModel.pictureUrl = "";
 
         ChatListSqlManager chatListSqlManager = new ChatListSqlManager();
