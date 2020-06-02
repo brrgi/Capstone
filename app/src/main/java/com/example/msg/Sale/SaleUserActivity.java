@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import com.example.msg.R;
 import com.example.msg.RatingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 
 public class SaleUserActivity extends AppCompatActivity {
@@ -43,10 +45,12 @@ public class SaleUserActivity extends AppCompatActivity {
     private TextView txt_address;
     private ImageView image_product;
     private Button btn_rating;
-
+    private TextView ban;
+    private RatingBar grade;
     String u_name = "";
     String u_address="";
     String u_uid;
+
     private static int current = -1;
 
     private void processShare(final UserProductModel userProductModel, UserModel userModel) {
@@ -56,6 +60,7 @@ public class SaleUserActivity extends AppCompatActivity {
         shareModel.uproduct_id = userProductModel.uproduct_id;
         userProductModel.completed = 0;
 
+
         ShareApi.postShare(shareModel, new ShareApi.MyCallback() {
             @Override
             public void onSuccess(ShareModel shareModel) {
@@ -63,6 +68,7 @@ public class SaleUserActivity extends AppCompatActivity {
                 UserProductApi.updateProduct(userProductModel, new UserProductApi.MyCallback() {
                     @Override
                     public void onSuccess(UserProductModel userProductModel) {
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic(userProductModel.title);
                         finish();
                     }
 
@@ -109,6 +115,9 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_buy = (Button) findViewById(R.id.saleUserActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleUserActivity_button_chat);
         btn_rating = (Button)findViewById(R.id.saleUserActivity_button_evaluate);
+        ban = (TextView) findViewById(R.id.saleUserActivity_textView_ban);
+        grade=(RatingBar)findViewById(R.id.saleUserActivity_ratingBar_grade);
+
         Intent intent = getIntent();
         final UserProductModel userProductModel = (UserProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
@@ -129,6 +138,8 @@ public class SaleUserActivity extends AppCompatActivity {
                 u_uid = userModel.user_id;
                 txt_salesman.setText(u_name);
                 txt_address.setText(u_address);
+                ban.setText("신고 횟수 "+userModel.ban_count+"회");
+                grade.setRating(userModel.user_rating);
             }
 
             @Override

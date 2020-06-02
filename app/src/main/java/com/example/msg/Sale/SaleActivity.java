@@ -77,6 +77,7 @@ public class SaleActivity extends AppCompatActivity {
                 RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
                     @Override
                     public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic(restaurantProductModel.title);
                         finish();
                     }
 
