@@ -59,8 +59,8 @@ public class ProductUploadActivity extends AppCompatActivity {
     private Button address2;
     private final int PICK_FROM_ALBUM = 100;
     private final int QUALITY_SELECT = 101;
-    private double longitude;
-    private double latitude;
+    private double longitude=0.0;
+    private double latitude=0.0;
     private double altitude;
 
     private void postUserProduct(final UserProductModel userProductModel) {
@@ -174,6 +174,7 @@ public class ProductUploadActivity extends AppCompatActivity {
                     public void onSuccess(UserModel userModel) {
                         latitude=userModel.latitude;
                         longitude=userModel.longitude;
+                        Log.d("GOS", latitude+" "+userModel.user_address);
                     }
 
                     @Override
@@ -198,7 +199,7 @@ public class ProductUploadActivity extends AppCompatActivity {
                     longitude = location.getLongitude();
                     latitude = location.getLatitude();
                     altitude = location.getAltitude();
-
+                    Log.d("GOS", latitude+" "+longitude);
 
 
                     lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
@@ -221,6 +222,7 @@ public class ProductUploadActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("GOS", latitude+"Tlqkf"+longitude);
                 userProductModel.title = title.getText().toString();
                 userProductModel.p_description = specification.getText().toString();
                 userProductModel.categorySmall = smallSpinner.getSelectedItem().toString();
