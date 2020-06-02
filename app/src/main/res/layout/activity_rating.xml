@@ -26,7 +26,7 @@
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:text="제출"
-        android:fontFamily="@font/font_baemin"
+        android:fontFamily="@font/font_baemin5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:fontFamily="@font/font_baemin"
+        android:fontFamily="@font/font_baemin5"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:text="TextView"
-        android:fontFamily="@font/font_baemin"
+        android:fontFamily="@font/font_baemin5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingActivity_textview_user" />
 

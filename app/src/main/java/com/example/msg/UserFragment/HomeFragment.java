@@ -134,9 +134,11 @@ public class HomeFragment extends Fragment  {
         spinnerList.add("가격 순 정렬");
         spinnerList.add("재고 순 정렬");
 
+
         spinner = (Spinner) view.findViewById(R.id.home_spinner_sort);
         searchButton = (ImageButton) view.findViewById(R.id.home_button_search);
         searchText = (EditText) view.findViewById(R.id.home_editText_search);
+
         spinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, spinnerList);
         spinner.setAdapter(spinnerAdapter);
         dummy = (Button) view.findViewById(R.id.home_button_dummy);
@@ -198,7 +200,6 @@ public class HomeFragment extends Fragment  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_home,container,false);
-
         return view;
     }
 
@@ -206,6 +207,7 @@ public class HomeFragment extends Fragment  {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         final Context context = view.getContext();
         final LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        if(spinnerAdapter!=null) spinnerAdapter.clear();
         initializeLayout(context);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

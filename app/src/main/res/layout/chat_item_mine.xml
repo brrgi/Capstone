@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="bottom"
-            android:fontFamily="@font/font_baemin"
+            android:fontFamily="@font/font_baemin5"
             android:orientation="vertical" >
 
             <TextView
@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_margin="3sp"
-                android:fontFamily="@font/font_baemin"
+                android:fontFamily="@font/font_baemin5"
                 android:text="00:00"
                 />
 
@@ -50,7 +50,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/in_message"
                 android:textColor="#FFFFFF"
-                android:fontFamily="@font/font_baemin"
+                android:fontFamily="@font/font_baemin5"
                 android:text="안녕하안녕하세" />
 
         </LinearLayout>

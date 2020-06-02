@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.msg.Api.RestaurantApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.R;
 
 import java.io.IOException;
@@ -54,20 +55,7 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
             public void onSuccess(RestaurantModel restaurantModel) {
                 holder.name.setText(restaurantModel.res_name);
                 holder.grade.setRating(restaurantModel.res_rating);
-                String addressString = null;
-                Geocoder geocoder = new Geocoder(context, Locale.KOREAN);
-//                Log.d("GOS", lat+" "+lng);
-                try {
-                    List<Address> addresses = geocoder.getFromLocation(restaurantModel.res_latitude, restaurantModel.res_longitude, 10);
-                    for (int i=0; i<addresses.size(); i++) {
-                        if(addresses.get(i).getThoroughfare() != null ) {
-                            holder.dong.setText(addresses.get(i).getThoroughfare());
-                        }
-//                    Log.d("GOS", addresses.get(i).getThoroughfare());
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
             }
 
             @Override
@@ -82,6 +70,23 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
         holder.title.setText(arrayList.get(position).title);
 
         holder.cost.setText(arrayList.get(position).cost + "원");
+
+        RestaurantProductModel item = arrayList.get(position);
+
+        String addressString = null;
+        Geocoder geocoder = new Geocoder(context, Locale.KOREAN);
+//                Log.d("GOS", lat+" "+lng);
+        try {
+            List<Address> addresses = geocoder.getFromLocation(item.latitude, item.longitude, 10);
+            for (int i=0; i<addresses.size(); i++) {
+                if(addresses.get(i).getThoroughfare() != null ) {
+                    holder.dong.setText(addresses.get(i).getThoroughfare());
+                }
+//                    Log.d("GOS", addresses.get(i).getThoroughfare());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

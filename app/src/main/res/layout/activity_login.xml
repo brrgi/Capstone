@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MSG"
-        android:fontFamily="@font/font_baemin"
+        android:fontFamily="@font/font_baemin5"
         android:textColor="#F39C12"
         android:textSize="40dp"
         android:layout_marginBottom="100sp"/>
@@ -31,7 +31,7 @@
         <EditText
             android:id="@+id/loginActivity_edittext_id"
             android:hint="아이디"
-            android:fontFamily="@font/font_baemin"
+            android:fontFamily="@font/font_baemin5"
             android:singleLine="true"
             android:lines="1"
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         <EditText
             android:id="@+id/loginActivity_edittext_password"
             android:hint="패스워드"
-            android:fontFamily="@font/font_baemin"
+            android:fontFamily="@font/font_baemin5"
             android:singleLine="true"
             android:lines="1"
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
             android:id="@+id/loginActivity_button_login"
             android:text="로그인"
             android:layout_width="120sp"
-            android:fontFamily="@font/font_baemin"
+            android:fontFamily="@font/font_baemin5"
             android:layout_height="wrap_content"
             android:background="@drawable/bin_blue"
             android:textColor="#ffffff"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bin_blue"
             android:textColor="#ffffff"
-            android:fontFamily="@font/font_baemin"
+            android:fontFamily="@font/font_baemin5"
             android:layout_marginLeft="30sp"/>
 
     </LinearLayout>

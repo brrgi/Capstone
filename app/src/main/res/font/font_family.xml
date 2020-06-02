@@ -3,12 +3,12 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="200"
-        android:font="@font/font_baemin"
+        android:font="@font/font_baemin5"
         />
     <font
         android:fontStyle="normal"
         android:fontWeight="200"
-        android:font="@font/font_baemin2"
+        android:font="@font/font_baemin"
         />
     <font
         android:fontStyle="normal"

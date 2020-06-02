@@ -19,13 +19,13 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/font_baemin"
+                android:fontFamily="@font/font_baemin5"
                 android:text="판매중"/>
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/font_baemin"
+                android:fontFamily="@font/font_baemin5"
                 android:text="판매완료"/>
 
 
