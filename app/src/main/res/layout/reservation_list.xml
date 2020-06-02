@@ -7,41 +7,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:id="@+id/reservation_textView_ID"
-            android:layout_width="wrap_content"
+            android:layout_width="50sp"
             android:layout_height="wrap_content"
-            android:text="제목"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:text="키워드"
+            android:layout_weight="1"
+            android:fontFamily="@font/font_baemin"
+            android:textSize="20sp"
             />
 
         <TextView
             android:id="@+id/reservation_textView_category"
-            android:layout_width="wrap_content"
+            android:layout_width="40sp"
             android:layout_height="wrap_content"
             android:text="카테고리"
-            android:layout_marginLeft="10dp"
-            android:textSize="20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/font_baemin"
+            android:textSize="20sp"
             />
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <TextView
+            android:layout_width="40sp"
             android:layout_height="wrap_content"
-            android:gravity="right">
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:fontFamily="@font/font_baemin"
+            android:background="#00ffffff" />
 
-            <TextView
-                android:id="@+id/reservation_textView_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:text="예약 날짜"
-                android:layout_marginRight="30sp"
-                android:textSize="20dp"></TextView>
+        <TextView
+            android:id="@+id/reservation_textView_time"
+            android:layout_width="40sp"
+            android:layout_height="wrap_content"
+            android:text="예약 날짜"
+            android:layout_weight="1"
+            android:fontFamily="@font/font_baemin"
+            android:textSize="15sp"/>
 
-        </LinearLayout>
 
     </LinearLayout>
 

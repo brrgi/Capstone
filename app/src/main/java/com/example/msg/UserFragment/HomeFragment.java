@@ -32,6 +32,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.msg.Api.UserApi;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
@@ -74,6 +75,8 @@ public class HomeFragment extends Fragment  {
     private double altitude;
     private TextView address;
     private ImageButton filter;
+
+    private SwipeRefreshLayout refreshLayout;
 
     //HomeFragment에서 사용되는 수치값
     private double defaultLongitude = 0;
@@ -134,6 +137,8 @@ public class HomeFragment extends Fragment  {
 
 
 
+
+
         //일반 레이아웃 관련 초기화.
         spinnerList.add("거리 순 정렬");
         spinnerList.add("가격 순 정렬");
@@ -147,8 +152,11 @@ public class HomeFragment extends Fragment  {
         address1=(Button)view.findViewById(R.id.home_button_address1);
         address2=(Button)view.findViewById(R.id.home_button_address2);
         address=(TextView)view.findViewById(R.id.home_TextView_dong);
+        refreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.home_swipeLayout);
         if(isShowingUserProduct) refreshItemOfUserProducts();
         else refreshItemOfResProducts();
+
+        refreshLayout.setRefreshing(false);
     }
     //해당 프래그먼트에서 사용되는 레이아웃 등을 초기화 하는 함수입니다.
 
@@ -210,6 +218,16 @@ public class HomeFragment extends Fragment  {
         final Context context = view.getContext();
         final LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         initializeLayout(context);
+
+        //swipelayout관련 추가
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initializeLayout(context);
+            }
+        });
+
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();

@@ -1,53 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Reservation.ReservationActivity">
+    android:orientation="vertical"
+
+    >
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Reservation"
-        android:fontFamily="@font/font_baemin5"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:fontFamily="@font/font_baemin"
+        android:textSize="36sp"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#D3D3D3"/>
 
-    <EditText
-        android:id="@+id/reservationActivity_edittext_item"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="예약상품"
-        android:fontFamily="@font/font_baemin5"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center">
+        <EditText
+            android:id="@+id/reservationActivity_edittext_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="키워드를 입력해주세요"
+            android:fontFamily="@font/font_baemin"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <Spinner
+            android:id="@+id/reservationActivity_spinner_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/reservationActivity_button_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="예약 등록"
-        android:fontFamily="@font/font_baemin5"
+        android:layout_gravity="center"
+        android:fontFamily="@font/font_baemin"
         android:background="@drawable/bin_blue"
         android:textColor="#ffffff"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationActivity_spinner_category" />
+        android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/reservationActivity_spinner_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationActivity_edittext_item" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
