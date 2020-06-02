@@ -3,14 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5sp"
-    >
+    android:layout_margin="5sp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         android:gravity="right"
+        android:orientation="horizontal"
         >
 
         <LinearLayout
@@ -24,7 +23,6 @@
                 android:id="@+id/chat_item_mine_textView_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:layout_margin="3sp"
                 android:fontFamily="@font/font_baemin5"
                 android:text="00:00"
