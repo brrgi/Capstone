@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.msg.R;
 import com.example.msg.RecyclerView.ChatData;
-import com.example.msg.RecyclerView.ChatDataAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
@@ -77,8 +76,6 @@ public class ResChatFragment extends Fragment {
         });
 
 
-        adapter=new ChatDataAdapter(arrayList,context);
-        recyclerView.setAdapter(adapter);
     }
 }
 
