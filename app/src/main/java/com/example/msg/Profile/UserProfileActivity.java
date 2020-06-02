@@ -24,11 +24,11 @@ public class UserProfileActivity extends AppCompatActivity {
         Intent intent=getIntent();
         reported_user_id=intent.getStringExtra("reported_user_id");
         ban_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(UserProfileActivity.this, BanActivity.class);
-                intent.putExtra("reported_user_id",reported_user_id);
-                startActivity(intent);
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent=new Intent(UserProfileActivity.this, BanActivity.class);
+                        intent.putExtra("reported_user_id",reported_user_id);
+                        startActivity(intent);
             }
         });
 
