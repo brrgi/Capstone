@@ -115,8 +115,8 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_buy = (Button) findViewById(R.id.saleUserActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleUserActivity_button_chat);
         btn_rating = (Button)findViewById(R.id.saleUserActivity_button_evaluate);
-//        ban = (TextView) findViewById(R.id.saleUserActivity_textView_ban);
-//        grade=(RatingBar)findViewById(R.id.saleUserActivity_ratingBar_grade);
+        ban = (TextView) findViewById(R.id.saleUserActivity_textView_ban);
+        grade=(RatingBar)findViewById(R.id.saleUserActivity_ratingBar_grade);
 
         Intent intent = getIntent();
         final UserProductModel userProductModel = (UserProductModel)intent.getSerializableExtra("Model");
@@ -148,7 +148,7 @@ public class SaleUserActivity extends AppCompatActivity {
             }
         });
 
-        txt_title.setText("제목 : " + userProductModel.title);
+        txt_title.setText(userProductModel.title);
         txt_category.setText("카테고리 : " + userProductModel.categoryBig + " -> " + userProductModel.categorySmall);
        // txt_salesman.setText("판매자 : "+u_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
         txt_quantity.setText("양 : " + userProductModel.quantity);

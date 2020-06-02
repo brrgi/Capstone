@@ -48,25 +48,9 @@ public class WriteFragment extends Fragment {
             }
         });
 
-        enrollment = (Button) view.findViewById(R.id.writeFragment_button_enrollment);
-        enrollment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SaleActivity.class);
-                startActivity(intent);
-                Toast.makeText(getActivity(), "업로드로 갑니다.", Toast.LENGTH_LONG).show();
-            }
-        });
 
-//        upload = (Button) view.findViewById(R.id.writeFragment_button_enrollment);
-//        upload.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), UploadActivity.class);
-//                startActivity(intent);
-//                Toast.makeText(getActivity(), "업로드로 갑니다.", Toast.LENGTH_LONG).show();
-//            }
-//        });
+
+
 
         return view;
     }

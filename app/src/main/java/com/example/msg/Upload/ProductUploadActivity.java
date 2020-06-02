@@ -111,7 +111,6 @@ public class ProductUploadActivity extends AppCompatActivity {
         title = (EditText)findViewById(R.id.product_upload_editText_title);
         qualityText = (TextView)findViewById(R.id.product_upload_textView_quality);
         expireDate = (Button)findViewById(R.id.product_upload_button_expireDate);
-        qualityText.setText("Hello World!");
         quantity = (EditText)findViewById(R.id.product_upload_editText_quantity);
         address1=(Button)findViewById(R.id.product_upload_button_address);
         address2=(Button)findViewById(R.id.product_upload_button_address2);
