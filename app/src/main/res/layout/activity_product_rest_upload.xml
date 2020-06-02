@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="50sp"
+            android:fontFamily="@font/font_baemin"
             android:text="식당 식재료 등록" />
 
         <View
@@ -43,6 +44,7 @@
         <EditText
             android:id="@+id/product_rest_editText_title"
             android:hint="제목"
+            android:fontFamily="@font/font_baemin"
             android:textSize="30sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,12 +69,14 @@
                 android:layout_height="50sp"
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="10sp"
+                android:fontFamily="@font/font_baemin"
                 />
 
             <Spinner
                 android:id="@+id/product_rest_spinner_categoryB"
                 android:layout_width="150sp"
-                android:layout_height="50sp" />
+                android:layout_height="50sp"
+                android:fontFamily="@font/font_baemin"/>
 
         </LinearLayout>
 
@@ -88,6 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="양(상세히 서술해주세요)"
+            android:fontFamily="@font/font_baemin"
             android:textSize="30sp"
             android:background="@null"/>
 
@@ -108,6 +113,7 @@
             android:background="@android:color/transparent"
             android:onClick="OnClickHandler"
             android:hint="유통기한"
+            android:fontFamily="@font/font_baemin"
             android:textSize="30sp" />
 
         <View
@@ -128,6 +134,7 @@
                 android:layout_height="50sp"
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="50sp"
+                android:fontFamily="@font/font_baemin"
                 />
 
             <Button
@@ -135,6 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="품질 기준"
+                android:fontFamily="@font/font_baemin"
                 android:background="@drawable/bin_blue"
                 android:textColor="#ffffff"/>
 
@@ -155,6 +163,7 @@
             android:layout_height="wrap_content"
             android:textSize="30sp"
             android:hint="가격"
+            android:fontFamily="@font/font_baemin"
             android:background="@null"/>
 
         <View
@@ -169,6 +178,7 @@
             android:textSize="30sp"
             android:paddingBottom="50sp"
             android:hint="상세설명"
+            android:fontFamily="@font/font_baemin"
             android:background="@null"/>
 
         <View
@@ -183,6 +193,7 @@
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:text="급처 기능"
+            android:fontFamily="@font/font_baemin"
             android:background="@drawable/bin_blue"
             android:textColor="#ffffff"
             android:layout_marginLeft="10sp"
@@ -208,6 +219,7 @@
                 android:text="내 정보 위치"
                 android:background="@drawable/bin_blue"
                 android:textColor="#ffffff"
+                android:fontFamily="@font/font_baemin"
                 android:layout_marginRight="10sp">
 
             </Button>
@@ -218,6 +230,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GPS 위치"
+                android:fontFamily="@font/font_baemin"
                 android:background="@drawable/bin_blue"
                 android:textColor="#ffffff"
                 android:layout_marginLeft="10sp">
@@ -237,6 +250,7 @@
                 android:layout_width="150sp"
                 android:layout_height="wrap_content"
                 android:text="등록"
+                android:fontFamily="@font/font_baemin"
                 android:background="@drawable/bin_blue"
                 android:textColor="#ffffff"
                 android:layout_gravity="center"

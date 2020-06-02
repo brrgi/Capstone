@@ -65,10 +65,7 @@ public class SignupRestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup_rest);
 
         FirebaseRemoteConfig mFirebaseRemoteConfig= FirebaseRemoteConfig.getInstance();
-        splash_background = mFirebaseRemoteConfig.getString(getString(R.string.rc_color));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor(splash_background));
-        }
+
 
         profile=(ImageView)findViewById(R.id.signupRestActivity_imageview_profile);
         profile.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +97,6 @@ public class SignupRestActivity extends AppCompatActivity {
         pickup_end_time = (EditText) findViewById(R.id.signupRestActivity_edittext_pickupendtime);
 
         signup=(Button)findViewById(R.id.signupRestActivity_button_signup);
-        signup.setBackgroundColor(Color.parseColor(splash_background));
 
         signup.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -62,6 +62,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/btn_bf_ex"
             android:layout_marginLeft="10sp"
+            android:fontFamily="@font/font_baemin"
             android:text="공유 상품"
             />
         <View
@@ -83,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
                 android:background="@drawable/btn_bf_ex"
+                android:fontFamily="@font/font_baemin"
                 android:text="내 정보 위치" />
 
             <Button
@@ -92,6 +94,7 @@
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="10sp"
                 android:background="@drawable/btn_bf_ex"
+                android:fontFamily="@font/font_baemin"
                 android:text="현재 위치" />
 
 

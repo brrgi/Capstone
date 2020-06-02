@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:text="거래상대"
             android:textSize="20dp"
+            android:fontFamily="@font/font_baemin"
             android:textStyle="bold"
            />
 
@@ -23,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="주소"
+            android:fontFamily="@font/font_baemin"
             android:layout_marginLeft="10dp"
             android:textSize="20dp"
             />
@@ -38,6 +40,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="right"
                 android:text="last time"
+                android:fontFamily="@font/font_baemin"
                 android:textSize="20dp"></TextView>
         </LinearLayout>
 
@@ -48,6 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="마지막 문자"
+        android:fontFamily="@font/font_baemin"
         android:layout_margin="5dp"
         android:textSize="20dp"/>
 

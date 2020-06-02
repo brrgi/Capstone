@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="20sp"
     tools:context=".Upload.ProductUploadActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="50sp"
-        android:text="식재료 등록" />
+        android:text="식재료 등록"
+        android:fontFamily="@font/font_baemin"/>
 
     <View
         android:layout_width="match_parent"
@@ -47,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:fontFamily="@font/font_baemin"
         />
 
     <View
@@ -68,6 +69,7 @@
             android:layout_height="50sp"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
+            android:fontFamily="@font/font_baemin"
             />
 
         <Spinner
@@ -76,7 +78,8 @@
             android:layout_height="50sp"
             android:layout_marginTop="10sp"
             android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"/>
+            android:layout_marginRight="10sp"
+            android:fontFamily="@font/font_baemin"/>
 
     <View
         android:layout_width="match_parent"
@@ -91,7 +94,8 @@
         android:layout_height="wrap_content"
         android:hint="양(상세히 서술해주세요)"
         android:textSize="30sp"
-        android:background="@null"/>
+        android:background="@null"
+        android:fontFamily="@font/font_baemin"/>
 
     <View
         android:layout_width="match_parent"
@@ -108,6 +112,7 @@
             android:background="@android:color/transparent"
             android:onClick="OnClickHandler"
             android:hint="유통기한"
+            android:fontFamily="@font/font_baemin"
             android:textSize="30sp" />
 
 
@@ -118,31 +123,34 @@
         android:background="#D3D3D3"
         android:layout_marginBottom="10sp"/>
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="50sp"
-            android:text="품질" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/product_upload_textView_quality"
+                android:text="품질 기준을 눌러서 선택해주세요."
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="50sp"
+                android:fontFamily="@font/font_baemin"
+                />
 
-        <TextView
-            android:id="@+id/product_upload_textView_quality"
-            android:text="품질 기준을 눌러서 선택해주세요."
-            android:layout_width="150sp"
-            android:layout_height="50sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="50sp"
-            />
+            <Button
+                android:id="@+id/product_upload_button_quality"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:text="품질 기준"
+                android:background="@drawable/bin_blue"
+                android:layout_marginLeft="10sp"
+                android:layout_marginBottom="10sp"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/font_baemin"/>
 
-        <Button
-            android:id="@+id/product_upload_button_quality"
-            android:layout_width="150sp"
-            android:layout_height="wrap_content"
-            android:text="품질 기준"
-            android:background="@drawable/bin_blue"
-            android:layout_marginLeft="10sp"
-            android:layout_marginBottom="10sp"
-            android:textColor="#ffffff"/>
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
@@ -163,7 +171,9 @@
         android:textSize="30sp"
         android:hint="상세설명"
         android:background="@null"
-        android:paddingBottom="50sp"/>
+        android:paddingBottom="50sp"
+        android:fontFamily="@font/font_baemin"
+        />
 
     <View
         android:layout_width="match_parent"
@@ -184,7 +194,8 @@
             android:layout_marginRight="10sp"
             android:background="@drawable/bin_blue"
             android:text="내 정보 위치"
-            android:textColor="#ffffff">
+            android:textColor="#ffffff"
+            android:fontFamily="@font/font_baemin">
 
         </Button>
 
@@ -196,7 +207,8 @@
             android:text="GPS 위치"
             android:background="@drawable/bin_blue"
             android:textColor="#ffffff"
-            android:layout_marginLeft="10sp">
+            android:layout_marginLeft="10sp"
+            android:fontFamily="@font/font_baemin">
 
         </Button>
 
@@ -216,16 +228,11 @@
         android:background="@drawable/bin_blue"
         android:textColor="#ffffff"
         android:layout_gravity="center"
-        android:layout_marginLeft="30sp"/>
-
-    </LinearLayout>
-        <TextView
-        android:id="@+id/product_upload_TextView_txtResult"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_marginLeft="30sp"
+            android:fontFamily="@font/font_baemin"/>
 
     </LinearLayout>
 
-
+    </LinearLayout>
 
 </ScrollView>

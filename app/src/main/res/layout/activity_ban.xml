@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="신고하는 이유를 적어주세요"
+        android:fontFamily="@font/font_baemin"
         android:textSize="20sp"/>
 
     <View
@@ -22,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:hint="신고 사유"
+        android:fontFamily="@font/font_baemin"
         android:gravity="top"
         />
     <Button
@@ -31,6 +33,7 @@
         android:background="@drawable/bin_blue"
         android:textColor="#ffffff"
         android:textStyle="bold"
+        android:fontFamily="@font/font_baemin"
         android:text="제출하기"
         />
 </LinearLayout>
