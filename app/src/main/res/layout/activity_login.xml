@@ -45,10 +45,7 @@
         <EditText
             android:id="@+id/loginActivity_edittext_password"
             android:hint="패스워드"
-<<<<<<< Updated upstream
-=======
-            android:fontFamily="@font/font_baemin5"
->>>>>>> Stashed changes
+            android:fontFamily="@font/font_baemin"
             android:singleLine="true"
             android:lines="1"
             android:layout_width="match_parent"
