@@ -22,7 +22,6 @@ public class UserProductModel implements Serializable {
     public double longitude = -1;
     public String uproduct_id = null;
 
-
     public UserProductModel() {
         //파이어스토어의 정상 동작을 위해 필요한 생성자.
     }

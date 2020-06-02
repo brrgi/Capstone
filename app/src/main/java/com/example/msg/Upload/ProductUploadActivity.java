@@ -9,6 +9,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -38,7 +40,10 @@ import com.example.msg.RecyclerView.QualitySelectActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class ProductUploadActivity extends AppCompatActivity {
 
@@ -199,7 +204,6 @@ public class ProductUploadActivity extends AppCompatActivity {
                     longitude = location.getLongitude();
                     latitude = location.getLatitude();
                     altitude = location.getAltitude();
-                    Log.d("GOS", latitude+" "+longitude);
 
 
                     lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
@@ -232,9 +236,12 @@ public class ProductUploadActivity extends AppCompatActivity {
                 userProductModel.completed = -1;
                 userProductModel.longitude = longitude;
                 userProductModel.latitude = latitude;
+                Integer i = Integer.parseInt(qualityText.getText().toString());
+                userProductModel.quality = i;
                 postUserProduct(userProductModel);
             }
         });
+
 
     }
 
