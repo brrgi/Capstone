@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="예약 현황"
-        android:fontFamily="@font/font_baemin"
+        android:fontFamily="@font/font_baemin5"
         android:textSize="40sp"
         >
 
@@ -33,7 +33,7 @@
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:layout_marginBottom="5dp"
-        android:fontFamily="@font/font_baemin"
+        android:fontFamily="@font/font_baemin5"
         android:text="예약 추가" />
 
     <LinearLayout
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:text="키워드"
             android:layout_weight="1"
-            android:fontFamily="@font/font_baemin"
+            android:fontFamily="@font/font_baemin5"
             android:textSize="20sp"
             />
 
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:text="카테고리"
             android:layout_weight="1"
-            android:fontFamily="@font/font_baemin"
+            android:fontFamily="@font/font_baemin5"
             android:textSize="20sp"
             />
 
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_weight="1"
-            android:fontFamily="@font/font_baemin"
+            android:fontFamily="@font/font_baemin5"
             android:background="#00ffffff" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="예약 날짜"
                 android:layout_weight="1"
-                android:fontFamily="@font/font_baemin"
+                android:fontFamily="@font/font_baemin5"
                 android:textSize="20sp"/>
 
 
