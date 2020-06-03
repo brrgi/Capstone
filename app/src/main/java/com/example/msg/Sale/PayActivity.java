@@ -44,7 +44,7 @@ public class PayActivity extends AppCompatActivity {
         // 결제호출
         Intent intent = getIntent();
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel) intent.getSerializableExtra("Model");
-        BootUser bootUser = new BootUser().setPhone("010-1234-5678");
+        BootUser bootUser = new BootUser().setPhone("010-2237-4777");
         BootExtra bootExtra = new BootExtra().setQuotas(new int[]{0, 2, 3});
 
         Bootpay.init(getFragmentManager())
@@ -55,7 +55,7 @@ public class PayActivity extends AppCompatActivity {
                 .setUX(UX.PG_DIALOG)
 //                .setUserPhone("010-1234-5678") // 구매자 전화번호
                 .setName(restaurantProductModel.title) // 결제할 상품명
-                .setOrderId("1234") // 결제 고유번호 expire_month
+                .setOrderId(restaurantProductModel.res_id) // 결제 고유번호 expire_month
                 .setPrice(restaurantProductModel.cost) // 결제할 금액
                 .onConfirm(new ConfirmListener() { // 결제가 진행되기 바로 직전 호출되는 함수로, 주로 재고처리 등의 로직이 수행
                     @Override

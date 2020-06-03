@@ -305,6 +305,9 @@ public class SaleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 processSale(restaurantProductModel);
+                Intent intent = new Intent(getApplicationContext(), PayActivity.class);
+                intent.putExtra("Model", restaurantProductModel);
+                startActivity(intent);
                 finish();
             }
         });
