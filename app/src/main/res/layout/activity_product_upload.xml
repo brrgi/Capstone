@@ -194,6 +194,7 @@
             android:background="@drawable/bin_blue"
             android:text="내 정보 위치"
             android:textColor="#ffffff"
+            android:layout_marginLeft="10sp"
             android:fontFamily="@font/font_baemin5">
 
         </Button>
@@ -215,13 +216,13 @@
             android:layout_width="2sp"
             android:layout_height="50sp"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="10sp"
+            android:layout_marginLeft="30sp"
             android:layout_marginRight="10sp"
             android:background="#D3D3D3"/>
 
         <Button
         android:id="@+id/product_upload_button_submit"
-        android:layout_width="150sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="등록"
         android:background="@drawable/bin_blue"
