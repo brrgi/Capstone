@@ -104,7 +104,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         chatListSqlManager.createTable();
         chatListSqlManager.insertRecord(chatRoomModel);
         */
-         
+
     }
 
     @Override

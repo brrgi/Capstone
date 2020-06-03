@@ -59,7 +59,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         if(remoteMessage.getData().size() > 0) {
             Log.d("ParkKyudong","Message data payload: "+remoteMessage.getData());
-
+            
             if(false)
             {
                 scheduleJob();
