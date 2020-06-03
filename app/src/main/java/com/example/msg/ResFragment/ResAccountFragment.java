@@ -77,6 +77,7 @@ public class ResAccountFragment extends Fragment {
         RestaurantApi.getUserById(AuthenticationApi.getCurrentUid(), new RestaurantApi.MyCallback() {
             @Override
             public void onSuccess(RestaurantModel restaurantModel) {
+
                 res_name.setText(restaurantModel.res_name);
                 res_address.setText(restaurantModel.res_address+" "+restaurantModel.res_address_detail);
             }
