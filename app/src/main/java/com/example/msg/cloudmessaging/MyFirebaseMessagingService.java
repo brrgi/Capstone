@@ -45,8 +45,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.msg.Api.SaleApi;
 import com.example.msg.MainActivity;
 import com.example.msg.R;
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.firebase.jobdispatcher.Job;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -54,13 +58,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public MyFirebaseMessagingService() {
     }
 
+    private String title = "";
+    private String body = "";
+    private String color = "";
+
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         if(remoteMessage.getData().size() > 0) {
             Log.d("ParkKyudong","Message data payload: "+remoteMessage.getData());
-            
-            if(false)
+            title = remoteMessage.getData().get("title");
+            body = remoteMessage.getData().get("body");
+            if(true)
             {
                 scheduleJob();
             }
@@ -72,6 +81,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             if(remoteMessage.getNotification() !=null) {
                 Log.d("ParkKyudong","Message Notification Body : "+remoteMessage.getNotification().getBody());
             }
+            sendNotification(body);
         }
 
     }
@@ -84,6 +94,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private void scheduleJob()
     {
+        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
+        Job myJob = dispatcher.newJobBuilder()
+                .setService(MyJobService.class)
+                .setTag("my-job-tag")
+                .build();
+        dispatcher.schedule(myjob);
         Log.d("ParkKyudong","schedulejob");
     }
 
@@ -97,8 +113,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void sendNotification(String messageBody)
+    //@RequiresApi(api = Build.VERSION_CODES.O)
+    private void sendNotification(String body)
     {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -108,7 +124,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,channelId).setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(getString(R.string.app_name))
-                .setContentText(messageBody)
+                .setContentText(body)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
