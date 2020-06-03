@@ -26,10 +26,9 @@
 
     <ImageView
         android:id="@+id/product_upload_imageView_product"
-        android:layout_width="wrap_content"
-        android:layout_height="100sp"
-        android:src="@drawable/icon_image_searching"
-        android:layout_gravity="start"
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:src="@drawable/upload"
         />
 
     <View
