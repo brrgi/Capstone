@@ -394,6 +394,21 @@ public class RestaurantProductApi {
     //TODO: 동작 방식에 문제가 있음. 다시 코딩하는 것을 권장.
 
 
+    public static ArrayList<RestaurantProductModel> filterByPrice(ArrayList<RestaurantProductModel> modelList, int price) {
+        ArrayList<RestaurantProductModel> filteredModel = new ArrayList<>();
+        Log.d("FilterTest", "filtering start");
+
+        for(int i = 0; i < modelList.size(); i++) {
+            if(modelList.get(i).cost < price)
+            {
+                filteredModel.add(modelList.get(i));
+                Log.d("FilterTest", modelList.get(i).title);
+            }
+
+        }
+
+        return filteredModel;
+    }
 
 
 }
