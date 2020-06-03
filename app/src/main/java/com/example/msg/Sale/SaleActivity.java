@@ -73,7 +73,6 @@ public class SaleActivity extends AppCompatActivity {
     static int state = -1;
     private Button btn_evaluate;
     private RatingBar rating;
-    private TextView dong;
     private Button dummy;
     String r_sub = "";
     String r_name = "";
@@ -284,7 +283,7 @@ public class SaleActivity extends AppCompatActivity {
             List<Address> addresses = geocoder.getFromLocation(restaurantProductModel.latitude, restaurantProductModel.longitude, 10);
             for (int i=0; i<addresses.size(); i++) {
                 if(addresses.get(i).getThoroughfare() != null ) {
-                    dong.setText(addresses.get(i).getThoroughfare());
+                    txt_address.setText(addresses.get(i).getThoroughfare());
                 }
             }
         } catch (IOException e) {
