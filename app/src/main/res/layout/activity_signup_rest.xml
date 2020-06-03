@@ -19,7 +19,6 @@
             android:id="@+id/signupRestActivity_edittext_email"
             android:hint="이메일"
             android:singleLine="true"
-            android:fontFamily="@font/font_baemin5"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -31,7 +30,6 @@
         <EditText
             android:id="@+id/signupRestActivity_edittext_password"
             android:hint="패스워드"
-            android:fontFamily="@font/font_baemin5"
             android:singleLine="true"
             android:lines="1"
             android:layout_width="match_parent"

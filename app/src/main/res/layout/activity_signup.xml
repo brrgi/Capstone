@@ -15,7 +15,6 @@
             android:singleLine="true"
             android:lines="1"
             android:hint="이메일"
-            android:fontFamily="@font/font_baemin5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -26,7 +25,6 @@
         <EditText
             android:id="@+id/signupActivity_edittext_password"
             android:hint="패스워드"
-            android:fontFamily="@font/font_baemin5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"/>
