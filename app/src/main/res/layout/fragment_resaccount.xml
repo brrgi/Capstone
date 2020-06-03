@@ -5,15 +5,11 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="50sp"
+        android:layout_width="150sp"
+        android:layout_height="50sp"
         android:text="내 정보"
         android:fontFamily="@font/font_baemin5"
-        android:textStyle="bold"
-        >
-
-    </TextView>
+        android:textSize="30sp"/>
 
     <View
         android:layout_width="match_parent"
