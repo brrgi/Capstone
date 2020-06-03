@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5sp"
                     android:clickable="true"
-                    android:text="최근리뷰 58 | 최근사장님댓글 58"
+                    android:text="최근리뷰 58 | 최근댓글 58"
                     android:fontFamily="@font/font_baemin5"/>
 
                 <LinearLayout
