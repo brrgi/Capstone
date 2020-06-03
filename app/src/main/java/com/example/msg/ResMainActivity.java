@@ -45,13 +45,13 @@ public class ResMainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.action_chat:
+                    case R.id.action_account:
                         setFrag(0);
                         break;
-                    case R.id.action_write:
+                    case R.id.action_chat:
                         setFrag(1);
                         break;
-                    case R.id.action_account:
+                    case R.id.action_write:
                         setFrag(2);
                         break;
                     case R.id.action_accountbook:
