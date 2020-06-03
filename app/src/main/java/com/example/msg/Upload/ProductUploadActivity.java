@@ -257,7 +257,7 @@ public class ProductUploadActivity extends AppCompatActivity {
     }
 
     public void OnClickHandler(View view) {
-        DatePickerDialog dialog = new DatePickerDialog(this, callbackMethod, 2019, 5, 24);
+        DatePickerDialog dialog = new DatePickerDialog(this, callbackMethod, 2020, 6, 3);
 
         dialog.show();
     }

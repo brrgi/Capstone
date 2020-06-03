@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,12 +15,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.Api.RestaurantProductApi;
+import com.example.msg.Api.SaleApi;
 import com.example.msg.Api.ShareApi;
 import com.example.msg.Api.UserProductApi;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.SaleModel;
 import com.example.msg.DatabaseModel.ShareModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.R;
+import com.example.msg.RecyclerView.ResProductsAdapter;
+import com.example.msg.RecyclerView.UserProductsAdapter;
 
 import java.util.ArrayList;
 
@@ -33,11 +39,18 @@ public class CompletedPurchaseFragment extends Fragment {
 
     //리사이클러뷰 UserProducts 전용 변수.
     private RecyclerView.Adapter userAdapter;
-    private ArrayList<UserProductModel> userProductModelArrayList = new ArrayList<UserProductModel>();
-    private ArrayList<UserProductModel> userProductModels = new ArrayList<UserProductModel>();
+    private final ArrayList<UserProductModel> userProductModelArrayList = new ArrayList<UserProductModel>();
+    private final ArrayList<UserProductModel> userProductModels = new ArrayList<UserProductModel>();
 
     private RecyclerView.Adapter resAdapter;
     private final ArrayList<RestaurantProductModel> restaurantProductModelArrayList = new ArrayList<RestaurantProductModel>();
+    private final ArrayList<RestaurantProductModel> restaurantProductModels = new ArrayList<RestaurantProductModel>();
+
+    final String uid = AuthenticationApi.getCurrentUid();
+
+    private Button btn_switch;
+
+    private boolean isUserProduct = true;
 
 
     private void initializeLayout(final Context context) {
@@ -47,14 +60,23 @@ public class CompletedPurchaseFragment extends Fragment {
         layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
 
-        userAdapter = new com.example.msg.RecyclerView.UserProductsAdapter(userProductModelArrayList, context);
+
+        resAdapter = new ResProductsAdapter(restaurantProductModelArrayList, context);
+        userAdapter = new UserProductsAdapter(userProductModelArrayList, context);
+
+        btn_switch = view.findViewById(R.id.completedpurchasefragment_switch_button);
+
+        //    userAdapter = new com.example.msg.RecyclerView.UserProductsAdapter(userProductModelArrayList, context);
+        if(isUserProduct) ComPurchaseUserHistory();
+        else ComPurchaseResHistory();
     }
 
-    private void PurchaseHistory() {
-        final String uid = AuthenticationApi.getCurrentUid();
+    private void ComPurchaseUserHistory() {
         ShareApi.getShareByToId(uid, new ShareApi.MyListCallback() {
             @Override
             public void onSuccess(final ArrayList<ShareModel> shareModelArrayList) {
+                restaurantProductModelArrayList.clear();
+                restaurantProductModels.clear();
                 for(int i=0;i<shareModelArrayList.size();i++) {
                     UserProductApi.getProduct((shareModelArrayList.get(i).uproduct_id), new UserProductApi.MyCallback() {
                         @Override
@@ -84,13 +106,71 @@ public class CompletedPurchaseFragment extends Fragment {
             }
         });
     }
+
+    private void ComPurchaseResHistory() {
+        SaleApi.getSaleByUserId(uid, new SaleApi.MyListCallback() {
+            @Override
+            public void onSuccess(ArrayList<SaleModel> saleModels) {
+                userProductModelArrayList.clear();
+                userProductModels.clear();
+                for(int i=0;i<saleModels.size();i++) {
+                    RestaurantProductApi.getProduct((saleModels.get(i).product_id), new RestaurantProductApi.MyCallback() {
+                        @Override
+                        public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                            if(restaurantProductModel.completed==1) {
+                                restaurantProductModels.add(restaurantProductModel);
+                            }
+                            recyclerView.setAdapter(resAdapter);
+                            restaurantProductModelArrayList.clear();
+                            Log.d("Purchase 2: ",Integer.toString(userProductModels.size()));
+
+                            restaurantProductModelArrayList.addAll(restaurantProductModels);
+                            resAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onFail(int errorCode, Exception e) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_completed_purchase,container,false);
-        PurchaseHistory();
-        initializeLayout(container.getContext());
+        initializeLayout(getContext());
         return view;
+    }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+
+        btn_switch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isUserProduct) {
+                    userProductModelArrayList.clear();
+                    userProductModels.clear();
+                    ComPurchaseResHistory();
+                    isUserProduct=false;
+                }
+                else  {
+                    restaurantProductModelArrayList.clear();
+                    restaurantProductModels.clear();
+                    isUserProduct=true;
+                    ComPurchaseUserHistory();
+                }
+            }
+        });
     }
 
 }
