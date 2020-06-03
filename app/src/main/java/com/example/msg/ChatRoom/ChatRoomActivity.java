@@ -90,6 +90,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
+        /*
         ChatRoomModel chatRoomModel = new ChatRoomModel();
         chatRoomModel.lastChat = chats.get(chats.size() -1).takeContent();
         chatRoomModel.lastDate = chats.get(chats.size() -1).getDate();
@@ -102,6 +103,8 @@ public class ChatRoomActivity extends AppCompatActivity {
         chatListSqlManager.createDatabase(getApplicationContext());
         chatListSqlManager.createTable();
         chatListSqlManager.insertRecord(chatRoomModel);
+        */
+         
     }
 
     @Override

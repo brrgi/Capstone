@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.ChatRoom.Chat;
 import com.example.msg.ChatRoom.ChatListSqlManager;
 import com.example.msg.ChatRoom.ChatRoomAdapter;
 import com.example.msg.ChatRoom.ChatRoomModel;
@@ -50,7 +52,8 @@ public class ChatFragment extends Fragment {
         db.createDatabase(view.getContext());
         db.createTable();
         db.makeDummyChatList(view.getContext());
-        loadChatRoomDataFromLocalDatabase(view.getContext()); //로컬DB에서 데이터를 뽑아서 chatRoomModels에 삽입함.
+        //loadChatRoomDataFromLocalDatabase(view.getContext()); //로컬DB에서 데이터를 뽑아서 chatRoomModels에 삽입함.
+        makeDummyChatData();
 
         //리사이클러뷰 관련 설정.
         recyclerView = view.findViewById(R.id.chat_recyclerView);
@@ -76,6 +79,55 @@ public class ChatFragment extends Fragment {
 
     }
 
+    private void makeDummyChatData() {
+        String uid = AuthenticationApi.getCurrentUid();
+        chatRoomModels = new ArrayList<>();
+        ChatRoomModel chatRoomModel = new ChatRoomModel();
+        switch(uid) {
+            case "PGfIRaSUdGVoJFR188PNloAqfOr1":
+                //user1
+                chatRoomModel = new ChatRoomModel();
+                chatRoomModel.myId = uid;
+                chatRoomModel.opponentId = "VJMsi2PlekUObxsRTO58EZPWhyM2";
+                chatRoomModel.opponentName = "한우석";
+                chatRoomModel.lastDate = "17:23";
+                chatRoomModel.lastChat = "안녕하세요!";
+                chatRoomModels.add(chatRoomModel);
+                chatRoomModel = new ChatRoomModel();
+                chatRoomModel.opponentName = "천윤서";
+                chatRoomModel.lastDate = "05:05";
+                chatRoomModel.lastChat = "네고요.";
+                chatRoomModels.add(chatRoomModel);
+                chatRoomModel = new ChatRoomModel();
+                chatRoomModel.opponentName = "이레";
+                chatRoomModel.lastDate = "05:03";
+                chatRoomModel.lastChat = "닭가슴살 언제 줘요.";
+                chatRoomModels.add(chatRoomModel);
+                break;
+            case "VJMsi2PlekUObxsRTO58EZPWhyM2":
+                //user2
+                chatRoomModel = new ChatRoomModel();
+                chatRoomModel.myId = uid;
+                chatRoomModel.opponentId = "PGfIRaSUdGVoJFR188PNloAqfOr1";
+                chatRoomModel.opponentName = "박규동";
+                chatRoomModel.lastDate = "17:23";
+                chatRoomModel.lastChat = "..";
+                chatRoomModels.add(chatRoomModel);
+                chatRoomModel = new ChatRoomModel();
+                chatRoomModel.opponentName = "이레";
+                chatRoomModel.lastDate = "05:11";
+                chatRoomModel.lastChat = "잘받았습니다.";
+                chatRoomModels.add(chatRoomModel);
+                chatRoomModel = new ChatRoomModel();
+                chatRoomModel.opponentName = "김영휘";
+                chatRoomModel.lastDate = "05:33";
+                chatRoomModel.lastChat = "저기요.";
+                chatRoomModels.add(chatRoomModel);
+                break;
+            default:
+                break;
+        }
+    }
 
     private void loadChatRoomDataFromLocalDatabase(Context context) {
         ChatListSqlManager sql = new ChatListSqlManager();
