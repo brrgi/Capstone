@@ -35,6 +35,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.msg.Api.UserApi;
+import com.example.msg.DataModel.FilterModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
@@ -61,6 +62,9 @@ import java.util.Locale;
 public class HomeFragment extends Fragment  {
     private View view;
     private static final String TAG = "HomeFragment";
+
+    //액티비티 코드
+    private final int FILTER_CODE = 100;
 
     //레이아웃 요소들
     private ArrayList spinnerList = new ArrayList<>();
@@ -184,6 +188,26 @@ public class HomeFragment extends Fragment  {
     동작:
      */
 
+
+    private void sortItemOfResProducts(String sortBy) {
+        switch(sortBy) {
+            case "distance":
+                RestaurantProductApi.sortByDistance(restaurantProductModels, defaultLatitude, defaultLongitude);
+                break;
+            case "price":
+                RestaurantProductApi.sortByPrice(restaurantProductModels);
+                break;
+            case "stock":
+                RestaurantProductApi.sortByStock(restaurantProductModels);
+                break;
+            default:
+                Log.d("HomeFragmentError", "sortBy value is not proper");
+                break;
+        }
+
+    }
+
+
     private void refreshItemOfResProducts() {
         RestaurantProductApi.getProductList(defaultLatitude, defaultLongitude, range, new RestaurantProductApi.MyListCallback() {
             @Override
@@ -241,7 +265,7 @@ public class HomeFragment extends Fragment  {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FilterSelectActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, FILTER_CODE);
             }
         });
         //검색 버튼
@@ -252,6 +276,7 @@ public class HomeFragment extends Fragment  {
                     if(isShowingUserProduct) {
                         filteredUserModels.clear();
                         filteredUserModels.addAll(UserProductApi.filterByKeyWord(userProductModelArrayList, searchText.getText().toString()));
+                        userAdapter.notifyDataSetChanged();
                     }
                     else {
                         filteredResModels.clear();
@@ -386,4 +411,16 @@ public class HomeFragment extends Fragment  {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == FILTER_CODE && resultCode ==  getActivity().RESULT_OK) {
+            FilterModel filterModel = (FilterModel)data.getSerializableExtra("Object");
+            sortItemOfResProducts(filterModel.getFilterType());
+            filteredResModels = RestaurantProductApi.filterByPrice(restaurantProductModels, filterModel.getPrice());
+            filteredResModels.clear();
+            filteredResModels.addAll(restaurantProductModels);
+            resAdapter.notifyDataSetChanged();
+        }
+    }
 }

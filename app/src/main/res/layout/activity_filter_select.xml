@@ -30,21 +30,18 @@
             android:layout_width="wrap_content"
             android:layout_height="50sp"
             android:layout_marginRight="30sp"
-            android:background="@drawable/bin_blue"
+            android:background="@drawable/bin_blue_none_select"
             android:fontFamily="@font/font_baemin5"
             android:text="거리"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
+            android:textStyle="normal" />
 
         <Button
             android:id="@+id/filterSelectActivity_btn_cost"
             android:layout_width="wrap_content"
             android:layout_height="50sp"
-            android:background="@drawable/bin_blue"
+            android:background="@drawable/bin_blue_none_select"
             android:fontFamily="@font/font_baemin5"
             android:text="가격"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
 
             />
 
@@ -53,11 +50,9 @@
             android:layout_width="wrap_content"
             android:layout_height="50sp"
             android:layout_marginLeft="30sp"
-            android:background="@drawable/bin_blue"
+            android:background="@drawable/bin_blue_none_select"
             android:fontFamily="@font/font_baemin5"
-            android:text="물량"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
+            android:text="물량" />
     </LinearLayout>
 
     <TextView
@@ -123,6 +118,7 @@
         />
 
     <TextView
+        android:id="@+id/filterSelectActivity_textView_price"
         android:layout_marginTop="3sp"
         android:layout_marginBottom="3sp"
         android:layout_width="match_parent"
