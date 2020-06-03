@@ -79,15 +79,15 @@ public class ResMainActivity extends AppCompatActivity {
         ft=fm.beginTransaction();
         switch (n){
             case 0:
-                ft.replace(R.id.resmainactivity_framelayout,chatFragment);
+                ft.replace(R.id.resmainactivity_framelayout,accountFragment);
                 ft.commit();
                 break;
             case 1:
-                ft.replace(R.id.resmainactivity_framelayout,writeFragment);
+                ft.replace(R.id.resmainactivity_framelayout,chatFragment);
                 ft.commit();
                 break;
             case 2:
-                ft.replace(R.id.resmainactivity_framelayout,accountFragment);
+                ft.replace(R.id.resmainactivity_framelayout,writeFragment);
                 ft.commit();
                 break;
             case 3:
