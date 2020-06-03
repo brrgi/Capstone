@@ -17,8 +17,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
+<<<<<<< HEAD
 import com.example.msg.Api.UserApi;
 import com.example.msg.DatabaseModel.UserModel;
+=======
+import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.Api.RestaurantApi;
+import com.example.msg.DatabaseModel.RestaurantModel;
+>>>>>>> 1be2161c28db4cbf4e8d9bd15c9208d16ee8d1ca
 import com.example.msg.R;
 import com.example.msg.Sale.ResSalesHistoryActivity;
 
@@ -31,6 +37,7 @@ public class ResAccountFragment extends Fragment {
     private View view;
     private LinearLayout ressaleshistory;
 
+<<<<<<< HEAD
     private String dong="";
     private TextView address;
     private double defaultLongitude = 0;
@@ -48,6 +55,11 @@ public class ResAccountFragment extends Fragment {
 
             @Override
             public void onFail(int errorCode, Exception e) {
+=======
+    private TextView res_name;
+    private TextView res_address;
+
+>>>>>>> 1be2161c28db4cbf4e8d9bd15c9208d16ee8d1ca
 
             }
         });
@@ -59,7 +71,25 @@ public class ResAccountFragment extends Fragment {
         view=inflater.inflate(R.layout.fragment_resaccount,container,false);
         ressaleshistory=view.findViewById(R.id.resaccount_linearLayout_saleshistory);
 
+<<<<<<< HEAD
 
+=======
+        res_name =view.findViewById(R.id.resaccount_textView_UID);
+        res_address=view.findViewById(R.id.resaccount_textView_address);
+
+        RestaurantApi.getUserById(AuthenticationApi.getCurrentUid(), new RestaurantApi.MyCallback() {
+            @Override
+            public void onSuccess(RestaurantModel restaurantModel) {
+                res_name.setText(restaurantModel.res_name);
+                res_address.setText(restaurantModel.res_address+" "+restaurantModel.res_address_detail);
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+>>>>>>> 1be2161c28db4cbf4e8d9bd15c9208d16ee8d1ca
 
         ressaleshistory.setOnClickListener(new View.OnClickListener() {
             @Override

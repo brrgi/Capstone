@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.msg.ChatRoom.ChatRoomActivity;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SaleModel;
@@ -169,6 +170,15 @@ public class SaleUserActivity extends AppCompatActivity {
         grade.setRating(4);
         txt_rating.setText("4.0");
         Glide.with(getApplicationContext()).load(userProductModel.p_imageURL).into(image_product);
+
+        btn_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SaleUserActivity.this, ChatRoomActivity.class);
+                intent.putExtra("id", userProductModel.user_id);
+                startActivity(intent);
+            }
+        });
 
 
         txt_salesman.setOnClickListener(new View.OnClickListener() {
