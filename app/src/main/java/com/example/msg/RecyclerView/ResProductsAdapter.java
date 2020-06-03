@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,6 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
             public void onSuccess(RestaurantModel restaurantModel) {
                 holder.name.setText(restaurantModel.res_name);
                 holder.grade.setRating(restaurantModel.res_rating);
-
             }
 
             @Override
@@ -75,14 +75,14 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
 
         String addressString = null;
         Geocoder geocoder = new Geocoder(context, Locale.KOREAN);
-//                Log.d("GOS", lat+" "+lng);
+                Log.d("GOS", item.latitude+"Tlqkf "+item.longitude);
         try {
             List<Address> addresses = geocoder.getFromLocation(item.latitude, item.longitude, 10);
             for (int i=0; i<addresses.size(); i++) {
                 if(addresses.get(i).getThoroughfare() != null ) {
                     holder.dong.setText(addresses.get(i).getThoroughfare());
                 }
-//                    Log.d("GOS", addresses.get(i).getThoroughfare());
+                    Log.d("GOS", "diqkf"+addresses.get(i).getThoroughfare());
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -121,7 +121,6 @@ public class ProductUploadActivity extends AppCompatActivity {
         address2=(Button)findViewById(R.id.product_upload_button_address2);
 
         this.InitializeListener();
-        final double  defaultLongitude = 0, defaultLatitude = 0;
         final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         final ArrayList<String> smallCategories = new ArrayList<>();

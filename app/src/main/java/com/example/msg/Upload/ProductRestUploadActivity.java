@@ -35,6 +35,8 @@ import com.example.msg.Api.GuideLineApi;
 import com.example.msg.Api.RestaurantProductApi;
 import com.example.msg.R;
 import com.example.msg.RecyclerView.QualitySelectActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.w3c.dom.Text;
 
@@ -55,7 +57,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
     private final RestaurantProductModel restaurantProductModel = new RestaurantProductModel();
 
 
-    private double defaultLatitude = 0, defaultLongitude = 0;
+    private double defaultLatitude = 0.0, defaultLongitude = 0.0;
     private Uri imageUri = null;
 
     private final int PICK_FROM_ALBUM =100, QUALITY_SELECT = 101;
@@ -97,22 +99,8 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         Integer i = Integer.parseInt(qualityText.getText().toString());
         restaurantProductModel.quality=i;
 
-        final String uid = AuthenticationApi.getCurrentUid();
-        RestaurantApi.getUserById(uid, new RestaurantApi.MyCallback() {
-            @Override
-            public void onSuccess(RestaurantModel restaurantModel) {
-                defaultLatitude=restaurantModel.res_latitude;
-                defaultLongitude=restaurantModel.res_longitude;
-            }
 
-            @Override
-            public void onFail(int errorCode, Exception e) {
 
-            }
-        });
-
-        restaurantProductModel.longitude = defaultLongitude;
-        restaurantProductModel.latitude = defaultLatitude;
     }
 
     private void postRestProduct(RestaurantProductModel restaurantProductModel) {
@@ -137,6 +125,20 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_rest_upload);
         initialize();
         this.InitializeListener();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user.getUid();
+        RestaurantApi.getUserById(uid, new RestaurantApi.MyCallback() {
+            @Override
+            public void onSuccess(RestaurantModel restaurantModel) {
+                defaultLatitude=restaurantModel.res_latitude;
+                defaultLongitude=restaurantModel.res_longitude;
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
         //대분류를 바꿀 때 소분류도 맞춰서 바꾸는 부분.
         bigCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -182,7 +184,10 @@ public class ProductRestUploadActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setRestaurantProductModelFromUI();
+                Log.d("GOS", "제발"+defaultLongitude);
                 restaurantProductModel.fast = false;
+                restaurantProductModel.longitude = defaultLongitude;
+                restaurantProductModel.latitude = defaultLatitude;
                 postRestProduct(restaurantProductModel);
             }
         });

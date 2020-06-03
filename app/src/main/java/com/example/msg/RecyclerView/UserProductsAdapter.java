@@ -56,8 +56,6 @@ public class UserProductsAdapter extends RecyclerView.Adapter<UserProductsAdapte
                 holder.name.setText(userModel.user_name);
                 holder.grade.setRating(userModel.user_rating);
                 holder.ban.setText("신고 횟수 "+userModel.ban_count+"회");
-                //holder.dong.setText(arrayList.get(position).p_description); //이레 추가부탁 6월01일
-
             }
 
             @Override

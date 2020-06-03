@@ -74,22 +74,55 @@
             android:id="@+id/resaccount_linearLayout_saleshistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:gravity="center"
             android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="45sp"
-                android:layout_height="80sp"
-                android:layout_margin="5sp"
-                android:src="@drawable/list"/>
-            <TextView
-
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:fontFamily="@font/font_baemin5"
-                android:text="판매내역"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="45sp"
+                    android:layout_height="80sp"
+                    android:layout_margin="5sp"
+                    android:src="@drawable/list"/>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/font_baemin5"
+                    android:text="판매내역"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="45sp"
+                    android:layout_height="80sp"
+                    android:layout_margin="5sp"
+                    android:src="@drawable/icon_food"/>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/font_baemin5"
+                    android:text="판매목록"/>
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
 
@@ -104,7 +137,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="10sp">
 
 
         <Button
@@ -112,6 +146,101 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="내 정보 수정"
+            android:fontFamily="@font/font_baemin5"
+            android:textSize="30sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
+            android:layout_margin="5sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10sp">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="위치 설정"
+            android:fontFamily="@font/font_baemin5"
+            android:textSize="30sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
+            android:layout_margin="5sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10sp">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공지사항"
+            android:fontFamily="@font/font_baemin5"
+            android:textSize="30sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
+            android:layout_margin="5sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10sp">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="신고하기"
+            android:fontFamily="@font/font_baemin5"
+            android:textSize="30sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
+            android:layout_margin="5sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10sp">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도움말"
+            android:fontFamily="@font/font_baemin5"
+            android:textSize="30sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="#00ff0000"
+            android:layout_margin="5sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10sp">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="통계 설정"
             android:fontFamily="@font/font_baemin5"
             android:textSize="30sp"
             style="@style/Widget.AppCompat.Button.Borderless"
