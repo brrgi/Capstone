@@ -1,6 +1,8 @@
 package com.example.msg.Sale;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +31,10 @@ import com.example.msg.RatingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 
 public class SaleUserActivity extends AppCompatActivity {
@@ -140,9 +146,9 @@ public class SaleUserActivity extends AppCompatActivity {
                 u_address=userModel.user_address;
                 u_uid = userModel.user_id;
                 txt_salesman.setText(u_name);
-                txt_address.setText(u_address);
                 ban.setText("신고 횟수 "+userModel.ban_count+"회");
                 grade.setRating(userModel.user_rating);
+                txt_rating.setText(Float.toString(userModel.user_rating));
             }
 
             @Override
@@ -167,9 +173,23 @@ public class SaleUserActivity extends AppCompatActivity {
         }
         txt_expireDate.setText(userProductModel.expiration_date);
         txt_description.setText(userProductModel.p_description);
-        grade.setRating(4);
-        txt_rating.setText("4.0");
+
         Glide.with(getApplicationContext()).load(userProductModel.p_imageURL).into(image_product);
+
+
+        String addressString = null;
+        Geocoder geocoder = new Geocoder(this, Locale.KOREAN);
+        try {
+            List<Address> addresses = geocoder.getFromLocation(userProductModel.latitude, userProductModel.longitude, 10);
+            for (int i=0; i<addresses.size(); i++) {
+                if(addresses.get(i).getThoroughfare() != null ) {
+                    txt_address.setText(addresses.get(i).getThoroughfare());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         btn_chat.setOnClickListener(new View.OnClickListener() {
             @Override

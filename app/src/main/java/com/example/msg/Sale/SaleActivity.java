@@ -127,6 +127,7 @@ public class SaleActivity extends AppCompatActivity {
                         subscriptionModel.user_id = subscriptionModelArrayList.get(i).user_id;
                         subscriptionModel.res_id = subscriptionModelArrayList.get(i).res_id;
                         subscriptionModel.subs_id = subscriptionModelArrayList.get(i).subs_id;
+
                         state = 1;
 
 
@@ -206,6 +207,8 @@ public class SaleActivity extends AppCompatActivity {
             @Override
             public void onSuccess(RestaurantModel restaurantModel) {
                 if(restaurantModel.res_name != null) txt_salesman.setText(restaurantModel.res_name);
+                rating.setRating(restaurantModel.res_rating);
+                txt_rating.setText(Float.toString(restaurantModel.res_rating));
 //                if(restaurantModel.res_address != null) txt_address.setText("동네: " + restaurantModel.res_address);
             }
 
@@ -274,8 +277,8 @@ public class SaleActivity extends AppCompatActivity {
         txt_description.setText(restaurantProductModel.p_description);
         String c=Integer.toString(restaurantProductModel.cost);
         txt_cost.setText(c);
-        rating.setRating(4);      //레이팅 모델이 없음!!!!!!!!!
-        txt_rating.setText("4.0");     // 마찬가지!!!!!!!!!!!!!!
+//        rating.setRating(4);      //레이팅 모델이 없음!!!!!!!!!
+//        txt_rating.setText("4.0");     // 마찬가지!!!!!!!!!!!!!!
 
         String addressString = null;
         Geocoder geocoder = new Geocoder(this, Locale.KOREAN);
