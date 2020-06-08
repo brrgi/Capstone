@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.RestaurantProductApi;
@@ -32,14 +33,24 @@ public class CompletedSaleResFagment extends Fragment {
     private RecyclerView.Adapter resAdapter;
     private final ArrayList<RestaurantProductModel> restaurantProductModelArrayList = new ArrayList<RestaurantProductModel>();
 
+    //refreshLayout 변수
+    private SwipeRefreshLayout refreshLayout;
+
     private void initializeLayout(final Context context) {
+        //refreshLayout 초기화
+        refreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.completedsale_res_swipeLayout);
+
         //리사이클러뷰 관련 초기화
-        recyclerView = view.findViewById(R.id.rescompletedsale_recyclerView);
+        recyclerView = view.findViewById(R.id.completedsale_res_recyclerView);
         recyclerView.setHasFixedSize(true); //리사이클러뷰 기존성능 강화
         layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
 
         resAdapter = new com.example.msg.RecyclerView.ResProductsAdapter(restaurantProductModelArrayList, context);
+
+        SalesHistory();
+        //refreshLayout false
+        refreshLayout.setRefreshing(false);
     }
 
     private void SalesHistory() {
@@ -62,10 +73,17 @@ public class CompletedSaleResFagment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_res_completedsale,container,false);
-        SalesHistory();
         initializeLayout(container.getContext());
+
+        //refreshLayout로 새로고침했을 때
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initializeLayout(container.getContext());
+            }
+        });
         return view;
     }
 }

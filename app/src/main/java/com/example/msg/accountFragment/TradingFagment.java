@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.ShareApi;
@@ -33,7 +34,13 @@ public class TradingFagment extends Fragment {
     private RecyclerView.Adapter userAdapter;
     private final ArrayList<UserProductModel> userProductModelArrayList = new ArrayList<UserProductModel>();
 
+    //refreshLayout 변수
+    private SwipeRefreshLayout refreshLayout;
+
     private void initializeLayout(final Context context) {
+        //refreshLayout 초기화
+        refreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.trading_swipeLayout);
+
         //리사이클러뷰 관련 초기화
         recyclerView = view.findViewById(R.id.trading_recyclerView);
         recyclerView.setHasFixedSize(true); //리사이클러뷰 기존성능 강화
@@ -41,6 +48,10 @@ public class TradingFagment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         userAdapter = new com.example.msg.RecyclerView.UserProductsAdapter(userProductModelArrayList, context);
+
+        SalesHistory();
+        //refreshLayout false
+        refreshLayout.setRefreshing(false);
     }
 
     private void SalesHistory() {
@@ -63,10 +74,19 @@ public class TradingFagment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_trading,container,false);
-        SalesHistory();
+
         initializeLayout(container.getContext());
+
+        //refreshLayout로 새로고침했을 때
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initializeLayout(container.getContext());
+            }
+        });
+
         return view;
     }
 }

@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <ScrollView
+    android:id="@+id/completedsale_swipeLayout"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_marginTop="2sp"
-        android:layout_gravity="bottom"
         android:orientation="vertical">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/completedsale_recyclerView"
-            android:fontFamily="@font/font_baemin5"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="2sp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/completedsale_recyclerView"
+                android:fontFamily="@font/font_baemin5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
 
-</LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
