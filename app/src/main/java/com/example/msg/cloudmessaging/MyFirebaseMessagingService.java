@@ -83,6 +83,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             }
             sendNotification(body);
         }
+        else if(remoteMessage.getNotification()!=null) {
+            body = remoteMessage.getData().get("body");
+            sendNotification(body);
+        }
 
     }
 
@@ -94,12 +98,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private void scheduleJob()
     {
-        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
-        Job myJob = dispatcher.newJobBuilder()
-                .setService(MyJobService.class)
-                .setTag("my-job-tag")
-                .build();
-        dispatcher.schedule(myjob);
         Log.d("ParkKyudong","schedulejob");
     }
 

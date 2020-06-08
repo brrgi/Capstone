@@ -6,8 +6,8 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MyJobService extends JobService {
+
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
         return false;
