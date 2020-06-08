@@ -142,6 +142,7 @@ public class UserProductApi {
                         "latitude", userProductModel.latitude,
                         "longitude", userProductModel.longitude,
                         "user_id", userProductModel.user_id
+
                 ).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
