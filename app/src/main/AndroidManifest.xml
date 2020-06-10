@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".EditProfile.EditProfileActivity"/>
         <activity android:name=".FilterSelectActivity"></activity>
         <activity android:name=".ban.BanActivity" />
         <activity android:name=".Profile.UserProfileActivity" />

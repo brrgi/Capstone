@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    android:gravity="center">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/editProfileActivity_edittext_email"
+                android:singleLine="true"
+                android:lines="1"
+                android:hint="이메일"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editProfileActivity_edittext_password"
+            android:hint="패스워드"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editProfileActivity_edittext_name"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="이름"
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/editProfileActivity_button_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:fontFamily="@font/font_baemin5"
+        android:layout_gravity="start"
+        android:text="주소 입력하기"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editProfileActivity_edittext_address"
+            android:singleLine="true"
+            android:lines="1"
+            android:fontFamily="@font/font_baemin5"
+            android:hint="받은 주소"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editProfileActivity_edittext_address_detail"
+            android:singleLine="true"
+            android:lines="1"
+            android:fontFamily="@font/font_baemin5"
+            android:hint="상세 주소"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editProfileActivity_edittext_phone"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="전화 번호"
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/editProfileActivity_button_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:fontFamily="@font/font_baemin5"
+        android:text="수정"/>
+
+
+</LinearLayout>

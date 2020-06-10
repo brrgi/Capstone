@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.DatabaseModel.UserModel;
+import com.example.msg.EditProfile.EditProfileActivity;
 import com.example.msg.R;
 import com.example.msg.Sale.PurchaseHistoryActivity;
 import com.example.msg.Sale.SalesHistoryActivity;
@@ -43,6 +45,8 @@ public class AccountFragment extends Fragment {
     private double defaultLatitude = 0;
     private String dong="";
     private TextView address;
+    private Button editProfile;
+
     private void getAddress(String uid){
         UserApi.getUserById(uid, new UserApi.MyCallback() {
             @Override
@@ -70,6 +74,7 @@ public class AccountFragment extends Fragment {
         address=(TextView)view.findViewById(R.id.account_textView_address);
         txt_user_rating = view.findViewById(R.id.account_textView_rating);
         txt_username = view.findViewById(R.id.account_textView_UID);
+        editProfile = view.findViewById(R.id.account_textView_editprofile);
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -105,6 +110,13 @@ public class AccountFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), PurchaseHistoryActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), EditProfileActivity.class));
             }
         });
 

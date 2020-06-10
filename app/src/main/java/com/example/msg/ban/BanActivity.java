@@ -67,7 +67,7 @@ public class BanActivity extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(UserModel userModel) {
                                                 Log.d(TAG,"ban success");
-                                                startActivity(new Intent(BanActivity.this, UserProfileActivity.class));
+                                                //startActivity(new Intent(BanActivity.this, UserProfileActivity.class));
                                                 Intent intent=new Intent(BanActivity.this, UserProfileActivity.class);
                                                 intent.putExtra("reported_user_id", uid);
                                                 startActivity(intent);
