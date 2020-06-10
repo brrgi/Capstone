@@ -1,7 +1,10 @@
 package com.example.msg.EditProfile;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -82,6 +85,32 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onFail(int errorCode, Exception e) {
 
+            }
+        });
+
+        //비밀번호 6자리 이상일 때 버튼 누를 수 있고 색상도 회색에서 주황색으로
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(password.getText().toString().length()<6){
+                    edit.setEnabled(false);
+                    edit.setBackgroundColor(Color.parseColor("#D8D8D8"));
+                    edit.setText("비밀번호 6자리 이상 입력해주세요.");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(password.getText().toString().length()>=6){
+                    edit.setEnabled(true);
+                    edit.setBackgroundColor(Color.parseColor("#F39C12"));
+                    edit.setText("수정");
+                }
             }
         });
 
