@@ -136,6 +136,7 @@ public class SignupRestActivity extends AppCompatActivity {
                                         com.example.msg.DatabaseModel.RestaurantModel restaurantModel=new com.example.msg.DatabaseModel.RestaurantModel();
                                         //RestaurantModel restaurantModel = new RestaurantModel();
                                         restaurantModel.res_id=uid;
+                                        restaurantModel.res_email=email.getText().toString();
                                         restaurantModel.res_name=(res_name.getText().toString());
                                         restaurantModel.res_imageURL=(imageUrl.getResult().toString());
                                         restaurantModel.res_phone=(res_phone.getText().toString());

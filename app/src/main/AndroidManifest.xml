@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".EditProfile.EditProfileActivity"/>
+        <activity android:name=".EditProfile.EditResProfileActivity"/>
         <activity android:name=".FilterSelectActivity"></activity>
         <activity android:name=".ban.BanActivity" />
         <activity android:name=".Profile.UserProfileActivity" />

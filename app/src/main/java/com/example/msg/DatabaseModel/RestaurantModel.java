@@ -6,6 +6,7 @@ public class RestaurantModel {
     public String res_phone;
     public String res_address = null;
     public String res_address_detail=null; //추가 0526
+    public String res_email=null; //추가 0611
     public String res_imageURL = null;
     public String res_description = null;
     public String pickup_start_time;

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.RestaurantApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
 
+import com.example.msg.EditProfile.EditResProfileActivity;
 import com.example.msg.R;
 import com.example.msg.Sale.ResSalesHistoryActivity;
 
@@ -44,6 +46,7 @@ public class ResAccountFragment extends Fragment {
 
     private TextView res_name;
     private TextView res_address;
+    private Button editProfile;
 
     private void getAddress(String uid){
         UserApi.getUserById(uid, new UserApi.MyCallback() {
@@ -73,6 +76,7 @@ public class ResAccountFragment extends Fragment {
 
         res_name =view.findViewById(R.id.resaccount_textView_UID);
         res_address=view.findViewById(R.id.resaccount_textView_address);
+        editProfile=view.findViewById(R.id.reaccount_textView_editprofile);
 
         RestaurantApi.getUserById(AuthenticationApi.getCurrentUid(), new RestaurantApi.MyCallback() {
             @Override
@@ -96,6 +100,12 @@ public class ResAccountFragment extends Fragment {
             }
         });
 
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), EditResProfileActivity.class));
+            }
+        });
 
 
         return view;
