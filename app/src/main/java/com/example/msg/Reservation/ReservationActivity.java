@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.DateFormat;
@@ -32,6 +35,7 @@ public class ReservationActivity extends AppCompatActivity {
 
     private Button button;
     private EditText editText;
+    String user_token = "";
     Spinner spinner;
 
     String msg = "예약이 완료되었습니다.";
@@ -74,22 +78,22 @@ public class ReservationActivity extends AppCompatActivity {
                 reserveModel.category = tmp;
                 reserveModel.keyword = editText.getText().toString();
                 reserveModel.time = makeCurrentTimeString();
+                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(!task.isSuccessful()) {
+                            Log.d("ParkKyudong","getInstanceId failed",task.getException());
+                            return;
+                        }
+                        user_token = task.getResult().getToken();
+                    }
+                });
+                reserveModel.user_token = user_token;
 
                 ReserveApi.postReservation(reserveModel, new ReserveApi.MyCallback() {
                     @Override
                     public void onSuccess(ReserveModel reserveModel) {
-                        FirebaseMessaging.getInstance().subscribeToTopic(reserveModel.keyword)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        //String msg = getString(R.string.msg_subscribed);
-                                        if (!task.isSuccessful()) {
-                                            //  msg = getString(R.string.msg_subscribe_failed);
-                                        }
-                                        //Log.d(TAG, msg);
-                                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+
                     }
 
                     @Override
