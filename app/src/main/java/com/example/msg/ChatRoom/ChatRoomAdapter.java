@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.DatabaseModel.ChatRoomModel;
 import com.example.msg.R;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                     if(pos != RecyclerView.NO_POSITION) {
                         ChatRoomModel chatRoomModel = chatRoomModels.get(pos);
                         Intent intent = new Intent(v.getContext(), ChatRoomActivity.class);
-                        intent.putExtra("id", chatRoomModel.opponentId);
+                        intent.putExtra("object", chatRoomModel);
                         v.getContext().startActivity(intent);
 
                     }

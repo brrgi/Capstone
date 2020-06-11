@@ -1,3 +1,4 @@
+
 package com.example.msg.ChatRoom;
 
 import android.content.Context;
@@ -5,9 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.msg.DatabaseModel.ChatRoomModel;
+
 import java.util.ArrayList;
 
 public class ChatListSqlManager {
+    /*
     private static  SQLiteDatabase database = null;
     private final String CHAT_LIST_TABLE_NAME = "chat_list";
     private final String DATABASE_NAME = "msg.db";
@@ -108,4 +112,5 @@ public class ChatListSqlManager {
         chatRoomModel.opponentName = "상대: test1234@naver.com";
         chatListSqlManager.insertRecord(chatRoomModel);
     }
+    */
 }

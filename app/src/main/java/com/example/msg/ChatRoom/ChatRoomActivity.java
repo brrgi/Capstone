@@ -13,6 +13,8 @@ import android.widget.EditText;
 
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.ChatApi;
+import com.example.msg.Api.ChatRoomApi;
+import com.example.msg.DatabaseModel.ChatRoomModel;
 import com.example.msg.R;
 
 import java.lang.reflect.Array;
@@ -57,11 +59,18 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     }
 
+    private String getOpponentIdByModel(ChatRoomModel chatRoomModel, String myId) {
+        if(chatRoomModel.id1.equals(myId)) return chatRoomModel.id2;
+        else return chatRoomModel.id1;
+    }
+
+
     private void initializeId() {
         myId = AuthenticationApi.getCurrentUid();
         Intent intent = getIntent();
 
-        opponentId = intent.getExtras().getString("id");
+        ChatRoomModel chatRoomModel = (ChatRoomModel)intent.getSerializableExtra("object");
+        opponentId = getOpponentIdByModel(chatRoomModel, myId);
     }
 
     @Override
@@ -90,15 +99,28 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        /*
+
         ChatRoomModel chatRoomModel = new ChatRoomModel();
         chatRoomModel.lastChat = chats.get(chats.size() -1).takeContent();
         chatRoomModel.lastDate = chats.get(chats.size() -1).getDate();
-        chatRoomModel.myId = myId;
-        chatRoomModel.opponentId = opponentId;
+        chatRoomModel.id1 = myId;
+        chatRoomModel.id2 = opponentId;
         chatRoomModel.opponentName = opponentName;
         chatRoomModel.pictureUrl = "";
 
+        ChatRoomApi.postOrUpdateChatRoom(chatRoomModel, new ChatRoomApi.MyCallback() {
+            @Override
+            public void onSuccess(ChatRoomModel chatRoomModel) {
+
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+
+        /*
         ChatListSqlManager chatListSqlManager = new ChatListSqlManager();
         chatListSqlManager.createDatabase(getApplicationContext());
         chatListSqlManager.createTable();

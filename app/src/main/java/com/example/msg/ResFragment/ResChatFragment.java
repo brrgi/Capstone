@@ -16,17 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.msg.ChatRoom.ChatListSqlManager;
 import com.example.msg.ChatRoom.ChatRoomAdapter;
-import com.example.msg.ChatRoom.ChatRoomModel;
+import com.example.msg.DatabaseModel.ChatRoomModel;
 import com.example.msg.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
