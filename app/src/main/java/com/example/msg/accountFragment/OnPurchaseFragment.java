@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.RestaurantProductApi;
@@ -55,7 +56,13 @@ public class OnPurchaseFragment extends Fragment {
     private boolean isUserProduct = true;
 
 
+    //refreshLayout 변수
+    private SwipeRefreshLayout refreshLayout;
+
     private void initializeLayout(final Context context) {
+        //refreshLayout 초기화
+        refreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.onpurchasefragment_swipeLayout);
+
         //리사이클러뷰 관련 초기화
         recyclerView = view.findViewById(R.id.onpurchase_recyclerView);
         recyclerView.setHasFixedSize(true); //리사이클러뷰 기존성능 강화
@@ -71,6 +78,9 @@ public class OnPurchaseFragment extends Fragment {
     //    userAdapter = new com.example.msg.RecyclerView.UserProductsAdapter(userProductModelArrayList, context);
         if(isUserProduct) PurchaseUserHistory();
         else PurchaseResHistory();
+
+        //refreshLayout false
+        refreshLayout.setRefreshing(false);
     }
 
     private void PurchaseUserHistory() {
@@ -116,6 +126,7 @@ public class OnPurchaseFragment extends Fragment {
                 userProductModelArrayList.clear();
                 userProductModels.clear();
                 for(int i=0;i<saleModels.size();i++) {
+                    Log.d(TAG,"saleModels.size() : "+saleModels.size());
                     RestaurantProductApi.getProduct((saleModels.get(i).product_id), new RestaurantProductApi.MyCallback() {
                         @Override
                         public void onSuccess(RestaurantProductModel restaurantProductModel) {
@@ -148,9 +159,21 @@ public class OnPurchaseFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_on_purchase,container,false);
         initializeLayout(getContext());
+
+        //refreshLayout로 새로고침했을 때
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                userProductModelArrayList.clear();
+                userProductModels.clear();
+                restaurantProductModelArrayList.clear();
+                restaurantProductModels.clear();
+                initializeLayout(container.getContext());
+            }
+        });
         return view;
     }
     public void onViewCreated(View view, Bundle savedInstanceState) {
