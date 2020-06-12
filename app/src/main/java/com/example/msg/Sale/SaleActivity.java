@@ -334,7 +334,6 @@ public class SaleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ResQrcodeActivity.class);
                 intent.putExtra("Model", restaurantProductModel);
-                //사용자 uid나 name도 보내자
                 startActivity(intent);
             }
         });

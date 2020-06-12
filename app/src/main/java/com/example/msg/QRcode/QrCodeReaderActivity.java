@@ -31,9 +31,11 @@ public class QrCodeReaderActivity extends AppCompatActivity {
         if(result != null) {
             if(result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+                finish();
                 // todo
             } else {
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, " " + result.getContents(), Toast.LENGTH_LONG).show();
+                finish();
                 // todo
             }
         } else {
