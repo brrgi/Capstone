@@ -34,6 +34,7 @@ import com.example.msg.Api.SubscriptionApi;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Map.MapActivity;
+import com.example.msg.QRcode.ResQrcodeActivity;
 import com.example.msg.R;
 import com.example.msg.RatingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -72,6 +73,7 @@ public class SaleActivity extends AppCompatActivity {
     private final SubscriptionModel subscriptionModel = new SubscriptionModel();
     static int state = -1;
     private Button btn_evaluate;
+    private Button QRcode;
     private RatingBar rating;
     private Button dummy;
     String r_sub = "";
@@ -243,7 +245,8 @@ public class SaleActivity extends AppCompatActivity {
 
         btn_buy = (Button) findViewById(R.id.saleActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
-        btn_evaluate = (Button) findViewById(R.id.test_ratingbtn);
+        btn_evaluate = (Button) findViewById(R.id.saleActivity_button_rating);
+        QRcode = (Button) findViewById(R.id.saleActivity_button_QRcode);
 
 
 
@@ -253,7 +256,10 @@ public class SaleActivity extends AppCompatActivity {
             btn_chat.setVisibility(View.INVISIBLE);
         }
 
-        if(restaurantProductModel.completed==0) btn_evaluate.setVisibility(View.VISIBLE);
+        if(restaurantProductModel.completed==0){
+            btn_evaluate.setVisibility(View.VISIBLE);
+            QRcode.setVisibility(View.VISIBLE);
+        }
 
         getResModelFromProduct(restaurantProductModel);
         getSubscribeCheck(restaurantProductModel);
@@ -320,6 +326,16 @@ public class SaleActivity extends AppCompatActivity {
                 intent.putExtra("Model", restaurantProductModel);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        QRcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ResQrcodeActivity.class);
+                intent.putExtra("Model", restaurantProductModel);
+                //사용자 uid나 name도 보내자
+                startActivity(intent);
             }
         });
 

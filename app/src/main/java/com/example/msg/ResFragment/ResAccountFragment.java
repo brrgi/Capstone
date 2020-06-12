@@ -27,6 +27,7 @@ import com.example.msg.Api.RestaurantApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
 
 import com.example.msg.EditProfile.EditResProfileActivity;
+import com.example.msg.QRcode.QrCodeReaderActivity;
 import com.example.msg.R;
 import com.example.msg.Sale.ResSalesHistoryActivity;
 
@@ -47,6 +48,7 @@ public class ResAccountFragment extends Fragment {
     private TextView res_name;
     private TextView res_address;
     private Button editProfile;
+    private Button qrReader;
 
     private void getAddress(String uid){
         UserApi.getUserById(uid, new UserApi.MyCallback() {
@@ -77,6 +79,7 @@ public class ResAccountFragment extends Fragment {
         res_name =view.findViewById(R.id.resaccount_textView_UID);
         res_address=view.findViewById(R.id.resaccount_textView_address);
         editProfile=view.findViewById(R.id.reaccount_textView_editprofile);
+        qrReader=view.findViewById(R.id.reaccount_textView_qrReader);
 
         RestaurantApi.getUserById(AuthenticationApi.getCurrentUid(), new RestaurantApi.MyCallback() {
             @Override
@@ -104,6 +107,13 @@ public class ResAccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), EditResProfileActivity.class));
+            }
+        });
+
+        qrReader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), QrCodeReaderActivity.class));
             }
         });
 
