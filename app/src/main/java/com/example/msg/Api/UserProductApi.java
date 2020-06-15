@@ -35,6 +35,11 @@ public class UserProductApi {
         void onFail(int errorCode, Exception e);
     }
 
+    public interface MyFilterCallback {
+        void onSuccess(FoodModel foodModel);
+        void onFail(int errorCode, Exception e);
+    }
+
     public interface MyListCallback{
         void onSuccess(ArrayList<UserProductModel> userProductModels);
         void onFail(int errorCode, Exception e);
@@ -287,15 +292,41 @@ public class UserProductApi {
     동작: 모델 리스트에서 입력 카테고리에 해당하는 모델만 필터링해서 반환합니다. 얕은 복사를 일으키므로 주의하십시오.
     */
 
-    public static ArrayList<UserProductModel> filterByKeyWord(ArrayList<UserProductModel> modelList, String keyword) {
-        ArrayList<UserProductModel> newModelList = new ArrayList<UserProductModel>();
-        UserProductModel userProductModel = null;
+    public static void keywordSend(final String keyword, final MyFilterCallback myFilterCallback) {
+        db.collection("Foods").whereEqualTo("food_name",keyword).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        FoodModel foodModel = new FoodModel();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                foodModel = documentSnapshot.toObject(FoodModel.class);
+                            }
+                            myFilterCallback.onSuccess(foodModel);
+                        } else {
+                            myFilterCallback.onFail(0, null);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                myFilterCallback.onFail(1,e);
+            }
+        });
+    }
 
-        for(int i =0; i< modelList.size(); i++) {
-            userProductModel = modelList.get(i);
-            if(userProductModel.title.contains(keyword) || userProductModel.p_description.contains(keyword)
-            || userProductModel.categoryBig.contains(keyword) || userProductModel.categorySmall.contains(keyword)) {
-                newModelList.add(userProductModel);
+
+    public static ArrayList<UserProductModel> filterByKeyWord(final ArrayList<UserProductModel> modelList,final FoodModel foodModel) {
+        ArrayList<UserProductModel> newModelList = new ArrayList<UserProductModel>();
+        UserProductModel userProductModel;
+        for(int j = 0; j < foodModel.ingredients.size()-1; j++) {
+            String keyword = foodModel.ingredients.get(j);
+            for(int i =0; i< modelList.size(); i++) {
+                userProductModel = modelList.get(i);
+                if(userProductModel.title.contains(keyword) || userProductModel.p_description.contains(keyword)
+                        || userProductModel.categoryBig.contains(keyword) || userProductModel.categorySmall.contains(keyword)) {
+                    newModelList.add(userProductModel);
+                }
             }
         }
 

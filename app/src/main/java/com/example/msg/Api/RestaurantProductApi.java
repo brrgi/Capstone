@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.msg.DatabaseModel.FoodModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.google.android.gms.tasks.Continuation;
@@ -30,6 +31,10 @@ public class RestaurantProductApi {
 
     public interface MyCallback {
         void onSuccess(RestaurantProductModel restaurantProductModel);
+        void onFail(int errorCode, Exception e);
+    }
+    public interface MyFilterCallback {
+        void onSuccess(FoodModel foodModel);
         void onFail(int errorCode, Exception e);
     }
 
@@ -287,18 +292,43 @@ public class RestaurantProductApi {
     동작: 모델 리스트에서 입력 카테고리에 해당하는 모델만 필터링해서 반환합니다. 얕은 복사를 일으키므로 주의하십시오.
     */
 
-    public static ArrayList<RestaurantProductModel> filterByKeyWord(ArrayList<RestaurantProductModel> modelList, String keyword) {
+    public static void keywordSend(final String keyword, final MyFilterCallback myFilterCallback) {
+        db.collection("Foods").whereEqualTo("food_name",keyword).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        FoodModel foodModel = new FoodModel();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                foodModel = documentSnapshot.toObject(FoodModel.class);
+                                Log.d("FoodModel",foodModel.ingredients.get(0));
+                            }
+                            myFilterCallback.onSuccess(foodModel);
+                        } else {
+                            myFilterCallback.onFail(0, null);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                myFilterCallback.onFail(1,e);
+            }
+        });
+    }
+
+    public static ArrayList<RestaurantProductModel> filterByKeyWord(ArrayList<RestaurantProductModel> modelList, FoodModel foodModel) {
         ArrayList<RestaurantProductModel> newModelList = new ArrayList<RestaurantProductModel>();
         RestaurantProductModel restaurantProductModel = null;
-
-        for(int i =0; i< modelList.size(); i++) {
-            restaurantProductModel = modelList.get(i);
-            if(restaurantProductModel.title.contains(keyword) || restaurantProductModel.p_description.contains(keyword)
-                    || restaurantProductModel.categoryBig.contains(keyword) || restaurantProductModel.categorySmall.contains(keyword)) {
-                newModelList.add(restaurantProductModel);
+        for(int j = 0; j<foodModel.ingredients.size()-1; j++) {
+            String keyword = foodModel.ingredients.get(j);
+            for(int i =0; i< modelList.size(); i++) {
+                restaurantProductModel = modelList.get(i);
+                if(restaurantProductModel.title.contains(keyword) || restaurantProductModel.p_description.contains(keyword)
+                        || restaurantProductModel.categoryBig.contains(keyword) || restaurantProductModel.categorySmall.contains(keyword)) {
+                    newModelList.add(restaurantProductModel);
+                }
             }
         }
-
         return newModelList;
     }
     /*
