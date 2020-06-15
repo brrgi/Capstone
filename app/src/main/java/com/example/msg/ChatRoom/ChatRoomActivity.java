@@ -1,3 +1,7 @@
+/*
+채팅 리스트의 채팅을 클릭해서 입장한 채팅방의 액티비티입니다.
+ */
+
 package com.example.msg.ChatRoom;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,16 +26,16 @@ import java.util.ArrayList;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
-    private String myId = "1";
-    private String opponentId = "2";
-    private String opponentName = "김철수";
+    private String myId;
+    private String opponentId;
+    private String opponentName;
 
     //리사이클러뷰 관련 요소들.
     private ArrayList<Chat> chats;
     private RecyclerView recyclerView;
     private ChatAdapter chatAdapter;
 
-
+    //기타 레이아웃 관련 요소들.
     private Button sendButton;
     private EditText sendEditText;
 
@@ -58,11 +62,11 @@ public class ChatRoomActivity extends AppCompatActivity {
         });
 
     }
+    /*
+    레이아웃을 초기화하고 채팅의 실시간 리스너를 등록합니다. 이때문에 UI는 채팅 데이터베이스의 변화에 따라
+    실시간으로 변화를 일으킵니다.
+     */
 
-    private String getOpponentIdByModel(ChatRoomModel chatRoomModel, String myId) {
-        if(chatRoomModel.id1.equals(myId)) return chatRoomModel.id2;
-        else return chatRoomModel.id1;
-    }
 
 
     private void initializeId() {
@@ -70,8 +74,9 @@ public class ChatRoomActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         ChatRoomModel chatRoomModel = (ChatRoomModel)intent.getSerializableExtra("object");
-        opponentId = getOpponentIdByModel(chatRoomModel, myId);
+        opponentId = ChatRoomApi.getOpponentIdByModel(chatRoomModel, myId);
     }
+    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

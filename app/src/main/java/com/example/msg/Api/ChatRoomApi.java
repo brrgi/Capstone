@@ -120,5 +120,12 @@ public class ChatRoomApi {
     동작: 현재 사용자의 아이디를 받아서 해당 id를 포함하는 ChatRoom정보를 전부 끌어옵니다.
      */
 
+    public static String getOpponentIdByModel(ChatRoomModel chatRoomModel, String myId) {
+        if(chatRoomModel.id1.equals(myId)) return chatRoomModel.id2;
+        else return chatRoomModel.id1;
+    }
+    /*
+
+     */
 
 }
