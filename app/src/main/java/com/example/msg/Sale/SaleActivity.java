@@ -252,6 +252,8 @@ public class SaleActivity extends AppCompatActivity {
         btn_evaluate = (Button) findViewById(R.id.saleActivity_button_rating);
         QRcode = (Button) findViewById(R.id.saleActivity_button_QRcode);
 
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
 
         if(uid.equals(restaurantProductModel.res_id)) {
