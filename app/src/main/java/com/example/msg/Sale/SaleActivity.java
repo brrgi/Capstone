@@ -54,6 +54,7 @@ import java.util.Locale;
 
 public class SaleActivity extends AppCompatActivity {
 
+    private static final String TAG = "SaleActivity";
     private int stuck = 10;
 
     private Button btn_chat;
@@ -85,6 +86,8 @@ public class SaleActivity extends AppCompatActivity {
         saleModel.res_id = restaurantProductModel.res_id;
         saleModel.user_id = AuthenticationApi.getCurrentUid();
         saleModel.product_id = restaurantProductModel.rproduct_id;
+        //재고
+        restaurantProductModel.stock-=1;
         restaurantProductModel.completed = 0;
 
         SaleApi.postSale(saleModel, new SaleApi.MyCallback() {
@@ -93,12 +96,13 @@ public class SaleActivity extends AppCompatActivity {
                 RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
                     @Override
                     public void onSuccess(RestaurantProductModel restaurantProductModel) {
+
                         finish();
                     }
 
                     @Override
                     public void onFail(int errorCode, Exception e) {
-
+                        Log.d(TAG,"RestaurantProductApi.updateProduct fail");
                     }
                 });
             }

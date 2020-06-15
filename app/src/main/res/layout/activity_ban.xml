@@ -22,7 +22,10 @@
         android:id="@+id/ban_editText_description"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginTop="30dp"
         android:hint="신고 사유"
+        android:background="@drawable/edittext_rounded_corner_rectangle"
+        android:layout_marginHorizontal="20dp"
         android:fontFamily="@font/font_baemin5"
         android:gravity="top"
         />
@@ -33,6 +36,7 @@
         android:background="@drawable/bin_blue"
         android:textColor="#ffffff"
         android:textStyle="bold"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/font_baemin5"
         android:text="제출하기"
         />

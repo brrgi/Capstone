@@ -36,6 +36,10 @@ public class SaleApi {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+
+                        db.collection("Sales").document(documentReference.getId())
+                                .update("sales_id",documentReference.getId());
+
                         myCallback.onSuccess(saleModel);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -121,5 +125,54 @@ public class SaleApi {
     출력: 없음.
     동작: ID를 이용해서 데이터베이스에 서칭을 하고, 그 결과 나온 모델들의 리스트를 돌려줍니다. 콜백함수 onSuccess를 통해서 돌려줍니다. 실패시 onFail이 호출됩니다.
      */
+
+    public static void updateSales(final SaleModel saleModel, final MyCallback myCallback) {
+        db.collection("Sales").document(saleModel.sales_id).
+                update(
+                        "review", saleModel.review
+                ).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                myCallback.onSuccess(saleModel);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                myCallback.onFail(0, e);
+            }
+        });
+    }
+
+    public static void getSaleByProductIdandUserId(final String user_id, final String product_id,  final MyListCallback myCallback) {
+        db.collection("Sales")
+                .whereEqualTo("product_id", product_id)
+                .whereEqualTo("user_id",user_id)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        SaleModel saleModel = null;
+                        ArrayList<SaleModel> saleModelArrayList = new ArrayList<SaleModel>();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                saleModel = document.toObject(SaleModel.class);
+                                saleModelArrayList.add(saleModel);
+                            }
+                            myCallback.onSuccess(saleModelArrayList);
+
+                        } else {
+                            myCallback.onFail(1, null);
+                            //태스크 실패.
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                myCallback.onFail(0, e); //실패.
+            }
+        });
+    }
 }
+
 

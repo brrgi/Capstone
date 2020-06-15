@@ -45,7 +45,7 @@ import java.util.ArrayList;
 public class ProductRestUploadActivity extends AppCompatActivity {
 
     private ImageView productImage;
-    private EditText title, quantity, cost, description;
+    private EditText title, quantity, cost, description, stock;
     private Spinner bigCategory, smallCategory;
     private TextView qualityText,txtResult;
     private Button qualityButton, submit, fast,expireDate;
@@ -69,6 +69,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         expireDate = (Button)findViewById(R.id.product_rest_button_expireDate);
         cost = (EditText)findViewById(R.id.product_rest_editText_cost);
         description = (EditText)findViewById(R.id.product_rest_editText_description);
+        stock = (EditText)findViewById(R.id.product_rest_editText_stock);
 
         bigCategory = (Spinner)findViewById(R.id.product_rest_spinner_categoryA);
         smallCategory = (Spinner)findViewById(R.id.product_rest_spinner_categoryB);
@@ -91,6 +92,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         restaurantProductModel.expiration_date = expireDate.getText().toString();
         restaurantProductModel.cost = Integer.parseInt(cost.getText().toString());
         restaurantProductModel.p_description = description.getText().toString();
+        restaurantProductModel.stock = Integer.parseInt(stock.getText().toString());
 
         restaurantProductModel.categoryBig = bigCategory.getSelectedItem().toString();
         restaurantProductModel.categorySmall = smallCategory.getSelectedItem().toString();

@@ -7,5 +7,7 @@ public class ShareModel {
     public String share_from;
     public String share_to;
     public String uproduct_id;
+    public String review=null;
+    public String share_id=null;
 
 }

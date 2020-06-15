@@ -15,30 +15,34 @@
         android:rating="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.235" />
 
     <Button
         android:id="@+id/ratingActivity_ratingButton_rating"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bin_blue"
+        android:fontFamily="@font/font_baemin5"
+        android:text="제출"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:text="제출"
-        android:fontFamily="@font/font_baemin5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingActivity_ratingBar_rating"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/ratingActivity_editText_review"
+        app:layout_constraintVertical_bias="0.925" />
 
     <TextView
         android:id="@+id/ratingActivity_textview_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="48dp"
         android:fontFamily="@font/font_baemin5"
+        android:text="판매자이름"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,10 +51,27 @@
         android:id="@+id/ratingActivity_textview_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="TextView"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/font_baemin5"
+        android:text="평점"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingActivity_textview_user" />
+
+    <EditText
+        android:id="@+id/ratingActivity_editText_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:fontFamily="@font/font_baemin5"
+        android:hint="리뷰를 남겨주세요!"
+        android:background="@drawable/edittext_rounded_corner_rectangle"
+        android:layout_marginHorizontal="20dp"
+        android:paddingBottom="200dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingActivity_ratingBar_rating" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

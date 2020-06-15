@@ -212,7 +212,8 @@ public class RestaurantProductApi {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 restaurantProductModel = document.toObject(RestaurantProductModel.class);
                                 if((restaurantProductModel.longitude > curLongitude - range) && (restaurantProductModel.longitude < curLongitude + range)){
-                                    restaurantProductModelArrayList.add(restaurantProductModel);
+                                    if(restaurantProductModel.stock>0)
+                                        restaurantProductModelArrayList.add(restaurantProductModel);
                                 }
                             }
                             myCallback.onSuccess(restaurantProductModelArrayList);

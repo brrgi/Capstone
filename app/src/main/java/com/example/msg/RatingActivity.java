@@ -8,18 +8,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.RestaurantApi;
 import com.example.msg.Api.RestaurantProductApi;
+import com.example.msg.Api.SaleApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.Api.UserProductApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.SaleModel;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Sale.SaleUserActivity;
+
+import java.util.ArrayList;
 
 public class RatingActivity extends AppCompatActivity {
 
@@ -28,6 +35,7 @@ public class RatingActivity extends AppCompatActivity {
     private float ratingScore = 0;
     private TextView saleRating;
     private TextView salesman;
+    private EditText review;
     private float ratingSum = 0;
 
     private void ratingUserCalculate(UserProductModel userProductModel, final float ratingScore) {
@@ -119,6 +127,7 @@ public class RatingActivity extends AppCompatActivity {
         salesman = (TextView)findViewById(R.id.ratingActivity_textview_user);
         ratingBar = (RatingBar) findViewById(R.id.ratingActivity_ratingBar_rating);
         ratingBtn = (Button) findViewById(R.id.ratingActivity_ratingButton_rating);
+        review=(EditText)findViewById(R.id.ratingActivity_editText_review);
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -138,7 +147,10 @@ public class RatingActivity extends AppCompatActivity {
                     userProductModel.completed = 1;
                     UserProductApi.updateProduct(userProductModel, new UserProductApi.MyCallback() {
                         @Override
-                        public void onSuccess(UserProductModel userProductModel) { finish();}
+                        public void onSuccess(UserProductModel userProductModel) {
+                            //Share update
+                            finish();
+                        }
 
                         @Override
                         public void onFail(int errorCode, Exception e) { }
@@ -151,7 +163,33 @@ public class RatingActivity extends AppCompatActivity {
                     restaurantProductModel.completed = 1;
                     RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
                         @Override
-                        public void onSuccess(RestaurantProductModel restaurantProductModel) { finish();}
+                        public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                            //Sales update
+                            SaleApi.getSaleByProductIdandUserId(AuthenticationApi.getCurrentUid(), restaurantProductModel.rproduct_id, new SaleApi.MyListCallback() {
+                                @Override
+                                public void onSuccess(ArrayList<SaleModel> saleModels) {
+                                    saleModels.get(0).review=review.getText().toString();
+                                    SaleApi.updateSales(saleModels.get(0), new SaleApi.MyCallback() {
+                                        @Override
+                                        public void onSuccess(SaleModel saleModel) {
+                                            Toast.makeText(getApplicationContext(), "평가가 완료되었습니다.", Toast.LENGTH_LONG).show();
+                                            finish();
+                                        }
+
+                                        @Override
+                                        public void onFail(int errorCode, Exception e) {
+
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onFail(int errorCode, Exception e) {
+
+                                }
+                            });
+                            finish();
+                        }
 
                         @Override
                         public void onFail(int errorCode, Exception e) { }

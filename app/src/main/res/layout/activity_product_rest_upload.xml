@@ -84,18 +84,42 @@
             android:layout_width="match_parent"
             android:layout_height="2sp"
             android:layout_centerInParent="true"
-            android:background="#D3D3D3"
-            android:layout_marginBottom="10sp"/>
+            android:background="#D3D3D3"/>
 
-        <EditText
-            android:id="@+id/product_rest_editText_quantity"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="양(상세히 서술해주세요)"
-            android:fontFamily="@font/font_baemin5"
-            android:textSize="30sp"
-            android:background="@null"/>
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <EditText
+                android:id="@+id/product_rest_editText_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="양 (g)"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_baemin5"
+                android:textSize="30sp"
+                android:background="@null"/>
 
+            <View
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#D3D3D3" />
+
+            <EditText
+                android:id="@+id/product_rest_editText_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:hint="수량 (개)"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_baemin5"
+                android:textSize="30sp"
+                android:background="@null"/>
+
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="2sp"
