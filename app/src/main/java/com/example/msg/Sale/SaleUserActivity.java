@@ -131,13 +131,21 @@ public class SaleUserActivity extends AppCompatActivity {
         final UserProductModel userProductModel = (UserProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user.getUid();
+
+        if(uid.equals(userProductModel.user_id)) {
+            btn_buy.setVisibility(View.INVISIBLE);
+            btn_chat.setVisibility(View.INVISIBLE);
+            btn_rating.setVisibility(View.INVISIBLE);
+        }
+
         if(userProductModel.completed!=-1) {
             btn_chat.setVisibility(View.INVISIBLE);
             btn_buy.setVisibility(View.INVISIBLE);
         }
         if(userProductModel.completed==0) btn_rating.setVisibility(View.VISIBLE);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         UserApi.getUserById(userProductModel.user_id, new UserApi.MyCallback() {
             @Override

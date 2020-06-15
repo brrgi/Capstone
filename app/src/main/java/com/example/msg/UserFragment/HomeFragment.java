@@ -36,6 +36,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.msg.Api.UserApi;
 import com.example.msg.DataModel.FilterModel;
+import com.example.msg.DatabaseModel.FoodModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
@@ -275,13 +276,33 @@ public class HomeFragment extends Fragment  {
                 if (searchText.getText() != null) {
                     if(isShowingUserProduct) {
                         filteredUserModels.clear();
-                        filteredUserModels.addAll(UserProductApi.filterByKeyWord(userProductModelArrayList, searchText.getText().toString()));
-                        userAdapter.notifyDataSetChanged();
+                        UserProductApi.keywordSend(searchText.getText().toString(), new UserProductApi.MyFilterCallback() {
+                            @Override
+                            public void onSuccess(FoodModel foodModel) {
+                                filteredUserModels.addAll(UserProductApi.filterByKeyWord(userProductModelArrayList,foodModel));
+                                userAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFail(int errorCode, Exception e) {
+
+                            }
+                        });
                     }
                     else {
                         filteredResModels.clear();
-                        filteredResModels.addAll(RestaurantProductApi.filterByKeyWord(restaurantProductModels, searchText.getText().toString()));
-                        resAdapter.notifyDataSetChanged();
+                        RestaurantProductApi.keywordSend(searchText.getText().toString(), new RestaurantProductApi.MyFilterCallback() {
+                            @Override
+                            public void onSuccess(FoodModel foodModel) {
+                                filteredResModels.addAll(RestaurantProductApi.filterByKeyWord(restaurantProductModels, foodModel));
+                                resAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFail(int errorCode, Exception e) {
+
+                            }
+                        });
                     }
 
                 }

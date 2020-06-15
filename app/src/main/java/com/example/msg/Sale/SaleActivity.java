@@ -252,7 +252,14 @@ public class SaleActivity extends AppCompatActivity {
         btn_evaluate = (Button) findViewById(R.id.saleActivity_button_rating);
         QRcode = (Button) findViewById(R.id.saleActivity_button_QRcode);
 
+        final String uid = user.getUid();
 
+        if(uid.equals(restaurantProductModel.res_id)) {
+            btn_buy.setVisibility(View.INVISIBLE);
+            btn_chat.setVisibility(View.INVISIBLE);
+            btn_evaluate.setVisibility(View.INVISIBLE);
+            btn_subscription.setVisibility(View.INVISIBLE);
+        }
 
 
         if(restaurantProductModel.completed!=-1) {
