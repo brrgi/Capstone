@@ -45,9 +45,9 @@ public class ResChatFragment extends Fragment {
 
     private void initializeLayout(View view) {
         ChatListSqlManager db = new ChatListSqlManager();
-       // db.createDatabase(view.getContext());
-        //db.createTable();
-        //db.makeDummyChatList(view.getContext());
+        db.createDatabase(view.getContext());
+        db.createTable();
+        db.makeDummyChatList(view.getContext());
         loadChatRoomDataFromLocalDatabase(view.getContext()); //로컬DB에서 데이터를 뽑아서 chatRoomModels에 삽입함.
 
         //리사이클러뷰 관련 설정.
@@ -77,12 +77,12 @@ public class ResChatFragment extends Fragment {
 
     private void loadChatRoomDataFromLocalDatabase(Context context) {
         ChatListSqlManager sql = new ChatListSqlManager();
-        //sql.createDatabase(context);
-       // sql.createTable();
-        //chatRoomModels = sql.executeQuery();
-        //for(int i =0; i < chatRoomModels.size(); i++) {
-         //   Log.d("ChatTest", chatRoomModels.get(i).opponentId);
-       // }
+        sql.createDatabase(context);
+        sql.createTable();
+        chatRoomModels = sql.executeQuery();
+        for(int i =0; i < chatRoomModels.size(); i++) {
+            Log.d("ChatTest", chatRoomModels.get(i).opponentId);
+        }
     }
 }
 
