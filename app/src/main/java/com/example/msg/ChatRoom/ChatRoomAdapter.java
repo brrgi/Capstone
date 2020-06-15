@@ -17,8 +17,7 @@ import java.util.ArrayList;
 
 public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHolder> {
 
-
-    private ArrayList<ChatRoomModel> chatRoomModels = null;
+    private ArrayList<ChatRoomModel> chatRoomModels;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;

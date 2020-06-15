@@ -1,22 +1,52 @@
 package com.example.msg;
 
+import android.util.Log;
+
+import com.example.msg.Api.AuthenticationApi;
+
 public class CommonTestFunction {
+    private boolean lock = false;
     private static CommonTestFunction instance = null;
-    private String dummyUserId1 = "user1@naver.com";
-    private String dummyUserUid1 = "";
-    private String dummyUserId2 = "user1@naver.com";
-    private String dummyUserUid2 = "";
-    private String dummyResId = "";
-    private String dummyResUid = "";
+    private String dummyUserId1;
+    private String dummyUserUid1;
+    private String dummyUserId2;
+    private String dummyUserUid2;
+
+    public String getDummyUserId1() {
+        return dummyUserId1;
+    }
+
+    public String getDummyUserUid1() {
+        return dummyUserUid1;
+    }
+
+    public String getDummyUserId2() {
+        return dummyUserId2;
+    }
+
+    public String getDummyUserUid2() {
+        return dummyUserUid2;
+    }
+
+    public String getDummyResId() {
+        return dummyResId;
+    }
+
+    public String getDummyResUid() {
+        return dummyResUid;
+    }
+
+    private String dummyResId;
+    private String dummyResUid;
     private final String dummyPassword = "123123";
 
     public CommonTestFunction(String testerName) {
         switch(testerName) {
             case "천윤서":
-                dummyUserId1 = "";
-                dummyUserUid1 = "";
-                dummyUserId2 = "";
-                dummyUserUid2 = "";
+                dummyUserId1 = "tdduser01@naver.com";
+                dummyUserUid1 = "INFNvZwduOeuaw2VVDKiHZ20Yky2";
+                dummyUserId2 = "tdduser02@naver.com";
+                dummyUserUid2 = "19YNBgzwMld0s4Q7sadLS0Mh2bg2";
                 dummyResId = "";
                 dummyResUid = "";
                 break;
@@ -54,7 +84,7 @@ public class CommonTestFunction {
         return instance;
     }
 
-    public void commonLoginSetup(boolean isRestaurant, int dummyNumber, String testerName) {
+    public void commonLoginSetup(boolean isRestaurant, int dummyNumber) {
         String id, pw;
 
         if(isRestaurant) {
@@ -66,12 +96,46 @@ public class CommonTestFunction {
         }
         pw = dummyPassword;
 
+        lock();
+        AuthenticationApi.login(id, pw, new AuthenticationApi.MyCallback() {
+            @Override
+            public void onSuccess() {
+                unlock();
+            }
+            @Override
+            public void onFail(int errorCode, Error e) {
+                unlock();
+            }
+        });
+        waitUnlock();
+        waitForFirebase(3000);
 
     }
     /*
     파이어베이스 더미 유저 계정의 로그인을 시도합니다. 로그인을 하지 않으면 보안 규칙 때문에 데이터베이스에 접근할 수 없습니다.
     일부 기능들은 유저 계정과 식당 계정의 기능이 다르게 동작하기 때문에, 반드시 유저를 구분해서 테스트하는 것을 권장합니다.
      */
+
+    public void waitUnlock(int timeout) {
+        while(lock) {
+            try {
+                Thread.sleep(100);
+            }
+            catch(Exception e) {
+
+            }
+            timeout -= 100;
+            if(timeout < 0) break;
+        }
+    }
+
+    public void lock() {
+        lock = true;
+    }
+
+    public void unlock() {
+        lock = false;
+    }
 
     public void waitForFirebase(int millisecond) {
         try {

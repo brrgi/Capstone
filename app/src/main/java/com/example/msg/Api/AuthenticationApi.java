@@ -45,6 +45,10 @@ public class AuthenticationApi {
         });
     }
 
+    public static void logout() {
+        firebaseAuth.signOut();
+    }
+
 
 
 
