@@ -56,6 +56,8 @@ public class SaleUserActivity extends AppCompatActivity {
     private Button btn_rating;
     private TextView ban;
     private RatingBar grade;
+    private Button love;
+    private Button share;
     String u_name = "";
     String u_address="";
     String u_uid;
@@ -124,6 +126,8 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_buy = (Button) findViewById(R.id.saleUserActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleUserActivity_button_chat);
         btn_rating = (Button)findViewById(R.id.saleUserActivity_button_evaluate);
+        love=(Button)findViewById(R.id.saleUserActivity_button_love);
+        share=(Button)findViewById(R.id.saleUserActivity_button_share);
         ban = (TextView) findViewById(R.id.saleUserActivity_textView_ban);
         grade=(RatingBar)findViewById(R.id.saleUserActivity_ratingBar_grade);
         txt_rating=(TextView) findViewById(R.id.saleUserActivity_textView_ratingText);
@@ -228,6 +232,21 @@ public class SaleUserActivity extends AppCompatActivity {
                 intent.putExtra("Model", userProductModel);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Sharing_intent = new Intent(Intent.ACTION_SEND);
+                Sharing_intent.setType("text/plain");
+
+                String Test_Message = "공유할 Text";
+
+                Sharing_intent.putExtra(Intent.EXTRA_TEXT, Test_Message);
+
+                Intent Sharing = Intent.createChooser(Sharing_intent, "공유하기");
+                startActivity(Sharing);
             }
         });
     }

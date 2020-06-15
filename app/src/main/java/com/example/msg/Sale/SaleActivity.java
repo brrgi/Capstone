@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,6 +70,8 @@ public class SaleActivity extends AppCompatActivity {
     private TextView txt_cost;
     private ImageView image_product;
     private Button btn_subscription;
+    private Button love;
+    private Button share;
     private final SubscriptionModel subscriptionModel = new SubscriptionModel();
     static int state = -1;
     private Button btn_evaluate;
@@ -238,6 +241,8 @@ public class SaleActivity extends AppCompatActivity {
         rating= (RatingBar)findViewById((R.id.saleActivity_item_ratingBar_grade));  //!!!!!!!
         txt_rating=(TextView)findViewById(R.id.saleActivity_textView_ratingText);
         txt_cost=(TextView)findViewById((R.id.saleActivity_textView_cost));
+        love=(Button)findViewById(R.id.saleActivity_button_love);
+        share=(Button)findViewById(R.id.saleActivity_button_share);
         Intent intent = getIntent();
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
@@ -324,6 +329,20 @@ public class SaleActivity extends AppCompatActivity {
             }
         });
 
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Sharing_intent = new Intent(Intent.ACTION_SEND);
+                Sharing_intent.setType("text/plain");
+
+                String Test_Message = "공유할 Text";
+
+                Sharing_intent.putExtra(Intent.EXTRA_TEXT, Test_Message);
+
+                Intent Sharing = Intent.createChooser(Sharing_intent, "공유하기");
+                startActivity(Sharing);
+            }
+        });
 
     }
 

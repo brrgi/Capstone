@@ -34,7 +34,6 @@
                 android:id="@+id/resaccountbook_textView_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="togo샐러드"
                 android:textSize="30sp"
                 android:textStyle="bold"/>
 
@@ -59,7 +58,6 @@
             android:id="@+id/resaccountbook_textView_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2020-06-03 수요일"
             android:textSize="25sp"
             android:layout_marginTop="15sp"
             android:layout_marginLeft="10sp"
@@ -142,7 +140,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginLeft="10sp"
-                    android:text="30,000원"
                     android:textSize="35sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"></TextView>
@@ -190,7 +187,6 @@
                     android:id="@+id/resaccountbook_textView_todayCost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25,000원"
                     android:textSize="35sp"
                     android:layout_marginLeft="10sp"
                     android:layout_gravity="end"
@@ -241,11 +237,11 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/resaccountbook_textView_monthCost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginLeft="10sp"
-                    android:text="275,000원"
                     android:textSize="35sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"></TextView>
@@ -282,9 +278,9 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/resaccountbook_textView_totalCost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="895,000원"
                     android:textSize="35sp"
                     android:layout_marginLeft="10sp"
                     android:layout_gravity="end"

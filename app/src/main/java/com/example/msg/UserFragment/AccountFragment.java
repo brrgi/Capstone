@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.DatabaseModel.UserModel;
+import com.example.msg.Map.MapActivity;
 import com.example.msg.R;
 import com.example.msg.Sale.PurchaseHistoryActivity;
 import com.example.msg.Sale.SalesHistoryActivity;
@@ -36,6 +38,9 @@ public class AccountFragment extends Fragment {
     private LinearLayout saleshistory;
     private LinearLayout purchasehistory;
     private LinearLayout subscribehistory;
+
+    private Button addressSetting;
+    private Button statistics;
 
     private TextView txt_username;
     private TextView txt_user_rating;
@@ -70,7 +75,8 @@ public class AccountFragment extends Fragment {
         address=(TextView)view.findViewById(R.id.account_textView_address);
         txt_user_rating = view.findViewById(R.id.account_textView_rating);
         txt_username = view.findViewById(R.id.account_textView_UID);
-
+        addressSetting=view.findViewById(R.id.account_button_addressSetting);
+        statistics=view.findViewById(R.id.account_button_statistics);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
@@ -109,6 +115,24 @@ public class AccountFragment extends Fragment {
         });
 
 
+        addressSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapActivity.class);
+                intent.putExtra("mLat",defaultLatitude);
+                intent.putExtra("mLng", defaultLongitude);
+                startActivity(intent);
+
+            }
+        });
+
+        statistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), MapActivity.class);
+//                startActivity(intent);
+            }
+        });
 
         return view;
     }

@@ -10,7 +10,8 @@ import android.graphics.Color;
         import android.text.style.ForegroundColorSpan;
         import android.text.style.StyleSpan;
         import android.text.style.UnderlineSpan;
-        import android.view.LayoutInflater;
+import android.util.Log;
+import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.EditText;
@@ -20,7 +21,13 @@ import android.graphics.Color;
         import androidx.annotation.Nullable;
         import androidx.fragment.app.Fragment;
 
-        import com.example.msg.R;
+import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.Api.RestaurantApi;
+import com.example.msg.Api.StatisticsApi;
+import com.example.msg.DatabaseModel.RestaurantModel;
+import com.example.msg.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.eazegraph.lib.charts.BarChart;
 import org.eazegraph.lib.charts.PieChart;
@@ -32,26 +39,171 @@ import org.eazegraph.lib.models.StackedBarModel;
 import org.eazegraph.lib.models.ValueLinePoint;
 import org.eazegraph.lib.models.ValueLineSeries;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class ResAccountBookFragment extends Fragment {
     private View view;
-    private TextView day;
+    private TextView date;
+    private TextView title;
+    private TextView yesterday;
+    private TextView today;
+    private TextView yesterdayCost;
+    private TextView todayCost;
+    private TextView monthCost;
+    private TextView totalCost;
 
 
+    private int total1, total2, total3, total4;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_resaccountbook,container,false);
 
-        day=(TextView)view.findViewById(R.id.resaccountbook_textView_date);
-        SpannableString content = new SpannableString(day.getText().toString());
+        date=(TextView)view.findViewById(R.id.resaccountbook_textView_date);
+        title=(TextView)view.findViewById(R.id.resaccountbook_textView_title);
+        yesterday=(TextView)view.findViewById(R.id.resaccountbook_textView_yesterdayDate);
+        today=(TextView) view.findViewById(R.id.resaccountbook_textView_todayDate);
+        yesterdayCost=(TextView) view.findViewById(R.id.resaccountbook_textView_yesterdayCost);
+        todayCost=(TextView)view.findViewById(R.id.resaccountbook_textView_todayCost);
+        monthCost=(TextView)view.findViewById(R.id.resaccountbook_textView_monthCost);
+        totalCost=(TextView)view.findViewById(R.id.resaccountbook_textView_totalCost);
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user.getUid();
+
+        RestaurantApi.getUserById(uid, new RestaurantApi.MyCallback() {
+            @Override
+            public void onSuccess(RestaurantModel restaurantModel) {
+                title.setText(restaurantModel.res_name);
+                long now = System.currentTimeMillis();
+                Date dates = new Date(now);
+                SimpleDateFormat sdfNow1 = new SimpleDateFormat("yyyy-MM-dd E"+"요일");
+                SimpleDateFormat todayss = new SimpleDateFormat("MM/dd");
+                SimpleDateFormat yesters = new SimpleDateFormat("MM/dd");
+
+                SimpleDateFormat todayYear = new SimpleDateFormat("yy");
+                SimpleDateFormat todayMonth = new SimpleDateFormat("MM");
+                SimpleDateFormat todayDay = new SimpleDateFormat("dd");
+
+                Calendar cal=Calendar.getInstance();
+                cal.add(cal.DATE,-1);
+
+                String formatDate = sdfNow1.format(dates);
+                String todays=todayss.format(dates);
+                String yester=yesters.format(cal.getTime());
+
+                String todayDateYear = todayYear.format(dates);
+                String todayDateMonth = todayMonth.format(dates);
+                String todayDateDay = todayDay.format(dates);
+
+                String yesterDateYear = todayYear.format(cal.getTime());
+                String yesterDateMonth = todayMonth.format(cal.getTime());
+                String yesterDateDay = todayDay.format(cal.getTime());
+
+                date.setText(formatDate);
+                yesterday.setText(yester);
+                today.setText(todays);
+
+
+                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear, 10), Integer.parseInt(yesterDateMonth, 10), Integer.parseInt(yesterDateDay, 10), new StatisticsApi.MyCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<Integer> sum) {
+                        total1=0;
+                        for (int i=0; i<sum.size(); i++){
+                            total1+=sum.get(i);
+                        }
+                        Log.d("뿌슝1",Integer.toString(total1)+" "+sum);
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+
+                StatisticsApi.getTodayCost(uid, 1, Integer.parseInt(todayDateYear, 10), Integer.parseInt(todayDateMonth, 10), Integer.parseInt(todayDateDay, 10), new StatisticsApi.MyCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<Integer> sum) {
+                        total2=0;
+                        for (int i=0; i<sum.size(); i++){
+                            total2+=sum.get(i);
+                        }
+                        Log.d("뿌슝2",Integer.toString(total2)+" "+sum);
+
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+
+                StatisticsApi.getMonthCost(uid, 1, Integer.parseInt(todayDateYear, 10), Integer.parseInt(todayDateMonth, 10), new StatisticsApi.MyCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<Integer> sum) {
+                        total3=0;
+                        for (int i=0; i<sum.size(); i++){
+                            total3+=sum.get(i);
+                        }
+                        Log.d("뿌슝3",Integer.toString(total3)+" "+sum);
+
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+
+                StatisticsApi.getTotalCost(uid, 1, new StatisticsApi.MyCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<Integer> sum) {
+                        total4=0;
+                        for (int i=0; i<sum.size(); i++){
+                            total4+=sum.get(i);
+                        }
+                        Log.d("뿌슝4",Integer.toString(total4)+" "+sum);
+
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+
+                yesterdayCost.setText(total1+"원");
+                todayCost.setText(total2+"원");
+                monthCost.setText(total3+"원");
+                totalCost.setText(total4+"원");
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+
+        SpannableString content = new SpannableString(date.getText().toString());
+
+
+
+
+
+
+
+
 
 // 저는이미 TextView 에 String 을 넣었기 때문에 위와 같이 TextView.getText().toString() 했음
 
         content.setSpan(new UnderlineSpan(), 0, content.length(),0);
         content.setSpan(new StyleSpan(Typeface.ITALIC), 0, content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        day.setText(content);
+        date.setText(content);
 
         BarChart mBarChart = (BarChart) view.findViewById(R.id.barchart);
 

@@ -107,16 +107,15 @@
                             android:layout_height="30sp"
                             android:src="@drawable/like_favorite_heart_5759"
                             android:background="#00ffffff"/>
-                        <TextView
+                        <Button
+                            android:id="@+id/saleUserActivity_button_love"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="20sp"
-                            android:text="찜 "/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:text="125"/>
+                            android:background="#00ffffff"
+                            android:fontFamily="@font/font_baemin5"
+                            android:text="찜 125"/>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -130,10 +129,13 @@
                             android:layout_height="30sp"
                             android:src="@drawable/share"
                             android:background="#00ffffff"/>
-                        <TextView
+                        <Button
+                            android:id="@+id/saleUserActivity_button_share"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="20sp"
+                            android:background="#00ffffff"
+                            android:fontFamily="@font/font_baemin5"
                             android:text="공유 "/>
 
                     </LinearLayout>

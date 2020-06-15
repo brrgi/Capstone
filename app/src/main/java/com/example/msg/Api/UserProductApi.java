@@ -141,7 +141,10 @@ public class UserProductApi {
                         "completed", userProductModel.completed,
                         "latitude", userProductModel.latitude,
                         "longitude", userProductModel.longitude,
-                        "user_id", userProductModel.user_id
+                        "user_id", userProductModel.user_id,
+                        "saleDateYear", userProductModel.saleDateYear,
+                        "saleDateMonth", userProductModel.saleDateMonth,
+                        "saleDateDay", userProductModel.saleDateDay
 
                 ).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
