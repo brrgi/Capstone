@@ -107,7 +107,7 @@ public class CommonTestFunction {
                 unlock();
             }
         });
-        waitUnlock();
+        waitUnlock(500);
         waitForFirebase(3000);
 
     }
@@ -116,7 +116,7 @@ public class CommonTestFunction {
     일부 기능들은 유저 계정과 식당 계정의 기능이 다르게 동작하기 때문에, 반드시 유저를 구분해서 테스트하는 것을 권장합니다.
      */
 
-    public void waitUnlock(int timeout) {
+    public void waitUnlock(int timeoutMillis) {
         while(lock) {
             try {
                 Thread.sleep(100);
@@ -124,8 +124,8 @@ public class CommonTestFunction {
             catch(Exception e) {
 
             }
-            timeout -= 100;
-            if(timeout < 0) break;
+            timeoutMillis -= 100;
+            if(timeoutMillis < 0) break;
         }
     }
 
