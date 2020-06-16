@@ -93,6 +93,7 @@ public class SaleActivity extends AppCompatActivity {
     private Button btn_evaluate;
     private Button QRcode;
     private RatingBar rating;
+    private String name;
     String r_sub = "";
 
 
@@ -232,6 +233,7 @@ public class SaleActivity extends AppCompatActivity {
             @Override
             public void onSuccess(RestaurantModel restaurantModel) {
                 if(restaurantModel.res_name != null) txt_salesman.setText(restaurantModel.res_name);
+                name=restaurantModel.res_name;
                 rating.setRating(restaurantModel.res_rating);
                 txt_rating.setText(Float.toString(restaurantModel.res_rating));
 //                if(restaurantModel.res_address != null) txt_address.setText("동네: " + restaurantModel.res_address);
@@ -322,23 +324,6 @@ public class SaleActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(resReviewsFragment,"리뷰");
         viewPager.setAdapter(viewPagerAdapter);
 
-        //이사
-//        txt_category.setText(restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
-//        //txt_salesman.setText("판매자 : "+r_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
-//        txt_quantity.setText(restaurantProductModel.quantity);
-//        if (restaurantProductModel.quality==1){
-//            txt_quality.setText("하");
-//        }
-//        else if (restaurantProductModel.quality==2){
-//            txt_quality.setText("중");
-//        }
-//        else if (restaurantProductModel.quality==3){
-//            txt_quality.setText("상");
-//        }
-//        txt_expireDate.setText(restaurantProductModel.expiration_date);
-//        txt_description.setText(restaurantProductModel.p_description);
-//        String c=Integer.toString(restaurantProductModel.cost);
-//        txt_cost.setText(c);
 
         String addressString = null;
         Geocoder geocoder = new Geocoder(this, Locale.KOREAN);
@@ -401,6 +386,7 @@ public class SaleActivity extends AppCompatActivity {
 //        private String res_id=null;
 //        private String rproduct_id=null;
         private RestaurantProductModel restaurantProductModel;
+
         private List<Fragment> fragments=new ArrayList<>();
         private List<String> fragmentTitle=new ArrayList<>();
 
@@ -422,6 +408,9 @@ public class SaleActivity extends AppCompatActivity {
             //bundle.putParcelable("restaurantProductModel", (Parcelable) restaurantProductModel);
             bundle.putString("res_id",restaurantProductModel.res_id);
             bundle.putString("rproduct_id",restaurantProductModel.rproduct_id);
+            bundle.putDouble("lat", restaurantProductModel.latitude);
+            bundle.putDouble("long", restaurantProductModel.longitude);
+            bundle.putString("name", name);
             fragments.get(position).setArguments(bundle);
             return fragments.get(position);
         }

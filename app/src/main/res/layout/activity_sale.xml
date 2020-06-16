@@ -84,40 +84,30 @@
                         android:fontFamily="@font/font_baemin5"/>
 
                 </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    android:clickable="true"
-                    android:text="최근리뷰 58 | 최근댓글 58"
-                    android:fontFamily="@font/font_baemin5"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center">
 
-                        <ImageView
-                            android:layout_width="30sp"
-                            android:layout_height="30sp"
-                            android:src="@drawable/like_favorite_heart_5759"
-                            android:background="#00ffffff"/>
                         <TextView
+                            android:id="@+id/saleActivity_textView_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_margin="5sp"
                             android:textSize="20sp"
-                            android:text="찜 "/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:text="125"/>
+                            android:text="동네"
+                            android:fontFamily="@font/font_baemin5"
+                            android:layout_marginBottom="10sp"/>
+
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -147,7 +137,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0sp"
             android:orientation="horizontal"
             android:layout_marginBottom="10sp"
             android:layout_marginTop="15sp"
@@ -176,7 +166,6 @@
                     android:fontFamily="@font/font_baemin5"/>
 
                 <TextView
-                    android:id="@+id/saleActivity_textView_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5sp"
@@ -203,19 +192,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/font_baemin5"
-                    android:text="상품 정보"/>
+                    android:text="상품 정보" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/font_baemin5"
-                    android:text="식당 정보"/>
+                    android:text="식당 정보" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/font_baemin5"
-                    android:text="리뷰"/>
+                    android:text="리뷰" />
 
 
             </com.google.android.material.tabs.TabLayout>
@@ -224,15 +213,8 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/saleActivity_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="300sp"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-
-
-
-
-
-
-
 
 
 
