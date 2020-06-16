@@ -205,6 +205,9 @@ public class HomeFragment extends Fragment  {
                 Log.d("HomeFragmentError", "sortBy value is not proper");
                 break;
         }
+        filteredResModels.clear();
+        filteredResModels.addAll(restaurantProductModels);
+        resAdapter.notifyDataSetChanged();
 
     }
 
@@ -438,10 +441,8 @@ public class HomeFragment extends Fragment  {
         if(requestCode == FILTER_CODE && resultCode ==  getActivity().RESULT_OK) {
             FilterModel filterModel = (FilterModel)data.getSerializableExtra("Object");
             sortItemOfResProducts(filterModel.getFilterType());
-            filteredResModels = RestaurantProductApi.filterByPrice(restaurantProductModels, filterModel.getPrice());
-            filteredResModels.clear();
-            filteredResModels.addAll(restaurantProductModels);
-            resAdapter.notifyDataSetChanged();
+            //filteredResModels = RestaurantProductApi.filterByPrice(restaurantProductModels, filterModel.getPrice());
+
         }
     }
 }
