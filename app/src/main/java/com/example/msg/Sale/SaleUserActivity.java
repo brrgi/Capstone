@@ -25,6 +25,7 @@ import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.ShareApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.Api.UserProductApi;
+import com.example.msg.Map.MapActivity;
 import com.example.msg.Profile.UserProfileActivity;
 import com.example.msg.R;
 import com.example.msg.RatingActivity;
@@ -58,6 +59,8 @@ public class SaleUserActivity extends AppCompatActivity {
     private RatingBar grade;
     private Button love;
     private Button share;
+    private double defaultLongitude = 0;
+    private double defaultLatitude = 0;
     String u_name = "";
     String u_address="";
     String u_uid;
@@ -126,7 +129,6 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_buy = (Button) findViewById(R.id.saleUserActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleUserActivity_button_chat);
         btn_rating = (Button)findViewById(R.id.saleUserActivity_button_evaluate);
-        love=(Button)findViewById(R.id.saleUserActivity_button_love);
         share=(Button)findViewById(R.id.saleUserActivity_button_share);
         ban = (TextView) findViewById(R.id.saleUserActivity_textView_ban);
         grade=(RatingBar)findViewById(R.id.saleUserActivity_ratingBar_grade);
@@ -142,7 +144,8 @@ public class SaleUserActivity extends AppCompatActivity {
         if(userProductModel.completed==0) btn_rating.setVisibility(View.VISIBLE);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+        final String uid = user.getUid();
+        getAddress(uid);
         UserApi.getUserById(userProductModel.user_id, new UserApi.MyCallback() {
             @Override
             public void onSuccess(UserModel userModel) {
@@ -230,6 +233,9 @@ public class SaleUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RatingActivity.class);
                 intent.putExtra("Model", userProductModel);
+
+                intent.putExtra("mLat",defaultLatitude);
+                intent.putExtra("mLng", defaultLongitude);
                 startActivity(intent);
                 finish();
             }
@@ -251,6 +257,22 @@ public class SaleUserActivity extends AppCompatActivity {
         });
     }
 
+    private void getAddress(String uid){
+        UserApi.getUserById(uid, new UserApi.MyCallback() {
+            @Override
+            public void onSuccess(UserModel userModel) {
 
+                defaultLatitude=userModel.latitude;
+                defaultLongitude=userModel.longitude;
+                //Toast.makeText(getActivity(), defaultLatitude+" "+defaultLongitude, Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+    }
 }
 

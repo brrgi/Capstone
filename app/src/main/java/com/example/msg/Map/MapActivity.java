@@ -44,7 +44,6 @@ public class MapActivity extends AppCompatActivity {
         Double lng=intent.getExtras().getDouble("mLng");
 
 
-
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lat, lng), 1, true);
 
 
