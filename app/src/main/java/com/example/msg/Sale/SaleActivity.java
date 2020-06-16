@@ -76,6 +76,7 @@ public class SaleActivity extends AppCompatActivity {
     private Button btn_evaluate;
     private Button QRcode;
     private RatingBar rating;
+    private Button btn_edit;
     private Button dummy;
     String r_sub = "";
     String r_name = "";
@@ -243,6 +244,7 @@ public class SaleActivity extends AppCompatActivity {
         rating= (RatingBar)findViewById((R.id.saleActivity_item_ratingBar_grade));  //!!!!!!!
         txt_rating=(TextView)findViewById(R.id.saleActivity_textView_ratingText);
         txt_cost=(TextView)findViewById((R.id.saleActivity_textView_cost));
+        btn_edit=(Button)findViewById(R.id.saleActivity_button_edit);
         Intent intent = getIntent();
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
@@ -261,6 +263,10 @@ public class SaleActivity extends AppCompatActivity {
             btn_chat.setVisibility(View.INVISIBLE);
             btn_evaluate.setVisibility(View.INVISIBLE);
             btn_subscription.setVisibility(View.INVISIBLE);
+        }
+
+        if(uid.equals(restaurantProductModel.res_id)&&restaurantProductModel.completed==-1) {
+            btn_edit.setVisibility(View.VISIBLE);
         }
 
 
@@ -347,6 +353,15 @@ public class SaleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ResQrcodeActivity.class);
                 intent.putExtra("Model", restaurantProductModel);
+                startActivity(intent);
+            }
+        });
+
+        btn_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),EditSaleActivity.class);
+                intent.putExtra("Models",restaurantProductModel);
                 startActivity(intent);
             }
         });
