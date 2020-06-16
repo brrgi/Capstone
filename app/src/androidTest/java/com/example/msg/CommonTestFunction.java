@@ -40,7 +40,7 @@ public class CommonTestFunction {
     private String dummyResUid;
     private final String dummyPassword = "123123";
 
-    public void setTester(String testerName) {
+    public CommonTestFunction(String testerName) {
         switch(testerName) {
             case "천윤서":
                 dummyUserId1 = "tdduser01@naver.com";
@@ -79,8 +79,8 @@ public class CommonTestFunction {
         }
     }
 
-    public static CommonTestFunction getInstance() {
-        if(instance == null) instance = new CommonTestFunction();
+    public static CommonTestFunction getInstance(String testerName) {
+        if(instance == null) instance = new CommonTestFunction(testerName);
         return instance;
     }
 
@@ -107,8 +107,8 @@ public class CommonTestFunction {
                 unlock();
             }
         });
-        waitUnlock(5000);
-        waitForFirebase(1000);
+        waitUnlock();
+        waitForFirebase(3000);
 
     }
     /*
