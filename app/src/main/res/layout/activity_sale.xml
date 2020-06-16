@@ -213,7 +213,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/saleActivity_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="300sp"
+            android:layout_height="500sp"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
 

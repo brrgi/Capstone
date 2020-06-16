@@ -74,14 +74,6 @@ public class SaleActivity extends AppCompatActivity {
     private Button btn_buy;
     private TextView txt_title;
 
-    //이사
-//    private TextView txt_category;
-//    private TextView txt_quantity;
-//    private TextView txt_quality;
-//    private TextView txt_expireDate;
-//    private TextView txt_description;
-//    private TextView txt_cost;
-
     private TextView txt_salesman;
     private TextView txt_address;
     private TextView txt_rating;
@@ -255,14 +247,6 @@ public class SaleActivity extends AppCompatActivity {
         viewPager=findViewById(R.id.saleActivity_viewpager);
         tabLayout=findViewById(R.id.saleActivity_tablayout);
 
-        //이사가자
-//        txt_category = (TextView) findViewById(R.id.saleActivity_textView_categoryBig);
-//        txt_description = (TextView) findViewById(R.id.saleActivity_textView_description);
-//        txt_expireDate = (TextView) findViewById(R.id.saleActivity_textView_expiredDate);
-//        txt_quality = (TextView) findViewById(R.id.saleActivity_textView_quality);
-//        txt_quantity = (TextView) findViewById(R.id.saleActivity_textView_quantity);
-//        txt_cost=(TextView)findViewById((R.id.saleActivity_textView_cost));
-
         txt_salesman = (TextView) findViewById(R.id.saleActivity_textView_salesman);
         txt_title = (TextView) findViewById(R.id.saleActivity_textView_title);
         image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
@@ -310,7 +294,6 @@ public class SaleActivity extends AppCompatActivity {
 
 
         txt_title.setText(restaurantProductModel.title);
-
 
         productInfoFragment=new ProductInfoFragment();
         resInfoFragment =new ResInfoFragment();

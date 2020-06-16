@@ -69,6 +69,9 @@ public class ProductInfoFragment extends Fragment {
                 txt_expireDate.setText(restaurantProductModel.expiration_date);
                 txt_description.setText(restaurantProductModel.p_description);
                 String c=Integer.toString(restaurantProductModel.cost);
+
+                latitude=restaurantProductModel.latitude;
+
                 txt_cost.setText(c);
 
 
