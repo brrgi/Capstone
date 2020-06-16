@@ -74,14 +74,6 @@ public class SaleActivity extends AppCompatActivity {
     private Button btn_buy;
     private TextView txt_title;
 
-    //이사
-//    private TextView txt_category;
-//    private TextView txt_quantity;
-//    private TextView txt_quality;
-//    private TextView txt_expireDate;
-//    private TextView txt_description;
-//    private TextView txt_cost;
-
     private TextView txt_salesman;
     private TextView txt_address;
     private TextView txt_rating;
@@ -253,14 +245,6 @@ public class SaleActivity extends AppCompatActivity {
         viewPager=findViewById(R.id.saleActivity_viewpager);
         tabLayout=findViewById(R.id.saleActivity_tablayout);
 
-        //이사가자
-//        txt_category = (TextView) findViewById(R.id.saleActivity_textView_categoryBig);
-//        txt_description = (TextView) findViewById(R.id.saleActivity_textView_description);
-//        txt_expireDate = (TextView) findViewById(R.id.saleActivity_textView_expiredDate);
-//        txt_quality = (TextView) findViewById(R.id.saleActivity_textView_quality);
-//        txt_quantity = (TextView) findViewById(R.id.saleActivity_textView_quantity);
-//        txt_cost=(TextView)findViewById((R.id.saleActivity_textView_cost));
-
         txt_salesman = (TextView) findViewById(R.id.saleActivity_textView_salesman);
         txt_title = (TextView) findViewById(R.id.saleActivity_textView_title);
         image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
@@ -300,7 +284,6 @@ public class SaleActivity extends AppCompatActivity {
 
         txt_title.setText(restaurantProductModel.title);
 
-
         productInfoFragment=new ProductInfoFragment();
         resInfoFragment =new ResInfoFragment();
         resReviewsFragment = new ResReviewsFragment();
@@ -313,23 +296,7 @@ public class SaleActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(resReviewsFragment,"리뷰");
         viewPager.setAdapter(viewPagerAdapter);
 
-        //이사
-//        txt_category.setText(restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
-//        //txt_salesman.setText("판매자 : "+r_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
-//        txt_quantity.setText(restaurantProductModel.quantity);
-//        if (restaurantProductModel.quality==1){
-//            txt_quality.setText("하");
-//        }
-//        else if (restaurantProductModel.quality==2){
-//            txt_quality.setText("중");
-//        }
-//        else if (restaurantProductModel.quality==3){
-//            txt_quality.setText("상");
-//        }
-//        txt_expireDate.setText(restaurantProductModel.expiration_date);
-//        txt_description.setText(restaurantProductModel.p_description);
-//        String c=Integer.toString(restaurantProductModel.cost);
-//        txt_cost.setText(c);
+
 
         String addressString = null;
         Geocoder geocoder = new Geocoder(this, Locale.KOREAN);

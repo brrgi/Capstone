@@ -28,6 +28,7 @@ public class ProductInfoFragment extends Fragment {
     private TextView txt_cost;
 
     private String rproduct_id;
+    private double latitude;
 
     private void initializeLayout(final Context context) {
         txt_category = view.findViewById(R.id.productInfo_textView_categoryBig);
@@ -60,6 +61,9 @@ public class ProductInfoFragment extends Fragment {
                 txt_expireDate.setText(restaurantProductModel.expiration_date);
                 txt_description.setText(restaurantProductModel.p_description);
                 String c=Integer.toString(restaurantProductModel.cost);
+
+                latitude=restaurantProductModel.latitude;
+
                 txt_cost.setText(c);
             }
 
