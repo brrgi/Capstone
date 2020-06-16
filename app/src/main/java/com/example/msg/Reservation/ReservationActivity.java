@@ -35,7 +35,7 @@ public class ReservationActivity extends AppCompatActivity {
 
     private Button button;
     private EditText editText;
-    String user_token = "";
+    static String user_token = "";
     Spinner spinner;
 
     String msg = "예약이 완료되었습니다.";
@@ -73,7 +73,7 @@ public class ReservationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 final String uid = user.getUid();
-                ReserveModel reserveModel = new ReserveModel();
+                final ReserveModel reserveModel = new ReserveModel();
                 reserveModel.user_id = uid;
                 reserveModel.category = tmp;
                 reserveModel.keyword = editText.getText().toString();
@@ -86,21 +86,31 @@ public class ReservationActivity extends AppCompatActivity {
                             return;
                         }
                         user_token = task.getResult().getToken();
+                        reserveModel.user_id = uid;
+                        reserveModel.category = tmp;
+                        reserveModel.keyword = editText.getText().toString();
+                        reserveModel.time = makeCurrentTimeString();
+                        reserveModel.user_token = user_token;
+
+                        Log.d("ParkKyudong",user_token);
+
+                        ReserveApi.postReservation(reserveModel, new ReserveApi.MyCallback() {
+                            @Override
+                            public void onSuccess(ReserveModel reserveModel) {
+
+                            }
+
+                            @Override
+                            public void onFail(int errorCode, Exception e) {
+
+                            }
+                        });
+
                     }
                 });
-                reserveModel.user_token = user_token;
+                Log.d("ParkKyudong22",user_token);
 
-                ReserveApi.postReservation(reserveModel, new ReserveApi.MyCallback() {
-                    @Override
-                    public void onSuccess(ReserveModel reserveModel) {
 
-                    }
-
-                    @Override
-                    public void onFail(int errorCode, Exception e) {
-
-                    }
-                });
 
 
             }
