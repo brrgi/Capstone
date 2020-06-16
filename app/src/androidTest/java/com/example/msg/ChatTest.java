@@ -60,8 +60,7 @@ public class ChatTest {
                 tf.unlock();
             }
         });
-        tf.waitUnlock();
-        assertEquals(1+1, 5);
+        tf.waitUnlock(5000);
 
 
         AuthenticationApi.logout();
@@ -86,7 +85,7 @@ public class ChatTest {
                 tf.unlock();
             }
         });
-        tf.waitForFirebase(1000);
+        tf.waitUnlock(5000);
 
         assertEquals(chatRoomModelArrayList.get(0).lastChat, "안녕하세요");
 
@@ -108,7 +107,7 @@ public class ChatTest {
                 tf.unlock();
             }
         });
-        tf.waitUnlock();
+        tf.waitUnlock(5000);
 
     }
 
@@ -116,7 +115,7 @@ public class ChatTest {
         ChatRoomModel chatRoomModel = new ChatRoomModel();
         chatRoomModel.id1 = id1;
         chatRoomModel.id2 = id2;
-        chatRoomModel.lastChat = "안녕하세요";
+        chatRoomModel.lastChat = "반갑습니다";
         chatRoomModel.opponentName = "김규동";
         chatRoomModel.lastDate = "06:02";
         chatRoomModel.pictureUrl = null;
