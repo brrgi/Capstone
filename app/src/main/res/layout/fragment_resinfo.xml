@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/editResProfileActivity_imageview_profile"
+        android:src="@drawable/chef"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editResProfileActivity_edittext_email"
+            android:hint="이메일"
+            android:singleLine="true"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editResProfileActivity_edittext_password"
+            android:hint="패스워드"
+            android:singleLine="true"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editResProfileActivity_edittext_res_name"
+            android:hint="식당이름"
+            android:fontFamily="@font/font_baemin5"
+            android:singleLine="true"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editResProfileActivity_edittext_res_phone"
+            android:hint="전화번호"
+            android:singleLine="true"
+            android:fontFamily="@font/font_baemin5"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:id="@+id/editResProfileActivity_edittext_pickupstarttime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/iconfinder_clock"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/font_baemin5"
+        android:hint="픽업 가능 시작시간 입력(ex.13:00)"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editResProfileActivity_edittext_pickupendtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/iconfinder_clock"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/font_baemin5"
+        android:hint="픽업 가능 끝시간 입력(ex.18:00)"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/editResProfileActivity_button_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bin_blue"
+        android:textColor="#ffffff"
+        android:fontFamily="@font/font_baemin5"
+        android:textStyle="bold"
+        android:layout_gravity="start"
+        android:text="주소 입력하기"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editResProfileActivity_edittext_address"
+            android:singleLine="true"
+            android:lines="1"
+            android:fontFamily="@font/font_baemin5"
+            android:hint="받은 주소"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editResProfileActivity_edittext_address_detail"
+            android:singleLine="true"
+            android:lines="1"
+            android:fontFamily="@font/font_baemin5"
+            android:hint="상세 주소"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/editResProfileActivity_edittext_res_description"
+            android:hint="식당 설명"
+            android:singleLine="true"
+            android:fontFamily="@font/font_baemin5"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/editResProfileActivity_button_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:enabled="false"
+        android:background="#D8D8D8"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:fontFamily="@font/font_baemin5"
+        android:text="비밀번호 6자리 이상 입력해주세요." />
+
+</LinearLayout>
