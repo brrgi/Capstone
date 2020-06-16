@@ -5,13 +5,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.example.msg.Api.RestaurantApi;
 import com.example.msg.Api.RestaurantProductApi;
+import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.R;
 
@@ -19,47 +23,40 @@ public class ResInfoFragment extends Fragment {
     private View view;
     private static final String TAG = "ProductInfo";
 
-    private TextView txt_category;
-    private TextView txt_quantity;
-    private TextView txt_quality;
-    private TextView txt_expireDate;
-    private TextView txt_description;
-    private TextView txt_cost;
+    private ImageView profile;
+    private TextView name;
+    private TextView phone;
+    private TextView pickupstarttime;
+    private TextView pickupendtime;
+    private TextView address;
+    private TextView description;
 
-    private String rproduct_id;
+    private String res_id;
 
     private void initializeLayout(final Context context) {
-        txt_category = view.findViewById(R.id.productInfo_textView_categoryBig);
-        txt_description = view.findViewById(R.id.productInfo_textView_description);
-        txt_expireDate =  view.findViewById(R.id.productInfo_textView_expiredDate);
-        txt_quality = view.findViewById(R.id.productInfo_textView_quality);
-        txt_quantity = view.findViewById(R.id.productInfo_textView_quantity);
-        txt_cost=view.findViewById((R.id.productInfo_textView_cost));
+        profile = view.findViewById(R.id.ResInfoFragment_imageview_profile);
+        name = view.findViewById(R.id.ResInfoFragment_textView_name);
+        phone =  view.findViewById(R.id.ResInfoFragment_textView_phone);
+        pickupstarttime = view.findViewById(R.id.ResInfoFragment_textView_pickupstarttime);
+        pickupendtime = view.findViewById(R.id.ResInfoFragment_textView_pickupendtime);
+        address=view.findViewById((R.id.ResInfoFragment_textView_address));
+        description=view.findViewById((R.id.ResInfoFragment_textView_description));
 
         Bundle bundle=getArguments();
         if(bundle !=null) {
-            rproduct_id = bundle.getString("rproduct_id");
+            res_id = bundle.getString("res_id");
         }
 
-        RestaurantProductApi.getProduct(rproduct_id, new RestaurantProductApi.MyCallback() {
+        RestaurantApi.getUserById(res_id, new RestaurantApi.MyCallback() {
             @Override
-            public void onSuccess(RestaurantProductModel restaurantProductModel) {
-                txt_category.setText(restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
-                //txt_salesman.setText("판매자 : "+r_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
-                txt_quantity.setText(restaurantProductModel.quantity);
-                if (restaurantProductModel.quality==1){
-                    txt_quality.setText("하");
-                }
-                else if (restaurantProductModel.quality==2){
-                    txt_quality.setText("중");
-                }
-                else if (restaurantProductModel.quality==3){
-                    txt_quality.setText("상");
-                }
-                txt_expireDate.setText(restaurantProductModel.expiration_date);
-                txt_description.setText(restaurantProductModel.p_description);
-                String c=Integer.toString(restaurantProductModel.cost);
-                txt_cost.setText(c);
+            public void onSuccess(RestaurantModel restaurantModel) {
+                Glide.with(ResInfoFragment.this).load(restaurantModel.res_imageURL).into(profile);
+                name.setText(restaurantModel.res_name);
+                phone.setText(restaurantModel.res_phone);
+                pickupstarttime.setText(restaurantModel.pickup_start_time);
+                pickupendtime.setText(restaurantModel.pickup_end_time);
+                address.setText(restaurantModel.res_address);
+                description.setText(restaurantModel.res_description);
             }
 
             @Override
@@ -76,7 +73,7 @@ public class ResInfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_productinfo,container,false);
+        view=inflater.inflate(R.layout.fragment_resinfo,container,false);
         initializeLayout(getContext());
 
         return view;
