@@ -12,6 +12,7 @@ public class CommonTestFunction {
     private String dummyUserId2;
     private String dummyUserUid2;
 
+
     public String getDummyUserId1() {
         return dummyUserId1;
     }
@@ -78,6 +79,7 @@ public class CommonTestFunction {
                 throw new IllegalArgumentException();
         }
     }
+
 
     public static CommonTestFunction getInstance(String testerName) {
         if(instance == null) instance = new CommonTestFunction(testerName);

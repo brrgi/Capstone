@@ -29,86 +29,72 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ChatTest {
 
+    private CommonTestFunction commonTestFunction = CommonTestFunction.getInstance("천윤서");
+
     @Before
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.msg", appContext.getPackageName());
 
-        CommonTestFunction tf = CommonTestFunction.getInstance("천윤서");
-        tf.commonLoginSetup(false, 1);
-        assertEquals(AuthenticationApi.getCurrentUid(), tf.getDummyUserUid1());
-        //유저 1로 로그인을 한다.
-
+        AuthenticationApi.logout();
     }
 
     @Test
     public void testChatRoomCreation() {
+
+        commonTestFunction.commonLoginSetup(false, 1);
+        assertEquals(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyUserUid1());
+        //유저 1로 로그인을 한다.
+
         //더미유저2를 타겟으로 채팅방을 생성한다.
-        final CommonTestFunction tf = CommonTestFunction.getInstance("천윤서");
-        makeChatRoom(AuthenticationApi.getCurrentUid(), tf.getDummyUserUid2());
+        ChatRoomModel modelForCreation = makeDummyChatRoom(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyUserUid2());
+        ChatRoomModel modelForAssert = makeDummyChatRoom(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyUserUid2());
+        makeChatRoom(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyUserUid2(), modelForCreation);
 
-        tf.lock();
-        ShareApi.getShareByToId("", new ShareApi.MyListCallback() {
-            @Override
-            public void onSuccess(ArrayList<ShareModel> shareModelArrayList) {
-                tf.unlock();
-            }
-
-            @Override
-            public void onFail(int errorCode, Exception e) {
-                tf.unlock();
-            }
-        });
-        tf.waitUnlock();
-        assertEquals(1+1, 5);
+        //유저 2로 로그인하고, 로그인이 성공했는지 검증한다.
+        commonTestFunction.commonLoginSetup(false, 2);
+        assertEquals(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyUserUid2());
 
 
-        AuthenticationApi.logout();
-
-        //유저 2로 로그인한다.
-        tf.commonLoginSetup(false, 2);
-        assertEquals(AuthenticationApi.getCurrentUid(), tf.getDummyUserUid2());
-
-
-        //유저 2에게 정상적으로 채팅방이 생성됐나 확인한다.
-        tf.lock();
+        //유저 2의 계정을 이용해서 채팅방을 불러오고, 검증용 모델과 비교하여 정상적으로 채팅방이 생성됐나 확인한다.
+        commonTestFunction.lock();
         final ArrayList<ChatRoomModel> chatRoomModelArrayList = new ArrayList<>();
         ChatRoomApi.getChatRoomById(AuthenticationApi.getCurrentUid(), new ChatRoomApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<ChatRoomModel> chatRoomModels) {
                 chatRoomModelArrayList.addAll(chatRoomModels);
-                tf.unlock();
+                commonTestFunction.unlock();
             }
 
             @Override
             public void onFail(int errorCode, Exception e) {
-                tf.unlock();
+                commonTestFunction.unlock();
             }
         });
-        tf.waitForFirebase(1000);
-
-        assertEquals(chatRoomModelArrayList.get(0).lastChat, "안녕하세요");
-
+        commonTestFunction.waitForFirebase(2000);
+        assertEqualsModel(modelForAssert, chatRoomModelArrayList.get(0));
     }
 
+    private void assertEqualsModel(ChatRoomModel expected, ChatRoomModel actual) {
+        assertEquals(expected.lastChat, actual.lastChat);
+        assertEquals(expected.lastDate, actual.lastDate);
+        assertEquals(expected.opponentName, actual.opponentName);
+    }
 
-
-    private void makeChatRoom(String currentUser, String targetUser) {
-        final CommonTestFunction tf = CommonTestFunction.getInstance("천윤서");
-        tf.lock();
-        ChatRoomModel chatRoomModel = makeDummyChatRoom(currentUser, targetUser);
+    private void makeChatRoom(String currentUser, String targetUser, ChatRoomModel chatRoomModel) {
+        commonTestFunction.lock();
         ChatRoomApi.postOrUpdateChatRoom(chatRoomModel, new ChatRoomApi.MyCallback() {
             @Override
             public void onSuccess(ChatRoomModel chatRoomModel) {
-                tf.unlock();
+                commonTestFunction.unlock();
             }
             @Override
             public void onFail(int errorCode, Exception e) {
-                tf.unlock();
+                commonTestFunction.unlock();
             }
         });
-        tf.waitUnlock();
+        commonTestFunction.waitUnlock(5000);
 
     }
 

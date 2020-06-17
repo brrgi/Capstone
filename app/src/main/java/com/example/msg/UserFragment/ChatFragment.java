@@ -45,22 +45,6 @@ public class ChatFragment extends Fragment {
     private RecyclerView recyclerView;
     private ChatRoomAdapter chatRoomAdapter;
 
-    private void initializeLayout(View view) {
-        //ChatListSqlManager db = new ChatListSqlManager();
-       // db.createDatabase(view.getContext());
-       // db.createTable();
-       // db.makeDummyChatList(view.getContext());
-        //loadChatRoomDataFromLocalDatabase(view.getContext()); //로컬DB에서 데이터를 뽑아서 chatRoomModels에 삽입함.
-       // makeDummyChatData();
-        loadChatRoomDataFromDatabase();
-
-        //리사이클러뷰 관련 설정.
-        recyclerView = view.findViewById(R.id.chat_recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        chatRoomAdapter = new ChatRoomAdapter(chatRoomModelArrayList);
-        recyclerView.setAdapter(chatRoomAdapter);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,18 +56,26 @@ public class ChatFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Context context = view.getContext();
-
         initializeLayout(view);
+    }
 
+    private void initializeLayout(View view) {
+        chatRoomModelArrayList = new ArrayList<>();
+        loadChatRoomDataAndSetRecyclerView();
 
     }
 
-    private void loadChatRoomDataFromDatabase() {
+    private void loadChatRoomDataAndSetRecyclerView() {
         String myId = AuthenticationApi.getCurrentUid();
         ChatRoomApi.getChatRoomById(myId, new ChatRoomApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<ChatRoomModel> chatRoomModels) {
                 chatRoomModelArrayList.addAll(chatRoomModels);
+                recyclerView = view.findViewById(R.id.chat_recyclerView);
+                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                recyclerView.setAdapter(chatRoomAdapter);
+                chatRoomAdapter = new ChatRoomAdapter(chatRoomModelArrayList);
+
             }
 
             @Override
@@ -92,17 +84,7 @@ public class ChatFragment extends Fragment {
             }
         });
     }
-
-
-/*
-    private void loadChatRoomDataFromLocalDatabase(Context context) {
-        ChatListSqlManager sql = new ChatListSqlManager();
-        sql.createDatabase(context);
-        sql.createTable();
-        chatRoomModels = sql.executeQuery();
-        for(int i =0; i < chatRoomModels.size(); i++) {
-            Log.d("ChatTest", chatRoomModels.get(i).opponentId);
-        }
-    }
-*/
+    /*
+    채팅룸의 데이터를 불러오고 리사이클러뷰와 연결시키는 함수입니다.
+     */
 }

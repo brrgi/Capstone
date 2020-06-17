@@ -1,5 +1,7 @@
 package com.example.msg.Api;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.msg.DatabaseModel.ChatRoomModel;
@@ -72,24 +74,33 @@ public class ChatRoomApi {
         db.collection(pathName).whereEqualTo("id1", myId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Log.d("ChatRoomLog", "온 컴플리트 안으로 들어옴");
                 ChatRoomModel chatRoomModel = null;
 
                 if(task.isSuccessful()) {
+                    Log.d("ChatRoomLog", "태스크가 성공적임");
                     for(QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         chatRoomModel = documentSnapshot.toObject(ChatRoomModel.class);
                         chatRoomModels.add(chatRoomModel);
                     }
+                    Log.d("ChatRoomLog", "for문 빠져나옴");
+                    Log.d("ChatRoomLog", Integer.toString(chatRoomModels.size()));
 
                     db.collection(pathName).whereEqualTo("id2", myId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            Log.d("ChatRoomLog", "두 번 째 온 컴플리트 안으로 들어옴");
                             ChatRoomModel innerChatRoomModel = null;
 
                             if(task.isSuccessful()) {
+                                Log.d("ChatRoomLog", "두 번째 태스크가 성공적임");
                                 for(QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                     innerChatRoomModel = documentSnapshot.toObject(ChatRoomModel.class);
                                     chatRoomModels.add(innerChatRoomModel);
                                 }
+                                Log.d("ChatRoomLog", "두 번째 포문을 빠져나옴");
+                                Log.d("ChatRoomLog", Integer.toString(chatRoomModels.size()));
+                                myListCallback.onSuccess(chatRoomModels);
                             } else {
                                 myListCallback.onFail(21, null);
                             }
