@@ -1,6 +1,7 @@
 package com.example.msg;
 
 import android.content.Context;
+import android.location.Location;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -30,7 +31,42 @@ public class FilterTest {
     }
 
     @Test
-    public void testTest() {
-        assertEquals(1+1, 5);
+    public void testSortingByDistance() {
+        float[] result = new float[10];
+        Location.distanceBetween(37.239624, 126.965566, 37.242331,126.966220, result); //305미터
+
+        assertEquals(1.0, result[0], 1);
     }
+
+    @Test
+    public void testSortingByPrice() {
+
+    }
+
+    @Test
+    public void testSortingByStock() {
+
+    }
+
+    @Test
+    public void testFilteringByCategory() {
+
+    }
+
+    @Test
+    public void testFilteringByDistance() {
+
+    }
+
+    @Test
+    public void testFilteringByPrice() {
+
+    }
+
+    @Test
+    public void testFilteringByQuality() {
+
+    }
+
+
 }

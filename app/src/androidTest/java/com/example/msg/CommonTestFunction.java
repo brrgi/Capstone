@@ -3,6 +3,9 @@ package com.example.msg;
 import android.util.Log;
 
 import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.DatabaseModel.RestaurantProductModel;
+
+import java.util.ArrayList;
 
 public class CommonTestFunction {
     private boolean lock = false;
@@ -153,4 +156,11 @@ public class CommonTestFunction {
     따라서 간격을 주는 방식을 이용해서 이를 대체하는 것을 권장합니다. 물론, 다중콜백을 사용하는 방식도 있으나, 이는
     테스트 코드의 가독성을 해치기 떄문에 사용하는 것을 권장하지 않습니다.
      */
+
+    public ArrayList<RestaurantProductModel> getDummyRestaurantProductModelList() {
+        ArrayList<RestaurantProductModel> restaurantProductModels = new ArrayList<>();
+
+        return restaurantProductModels;
+    }
+
 }
