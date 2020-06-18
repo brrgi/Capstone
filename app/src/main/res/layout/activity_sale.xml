@@ -110,20 +110,25 @@
 
 
                     <LinearLayout
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center">
 
                         <ImageView
-                            android:layout_width="30sp"
+                            android:layout_width="24dp"
                             android:layout_height="30sp"
+                            android:background="#00ffffff"
                             android:src="@drawable/share"
-                            android:background="#00ffffff"/>
-                        <TextView
+                            android:layout_marginRight="10sp"/>
+                        <Button
+                            android:id="@+id/saleActivity_button_share"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="20sp"
+                            android:background="#00ffffff"
+                            android:fontFamily="@font/font_baemin5"
                             android:text="공유 "/>
 
                     </LinearLayout>

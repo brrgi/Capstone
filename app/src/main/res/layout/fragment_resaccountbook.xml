@@ -34,7 +34,6 @@
                 android:id="@+id/resaccountbook_textView_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="togo샐러드"
                 android:textSize="30sp"
                 android:textStyle="bold"/>
 
@@ -59,7 +58,6 @@
             android:id="@+id/resaccountbook_textView_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2020-06-03 수요일"
             android:textSize="25sp"
             android:layout_marginTop="15sp"
             android:layout_marginLeft="10sp"
@@ -129,7 +127,7 @@
                         android:id="@+id/resaccountbook_textView_yesterdayDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="06/02"
+                        android:text=""
                         android:textSize="25sp"
                         android:layout_marginLeft="10sp"
                         >
@@ -142,7 +140,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginLeft="10sp"
-                    android:text="30,000원"
                     android:textSize="35sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"></TextView>
@@ -179,7 +176,7 @@
                         android:id="@+id/resaccountbook_textView_todayDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="06/03"
+                        android:text=""
                         android:textSize="25sp"
                         android:layout_marginLeft="10sp"
                         >
@@ -190,7 +187,6 @@
                     android:id="@+id/resaccountbook_textView_todayCost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25,000원"
                     android:textSize="35sp"
                     android:layout_marginLeft="10sp"
                     android:layout_gravity="end"
@@ -241,11 +237,11 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/resaccountbook_textView_monthCost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginLeft="10sp"
-                    android:text="275,000원"
                     android:textSize="35sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"></TextView>
@@ -282,9 +278,9 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/resaccountbook_textView_totalCost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="895,000원"
                     android:textSize="35sp"
                     android:layout_marginLeft="10sp"
                     android:layout_gravity="end"
@@ -309,8 +305,8 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/barchart"
                 android:layout_width="match_parent"
-                android:layout_height="256dp"
-                android:padding="10dp"
+                android:layout_height="0sp"
+                android:padding="0dp"
                 app:egFixedBarWidth="true"
                 app:egBarWidth="20dp"
                 app:egLegendHeight="40dp"/>
@@ -319,18 +315,18 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/stackedbarchart"
                 android:layout_width="match_parent"
-                android:layout_height="256dp"
-                android:padding="10dp"
+                android:layout_height="256sp"
+                android:padding="10sp"
                 app:egFixedBarWidth="true"
-                app:egBarWidth="20dp"
-                app:egLegendHeight="40dp"/>
+                app:egBarWidth="20sp"
+                app:egLegendHeight="40sp"/>
 
             <org.eazegraph.lib.charts.PieChart
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/piechart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:padding="8dp"
+                android:layout_height="300sp"
+                android:padding="8sp"
                 app:egLegendTextSize="18sp"
                 app:egUsePieRotation="true"
                 app:egValueTextSize="36sp"/>
@@ -339,12 +335,12 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/cubiclinechart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="200sp"
                 app:egUseCubic="true"
                 app:egUseOverlapFill="true"
                 app:egCurveSmoothness="0.4"
                 app:egIndicatorLineColor="#FE6DA8"
-                app:egLegendHeight="40dp"
+                app:egLegendHeight="40sp"
                 app:egShowStandardValue="true"/>
         </LinearLayout>
 

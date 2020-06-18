@@ -19,6 +19,9 @@ public class RestaurantProductModel implements Serializable {
     public int completed = -1;
     public double longitude = -1;
     public double latitude = -1;
+    public int saleDateYear = -1;
+    public int saleDateMonth = -1;
+    public int saleDateDay   = -1;
 
     public RestaurantProductModel() {
 
@@ -26,7 +29,7 @@ public class RestaurantProductModel implements Serializable {
 
     public RestaurantProductModel(String rproduct_id, String res_id, String title, String p_imageURL, String p_description
             ,String categoryBig, String categorySmall, int quality, String quantity, String expiration_date, int cost, boolean fast
-            ,int stock, int completed, double longitude, double latitude) {
+            ,int stock, int completed, double longitude, double latitude, int saleDateYear,int saleDateMonth, int saleDateDay  ) {
         this.rproduct_id = rproduct_id;
         this.res_id = res_id;
         this.title = title;
@@ -43,6 +46,9 @@ public class RestaurantProductModel implements Serializable {
         this.completed = completed;
         this.longitude = longitude;
         this.latitude =latitude;
+        this.saleDateYear=saleDateYear;
+        this.saleDateMonth=saleDateMonth;
+        this.saleDateDay=saleDateDay;
     }
 
 }
