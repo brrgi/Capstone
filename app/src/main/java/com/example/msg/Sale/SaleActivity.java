@@ -260,7 +260,6 @@ public class SaleActivity extends AppCompatActivity {
         txt_address = (TextView) findViewById(R.id.saleActivity_textView_address);
         rating= (RatingBar)findViewById((R.id.saleActivity_item_ratingBar_grade));  //!!!!!!!
         txt_rating=(TextView)findViewById(R.id.saleActivity_textView_ratingText);
-        txt_cost=(TextView)findViewById((R.id.saleActivity_textView_cost));
         share=(Button)findViewById(R.id.saleActivity_button_share);
         Intent intent = getIntent();
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
@@ -303,7 +302,7 @@ public class SaleActivity extends AppCompatActivity {
         final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         MapView mapView = new MapView(this);
-        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.saleActivity_map_view);
+        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.productInfo_map_view);
         mapViewContainer.addView(mapView);
 
         Double lat=intent.getExtras().getDouble("mLat");
