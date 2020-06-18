@@ -6,6 +6,8 @@ import android.location.Location;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.example.msg.Api.DistanceApi;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,10 +34,7 @@ public class FilterTest {
 
     @Test
     public void testSortingByDistance() {
-        float[] result = new float[10];
-        Location.distanceBetween(37.239624, 126.965566, 37.242331,126.966220, result); //305미터
 
-        assertEquals(1.0, result[0], 1);
     }
 
     @Test
