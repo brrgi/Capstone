@@ -1,12 +1,18 @@
 package com.example.msg.Sale;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +43,12 @@ import com.example.msg.Map.MapActivity;
 import com.example.msg.QRcode.ResQrcodeActivity;
 import com.example.msg.R;
 import com.example.msg.RatingActivity;
+import com.example.msg.saleFragment.ProductInfoFragment;
+import com.example.msg.saleFragment.ResInfoFragment;
+import com.example.msg.saleFragment.ResReviewsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -57,18 +67,17 @@ public class SaleActivity extends AppCompatActivity {
     private static final String TAG = "SaleActivity";
     private int stuck = 10;
 
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+
     private Button btn_chat;
     private Button btn_buy;
     private TextView txt_title;
-    private TextView txt_category;
-    private TextView txt_quantity;
-    private TextView txt_quality;
-    private TextView txt_expireDate;
-    private TextView txt_description;
+
     private TextView txt_salesman;
     private TextView txt_address;
     private TextView txt_rating;
-    private TextView txt_cost;
+
     private ImageView image_product;
     private Button btn_subscription;
     private final SubscriptionModel subscriptionModel = new SubscriptionModel();
@@ -78,9 +87,14 @@ public class SaleActivity extends AppCompatActivity {
     private RatingBar rating;
     private Button btn_edit;
     private Button dummy;
+    private String name;
     String r_sub = "";
-    String r_name = "";
 
+
+
+    private ProductInfoFragment productInfoFragment;
+    private ResInfoFragment resInfoFragment;
+    private ResReviewsFragment resReviewsFragment;
 
     private void processSale(final RestaurantProductModel restaurantProductModel) {
         SaleModel saleModel = new SaleModel();
@@ -213,6 +227,7 @@ public class SaleActivity extends AppCompatActivity {
             @Override
             public void onSuccess(RestaurantModel restaurantModel) {
                 if(restaurantModel.res_name != null) txt_salesman.setText(restaurantModel.res_name);
+                name=restaurantModel.res_name;
                 rating.setRating(restaurantModel.res_rating);
                 txt_rating.setText(Float.toString(restaurantModel.res_rating));
 //                if(restaurantModel.res_address != null) txt_address.setText("동네: " + restaurantModel.res_address);
@@ -231,11 +246,9 @@ public class SaleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale);
 
-        txt_category = (TextView) findViewById(R.id.saleActivity_textView_categoryBig);
-        txt_description = (TextView) findViewById(R.id.saleActivity_textView_description);
-        txt_expireDate = (TextView) findViewById(R.id.saleActivity_textView_expiredDate);
-        txt_quality = (TextView) findViewById(R.id.saleActivity_textView_quality);
-        txt_quantity = (TextView) findViewById(R.id.saleActivity_textView_quantity);
+        viewPager=findViewById(R.id.saleActivity_viewpager);
+        tabLayout=findViewById(R.id.saleActivity_tablayout);
+
         txt_salesman = (TextView) findViewById(R.id.saleActivity_textView_salesman);
         txt_title = (TextView) findViewById(R.id.saleActivity_textView_title);
         image_product = (ImageView) findViewById(R.id.saleActivity_imageView_product);
@@ -245,6 +258,7 @@ public class SaleActivity extends AppCompatActivity {
         txt_rating=(TextView)findViewById(R.id.saleActivity_textView_ratingText);
         txt_cost=(TextView)findViewById((R.id.saleActivity_textView_cost));
         btn_edit=(Button)findViewById(R.id.saleActivity_button_edit);
+
         Intent intent = getIntent();
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
@@ -270,6 +284,9 @@ public class SaleActivity extends AppCompatActivity {
         }
 
 
+
+
+
         if(restaurantProductModel.completed!=-1) {
             btn_buy.setVisibility(View.INVISIBLE);
             btn_chat.setVisibility(View.INVISIBLE);
@@ -285,24 +302,19 @@ public class SaleActivity extends AppCompatActivity {
 
 
         txt_title.setText(restaurantProductModel.title);
-        txt_category.setText(restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
-        //txt_salesman.setText("판매자 : "+r_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
-        txt_quantity.setText(restaurantProductModel.quantity);
-        if (restaurantProductModel.quality==1){
-            txt_quality.setText("하");
-        }
-        else if (restaurantProductModel.quality==2){
-            txt_quality.setText("중");
-        }
-        else if (restaurantProductModel.quality==3){
-            txt_quality.setText("상");
-        }
-        txt_expireDate.setText(restaurantProductModel.expiration_date);
-        txt_description.setText(restaurantProductModel.p_description);
-        String c=Integer.toString(restaurantProductModel.cost);
-        txt_cost.setText(c);
-//        rating.setRating(4);      //레이팅 모델이 없음!!!!!!!!!
-//        txt_rating.setText("4.0");     // 마찬가지!!!!!!!!!!!!!!
+
+        productInfoFragment=new ProductInfoFragment();
+        resInfoFragment =new ResInfoFragment();
+        resReviewsFragment = new ResReviewsFragment();
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),0, restaurantProductModel);
+        viewPagerAdapter.addFragment(productInfoFragment,"상품 정보");
+        viewPagerAdapter.addFragment(resInfoFragment,"식당 정보");
+        viewPagerAdapter.addFragment(resReviewsFragment,"리뷰");
+        viewPager.setAdapter(viewPagerAdapter);
+
 
         String addressString = null;
         Geocoder geocoder = new Geocoder(this, Locale.KOREAN);
@@ -369,5 +381,50 @@ public class SaleActivity extends AppCompatActivity {
 
     }
 
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+
+//        private String res_id=null;
+//        private String rproduct_id=null;
+        private RestaurantProductModel restaurantProductModel;
+
+        private List<Fragment> fragments=new ArrayList<>();
+        private List<String> fragmentTitle=new ArrayList<>();
+
+        public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior,RestaurantProductModel restaurantProductModel) {
+            super(fm, behavior);
+            this.restaurantProductModel=restaurantProductModel;
+        }
+
+        public void addFragment(Fragment fragment,String title){
+            fragments.add(fragment);
+            fragmentTitle.add(title);
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            //fragment로 값 전달을 위해
+            Bundle bundle = new Bundle();
+            //bundle.putParcelable("restaurantProductModel", (Parcelable) restaurantProductModel);
+            bundle.putString("res_id",restaurantProductModel.res_id);
+            bundle.putString("rproduct_id",restaurantProductModel.rproduct_id);
+            bundle.putDouble("lat", restaurantProductModel.latitude);
+            bundle.putDouble("long", restaurantProductModel.longitude);
+            bundle.putString("name", name);
+            fragments.get(position).setArguments(bundle);
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragmentTitle.get(position);
+        }
+    }
 }
 
