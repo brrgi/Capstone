@@ -1,3 +1,2 @@
 language: android
 dist: trusty
-os : window
