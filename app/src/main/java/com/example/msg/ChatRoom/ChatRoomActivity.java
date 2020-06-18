@@ -1,3 +1,7 @@
+/*
+채팅 리스트의 채팅을 클릭해서 입장한 채팅방의 액티비티입니다.
+ */
+
 package com.example.msg.ChatRoom;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +17,8 @@ import android.widget.EditText;
 
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.ChatApi;
+import com.example.msg.Api.ChatRoomApi;
+import com.example.msg.DatabaseModel.ChatRoomModel;
 import com.example.msg.R;
 
 import java.lang.reflect.Array;
@@ -20,16 +26,16 @@ import java.util.ArrayList;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
-    private String myId = "1";
-    private String opponentId = "2";
-    private String opponentName = "김철수";
+    private String myId;
+    private String opponentId;
+    private String opponentName;
 
     //리사이클러뷰 관련 요소들.
     private ArrayList<Chat> chats;
     private RecyclerView recyclerView;
     private ChatAdapter chatAdapter;
 
-
+    //기타 레이아웃 관련 요소들.
     private Button sendButton;
     private EditText sendEditText;
 
@@ -56,13 +62,21 @@ public class ChatRoomActivity extends AppCompatActivity {
         });
 
     }
+    /*
+    레이아웃을 초기화하고 채팅의 실시간 리스너를 등록합니다. 이때문에 UI는 채팅 데이터베이스의 변화에 따라
+    실시간으로 변화를 일으킵니다.
+     */
+
+
 
     private void initializeId() {
         myId = AuthenticationApi.getCurrentUid();
         Intent intent = getIntent();
 
-        opponentId = intent.getExtras().getString("id");
+        ChatRoomModel chatRoomModel = (ChatRoomModel)intent.getSerializableExtra("object");
+        opponentId = ChatRoomApi.getOpponentIdByModel(chatRoomModel, myId);
     }
+    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,15 +104,28 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        /*
+
         ChatRoomModel chatRoomModel = new ChatRoomModel();
         chatRoomModel.lastChat = chats.get(chats.size() -1).takeContent();
         chatRoomModel.lastDate = chats.get(chats.size() -1).getDate();
-        chatRoomModel.myId = myId;
-        chatRoomModel.opponentId = opponentId;
+        chatRoomModel.id1 = myId;
+        chatRoomModel.id2 = opponentId;
         chatRoomModel.opponentName = opponentName;
         chatRoomModel.pictureUrl = "";
 
+        ChatRoomApi.postOrUpdateChatRoom(chatRoomModel, new ChatRoomApi.MyCallback() {
+            @Override
+            public void onSuccess(ChatRoomModel chatRoomModel) {
+
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+
+        /*
         ChatListSqlManager chatListSqlManager = new ChatListSqlManager();
         chatListSqlManager.createDatabase(getApplicationContext());
         chatListSqlManager.createTable();
