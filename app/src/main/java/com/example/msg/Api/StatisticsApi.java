@@ -44,6 +44,64 @@ public class StatisticsApi {
 
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    public static void getMen(final MyCallback myCallback){
+        final ArrayList<Integer> sum=new ArrayList<>();
+        db.collection("User")
+                .whereEqualTo("is_male", true)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        UserModel userModel = null;
+
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                userModel = document.toObject(userModel.class);
+                                sum.add(1);
+
+                            }
+                            myCallback.onSuccess(sum);
+                        } else {
+                            myCallback.onFail(1, null);
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
+    }
+
+    public static void getWomen(final MyCallback myCallback){
+        final ArrayList<Integer> sum=new ArrayList<>();
+        db.collection("User")
+                .whereEqualTo("is_male", false)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        UserModel userModel = null;
+
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                userModel = document.toObject(userModel.class);
+                                sum.add(1);
+
+                            }
+                            myCallback.onSuccess(sum);
+                        } else {
+                            myCallback.onFail(1, null);
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
+    }
+
     public static void getYesterdayCost(final String id, final int completed ,int year, int month, int day, final MyCallback myCallback) {
         final ArrayList<Integer> sum=new ArrayList<>();
         db.collection("ResProducts")
