@@ -175,14 +175,14 @@ public class CommonTestFunction {
         restaurantProductModel.categorySmall = "닭고기";
         restaurantProductModel.p_description = "싱싱하다";
         restaurantProductModel.cost = 6000;
-        restaurantProductModel.
-
+        //restaurantProductModel.
+/*
         restaurantProductModels.add(restaurantProductModel);
 
         restaurantProductModel.title = "양파";
         restaurantProductModel.p_description = "맛있는 양파";
 
-
+*/
         return restaurantProductModels;
     }
 
