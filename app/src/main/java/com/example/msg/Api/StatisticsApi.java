@@ -28,7 +28,10 @@ public class StatisticsApi {
         void onSuccess(ArrayList<Integer> sum);
         void onFail(int errorCode, Exception e);
     }
-
+    public interface MyCallback1 {
+        void onSuccess(ArrayList<Integer> sum1,ArrayList<Integer> sum2,ArrayList<Integer> sum3,ArrayList<Integer> sum4);
+        void onFail(int errorCode, Exception e);
+    }
     public interface MyListCallback{
         void onSuccess(ArrayList<RestaurantProductModel> restaurantModelArrayList);
         void onFail(int errorCode, Exception e);
@@ -44,6 +47,47 @@ public class StatisticsApi {
 
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+
+    public static void getAge(final MyCallback1 myCallback){
+        final ArrayList<Integer> sum10=new ArrayList<>();
+        final ArrayList<Integer> sum20=new ArrayList<>();
+        final ArrayList<Integer> sum30=new ArrayList<>();
+        final ArrayList<Integer> sum40=new ArrayList<>();
+        db.collection("User")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        UserModel userModel = null;
+
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                userModel = document.toObject(UserModel.class);
+
+                                if ((2020-userModel.age)<20)
+                                    sum10.add(1);
+                                else if ((2020-userModel.age)<30)
+                                    sum20.add(1);
+                                else if((2020-userModel.age)<30)
+                                    sum30.add(1);
+                                else
+                                    sum40.add(1);
+
+                            }
+                            myCallback.onSuccess(sum10, sum20, sum30, sum40);
+                        } else {
+                            myCallback.onFail(1, null);
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
+    }
+
+
     public static void getMen(final MyCallback myCallback){
         final ArrayList<Integer> sum=new ArrayList<>();
         db.collection("User")
@@ -56,7 +100,7 @@ public class StatisticsApi {
 
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                userModel = document.toObject(userModel.class);
+                                userModel = document.toObject(UserModel.class);
                                 sum.add(1);
 
                             }
@@ -85,9 +129,8 @@ public class StatisticsApi {
 
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                userModel = document.toObject(userModel.class);
+                                userModel = document.toObject(UserModel.class);
                                 sum.add(1);
-
                             }
                             myCallback.onSuccess(sum);
                         } else {

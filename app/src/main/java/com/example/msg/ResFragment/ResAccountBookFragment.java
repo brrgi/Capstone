@@ -88,6 +88,8 @@ public class ResAccountBookFragment extends Fragment {
 
     private int total1, total2, total3, total4;
     private int total5, total6, total7, total8, total9, total10, total11;
+    private int man, woman;
+    private int age10, age20, age30, age40;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -254,6 +256,33 @@ public class ResAccountBookFragment extends Fragment {
 
                     }
                 });
+
+                StatisticsApi.getAge(new StatisticsApi.MyCallback1() {
+                    @Override
+                    public void onSuccess(ArrayList<Integer> sum1, ArrayList<Integer> sum2, ArrayList<Integer> sum3, ArrayList<Integer> sum4) {
+                        age10=0;
+                        age20=0;
+                        age30=0;
+                        age40=0;
+                        for (int i=0; i<sum1.size(); i++){
+                            age10+=sum1.get(i);
+                        }
+                        for (int i=0; i<sum2.size(); i++){
+                            age20+=sum2.get(i);
+                        }
+                        for (int i=0; i<sum3.size(); i++){
+                            age30+=sum3.get(i);
+                        }
+                        for (int i=0; i<sum4.size(); i++){
+                            age40+=sum4.get(i);
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
 /////////////////////////////////////////////////////////////////
 
                 StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear1, 10), Integer.parseInt(yesterDateMonth1, 10), Integer.parseInt(yesterDateDay1, 10), new StatisticsApi.MyCallback() {
@@ -270,7 +299,9 @@ public class ResAccountBookFragment extends Fragment {
                     public void onFail(int errorCode, Exception e) {
 
                     }
-                }); StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear2, 10), Integer.parseInt(yesterDateMonth2, 10), Integer.parseInt(yesterDateDay2, 10), new StatisticsApi.MyCallback() {
+                });
+
+                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear2, 10), Integer.parseInt(yesterDateMonth2, 10), Integer.parseInt(yesterDateDay2, 10), new StatisticsApi.MyCallback() {
                     @Override
                     public void onSuccess(ArrayList<Integer> sum) {
                         total6=0;
@@ -284,7 +315,9 @@ public class ResAccountBookFragment extends Fragment {
                     public void onFail(int errorCode, Exception e) {
 
                     }
-                }); StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear3, 10), Integer.parseInt(yesterDateMonth3, 10), Integer.parseInt(yesterDateDay3, 10), new StatisticsApi.MyCallback() {
+                });
+
+                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear3, 10), Integer.parseInt(yesterDateMonth3, 10), Integer.parseInt(yesterDateDay3, 10), new StatisticsApi.MyCallback() {
                     @Override
                     public void onSuccess(ArrayList<Integer> sum) {
                         total7=0;
@@ -298,7 +331,9 @@ public class ResAccountBookFragment extends Fragment {
                     public void onFail(int errorCode, Exception e) {
 
                     }
-                }); StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear4, 10), Integer.parseInt(yesterDateMonth4, 10), Integer.parseInt(yesterDateDay4, 10), new StatisticsApi.MyCallback() {
+                });
+
+                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear4, 10), Integer.parseInt(yesterDateMonth4, 10), Integer.parseInt(yesterDateDay4, 10), new StatisticsApi.MyCallback() {
                     @Override
                     public void onSuccess(ArrayList<Integer> sum) {
                         total8=0;
@@ -312,7 +347,9 @@ public class ResAccountBookFragment extends Fragment {
                     public void onFail(int errorCode, Exception e) {
 
                     }
-                }); StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear5, 10), Integer.parseInt(yesterDateMonth5, 10), Integer.parseInt(yesterDateDay5, 10), new StatisticsApi.MyCallback() {
+                });
+
+                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear5, 10), Integer.parseInt(yesterDateMonth5, 10), Integer.parseInt(yesterDateDay5, 10), new StatisticsApi.MyCallback() {
                     @Override
                     public void onSuccess(ArrayList<Integer> sum) {
                         total9=0;
@@ -326,7 +363,9 @@ public class ResAccountBookFragment extends Fragment {
                     public void onFail(int errorCode, Exception e) {
 
                     }
-                }); StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear6, 10), Integer.parseInt(yesterDateMonth6, 10), Integer.parseInt(yesterDateDay6, 10), new StatisticsApi.MyCallback() {
+                });
+
+                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear6, 10), Integer.parseInt(yesterDateMonth6, 10), Integer.parseInt(yesterDateDay6, 10), new StatisticsApi.MyCallback() {
                     @Override
                     public void onSuccess(ArrayList<Integer> sum) {
                         total10=0;
@@ -340,7 +379,9 @@ public class ResAccountBookFragment extends Fragment {
                     public void onFail(int errorCode, Exception e) {
 
                     }
-                }); StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear7, 10), Integer.parseInt(yesterDateMonth7, 10), Integer.parseInt(yesterDateDay7, 10), new StatisticsApi.MyCallback() {
+                });
+
+                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear7, 10), Integer.parseInt(yesterDateMonth7, 10), Integer.parseInt(yesterDateDay7, 10), new StatisticsApi.MyCallback() {
                     @Override
                     public void onSuccess(ArrayList<Integer> sum) {
                         total11=0;
@@ -356,12 +397,43 @@ public class ResAccountBookFragment extends Fragment {
                     }
                 });
 
+                StatisticsApi.getMen(new StatisticsApi.MyCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<Integer> sum) {
+                        man=0;
+                        for (int i=0; i<sum.size(); i++){
+                            man+=sum.get(i);
+                        }
+                    }
 
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+
+                StatisticsApi.getWomen(new StatisticsApi.MyCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<Integer> sum) {
+                        woman=0;
+                        for (int i=0; i<sum.size(); i++){
+                            woman+=sum.get(i);
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
 
                 yesterdayCost.setText(total1+"원");
                 todayCost.setText(total2+"원");
                 monthCost.setText(total3+"원");
                 totalCost.setText(total4+"원");
+
+
+
             }
 
             @Override
@@ -369,6 +441,7 @@ public class ResAccountBookFragment extends Fragment {
 
             }
         });
+
 
         SpannableString content = new SpannableString(date.getText().toString());
 
@@ -382,12 +455,6 @@ public class ResAccountBookFragment extends Fragment {
         BarChart mBarChart = (BarChart) view.findViewById(R.id.barchart);
 
 //        mBarChart.addBar(new BarModel(2.3f, 0xFF123456));
-//        mBarChart.addBar(new BarModel(2.f,  0xFF343456));
-//        mBarChart.addBar(new BarModel(3.3f, 0xFF563456));
-//        mBarChart.addBar(new BarModel(1.1f, 0xFF873F56));
-//        mBarChart.addBar(new BarModel(2.7f, 0xFF56B7F1));
-//        mBarChart.addBar(new BarModel(2.f,  0xFF343456));
-
         mBarChart.startAnimation();
 
         ///
@@ -395,17 +462,17 @@ public class ResAccountBookFragment extends Fragment {
 
         StackedBarModel s1 = new StackedBarModel("10대");
 
-        s1.addBar(new BarModel(2.3f, 0xFF63CBB0));
+        s1.addBar(new BarModel(age10, 0xFF63CBB0));
 
         StackedBarModel s2 = new StackedBarModel("20대");
-        s2.addBar(new BarModel(1.1f, 0xFF63CBB0));
+        s2.addBar(new BarModel(age20, 0xFF63CBB0));
 
         StackedBarModel s3 = new StackedBarModel("30대");
 
-        s3.addBar(new BarModel(2.3f, 0xFF63CBB0));
+        s3.addBar(new BarModel(age30, 0xFF63CBB0));
 
         StackedBarModel s4 = new StackedBarModel("40대 이상");
-        s4.addBar(new BarModel(1.f, 0xFF63CBB0));
+        s4.addBar(new BarModel(age40, 0xFF63CBB0));
 
         mStackedBarChart.addBar(s1);
         mStackedBarChart.addBar(s2);
@@ -417,8 +484,8 @@ public class ResAccountBookFragment extends Fragment {
         ////
         PieChart mPieChart = (PieChart) view.findViewById(R.id.piechart);
 
-        mPieChart.addPieSlice(new PieModel("남자", 15, Color.parseColor("#FE6DA8")));
-        mPieChart.addPieSlice(new PieModel("여자", 25, Color.parseColor("#56B7F1")));
+        mPieChart.addPieSlice(new PieModel("남자", man, Color.parseColor("#FE6DA8")));
+        mPieChart.addPieSlice(new PieModel("여자", woman, Color.parseColor("#56B7F1")));
 
         mPieChart.startAnimation();
         ////
@@ -427,15 +494,17 @@ public class ResAccountBookFragment extends Fragment {
         ValueLineSeries series = new ValueLineSeries();
         series.setColor(0xFF56B7F1);
 
-        series.addPoint(new ValueLinePoint(yesterDateMonth7+"/"+yesterDateDay7, total11/1000));
-        series.addPoint(new ValueLinePoint(yesterDateMonth6+"/"+yesterDateDay6, total10/1000));
-        series.addPoint(new ValueLinePoint(yesterDateMonth5+"/"+yesterDateDay5, total9/1000));
-        series.addPoint(new ValueLinePoint(yesterDateMonth4+"/"+yesterDateDay4, total8/1000));
-        series.addPoint(new ValueLinePoint(yesterDateMonth3+"/"+yesterDateDay3, total7/1000));
-        series.addPoint(new ValueLinePoint(yesterDateMonth2+"/"+yesterDateDay2, total6/1000));
-        series.addPoint(new ValueLinePoint(yesterDateMonth1+"/"+yesterDateDay1, total5/1000));
-        series.addPoint(new ValueLinePoint(yesterDateMonth+"/"+yesterDateDay, total1/1000));
-        series.addPoint(new ValueLinePoint(todayDateMonth+"/"+todayDateDay, total2/1000));
+        series.addPoint(new ValueLinePoint("", 0));
+        series.addPoint(new ValueLinePoint(yesterDateMonth7+"/"+yesterDateDay7, (float)total11));
+        series.addPoint(new ValueLinePoint(yesterDateMonth6+"/"+yesterDateDay6, (float)total10));
+        series.addPoint(new ValueLinePoint(yesterDateMonth5+"/"+yesterDateDay5, (float)total9));
+        series.addPoint(new ValueLinePoint(yesterDateMonth4+"/"+yesterDateDay4, (float)total8));
+        series.addPoint(new ValueLinePoint(yesterDateMonth3+"/"+yesterDateDay3, (float)total7));
+        series.addPoint(new ValueLinePoint(yesterDateMonth2+"/"+yesterDateDay2, (float)total6));
+        series.addPoint(new ValueLinePoint(yesterDateMonth1+"/"+yesterDateDay1, (float)total5));
+        series.addPoint(new ValueLinePoint(yesterDateMonth+"/"+yesterDateDay, (float)total1));
+        series.addPoint(new ValueLinePoint(todayDateMonth+"/"+todayDateDay, (float)total2));
+        series.addPoint(new ValueLinePoint("", 0));
 
         mCubicValueLineChart.addSeries(series);
         mCubicValueLineChart.startAnimation();
