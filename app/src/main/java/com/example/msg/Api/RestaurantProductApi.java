@@ -181,7 +181,10 @@ public class RestaurantProductApi {
                         "cost", restaurantProductModel.cost,
                         "fast", restaurantProductModel.fast,
                         "stock", restaurantProductModel.stock,
-                        "completed", restaurantProductModel.completed
+                        "completed", restaurantProductModel.completed,
+                        "saleDateYear", restaurantProductModel.saleDateYear,
+                        "saleDateMonth", restaurantProductModel.saleDateMonth,
+                        "saleDateDay", restaurantProductModel.saleDateDay
                 ).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

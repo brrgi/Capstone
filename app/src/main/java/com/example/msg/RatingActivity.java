@@ -27,6 +27,8 @@ import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Sale.SaleUserActivity;
 
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RatingActivity extends AppCompatActivity {
 
@@ -147,6 +149,20 @@ public class RatingActivity extends AppCompatActivity {
                     UserProductModel userProductModel = (UserProductModel)obj;
                     ratingUserCalculate(userProductModel,ratingScore);
                     userProductModel.completed = 1;
+
+                    long now = System.currentTimeMillis();
+                    Date date = new Date(now);
+                    SimpleDateFormat sdfNowYear = new SimpleDateFormat("yy");
+                    SimpleDateFormat sdfNowMonth = new SimpleDateFormat("MM");
+                    SimpleDateFormat sdfNowDay = new SimpleDateFormat("dd");
+                    String formatDateYear = sdfNowYear.format(date);
+                    String formatDateMonth = sdfNowMonth.format(date);
+                    String formatDateDay = sdfNowDay.format(date);
+
+                    userProductModel.saleDateYear=Integer.parseInt(formatDateYear);
+                    userProductModel.saleDateMonth=Integer.parseInt(formatDateMonth);
+                    userProductModel.saleDateDay=Integer.parseInt(formatDateDay);
+                    Log.d("1234", formatDateYear+"Tlqkf"+formatDateMonth+formatDateDay);
                     UserProductApi.updateProduct(userProductModel, new UserProductApi.MyCallback() {
                         @Override
                         public void onSuccess(UserProductModel userProductModel) {
@@ -163,6 +179,19 @@ public class RatingActivity extends AppCompatActivity {
                     RestaurantProductModel restaurantProductModel = (RestaurantProductModel)obj;
                     ratingResCalculate(restaurantProductModel,ratingScore);
                     restaurantProductModel.completed = 1;
+                    long now = System.currentTimeMillis();
+                    Date date = new Date(now);
+                    SimpleDateFormat sdfNowYear = new SimpleDateFormat("yy");
+                    SimpleDateFormat sdfNowMonth = new SimpleDateFormat("MM");
+                    SimpleDateFormat sdfNowDay = new SimpleDateFormat("dd");
+                    String formatDateYear = sdfNowYear.format(date);
+                    String formatDateMonth = sdfNowMonth.format(date);
+                    String formatDateDay = sdfNowDay.format(date);
+
+                    restaurantProductModel.saleDateYear=Integer.parseInt(formatDateYear,10);
+                    restaurantProductModel.saleDateMonth=Integer.parseInt(formatDateMonth,10);
+                    restaurantProductModel.saleDateDay=Integer.parseInt(formatDateDay,10);
+
                     RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
                         @Override
                         public void onSuccess(RestaurantProductModel restaurantProductModel) {

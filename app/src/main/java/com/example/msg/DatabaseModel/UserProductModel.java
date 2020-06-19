@@ -21,12 +21,15 @@ public class UserProductModel implements Serializable {
     public double latitude = -1;
     public double longitude = -1;
     public String uproduct_id = null;
+    public int saleDateYear = -1;
+    public int saleDateMonth = -1;
+    public int saleDateDay   = -1;
 
     public UserProductModel() {
         //파이어스토어의 정상 동작을 위해 필요한 생성자.
     }
 
-    public UserProductModel( String uproduct_id, String user_id, String title, String p_imageURL, String p_description, String categoryBig, String categorySmall, int quality, String quantity, String expiration_date, int completed, double latitude, double longitude) {
+    public UserProductModel( String uproduct_id, String user_id, String title, String p_imageURL, String p_description, String categoryBig, String categorySmall, int quality, String quantity, String expiration_date, int completed, double latitude, double longitude, int saleDateYear,int saleDateMonth, int saleDateDay ) {
         this.uproduct_id = uproduct_id;
         this.user_id = user_id;
         this.title = title;
@@ -40,6 +43,9 @@ public class UserProductModel implements Serializable {
         this.completed = completed;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.saleDateYear=saleDateYear;
+        this.saleDateMonth=saleDateMonth;
+        this.saleDateDay=saleDateDay;
     }
     //필요한 모든 변수를 취하는 생성자입니다.
 

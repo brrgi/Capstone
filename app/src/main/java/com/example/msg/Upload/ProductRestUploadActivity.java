@@ -98,6 +98,9 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         restaurantProductModel.categorySmall = smallCategory.getSelectedItem().toString();
 
         restaurantProductModel.completed = -1;
+        restaurantProductModel.saleDateYear=-1;
+        restaurantProductModel.saleDateMonth=-1;
+        restaurantProductModel.saleDateDay=-1;
         Integer i = Integer.parseInt(qualityText.getText().toString());
         restaurantProductModel.quality=i;
 

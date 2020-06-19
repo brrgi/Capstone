@@ -225,7 +225,6 @@ public class ProductUploadActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("GOS", latitude+"Tlqkf"+longitude);
                 userProductModel.title = title.getText().toString();
                 userProductModel.p_description = specification.getText().toString();
                 userProductModel.categorySmall = smallSpinner.getSelectedItem().toString();
@@ -235,6 +234,10 @@ public class ProductUploadActivity extends AppCompatActivity {
                 userProductModel.completed = -1;
                 userProductModel.longitude = longitude;
                 userProductModel.latitude = latitude;
+                userProductModel.saleDateYear=-1;
+                userProductModel.saleDateMonth=-1;
+                userProductModel.saleDateDay=-1;
+
                 Integer i = Integer.parseInt(qualityText.getText().toString());
                 userProductModel.quality = i;
                 postUserProduct(userProductModel);
