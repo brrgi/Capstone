@@ -2,6 +2,7 @@ package com.example.msg.saleFragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,56 +11,56 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.msg.Api.RestaurantProductApi;
+import com.example.msg.Api.SaleApi;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.SaleModel;
 import com.example.msg.R;
+import com.example.msg.RecyclerView.ResReviewsAdapter;
+
+import java.util.ArrayList;
 
 public class ResReviewsFragment extends Fragment {
     private View view;
-    private static final String TAG = "ProductInfo";
+    private static final String TAG = "ResReviewsFragment";
+    private String res_id;
 
-    private TextView txt_category;
-    private TextView txt_quantity;
-    private TextView txt_quality;
-    private TextView txt_expireDate;
-    private TextView txt_description;
-    private TextView txt_cost;
+    //리사이클러뷰 공통 변수
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
 
-    private String rproduct_id;
+    //리사이클러뷰 Sales 전용 변수
+    private RecyclerView.Adapter saleAdapter;
+    private ArrayList<SaleModel> saleModelArrayList = new ArrayList<SaleModel>();
 
     private void initializeLayout(final Context context) {
-        txt_category = view.findViewById(R.id.productInfo_textView_categoryBig);
-        txt_description = view.findViewById(R.id.productInfo_textView_description);
-        txt_expireDate =  view.findViewById(R.id.productInfo_textView_expiredDate);
-        txt_quality = view.findViewById(R.id.productInfo_textView_quality);
-        txt_quantity = view.findViewById(R.id.productInfo_textView_quantity);
-        txt_cost=view.findViewById((R.id.productInfo_textView_cost));
 
         Bundle bundle=getArguments();
         if(bundle !=null) {
-            rproduct_id = bundle.getString("rproduct_id");
+            res_id = bundle.getString("res_id");
         }
 
-        RestaurantProductApi.getProduct(rproduct_id, new RestaurantProductApi.MyCallback() {
+        //리사이클러뷰 관련 초기화
+        recyclerView = view.findViewById(R.id.resReview_recyclerView);
+        recyclerView.setHasFixedSize(true); //리사이클러뷰 기존성능 강화
+        layoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+        SaleApi.getSaleByResId(res_id, new SaleApi.MyListCallback() {
             @Override
-            public void onSuccess(RestaurantProductModel restaurantProductModel) {
-                txt_category.setText(restaurantProductModel.categoryBig + " -> " + restaurantProductModel.categorySmall);
-                //txt_salesman.setText("판매자 : "+r_name); //더미 테스트라 아직 받아오지 못함 getRestaurant로 받아와야 할 예정
-                txt_quantity.setText(restaurantProductModel.quantity);
-                if (restaurantProductModel.quality==1){
-                    txt_quality.setText("하");
+            public void onSuccess(ArrayList<SaleModel> saleModels) {
+
+                saleModelArrayList.clear();
+                //saleModelArrayList.addAll(saleModels);
+                for(int index=0;index<saleModels.size();index++){
+                    if(saleModels.get(index).review!=null)
+                        saleModelArrayList.add(saleModels.get(index));
                 }
-                else if (restaurantProductModel.quality==2){
-                    txt_quality.setText("중");
-                }
-                else if (restaurantProductModel.quality==3){
-                    txt_quality.setText("상");
-                }
-                txt_expireDate.setText(restaurantProductModel.expiration_date);
-                txt_description.setText(restaurantProductModel.p_description);
-                String c=Integer.toString(restaurantProductModel.cost);
-                txt_cost.setText(c);
+                saleAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -68,18 +69,26 @@ public class ResReviewsFragment extends Fragment {
             }
         });
 
+        saleAdapter=new ResReviewsAdapter(saleModelArrayList,context);
+        recyclerView.setAdapter(saleAdapter);
+
+
+
+
 
 
     }
 
 
+
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_productinfo,container,false);
-        initializeLayout(getContext());
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view=inflater.inflate(R.layout.fragment_resreview,container,false);
+
+        initializeLayout(container.getContext());
 
         return view;
-
     }
 }

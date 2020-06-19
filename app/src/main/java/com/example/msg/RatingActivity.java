@@ -30,6 +30,8 @@ import java.util.ArrayList;
 
 public class RatingActivity extends AppCompatActivity {
 
+    private static final String TAG = "RatingActivity";
+
     private RatingBar ratingBar;
     private Button ratingBtn;
     private float ratingScore = 0;
@@ -168,7 +170,10 @@ public class RatingActivity extends AppCompatActivity {
                             SaleApi.getSaleByProductIdandUserId(AuthenticationApi.getCurrentUid(), restaurantProductModel.rproduct_id, new SaleApi.MyListCallback() {
                                 @Override
                                 public void onSuccess(ArrayList<SaleModel> saleModels) {
+                                    ratingScore=ratingScore*10/10;
                                     saleModels.get(0).review=review.getText().toString();
+                                    saleModels.get(0).ratingScore=ratingScore;
+                                    Log.d(TAG,"ratingScore : "+ ratingScore);
                                     SaleApi.updateSales(saleModels.get(0), new SaleApi.MyCallback() {
                                         @Override
                                         public void onSuccess(SaleModel saleModel) {
