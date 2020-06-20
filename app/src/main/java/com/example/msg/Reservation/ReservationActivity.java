@@ -3,6 +3,7 @@ package com.example.msg.Reservation;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.msg.DatabaseModel.ReserveModel;
 import com.example.msg.Api.ReserveApi;
 
 import com.example.msg.R;
+import com.example.msg.UserFragment.ReservationFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -97,7 +99,8 @@ public class ReservationActivity extends AppCompatActivity {
                         ReserveApi.postReservation(reserveModel, new ReserveApi.MyCallback() {
                             @Override
                             public void onSuccess(ReserveModel reserveModel) {
-
+                                Toast.makeText(getApplicationContext(), "예약 성공", Toast.LENGTH_LONG).show();
+                                finish();
                             }
 
                             @Override

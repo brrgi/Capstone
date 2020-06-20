@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.ReserveApi;
@@ -37,7 +38,13 @@ public class ReservationFragment extends Fragment {
     private RecyclerView.Adapter reserveAdapter;
     private ArrayList<ReserveModel> reserveModelArrayList = new ArrayList<ReserveModel>();
 
+    //refreshLayout 변수
+    private SwipeRefreshLayout refreshLayout;
+
     private void initializeLayout(final Context context) {
+        //refreshLayout 초기화
+        refreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.reservation_swipeLayout);
+
         recyclerView = view.findViewById(R.id.reserve_recyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(context);
@@ -45,6 +52,10 @@ public class ReservationFragment extends Fragment {
 
         reserveAdapter = new ReserveAdapter(reserveModelArrayList,context);
 
+        ReserveHistory();
+
+        //refreshLayout false
+        refreshLayout.setRefreshing(false);
     }
 
     private void ReserveHistory() {
@@ -67,11 +78,20 @@ public class ReservationFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_reservation,container,false);
         btn_reservation = (Button) view.findViewById(R.id.fragment_reservation_button);
-        ReserveHistory();
+        //ReserveHistory();
         initializeLayout(container.getContext());
+
+        //refreshLayout로 새로고침했을 때
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initializeLayout(container.getContext());
+            }
+        });
+
         btn_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
