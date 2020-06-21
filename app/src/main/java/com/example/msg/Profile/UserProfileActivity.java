@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.msg.Api.UserApi;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.R;
+import com.example.msg.Sale.UserSaleProductsActivity;
 import com.example.msg.ban.BanActivity;
 
 public class UserProfileActivity extends AppCompatActivity {
@@ -67,7 +68,7 @@ public class UserProfileActivity extends AppCompatActivity {
         products_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(UserProfileActivity.this, BanActivity.class);
+                Intent intent=new Intent(UserProfileActivity.this, UserSaleProductsActivity.class);
                 intent.putExtra("reported_user_id",reported_user_id);
                 startActivity(intent);
             }
