@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
@@ -76,7 +77,7 @@ public class ProductUploadActivity extends AppCompatActivity {
                 UserProductApi.postProduct(userProductModel, imageUri, new UserProductApi.MyCallback() {
                    @Override
                    public void onSuccess(UserProductModel userProductModel) {
-                        //유저 프로덕트 올리는데 성공함.
+                       Toast.makeText(getApplicationContext(), "상품 등록이 완료되었습니다.", Toast.LENGTH_LONG).show();
                        finish();
                    }
 
