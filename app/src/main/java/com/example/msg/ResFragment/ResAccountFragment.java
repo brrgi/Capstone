@@ -29,6 +29,7 @@ import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.EditProfile.EditResProfileActivity;
 import com.example.msg.QRcode.QrCodeReaderActivity;
 import com.example.msg.R;
+import com.example.msg.Review.ResReviewsActivity;
 import com.example.msg.Sale.ResSalesHistoryActivity;
 
 import java.io.IOException;
@@ -49,6 +50,7 @@ public class ResAccountFragment extends Fragment {
     private TextView res_address;
     private Button editProfile;
     private Button qrReader;
+    private Button reviews;
 
     private void getAddress(String uid){
         UserApi.getUserById(uid, new UserApi.MyCallback() {
@@ -78,8 +80,9 @@ public class ResAccountFragment extends Fragment {
 
         res_name =view.findViewById(R.id.resaccount_textView_UID);
         res_address=view.findViewById(R.id.resaccount_textView_address);
-        editProfile=view.findViewById(R.id.reaccount_textView_editprofile);
+        editProfile=view.findViewById(R.id.resaccount_button_editprofile);
         qrReader=view.findViewById(R.id.reaccount_textView_qrReader);
+        reviews=view.findViewById(R.id.resaccount_button_review);
 
         RestaurantApi.getUserById(AuthenticationApi.getCurrentUid(), new RestaurantApi.MyCallback() {
             @Override
@@ -107,6 +110,13 @@ public class ResAccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), EditResProfileActivity.class));
+            }
+        });
+
+        reviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), ResReviewsActivity.class));
             }
         });
 

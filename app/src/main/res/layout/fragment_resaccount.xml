@@ -146,7 +146,7 @@
             android:layout_marginLeft="10sp">
 
             <Button
-                android:id="@+id/reaccount_textView_editprofile"
+                android:id="@+id/resaccount_button_editprofile"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -225,7 +225,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="신고하기"
+                android:id="@+id/resaccount_button_review"
+                android:text="판매 식재료 후기"
                 android:fontFamily="@font/font_baemin5"
                 android:textSize="30sp"
                 style="@style/Widget.AppCompat.Button.Borderless"
