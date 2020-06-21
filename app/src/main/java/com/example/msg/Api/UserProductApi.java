@@ -355,6 +355,9 @@ public class UserProductApi {
             }
         return newModelList;
     }
+    /* filterbykeyword2 : 음식이름기반 검색 이후 기본 재료 정렬
+       return : userproductArraylist 담겨있는 newModelList
+     */
 
     public static void sortByDistance(ArrayList<UserProductModel> modelList, double curLatitude, double curLongitude) {
         final double finalCurLatitude = curLatitude;
