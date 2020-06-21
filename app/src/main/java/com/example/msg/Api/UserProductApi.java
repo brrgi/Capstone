@@ -319,17 +319,21 @@ public class UserProductApi {
     public static ArrayList<UserProductModel> filterByKeyWord(final ArrayList<UserProductModel> modelList,final FoodModel foodModel) {
         ArrayList<UserProductModel> newModelList = new ArrayList<UserProductModel>();
         UserProductModel userProductModel;
-        for(int j = 0; j < foodModel.ingredients.size()-1; j++) {
-            String keyword = foodModel.ingredients.get(j);
-            for(int i =0; i< modelList.size(); i++) {
-                userProductModel = modelList.get(i);
-                if(userProductModel.title.contains(keyword) || userProductModel.p_description.contains(keyword)
-                        || userProductModel.categoryBig.contains(keyword) || userProductModel.categorySmall.contains(keyword)) {
-                    newModelList.add(userProductModel);
+        if(foodModel.ingredients.size()==0) {
+            return newModelList;
+        }
+        else {
+            for (int j = 0; j < foodModel.ingredients.size() - 1; j++) {
+                String keyword = foodModel.ingredients.get(j);
+                for (int i = 0; i < modelList.size(); i++) {
+                    userProductModel = modelList.get(i);
+                    if (userProductModel.title.contains(keyword) || userProductModel.p_description.contains(keyword)
+                            || userProductModel.categoryBig.contains(keyword) || userProductModel.categorySmall.contains(keyword)) {
+                        newModelList.add(userProductModel);
+                    }
                 }
             }
         }
-
         return newModelList;
     }
     /*
@@ -337,6 +341,20 @@ public class UserProductApi {
     출력: 필터링된 모델 리스트
     동작: 모델 리스트에서 키워드와 매칭되는 모델만 필터링해서 반환합니다. 얕은 복사를 일으키므로 주의하십시오.
      */
+
+
+    public static ArrayList<UserProductModel> filterByKeyWord2(final ArrayList<UserProductModel> modelList,String keyword) {
+        ArrayList<UserProductModel> newModelList = new ArrayList<UserProductModel>();
+        UserProductModel userProductModel;
+            for(int i =0; i< modelList.size(); i++) {
+                userProductModel = modelList.get(i);
+                if(userProductModel.title.contains(keyword) || userProductModel.p_description.contains(keyword)
+                        || userProductModel.categoryBig.contains(keyword) || userProductModel.categorySmall.contains(keyword)) {
+                    newModelList.add(userProductModel);
+                }
+            }
+        return newModelList;
+    }
 
     public static void sortByDistance(ArrayList<UserProductModel> modelList, double curLatitude, double curLongitude) {
         final double finalCurLatitude = curLatitude;

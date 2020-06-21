@@ -30,6 +30,7 @@ import com.example.msg.Api.RestaurantApi;
 import com.example.msg.Api.RestaurantProductApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.EditProfile.EditResProfileActivity;
 import com.example.msg.R;
 import com.example.msg.RecyclerView.QualitySelectActivity;
@@ -57,8 +58,7 @@ public class EditSaleActivity extends AppCompatActivity {
 
     private final int PICK_FROM_ALBUM =100, QUALITY_SELECT = 101;
 
-    private final RestaurantProductModel restaurantProductModel = new RestaurantProductModel();
-
+    private RestaurantProductModel restaurantProductModel;
 
     private void setRestaurantProductModelFromUI(RestaurantProductModel restaurantProductModel) {
         restaurantProductModel.title = title.getText().toString();
@@ -96,7 +96,6 @@ public class EditSaleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_sale);
 
-
         productImage = (ImageView)findViewById(R.id.edit_product_rest_imageView_product);
         title = (EditText)findViewById(R.id.edit_product_rest_editText_title);
         quantity = (EditText)findViewById(R.id.edit_product_rest_editText_quantity);
@@ -115,11 +114,16 @@ public class EditSaleActivity extends AppCompatActivity {
         txtResult = (TextView)findViewById(R.id.edit_product_rest_TextView_txtResult);
 
         final String uid = AuthenticationApi.getCurrentUid();
+        final Intent intent = getIntent();
+        restaurantProductModel = (RestaurantProductModel) intent.getSerializableExtra("Models");
 
+        Log.d("hihi1 : ",restaurantProductModel.res_id);
         RestaurantProductApi.getProduct(restaurantProductModel.res_id, new RestaurantProductApi.MyCallback() {
             @Override
             public void onSuccess(RestaurantProductModel restaurantProductModel) {
-                title.setText(restaurantProductModel.title);
+                Log.d("hihi2 : ",restaurantProductModel.res_id);
+
+                title.setText("디버그용");
                 quantity.setText(restaurantProductModel.quantity);
                 expireDate.setText(restaurantProductModel.expiration_date);
                 cost.setText(restaurantProductModel.cost);
@@ -134,6 +138,7 @@ public class EditSaleActivity extends AppCompatActivity {
 
             }
         });
+
 
         this.InitializeListener();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

@@ -256,7 +256,7 @@ public class SaleActivity extends AppCompatActivity {
         txt_address = (TextView) findViewById(R.id.saleActivity_textView_address);
         rating= (RatingBar)findViewById((R.id.saleActivity_item_ratingBar_grade));  //!!!!!!!
         txt_rating=(TextView)findViewById(R.id.saleActivity_textView_ratingText);
-        txt_cost=(TextView)findViewById((R.id.saleActivity_textView_cost));
+        //txt_cost=(TextView)findViewById((R.id.saleActivity_textView_cost));
         btn_edit=(Button)findViewById(R.id.saleActivity_button_edit);
 
         Intent intent = getIntent();
