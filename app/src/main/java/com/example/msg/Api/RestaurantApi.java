@@ -19,12 +19,7 @@ public class RestaurantApi {
         void onSuccess(RestaurantModel restaurantModel);
         void onFail(int errorCode, Exception e);
     }
-    /*
-    에러코드에 관한 정의
-    0: onFailureListner가 호출되었습니다. Exception e를 참조해야합니다.
-    1: 태스크가 실패하였습니다. 대표적으로 쿼리 도중에 쿼리가 취소된 경우가 있습니다.
-    2: 다큐먼트가 null입니다.
-     */
+
 
     public static void postRestaurant(final RestaurantModel restaurantModel, final MyCallback myCallback) {
         db.collection("Restaurant").add(restaurantModel)

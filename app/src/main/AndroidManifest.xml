@@ -18,7 +18,7 @@
         <activity android:name=".QRcode.QrCodeReaderActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"/>
-        <activity android:name=".FilterSelectActivity"></activity>
+        <activity android:name=".Filter.FilterSelectActivity"></activity>
         <activity android:name=".ban.BanActivity" />
         <activity android:name=".Sale.UserSaleProductsActivity"/>
         <activity android:name=".Profile.UserProfileActivity" />

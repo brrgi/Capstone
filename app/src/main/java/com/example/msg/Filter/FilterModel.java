@@ -1,4 +1,4 @@
-package com.example.msg.DataModel;
+package com.example.msg.Filter;
 
 
 import java.io.Serializable;
@@ -6,8 +6,8 @@ import java.io.Serializable;
 public class FilterModel implements Serializable {
     private String filterType = "distance";
     private String category = null;
-    private double range = 500;
-    private int price = 500;
+    private int range = 100000;
+    private int price = 1000000;
     private boolean searchHighQuality = true;
     private boolean searchMidQuality = true;
     private boolean searchLowQuality = true;
@@ -28,11 +28,11 @@ public class FilterModel implements Serializable {
         return filterType;
     }
 
-    public double getRange() {
+    public int getRange() {
         return range;
     }
 
-    public void setRange(double range) {
+    public void setRange(int range) {
         this.range = range;
     }
 

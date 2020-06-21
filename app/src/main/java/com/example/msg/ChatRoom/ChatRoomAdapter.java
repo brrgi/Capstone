@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.Api.ChatRoomApi;
 import com.example.msg.DatabaseModel.ChatRoomModel;
 import com.example.msg.R;
 
@@ -69,7 +71,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String name = chatRoomModels.get(position).opponentName;
+        String name = ChatRoomApi.getOpponentNameByModel(chatRoomModels.get(position), AuthenticationApi.getCurrentUid());
         String date = chatRoomModels.get(position).lastDate;
         String chat = chatRoomModels.get(position).lastChat;
 
