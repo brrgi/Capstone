@@ -2,6 +2,7 @@ package com.example.msg.ban;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,8 @@ public class BanActivity extends AppCompatActivity {
     final BanModel banModel=new BanModel();
     Calendar calendar = Calendar.getInstance();
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //두번 클릭 방지
+    private long mLastClickTime = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +48,12 @@ public class BanActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //두번 클릭 방지 threshold 1초
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+                //
                 Intent intent=getIntent();
                 uid=intent.getStringExtra("reported_user_id");
                 banModel.report_user_id=AuthenticationApi.getCurrentUid();
