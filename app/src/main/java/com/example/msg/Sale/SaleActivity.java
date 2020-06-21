@@ -318,27 +318,10 @@ public class SaleActivity extends AppCompatActivity {
 
         final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        MapView mapView = new MapView(this);
-        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.productInfo_map_view);
-        mapViewContainer.addView(mapView);
 
         Double lat=intent.getExtras().getDouble("mLat");
         Double lng=intent.getExtras().getDouble("mLng");
 
-
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lat, lng), 1, true);
-
-
-        MapPOIItem customMarker = new MapPOIItem();
-        customMarker.setItemName("Custom Marker");
-        customMarker.setTag(1);
-        customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(lat, lng));
-        customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
-        customMarker.setCustomImageResourceId(R.drawable.marker2); // 마커 이미지.
-        customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
-        customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
-
-        mapView.addPOIItem(customMarker);
 
         txt_title.setText(restaurantProductModel.title);
 
