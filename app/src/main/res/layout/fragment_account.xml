@@ -164,17 +164,6 @@
             android:layout_marginLeft="10sp">
 
             <Button
-                android:id="@+id/account_button_addressSetting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="내 동네 설정"
-                android:fontFamily="@font/font_baemin5"
-                android:textSize="30sp"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:background="#00ff0000"
-                android:layout_margin="5sp"/>
-
-            <Button
                 android:id="@+id/account_textView_editprofile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,16 +174,6 @@
                 android:background="#00ff0000"
                 android:layout_margin="5sp"/>
 
-            <Button
-                android:id="@+id/account_button_statistics"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:background="#00ff0000"
-                android:fontFamily="@font/font_baemin5"
-                android:text="사용자 통계"
-                android:textSize="30sp" />
 
         </LinearLayout>
         <LinearLayout
@@ -205,6 +184,7 @@
 
 
             <Button
+                android:id="@+id/account_button_map"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="위치 설정"
@@ -224,6 +204,7 @@
 
 
             <Button
+                android:id="@+id/account_button_notice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="공지사항"
@@ -262,6 +243,7 @@
 
 
             <Button
+                android:id="@+id/account_button_help"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="도움말"

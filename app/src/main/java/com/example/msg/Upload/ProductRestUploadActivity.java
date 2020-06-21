@@ -233,6 +233,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == PICK_FROM_ALBUM && resultCode == RESULT_OK) {
             imageUri = data.getData();    //이미지 원본 경로
             productImage.setImageURI(imageUri);
@@ -240,7 +241,15 @@ public class ProductRestUploadActivity extends AppCompatActivity {
             int quality = -1;
             if (data.hasExtra("quality")) quality = data.getIntExtra("quality", -1);
             restaurantProductModel.quality = quality;
-            qualityText.setText(Integer.toString(quality));
+            if (restaurantProductModel.quality==1){
+                qualityText.setText("하");
+            }
+            else if (restaurantProductModel.quality==2){
+                qualityText.setText("중");
+            }
+            else if (restaurantProductModel.quality==3){
+                qualityText.setText("상");
+            }
         }
     }
 

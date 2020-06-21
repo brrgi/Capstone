@@ -45,6 +45,8 @@
         <activity android:name=".RatingActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ResMainActivity" />
+        <activity android:name=".menu.HelpActivity"/>
+        <activity android:name=".menu.NoticeActivity"/>
         <activity android:name=".SignUp.SignupActivity" />
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Login.SplashActivity">

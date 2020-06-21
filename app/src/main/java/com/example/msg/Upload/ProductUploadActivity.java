@@ -30,6 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Api.AuthenticationApi;
@@ -68,7 +69,7 @@ public class ProductUploadActivity extends AppCompatActivity {
     private double longitude=0.0;
     private double latitude=0.0;
     private double altitude;
-
+    private final UserProductModel userProductModel = new UserProductModel();
     private void postUserProduct(final UserProductModel userProductModel) {
         UserApi.getUserById(AuthenticationApi.getCurrentUid(), new UserApi.MyCallback() {
             @Override
@@ -273,7 +274,16 @@ public class ProductUploadActivity extends AppCompatActivity {
         } else if (requestCode == QUALITY_SELECT && resultCode == RESULT_OK) {
             int quality = -1;
             if (data.hasExtra("quality")) quality = data.getIntExtra("quality", -1);
-            qualityText.setText(Integer.toString(quality));
+            userProductModel.quality=quality;
+            if (userProductModel.quality==1){
+                qualityText.setText("하");
+            }
+            else if (userProductModel.quality==2){
+                qualityText.setText("중");
+            }
+            else if (userProductModel.quality==3){
+                qualityText.setText("상");
+            }
         }
     }
 

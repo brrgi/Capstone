@@ -231,6 +231,18 @@ public class SaleUserActivity extends AppCompatActivity {
                 //startActivity(intent);
                 UserModel userModel = new UserModel();
                 userModel.user_id = u_uid;
+                userModel.mileage-=1;
+                UserApi.getUserById(userProductModel.user_id, new UserApi.MyCallback() {
+                    @Override
+                    public void onSuccess(UserModel userModel) {
+                        userModel.mileage-=1;
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
                 processShare(userProductModel, userModel);
             }
         });

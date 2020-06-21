@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            android:background="#F39C12"
+            android:text="도움말"
+            android:textColor="#ffffff"
+            android:textSize="100sp">
+
+        </TextView>
+
+        <ImageView
+            android:src="@drawable/cute"
+            android:layout_width="100sp"
+            android:layout_height="150sp"
+
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10sp"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="도움이 필요하시면 연락주세요\n010-5555-3550 "
+        >
+    </TextView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10sp"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="식재료 품질이 궁금하시다구요?\n저희 msg에서 제공합니다"
+        >
+    </TextView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10sp"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="신고사유가 궁금하다고요\n전화주세요 010-5555-3550"
+        >
+    </TextView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10sp"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="오늘은 안녕하신가요~\n 저희 MSG를 이용해 주셔서 감사합니다.~~ "
+        >
+    </TextView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10sp"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="자주 이용해주시는 고객님께\n감사인사를 드립니다. "
+        >
+    </TextView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10sp"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"
+        />
+</LinearLayout>

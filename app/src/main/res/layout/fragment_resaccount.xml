@@ -105,28 +105,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="45sp"
-                        android:layout_height="80sp"
-                        android:layout_margin="5sp"
-                        android:src="@drawable/icon_food"/>
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/font_baemin5"
-                        android:text="판매목록"/>
-
-                </LinearLayout>
-
 
             </LinearLayout>
 
@@ -185,6 +163,7 @@
 
 
             <Button
+                android:id="@+id/resaccount_button_map"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="위치 설정"
@@ -204,6 +183,7 @@
 
 
             <Button
+                android:id="@+id/resaccount_button_notice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="공지사항"
@@ -223,15 +203,15 @@
 
 
             <Button
+                android:id="@+id/resaccount_button_review"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/resaccount_button_review"
-                android:text="판매 식재료 후기"
-                android:fontFamily="@font/font_baemin5"
-                android:textSize="30sp"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_margin="5sp"
                 android:background="#00ff0000"
-                android:layout_margin="5sp"/>
+                android:fontFamily="@font/font_baemin5"
+                android:text="판매 식재료 후기"
+                android:textSize="30sp" />
 
         </LinearLayout>
 
@@ -243,28 +223,10 @@
 
 
             <Button
+                android:id="@+id/resaccount_button_help"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="도움말"
-                android:fontFamily="@font/font_baemin5"
-                android:textSize="30sp"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:background="#00ff0000"
-                android:layout_margin="5sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="10sp">
-
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="통계 설정"
                 android:fontFamily="@font/font_baemin5"
                 android:textSize="30sp"
                 style="@style/Widget.AppCompat.Button.Borderless"

@@ -22,10 +22,13 @@ import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.EditProfile.EditProfileActivity;
+import com.example.msg.Map.DaumWebViewActivity;
 import com.example.msg.Map.MapActivity;
 import com.example.msg.R;
 import com.example.msg.Sale.PurchaseHistoryActivity;
 import com.example.msg.Sale.SalesHistoryActivity;
+import com.example.msg.menu.HelpActivity;
+import com.example.msg.menu.NoticeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -50,6 +53,7 @@ public class AccountFragment extends Fragment {
     private String dong="";
     private TextView address;
     private Button editProfile;
+    private Button map, help, notice;
 
     private void getAddress(String uid){
         UserApi.getUserById(uid, new UserApi.MyCallback() {
@@ -80,8 +84,8 @@ public class AccountFragment extends Fragment {
         txt_username = view.findViewById(R.id.account_textView_UID);
         editProfile = view.findViewById(R.id.account_textView_editprofile);
 
-        addressSetting=view.findViewById(R.id.account_button_addressSetting);
-        statistics=view.findViewById(R.id.account_button_statistics);
+//        addressSetting=view.findViewById(R.id.account_button_addressSetting);
+//        statistics=view.findViewById(R.id.account_button_statistics);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
@@ -143,6 +147,28 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
 //                Intent intent = new Intent(getActivity(), MapActivity.class);
 //                startActivity(intent);
+            }
+        });
+
+        notice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), HelpActivity.class));
+            }
+        });
+
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), NoticeActivity.class));
+            }
+        });
+
+
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), DaumWebViewActivity.class));
             }
         });
 

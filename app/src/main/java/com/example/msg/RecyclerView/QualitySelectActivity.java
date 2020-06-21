@@ -93,6 +93,9 @@ public class QualitySelectActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("quality", -1);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
