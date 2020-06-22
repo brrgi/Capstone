@@ -77,7 +77,7 @@ public class FilterTest {
 
     @Test
     public void testFilteringByCategory() {
-        restaurantProductModels = RestaurantProductApi.filterByCategory(restaurantProductModels, "육류", "닭고기");
+        restaurantProductModels = RestaurantProductApi.filterByCategory(restaurantProductModels, "닭고기");
         //필터링 실행
 
         assertEquals(1, restaurantProductModels.size());

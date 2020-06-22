@@ -122,7 +122,8 @@
         android:layout_width="50sp"
         android:layout_height="50sp"
         android:layout_marginBottom="10sp"
-        android:src="@drawable/iconfinder_filter_299094"
+        android:src="@drawable/filter"
+        android:scaleType="centerInside"
         />
 
 
