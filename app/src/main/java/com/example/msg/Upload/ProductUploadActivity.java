@@ -69,6 +69,7 @@ public class ProductUploadActivity extends AppCompatActivity {
     private double longitude=0.0;
     private double latitude=0.0;
     private double altitude;
+    private int quality=-1;
     private final UserProductModel userProductModel = new UserProductModel();
     private void postUserProduct(final UserProductModel userProductModel) {
         UserApi.getUserById(AuthenticationApi.getCurrentUid(), new UserApi.MyCallback() {
@@ -239,6 +240,7 @@ public class ProductUploadActivity extends AppCompatActivity {
                 userProductModel.saleDateYear=-1;
                 userProductModel.saleDateMonth=-1;
                 userProductModel.saleDateDay=-1;
+                userProductModel.quality=quality;
                 postUserProduct(userProductModel);
 
             }
@@ -270,7 +272,7 @@ public class ProductUploadActivity extends AppCompatActivity {
             imageUri = data.getData();    //이미지 원본 경로
             productImage.setImageURI(imageUri);
         } else if (requestCode == QUALITY_SELECT && resultCode == RESULT_OK) {
-            int quality = -1;
+            quality = -1;
             if (data.hasExtra("quality")) quality = data.getIntExtra("quality", -1);
             userProductModel.quality=quality;
             if (userProductModel.quality==1){

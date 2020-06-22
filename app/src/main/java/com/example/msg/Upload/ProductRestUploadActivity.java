@@ -57,7 +57,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
     private  ArrayAdapter<String> smallCategoriesAdapter;
     private final RestaurantProductModel restaurantProductModel = new RestaurantProductModel();
 
-
+    private int quality=-1;
     private double defaultLatitude = 0.0, defaultLongitude = 0.0;
     private Uri imageUri = null;
 
@@ -102,8 +102,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         restaurantProductModel.saleDateYear=-1;
         restaurantProductModel.saleDateMonth=-1;
         restaurantProductModel.saleDateDay=-1;
-        Integer i = Integer.parseInt(qualityText.getText().toString());
-        restaurantProductModel.quality=i;
+        restaurantProductModel.quality=quality;
 
 
 
@@ -237,7 +236,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
             imageUri = data.getData();    //이미지 원본 경로
             productImage.setImageURI(imageUri);
         } else if (requestCode == QUALITY_SELECT) {
-            int quality = -1;
+            quality = -1;
             if (data.hasExtra("quality")) quality = data.getIntExtra("quality", -1);
             restaurantProductModel.quality = quality;
             if (restaurantProductModel.quality==1){
