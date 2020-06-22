@@ -353,9 +353,6 @@ public class SaleActivity extends AppCompatActivity {
         }
 
 
-
-
-
         if(restaurantProductModel.completed!=-1) {
             btn_buy.setVisibility(View.INVISIBLE);
             btn_chat.setVisibility(View.INVISIBLE);

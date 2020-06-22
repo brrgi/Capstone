@@ -71,6 +71,7 @@ public class ProductUploadActivity extends AppCompatActivity {
     private double altitude;
     private int quality=-1;
     private final UserProductModel userProductModel = new UserProductModel();
+
     private void postUserProduct(final UserProductModel userProductModel) {
         UserApi.getUserById(AuthenticationApi.getCurrentUid(), new UserApi.MyCallback() {
             @Override

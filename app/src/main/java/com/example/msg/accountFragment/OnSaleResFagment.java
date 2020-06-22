@@ -40,6 +40,7 @@ public class OnSaleResFagment extends Fragment {
         //refreshLayout 초기화
         refreshLayout=(SwipeRefreshLayout)view.findViewById(R.id.onsale_res_swipeLayout);
 
+        restaurantProductModelArrayList.clear();
         //리사이클러뷰 관련 초기화
         recyclerView = view.findViewById(R.id.onsale_res_recyclerView);
         recyclerView.setHasFixedSize(true); //리사이클러뷰 기존성능 강화
