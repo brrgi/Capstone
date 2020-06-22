@@ -1,3 +1,5 @@
+
+
 package com.example.msg.Api;
 
 import android.net.Uri;
@@ -6,6 +8,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.msg.DatabaseModel.FoodModel;
+import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.google.android.gms.tasks.Continuation;
@@ -19,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,6 +31,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+
+/*
+파일명: RestaurantProductApi
+설  명: 식당이 등록한 상품에 관련된 기능들을 모아놓은 클래스입니다. 대부분 기능들이 콜백을 이용해서 RestaurantProductModel 이라는 객체를 이용해서 비동기적으로 동작합니다.
+파이어베이스에 관한 사전지식이 없으면 대부분의 코드가 읽기 어려우나, 밖에서는 협업자가 콜백 구조를 안다면 내부 구현들을 신경쓰지 않고 활용할수 있도록 만들었습니다.
+모든 데이터베이스 관련 동작은 onSuccess를 통해서 정보를 돌려주고, onFail을 통해서 실패 결과를 알려줍니다.
+ */
 public class RestaurantProductApi {
 
     public interface MyCallback {
@@ -73,7 +84,6 @@ public class RestaurantProductApi {
     }
     /*
     입력: RestaurantProductModel
-    출력: 없음.
     동작: RestaurantProductModel을 받아서 데이터베이스에 추가합니다. 실패할경우 콜백함수 onFail을 호출합니다.
          성공할시에는 콜백함수 onSuccess를 호출하고, 성공한 객체를 돌려줍니다.(해당 객체는 product_id를 가진 상태)
      */
@@ -127,7 +137,6 @@ public class RestaurantProductApi {
     }
     /*
     입력: 모델과 콜백함수.
-    출력: 없음.
     동작: 모델을 받아서 모델의 image를 storage에 등록합니다. 실패할경우 콜백함수 onFail을 호출합니다.
          성공할시에는 콜백함수 onSuccess를 호출하고, 성공한 객체를 돌려줍니다.(해당 객체는 image 변수를 얻은 상태)
      */
@@ -200,15 +209,17 @@ public class RestaurantProductApi {
     }
     /*
     입력: ProductModel
-    출력: 없음
     동작: ProductModel을 받아서 해당 객체에 대응되는 데이터베이스 자리에 값을 업데이트합니다. 성공할 경우 콜백 함수를 통해서 성공한 객체를
     그대로 반환하며, 실패할 경우는 onFail 콜백함수를 부릅니다.
      */
 
 
-    public static void getProductList(final double curLatitude, final double curLongitude, final double range, final MyListCallback myCallback) {
+    public static void getProductList(final double curLatitude, final double curLongitude, final int range, final MyListCallback myCallback) {
+        final double latitudeRange = DistanceApi.meterToLatitude(range);
+        final double longitudeRange = DistanceApi.meterToLongitude(range);
+
         db.collection("ResProducts").
-                whereGreaterThan("latitude", curLatitude - range).whereLessThan("latitude", curLatitude + range)
+                whereGreaterThan("latitude", curLatitude - latitudeRange).whereLessThan("latitude", curLatitude + latitudeRange)
                 .whereEqualTo("completed", -1)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -219,7 +230,7 @@ public class RestaurantProductApi {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 restaurantProductModel = document.toObject(RestaurantProductModel.class);
-                                if((restaurantProductModel.longitude > curLongitude - range) && (restaurantProductModel.longitude < curLongitude + range)){
+                                if((restaurantProductModel.longitude > curLongitude - longitudeRange) && (restaurantProductModel.longitude < curLongitude + longitudeRange)){
                                     if(restaurantProductModel.stock>0)
                                         restaurantProductModelArrayList.add(restaurantProductModel);
                                 }
@@ -241,7 +252,6 @@ public class RestaurantProductApi {
     }
     /*
     입력: 현재 경도와 위도, 반경.
-    출력: 없음.
     동작: 현재 위치로부터 일정 반경 내에 등록된 Product를 모두 가져옵니다. 그 결과는 myCallback의 onSuccess 안에서 참조할 수 있습니다.
      */
 
@@ -277,14 +287,13 @@ public class RestaurantProductApi {
     }
     /*
     입력: uid와 completed 상태.
-    출력: 없음.
     동작: 특정 uid와 특정 completed 상태를 가지는 모델들을 가져옵니다. 그 결과는 myCallback의 onSuccess 안에서 참조할 수 있습니다.
      */
 
-    public static ArrayList<RestaurantProductModel> filterByCategory(ArrayList<RestaurantProductModel> modelList, String categoryBig, String categorySmall) {
+    public static ArrayList<RestaurantProductModel> filterByCategory(ArrayList<RestaurantProductModel> modelList, String categorySmall) {
         ArrayList<RestaurantProductModel> newModelList = new ArrayList<RestaurantProductModel>();
         for(int i = 0; i < modelList.size(); i++) {
-            if(modelList.get(i).categoryBig.equals(categoryBig) && modelList.get(i).categorySmall.equals(categorySmall)){
+            if(modelList.get(i).categorySmall.equals(categorySmall)){
                 newModelList.add(modelList.get(i));
             }
         }
@@ -348,8 +357,8 @@ public class RestaurantProductApi {
                 double distance2 = Math.abs(curLatitude - o2.latitude) + Math.abs(curLongitude - o2.longitude);
                 double distance1 = Math.abs(curLatitude - o1.latitude) + Math.abs(curLongitude - o1.longitude);
                 //성능 향상을 위해서 맨허튼 거리 계산법 사용.
-
-                return (int)(distance1 - distance2);
+                if(distance1 > distance2) return 1;
+                else return -1;
             }
         };
 
@@ -357,7 +366,6 @@ public class RestaurantProductApi {
     }
     /*
     입력: 현재 위치의 GPS값과 userProductModel List
-    출력: 없음
     동작 : 입력으로 들어온 Model의 리스트를 맨허튼 거리 계산법에 따라 가까운 순으로 정렬해줍니다.
      */
 
@@ -390,7 +398,6 @@ public class RestaurantProductApi {
     }
     /*
     입력: 모델의 어레이 리스트.
-    출력: 없음.
     동작: 입력으로 들어온 모델의 리스트를 재고가 많은 순으로 정렬해줍니다.
      */
 
@@ -410,39 +417,111 @@ public class RestaurantProductApi {
 
         Collections.sort(modelList, myComparator);
     }
+    /*
+    입력: 모델의 어레이 리스트
+    동작: 입력으로 들어온 모델의 리스트 중, 급처가 켜져있는 리스트를 앞으로 불러옵니다.
+     */
 
-    public static void sortBySubscription(ArrayList<RestaurantProductModel> modelList, ArrayList<SubscriptionModel> subscriptionList) {
+    public static ArrayList<RestaurantProductModel> filterBySubscription(ArrayList<RestaurantProductModel> modelList, ArrayList<SubscriptionModel> subscriptionList) {
+
+        ArrayList<RestaurantProductModel> restaurantProductModels = new ArrayList<>();
+
         for(int i=0; i <modelList.size(); i++) {
             for(int j = 0; j < subscriptionList.size(); j++) {
-
                 if(modelList.get(i).res_id.equals(subscriptionList.get(j).res_id)) {
-                    Log.d("1234", modelList.get(i).title);
-                    modelList.get(i).fast = true;
-                    Log.d("1234", Boolean.toString(modelList.get(i).fast));
+                    restaurantProductModels.add(modelList.get(i));
                 }
             }
         }
 
-        sortByFast(modelList);
+        return restaurantProductModels;
     }
-    //TODO: 동작 방식에 문제가 있음. 다시 코딩하는 것을 권장.
+    /*
+    입력: 상품의 모델 리스트와, 구독 모델의 리스트.
+    동작: 상품의 모델 리스트 중, 구독과 관련있는 상품들만 걸러냅니다.
+     */
 
 
-    public static ArrayList<RestaurantProductModel> filterByPrice(ArrayList<RestaurantProductModel> modelList, int price) {
-        ArrayList<RestaurantProductModel> filteredModel = new ArrayList<>();
-        Log.d("FilterTest", "filtering start");
 
-        for(int i = 0; i < modelList.size(); i++) {
-            if(modelList.get(i).cost < price)
-            {
-                filteredModel.add(modelList.get(i));
-                Log.d("FilterTest", modelList.get(i).title);
+    public static ArrayList<RestaurantProductModel> filterByDistance(ArrayList<RestaurantProductModel> inputModels, double curLatitude, double curLongitude, int range) {
+        double rangeLatitude = DistanceApi.meterToLatitude(range);
+        double rangeLongitude = DistanceApi.meterToLongitude(range);
+
+        ArrayList<RestaurantProductModel> outputModels = new ArrayList<>();
+        for(int i =0; i < inputModels.size(); i ++) {
+            if(Math.abs(inputModels.get(i).latitude - curLatitude) < rangeLatitude) {
+                if(Math.abs(inputModels.get(i).longitude - curLongitude) < rangeLongitude) {
+                    outputModels.add(inputModels.get(i));
+                }
             }
-
         }
-
-        return filteredModel;
+        return outputModels;
     }
+    /*
+    입력: 모델, 현재 위도, 경도, 반경
+    출력 및 동작: 입력으로 받은 모델을 멘허튼 거리로 계산해서 일정 반경 미만만 걸러서 돌려줍니다.
+     */
+
+    public static ArrayList<RestaurantProductModel> filterByQuality(ArrayList<RestaurantProductModel> inputModels, boolean allowLow, boolean allowMid, boolean allowHigh) {
+        ArrayList<RestaurantProductModel> outputModels = new ArrayList<>();
+        for(int i =0; i <inputModels.size(); i++) {
+            switch(inputModels.get(i).quality) {
+                case 1:
+                    if(allowLow) outputModels.add(inputModels.get(i));
+                    break;
+                case 2:
+                    if(allowMid) outputModels.add(inputModels.get(i));
+                    break;
+                case 3:
+                    if(allowHigh) outputModels.add(inputModels.get(i));
+                    break;
+            }
+        }
+        return outputModels;
+    }
+    /*
+    입력: 모델, 품질 허락(Allow) 여부.
+    출력 및 동작: 입력으로 받은 모델을 allow 값에 따라 필터링해서 돌려줍니다.
+     */
+
+    public static ArrayList<RestaurantProductModel> filterByPrice(ArrayList<RestaurantProductModel> inputModels, int price) {
+        ArrayList<RestaurantProductModel> outputModels = new ArrayList<>();
+        for(int i =0; i <inputModels.size(); i++) {
+            if(inputModels.get(i).cost < price) {
+                outputModels.add(inputModels.get(i));
+            }
+        }
+        return outputModels;
+    }
+    /*
+    입력: 모델, 가격
+    출력 및 동작: 입력으로 받은 모델을 가격순으로 정렬해서 돌려줍니다.
+     */
+
+    public static void deleteProduct(final String id, final MyCallback myCallback) {
+        db.collection("Subscription").document(id).delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            myCallback.onSuccess(null);
+                        }
+                        else {
+                            myCallback.onFail(1, null);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                myCallback.onFail(0, e);
+            }
+        });
+    }
+    /*
+    입력: 삭제할 모델의 id, 콜백함수.
+    동작: id와 관련된 모델을 삭제합니다. 성공이나 실패시 콜백함수를 호출합니다.
+     */
+
 
 
 }

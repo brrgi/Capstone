@@ -21,13 +21,6 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
-/*
-TODO: 프로덕트 ID도 돌려주도록 만들기, 이미지도 처리하도록 만들기, 에러 코드 등록.
- */
-
-
-
 public class UserProductApi {
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     public interface MyCallback {
@@ -205,9 +198,12 @@ public class UserProductApi {
     동작: 프로덕트 ID를 이용해서 데이터베이스에 서칭을 하고, 그 결과 나온 모델을 돌려줍니다. 콜백함수 onSuccess를 통해서 돌려줍니다.
      */
 
-    public static void getProductList(final double curLatitude, final double curLongitude, final double range, final MyListCallback myCallback) {
+    public static void getProductList(final double curLatitude, final double curLongitude, final int range, final MyListCallback myCallback) {
+        final double latitudeRange = DistanceApi.meterToLatitude(range);
+        final double longitudeRange = DistanceApi.meterToLongitude(range);
+
         db.collection("UserProducts").
-                whereGreaterThan("latitude", curLatitude - range).whereLessThan("latitude", curLatitude + range)
+                whereGreaterThan("latitude", curLatitude - latitudeRange).whereLessThan("latitude", curLatitude + latitudeRange)
                 .whereEqualTo("completed", -1)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -218,7 +214,7 @@ public class UserProductApi {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 userProductModel = document.toObject(UserProductModel.class);
-                                if((userProductModel.longitude > curLongitude - range) && (userProductModel.longitude < curLongitude + range)){
+                                if((userProductModel.longitude > longitudeRange - range) && (userProductModel.longitude < longitudeRange + range)){
                                     userProductModels.add(userProductModel);
                                 }
                             }
@@ -280,21 +276,6 @@ public class UserProductApi {
      */
 
 
-    public static ArrayList<UserProductModel> filterByCategory(ArrayList<UserProductModel> modelList, String categoryBig, String categorySmall) {
-        ArrayList<UserProductModel> newModelList = new ArrayList<UserProductModel>();
-        for(int i = 0; i < modelList.size(); i++) {
-            if(modelList.get(i).categoryBig.equals(categoryBig) && modelList.get(i).categorySmall.equals(categorySmall)){
-                newModelList.add(modelList.get(i));
-            }
-        }
-        return newModelList;
-    }
-    /*
-    입력: 모델 리스트와 카테고리
-    출력: 필터링된 모델 리스트
-    동작: 모델 리스트에서 입력 카테고리에 해당하는 모델만 필터링해서 반환합니다. 얕은 복사를 일으키므로 주의하십시오.
-    */
-
     public static void keywordSend(final String keyword, final MyFilterCallback myFilterCallback) {
         db.collection("Foods").whereEqualTo("food_name",keyword).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -341,18 +322,30 @@ public class UserProductApi {
     동작: 모델 리스트에서 키워드와 매칭되는 모델만 필터링해서 반환합니다. 얕은 복사를 일으키므로 주의하십시오.
      */
 
-    public static void sortByDistance(ArrayList<UserProductModel> modelList, double curLatitude, double curLongitude) {
-        final double finalCurLatitude = curLatitude;
-        final double finalCurLongitude = curLongitude;
+    public static ArrayList<UserProductModel> filterByCategory(ArrayList<UserProductModel> modelList, String categorySmall) {
+        ArrayList<UserProductModel> newModelList = new ArrayList<>();
+        for(int i = 0; i < modelList.size(); i++) {
+            if( modelList.get(i).categorySmall.equals(categorySmall)){
+                newModelList.add(modelList.get(i));
+            }
+        }
+        return newModelList;
+    }
+    /*
+    입력: 모델 리스트와 카테고리
+    출력: 필터링된 모델 리스트
+    동작: 모델 리스트에서 입력 카테고리에 해당하는 모델만 필터링해서 반환합니다. 얕은 복사를 일으키므로 주의하십시오.
+    */
 
+    public static void sortByDistance(ArrayList<UserProductModel> modelList, final double curLatitude, final double curLongitude) {
         Comparator<UserProductModel> myComparator = new Comparator<UserProductModel>() {
             @Override
             public int compare(UserProductModel o1, UserProductModel o2) {
-                double distance2 = Math.abs(finalCurLatitude - o2.latitude) + Math.abs(finalCurLongitude - o2.longitude);
-                double distance1 = Math.abs(finalCurLatitude - o1.latitude) + Math.abs(finalCurLongitude - o1.longitude);
+                double distance2 = Math.abs(curLatitude - o2.latitude) + Math.abs(curLongitude - o2.longitude);
+                double distance1 = Math.abs(curLatitude - o1.latitude) + Math.abs(curLongitude - o1.longitude);
                 //성능 향상을 위해서 맨허튼 거리 계산법 사용.
-
-                return (int)(distance1 - distance2);
+                if(distance1 > distance2) return 1;
+                else return -1;
             }
         };
 
@@ -360,8 +353,48 @@ public class UserProductApi {
     }
     /*
     입력: 현재 위치의 GPS값과 userProductModel List
-    출력: 없음
-    동작 : 입력으로 들어온 UserProductModel의 리스트를 맨허튼 거리 계산법에 따라 가까운 순으로 정렬해줍니다.
+    동작 : 입력으로 들어온 Model의 리스트를 맨허튼 거리 계산법에 따라 가까운 순으로 정렬해줍니다.
+     */
+
+    public static ArrayList<UserProductModel> filterByDistance(ArrayList<UserProductModel> inputModels, double curLatitude, double curLongitude, int range) {
+        double rangeLatitude = DistanceApi.meterToLatitude(range);
+        double rangeLongitude = DistanceApi.meterToLongitude(range);
+
+        ArrayList<UserProductModel> outputModels = new ArrayList<>();
+        for(int i =0; i < inputModels.size(); i ++) {
+            if(Math.abs(inputModels.get(i).latitude - curLatitude) < rangeLatitude) {
+                if(Math.abs(inputModels.get(i).longitude - curLongitude) < rangeLongitude) {
+                    outputModels.add(inputModels.get(i));
+                }
+            }
+        }
+        return outputModels;
+    }
+    /*
+    입력: 모델, 현재 위도, 경도, 반경
+    출력 및 동작: 입력으로 받은 모델을 멘허튼 거리로 계산해서 일정 반경 미만만 걸러서 돌려줍니다.
+     */
+
+    public static ArrayList<UserProductModel> filterByQuality(ArrayList<UserProductModel> inputModels, boolean allowLow, boolean allowMid, boolean allowHigh) {
+        ArrayList<UserProductModel> outputModels = new ArrayList<>();
+        for(int i =0; i <inputModels.size(); i++) {
+            switch(inputModels.get(i).quality) {
+                case 1:
+                    if(allowLow) outputModels.add(inputModels.get(i));
+                    break;
+                case 2:
+                    if(allowMid) outputModels.add(inputModels.get(i));
+                    break;
+                case 3:
+                    if(allowHigh) outputModels.add(inputModels.get(i));
+                    break;
+            }
+        }
+        return outputModels;
+    }
+    /*
+    입력: 모델, 품질 허락(Allow) 여부.
+    출력 및 동작: 입력으로 받은 모델을 allow 값에 따라 필터링해서 돌려줍니다.
      */
 
 

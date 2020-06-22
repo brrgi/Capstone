@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.msg.DatabaseModel.ChatRoomModel;
+import com.example.msg.DatabaseModel.RestaurantModel;
+import com.example.msg.DatabaseModel.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -74,32 +76,23 @@ public class ChatRoomApi {
         db.collection(pathName).whereEqualTo("id1", myId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                Log.d("ChatRoomLog", "온 컴플리트 안으로 들어옴");
                 ChatRoomModel chatRoomModel = null;
 
                 if(task.isSuccessful()) {
-                    Log.d("ChatRoomLog", "태스크가 성공적임");
                     for(QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         chatRoomModel = documentSnapshot.toObject(ChatRoomModel.class);
                         chatRoomModels.add(chatRoomModel);
                     }
-                    Log.d("ChatRoomLog", "for문 빠져나옴");
-                    Log.d("ChatRoomLog", Integer.toString(chatRoomModels.size()));
 
                     db.collection(pathName).whereEqualTo("id2", myId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            Log.d("ChatRoomLog", "두 번 째 온 컴플리트 안으로 들어옴");
                             ChatRoomModel innerChatRoomModel = null;
-
                             if(task.isSuccessful()) {
-                                Log.d("ChatRoomLog", "두 번째 태스크가 성공적임");
                                 for(QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                     innerChatRoomModel = documentSnapshot.toObject(ChatRoomModel.class);
                                     chatRoomModels.add(innerChatRoomModel);
                                 }
-                                Log.d("ChatRoomLog", "두 번째 포문을 빠져나옴");
-                                Log.d("ChatRoomLog", Integer.toString(chatRoomModels.size()));
                                 myListCallback.onSuccess(chatRoomModels);
                             } else {
                                 myListCallback.onFail(21, null);
@@ -131,6 +124,70 @@ public class ChatRoomApi {
     동작: 현재 사용자의 아이디를 받아서 해당 id를 포함하는 ChatRoom정보를 전부 끌어옵니다.
      */
 
+    public static void makeChatRoomModelById(final String opponentId, boolean isOpponentUser, final MyCallback myCallback) {
+        final String myId = AuthenticationApi.getCurrentUid();
+        final ChatRoomModel chatRoomModel = new ChatRoomModel();
+        chatRoomModel.id1 = myId;
+        chatRoomModel.id2 = opponentId;
+
+        if(isOpponentUser) {
+            UserApi.getUserById(myId, new UserApi.MyCallback() {
+                @Override
+                public void onSuccess(UserModel userModel) {
+                    chatRoomModel.name1 = userModel.user_name;
+                    UserApi.getUserById(opponentId, new UserApi.MyCallback() {
+                        @Override
+                        public void onSuccess(UserModel userModel) {
+                            chatRoomModel.name2 = userModel.user_name;
+                            chatRoomModel.lastDate = "";
+                            chatRoomModel.lastChat = "";
+                            myCallback.onSuccess(chatRoomModel);
+                        }
+
+                        @Override
+                        public void onFail(int errorCode, Exception e) {
+                            myCallback.onFail(errorCode, e);
+                        }
+                    });
+                }
+
+                @Override
+                public void onFail(int errorCode, Exception e) {
+                    myCallback.onFail(errorCode, e);
+                }
+            });
+        } else {
+            UserApi.getUserById(myId, new UserApi.MyCallback() {
+                @Override
+                public void onSuccess(UserModel userModel) {
+                    chatRoomModel.name1 = userModel.user_name;
+                    RestaurantApi.getUserById(opponentId, new RestaurantApi.MyCallback() {
+                        @Override
+                        public void onSuccess(RestaurantModel restaurantModel) {
+                            chatRoomModel.name2 = restaurantModel.res_name;
+                            chatRoomModel.lastDate = "";
+                            chatRoomModel.lastChat = "";
+                            myCallback.onSuccess(chatRoomModel);
+                        }
+
+                        @Override
+                        public void onFail(int errorCode, Exception e) {
+                            myCallback.onFail(errorCode, e);
+                        }
+                    });
+                }
+
+                @Override
+                public void onFail(int errorCode, Exception e) {
+                    myCallback.onFail(errorCode, e);
+                }
+            });
+        }
+
+    }
+
+
+
     public static String getOpponentIdByModel(ChatRoomModel chatRoomModel, String myId) {
         if(chatRoomModel.id1.equals(myId)) return chatRoomModel.id2;
         else return chatRoomModel.id1;
@@ -138,5 +195,10 @@ public class ChatRoomApi {
     /*
 
      */
+
+    public static String getOpponentNameByModel(ChatRoomModel chatRoomModel, String myId) {
+        if(chatRoomModel.id1.equals(myId)) return chatRoomModel.name2;
+        else return chatRoomModel.name1;
+    }
 
 }

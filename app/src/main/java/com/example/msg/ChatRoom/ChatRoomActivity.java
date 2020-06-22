@@ -28,7 +28,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     private String myId;
     private String opponentId;
-    private String opponentName;
+    private ChatRoomModel chatRoomModel;
 
     //리사이클러뷰 관련 요소들.
     private ArrayList<Chat> chats;
@@ -73,10 +73,11 @@ public class ChatRoomActivity extends AppCompatActivity {
         myId = AuthenticationApi.getCurrentUid();
         Intent intent = getIntent();
 
-        ChatRoomModel chatRoomModel = (ChatRoomModel)intent.getSerializableExtra("object");
+        chatRoomModel = (ChatRoomModel)intent.getSerializableExtra("object");
         opponentId = ChatRoomApi.getOpponentIdByModel(chatRoomModel, myId);
+
     }
-    //
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,13 +105,10 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-
-        ChatRoomModel chatRoomModel = new ChatRoomModel();
         chatRoomModel.lastChat = chats.get(chats.size() -1).takeContent();
         chatRoomModel.lastDate = chats.get(chats.size() -1).getDate();
         chatRoomModel.id1 = myId;
         chatRoomModel.id2 = opponentId;
-        chatRoomModel.opponentName = opponentName;
         chatRoomModel.pictureUrl = "";
 
         ChatRoomApi.postOrUpdateChatRoom(chatRoomModel, new ChatRoomApi.MyCallback() {

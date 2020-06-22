@@ -79,7 +79,7 @@ public class ChatTest {
     private void assertEqualsModel(ChatRoomModel expected, ChatRoomModel actual) {
         assertEquals(expected.lastChat, actual.lastChat);
         assertEquals(expected.lastDate, actual.lastDate);
-        assertEquals(expected.opponentName, actual.opponentName);
+        //assertEquals(expected.opponentName, actual.opponentName);
     }
 
     private void makeChatRoom(String currentUser, String targetUser, ChatRoomModel chatRoomModel) {
@@ -103,7 +103,7 @@ public class ChatTest {
         chatRoomModel.id1 = id1;
         chatRoomModel.id2 = id2;
         chatRoomModel.lastChat = "안녕하세요";
-        chatRoomModel.opponentName = "김규동";
+        //chatRoomModel.opponentName = "김규동";
         chatRoomModel.lastDate = "06:02";
         chatRoomModel.pictureUrl = null;
         return chatRoomModel;

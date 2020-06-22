@@ -14,7 +14,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.msg.Api.ChatRoomApi;
 import com.example.msg.ChatRoom.ChatRoomActivity;
+import com.example.msg.DatabaseModel.ChatRoomModel;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SaleModel;
@@ -208,9 +210,20 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SaleUserActivity.this, ChatRoomActivity.class);
-                intent.putExtra("id", userProductModel.user_id);
-                startActivity(intent);
+                final Intent intent = new Intent(SaleUserActivity.this, ChatRoomActivity.class);
+
+                ChatRoomApi.makeChatRoomModelById(userProductModel.user_id, true, new ChatRoomApi.MyCallback() {
+                    @Override
+                    public void onSuccess(ChatRoomModel chatRoomModel) {
+                        intent.putExtra("object", chatRoomModel);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
             }
         });
 
