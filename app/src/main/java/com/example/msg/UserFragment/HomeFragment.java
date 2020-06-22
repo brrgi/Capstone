@@ -448,6 +448,8 @@ public class HomeFragment extends Fragment  {
    }
 
    public void filteringResProduct(FilterModel filterModel) {
+        refreshItemOfResProducts();
+
         ArrayList<RestaurantProductModel> temps = new ArrayList<>();
         temps.addAll(restaurantProductModels);
 
@@ -459,7 +461,7 @@ public class HomeFragment extends Fragment  {
         filteredResModels.clear();
         filteredResModels.addAll(temps);
         resAdapter.notifyDataSetChanged();
-        //TODO: KEYWORD FILTER와 중복 적용 가능하도록.
+
    }
 
 }

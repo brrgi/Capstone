@@ -1,6 +1,8 @@
 package com.example.msg.DatabaseModel;
 
-public class UserModel {
+import java.io.Serializable;
+
+public class UserModel implements Serializable {
     public String user_id = null;
     public String user_name = null;
     public int age = -1;
