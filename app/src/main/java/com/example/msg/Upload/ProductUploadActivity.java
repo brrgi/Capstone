@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Api.AuthenticationApi;
@@ -67,6 +68,8 @@ public class ProductUploadActivity extends AppCompatActivity {
     private double longitude=0.0;
     private double latitude=0.0;
     private double altitude;
+
+    private final UserProductModel userProductModel = new UserProductModel();
 
     private void postUserProduct(final UserProductModel userProductModel) {
         UserApi.getUserById(AuthenticationApi.getCurrentUid(), new UserApi.MyCallback() {
@@ -272,6 +275,7 @@ public class ProductUploadActivity extends AppCompatActivity {
         } else if (requestCode == QUALITY_SELECT && resultCode == RESULT_OK) {
             int quality = -1;
             if (data.hasExtra("quality")) quality = data.getIntExtra("quality", -1);
+            userProductModel.quality=quality;
             qualityText.setText(Integer.toString(quality));
         }
     }
