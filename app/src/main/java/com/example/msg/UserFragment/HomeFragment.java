@@ -211,6 +211,7 @@ public class HomeFragment extends Fragment  {
                 recyclerView.setAdapter(resAdapter);
                 restaurantProductModels.clear();
                 restaurantProductModels.addAll(restaurantModelArrayList);
+                RestaurantProductApi.sortByFast(restaurantModelArrayList);
                 filteredResModels.clear();
                 filteredResModels.addAll(restaurantProductModels);
                 resAdapter.notifyDataSetChanged();

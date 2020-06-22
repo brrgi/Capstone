@@ -127,6 +127,20 @@ public class FilterTest {
         assertEquals("딸기", restaurantProductModels.get(0).categorySmall);
     }
 
+    @Test
+    public void sortBySubscription() {
+        ArrayList<RestaurantProductModel> subscribedModel = new ArrayList<>();
+        restaurantProductModels.get(0).rproduct_id = "3";
+        restaurantProductModels.get(1).rproduct_id = "5";
+        restaurantProductModels.get(2).rproduct_id = "2";
+        restaurantProductModels.get(3).rproduct_id = "8";
+        subscribedModel.add(restaurantProductModels.get(0));
+
+        RestaurantProductApi.deleteDuplicated(subscribedModel, restaurantProductModels);
+        assertEquals(2, restaurantProductModels.size());
+
+    }
+
     private void assertContain(ArrayList<RestaurantProductModel> restaurantProductModels, String[] actualExist) {
         boolean flag;
         for(int i =0; i < actualExist.length; i++) {
@@ -137,6 +151,8 @@ public class FilterTest {
             assertEquals(true, flag);
         }
     }
+
+
 
     private void assertSortByStock(ArrayList<RestaurantProductModel> restaurantProductModels) {
         //재고: 딸기(20) > 감자(10) > 양파(5) > 닭고기(1)
@@ -161,6 +177,8 @@ public class FilterTest {
         assertEquals("양파", restaurantProductModels.get(2).categorySmall);
         assertEquals("닭고기", restaurantProductModels.get(3).categorySmall);
     }
+
+
 
 
     private ArrayList<RestaurantProductModel> getTestRestaurantProductModelList() {

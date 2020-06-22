@@ -466,6 +466,21 @@ public class RestaurantProductApi {
     동작: 상품의 모델 리스트 중, 구독과 관련있는 상품들만 걸러냅니다.
      */
 
+    public static void deleteDuplicated(ArrayList<RestaurantProductModel> reference, ArrayList<RestaurantProductModel> target) {
+        for(int i =0; i < reference.size(); i++) {
+            for(int j =0; j < target.size(); j++) {
+                if(reference.get(i).rproduct_id.equals(target.get(j).rproduct_id)) {
+                    target.remove(j);
+                    break;
+                }
+            }
+        }
+    }
+    /*
+    입력: 참조 모델과 타겟 모델
+    동작: 타겟 모델의 요소 중 참조 모델안에 있는 요소들과 중복되는 것들을 모조리 지웁니다.
+     */
+
 
 
     public static ArrayList<RestaurantProductModel> filterByDistance(ArrayList<RestaurantProductModel> inputModels, double curLatitude, double curLongitude, int range) {
