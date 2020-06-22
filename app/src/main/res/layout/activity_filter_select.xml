@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FilterSelectActivity">
+    tools:context=".Filter.FilterSelectActivity">
 
     <TextView
         android:layout_marginBottom="3sp"
@@ -94,6 +94,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/filterSelectActivity_textView_distance"
         android:layout_marginTop="3sp"
         android:layout_marginBottom="3sp"
         android:layout_width="match_parent"

@@ -33,13 +33,6 @@ public class ChatFragment extends Fragment {
     private View view;
     private static final String TAG = "ChatFragment";
 
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private FirebaseUser user;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference docRef;
-    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-
     //리사이클러 뷰 관련 변수들.
     private ArrayList<ChatRoomModel> chatRoomModelArrayList;
     private RecyclerView recyclerView;
@@ -61,6 +54,8 @@ public class ChatFragment extends Fragment {
 
     private void initializeLayout(View view) {
         chatRoomModelArrayList = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.chat_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         loadChatRoomDataAndSetRecyclerView();
 
     }
@@ -71,10 +66,9 @@ public class ChatFragment extends Fragment {
             @Override
             public void onSuccess(ArrayList<ChatRoomModel> chatRoomModels) {
                 chatRoomModelArrayList.addAll(chatRoomModels);
-                recyclerView = view.findViewById(R.id.chat_recyclerView);
-                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                recyclerView.setAdapter(chatRoomAdapter);
                 chatRoomAdapter = new ChatRoomAdapter(chatRoomModelArrayList);
+                recyclerView.setAdapter(chatRoomAdapter);
+                chatRoomAdapter.notifyDataSetChanged();
 
             }
 

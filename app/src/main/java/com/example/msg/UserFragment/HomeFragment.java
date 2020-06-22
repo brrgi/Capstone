@@ -11,19 +11,16 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,24 +32,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.msg.Api.UserApi;
-import com.example.msg.DataModel.FilterModel;
+import com.example.msg.Filter.FilterModel;
 import com.example.msg.DatabaseModel.FoodModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.Api.RestaurantProductApi;
 import com.example.msg.Api.UserProductApi;
-import com.example.msg.FilterSelectActivity;
-import com.example.msg.Profile.UserProfileActivity;
+import com.example.msg.Filter.FilterSelectActivity;
 import com.example.msg.R;
 import com.example.msg.RecyclerView.ResProductsAdapter;
 import com.example.msg.RecyclerView.UserProductsAdapter;
-import com.example.msg.Upload.ProductUploadActivity;
-import com.example.msg.ban.BanActivity;
-import com.firebase.ui.auth.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.example.msg.Api.UserApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -86,7 +78,7 @@ public class HomeFragment extends Fragment  {
     //HomeFragment에서 사용되는 수치값
     private double defaultLongitude = 0;
     private double defaultLatitude = 0;
-    private double range = 500;
+    private int range = 10000000;
     private String dong="";
     static int state = -1;
 
@@ -269,10 +261,12 @@ public class HomeFragment extends Fragment  {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FilterSelectActivity.class);
+                intent.putExtra("isShowingUserProduct", isShowingUserProduct);
                 startActivityForResult(intent, FILTER_CODE);
             }
         });
         //검색 버튼
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -441,8 +435,31 @@ public class HomeFragment extends Fragment  {
         if(requestCode == FILTER_CODE && resultCode ==  getActivity().RESULT_OK) {
             FilterModel filterModel = (FilterModel)data.getSerializableExtra("Object");
             sortItemOfResProducts(filterModel.getFilterType());
-            //filteredResModels = RestaurantProductApi.filterByPrice(restaurantProductModels, filterModel.getPrice());
-
+            if(isShowingUserProduct) {
+                filteringUserProduct(filterModel);
+            } else {
+                filteringResProduct(filterModel);
+            }
         }
     }
+
+   public void filteringUserProduct(FilterModel filterModel) {
+
+   }
+
+   public void filteringResProduct(FilterModel filterModel) {
+        ArrayList<RestaurantProductModel> temps = new ArrayList<>();
+        temps.addAll(restaurantProductModels);
+
+        if(filterModel.getCategory() != null) temps =  RestaurantProductApi.filterByCategory(temps, filterModel.getCategory());
+        temps = RestaurantProductApi.filterByDistance(temps, defaultLatitude, defaultLongitude, filterModel.getRange());
+        temps = RestaurantProductApi.filterByPrice(temps, filterModel.getPrice());
+        temps = RestaurantProductApi.filterByQuality(temps, filterModel.isSearchLowQuality(), filterModel.isSearchMidQuality(), filterModel.isSearchHighQuality());
+
+        filteredResModels.clear();
+        filteredResModels.addAll(temps);
+        resAdapter.notifyDataSetChanged();
+        //TODO: KEYWORD FILTER와 중복 적용 가능하도록.
+   }
+
 }

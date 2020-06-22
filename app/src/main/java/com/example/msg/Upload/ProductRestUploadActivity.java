@@ -121,7 +121,6 @@ public class ProductRestUploadActivity extends AppCompatActivity {
 
             @Override
             public void onFail(int errorCode, Exception e) {
-
             }
         });
     }
