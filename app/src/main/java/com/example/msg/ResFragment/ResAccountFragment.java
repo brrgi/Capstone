@@ -27,10 +27,14 @@ import com.example.msg.Api.RestaurantApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
 
 import com.example.msg.EditProfile.EditResProfileActivity;
+import com.example.msg.Map.DaumWebViewActivity;
 import com.example.msg.QRcode.QrCodeReaderActivity;
 import com.example.msg.R;
 import com.example.msg.Review.ResReviewsActivity;
 import com.example.msg.Sale.ResSalesHistoryActivity;
+import com.example.msg.SignUp.SignupActivity;
+import com.example.msg.menu.HelpActivity;
+import com.example.msg.menu.NoticeActivity;
 
 import java.io.IOException;
 import java.util.List;
@@ -51,6 +55,7 @@ public class ResAccountFragment extends Fragment {
     private Button editProfile;
     private Button qrReader;
     private Button reviews;
+    private Button notice, help, map;
 
     private void getAddress(String uid){
         UserApi.getUserById(uid, new UserApi.MyCallback() {
@@ -83,7 +88,9 @@ public class ResAccountFragment extends Fragment {
         editProfile=view.findViewById(R.id.resaccount_button_editprofile);
         qrReader=view.findViewById(R.id.reaccount_textView_qrReader);
         reviews=view.findViewById(R.id.resaccount_button_review);
-
+        notice=view.findViewById(R.id.resaccount_button_notice);
+        help=view.findViewById(R.id.resaccount_button_help);
+        map=view.findViewById(R.id.resaccount_button_map);
         RestaurantApi.getUserById(AuthenticationApi.getCurrentUid(), new RestaurantApi.MyCallback() {
             @Override
             public void onSuccess(RestaurantModel restaurantModel) {
@@ -97,6 +104,8 @@ public class ResAccountFragment extends Fragment {
 
             }
         });
+
+
 
         ressaleshistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +136,27 @@ public class ResAccountFragment extends Fragment {
             }
         });
 
+        notice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), HelpActivity.class));
+            }
+        });
+
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), NoticeActivity.class));
+            }
+        });
+
+
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), DaumWebViewActivity.class));
+            }
+        });
 
         return view;
     }

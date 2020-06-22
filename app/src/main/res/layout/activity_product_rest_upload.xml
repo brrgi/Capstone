@@ -79,6 +79,37 @@
                 android:fontFamily="@font/font_baemin5"/>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_centerInParent="true"
+            android:background="#D3D3D3"
+            android:layout_marginBottom="10sp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signupActivity_radiogroup_sex"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10sp">
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="대면"
+                android:fontFamily="@font/font_baemin5"
+                android:layout_weight="1"
+                android:checked="true"/>
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="비대면"
+                android:fontFamily="@font/font_baemin5"
+                android:layout_weight="1"/>
+
+        </RadioGroup>
+
 
         <View
             android:layout_width="match_parent"

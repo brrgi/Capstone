@@ -101,7 +101,7 @@ public class SignupActivity extends AppCompatActivity {
                                 userModel.user_address=(et_address.getText().toString());
                                 userModel.user_address_detail=(et_address_detail.getText().toString());
                                 userModel.ban_count=0;
-                                userModel.mileage=2;
+                                userModel.mileage=5;
                                 userModel.user_grade=0;
                                 userModel.user_id=uid;
                                 userModel.sanction=false;
