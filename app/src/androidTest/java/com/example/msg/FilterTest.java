@@ -129,6 +129,10 @@ public class FilterTest {
 
     @Test
     public void sortBySubscription() {
+        //식당으로 레스토랑 모델을 등록한다.
+        //식당을 로그아웃한다.
+        //유저로 들어가서 식당을 구독한다.
+        //
         ArrayList<RestaurantProductModel> subscribedModel = new ArrayList<>();
         restaurantProductModels.get(0).rproduct_id = "3";
         restaurantProductModels.get(1).rproduct_id = "5";
