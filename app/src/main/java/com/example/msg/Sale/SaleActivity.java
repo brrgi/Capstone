@@ -92,6 +92,8 @@ public class SaleActivity extends AppCompatActivity {
     private Button btn_evaluate;
     private Button QRcode;
     private RatingBar rating;
+    private Button btn_edit;
+    private Button dummy;
     private String name;
     private String user_name;
     String r_sub = "";
@@ -141,14 +143,83 @@ public class SaleActivity extends AppCompatActivity {
                     }
                 });
             }
+        final SaleModel saleModel = new SaleModel();
+        saleModel.res_id = restaurantProductModel.res_id;
+        saleModel.user_id = AuthenticationApi.getCurrentUid();
+        saleModel.product_id = restaurantProductModel.rproduct_id;
+        //재고
+        restaurantProductModel.stock-=1;
+        if(restaurantProductModel.stock > 1) {
+            restaurantProductModel.completed = -1;
+            RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
+                @Override
+                public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                    RestaurantProductModel cloneModel;
+                    cloneModel=restaurantProductModel;
+                    cloneModel.stock=0;
+                    cloneModel.completed=0;
+                    Log.d("test2forsale", "before postproductwithnoimage");
+                    RestaurantProductApi.postProductWithNoImage(cloneModel, new RestaurantProductApi.MyCallback() {
+                        @Override
+                        public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                            SaleModel saleModel1 = new SaleModel();
+                            saleModel1.res_id = restaurantProductModel.res_id;
+                            saleModel1.user_id = AuthenticationApi.getCurrentUid();
+                            saleModel1.product_id = restaurantProductModel.rproduct_id;
+                            Log.d("test2forsale", "on resproduct post finish");
+                            SaleApi.postSale(saleModel1, new SaleApi.MyCallback() {
+                                @Override
+                                public void onSuccess(SaleModel saleModel) {
+                                    Log.d("test2forsale", "on sale finish");
+                                    finish();
+                                }
 
-            @Override
-            public void onFail(int errorCode, Exception e) {
+                                @Override
+                                public void onFail(int errorCode, Exception e) {
+                                    Log.d("stock",e.toString()+Integer.toString(errorCode));
+                                }
+                            });
+                        }
 
-            }
-        });
+                        @Override
+                        public void onFail(int errorCode, Exception e) {
 
+                            Log.d("stock",e.toString()+Integer.toString(errorCode));
+                        }
+                    });
 
+                }
+
+                @Override
+                public void onFail(int errorCode, Exception e) {
+
+                    Log.d("stock",e.toString()+Integer.toString(errorCode));
+                }
+            });
+        }
+        else{
+            SaleApi.postSale(saleModel, new SaleApi.MyCallback() {
+                @Override
+                public void onSuccess(SaleModel saleModel) {
+                    RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
+                        @Override
+                        public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                            finish();
+                        }
+
+                        @Override
+                        public void onFail(int errorCode, Exception e) {
+                            Log.d(TAG,"RestaurantProductApi.updateProduct fail");
+                        }
+                    });
+                }
+
+                @Override
+                public void onFail(int errorCode, Exception e) {
+
+                }
+            });
+        }
 
 
     }
@@ -281,6 +352,9 @@ public class SaleActivity extends AppCompatActivity {
         rating= (RatingBar)findViewById((R.id.saleActivity_item_ratingBar_grade));  //!!!!!!!
         txt_rating=(TextView)findViewById(R.id.saleActivity_textView_ratingText);
         share=(Button)findViewById(R.id.saleActivity_button_share);
+        //txt_cost=(TextView)findViewById((R.id.saleActivity_textView_cost));
+        btn_edit=(Button)findViewById(R.id.saleActivity_button_edit);
+
         Intent intent = getIntent();
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel)intent.getSerializableExtra("Model");
         //인탠트에서 프로덕트 모델을 받아옴.
@@ -301,6 +375,10 @@ public class SaleActivity extends AppCompatActivity {
             btn_chat.setVisibility(View.INVISIBLE);
             btn_evaluate.setVisibility(View.INVISIBLE);
             btn_subscription.setVisibility(View.INVISIBLE);
+        }
+
+        if(uid.equals(restaurantProductModel.res_id)&&restaurantProductModel.completed==-1) {
+            btn_edit.setVisibility(View.VISIBLE);
         }
 
 
@@ -375,6 +453,7 @@ public class SaleActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), PayActivity.class);
                 intent.putExtra("Model", restaurantProductModel);
                 startActivity(intent);
+
                 finish();
             }
         });
@@ -412,6 +491,15 @@ public class SaleActivity extends AppCompatActivity {
                 startActivity(Sharing);
             }
         });
+        btn_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),EditSaleActivity.class);
+                intent.putExtra("Models",restaurantProductModel);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

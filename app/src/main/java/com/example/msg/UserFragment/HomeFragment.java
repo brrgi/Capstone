@@ -277,6 +277,7 @@ public class HomeFragment extends Fragment  {
                             @Override
                             public void onSuccess(FoodModel foodModel) {
                                 filteredUserModels.addAll(UserProductApi.filterByKeyWord(userProductModelArrayList,foodModel));
+                                filteredUserModels.addAll(UserProductApi.filterByKeyWord2(userProductModelArrayList,searchText.getText().toString()));
                                 userAdapter.notifyDataSetChanged();
                             }
 

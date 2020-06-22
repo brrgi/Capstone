@@ -12,10 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditProfile.EditProfileActivity"/>
-        <activity android:name=".EditProfile.EditResProfileActivity"/>
-        <activity android:name=".QRcode.ResQrcodeActivity"/>
-        <activity android:name=".QRcode.QrCodeReaderActivity"
+        <activity android:name=".Sale.EditSaleActivity"></activity>
+        <activity android:name=".EditProfile.EditProfileActivity" />
+        <activity android:name=".EditProfile.EditResProfileActivity" />
+        <activity android:name=".QRcode.ResQrcodeActivity" />
+        <activity
+            android:name=".QRcode.QrCodeReaderActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"/>
         <activity android:name=".Filter.FilterSelectActivity"></activity>
@@ -83,11 +85,11 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
