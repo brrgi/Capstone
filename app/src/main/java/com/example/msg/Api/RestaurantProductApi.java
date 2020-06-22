@@ -438,8 +438,9 @@ public class RestaurantProductApi {
     }
     /*
     입력: 상품의 모델 리스트와, 구독 모델의 리스트.
-    동작: 상품의 모델 리스트 중, 구독과 관련있는 상품들만 걸러냅니다. 걸러낸 결과를 얕은 복사를 해서 반환합니다.
+    동작: 상품의 모델 리스트 중, 구독과 관련있는 상품들만 걸러냅니다.
      */
+
 
 
     public static ArrayList<RestaurantProductModel> filterByDistance(ArrayList<RestaurantProductModel> inputModels, double curLatitude, double curLongitude, int range) {
