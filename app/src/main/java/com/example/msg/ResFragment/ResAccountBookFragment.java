@@ -87,6 +87,7 @@ public class ResAccountBookFragment extends Fragment {
     private String yesterDateDay7;
 
     private int total1, total2, total3, total4;
+
     private int total5, total6, total7, total8, total9, total10, total11;
     private int man, woman;
     private int age10, age20, age30, age40;
@@ -189,6 +190,24 @@ public class ResAccountBookFragment extends Fragment {
                 yesterday.setText(yester);
                 today.setText(todays);
 
+                SpannableString content = new SpannableString(date.getText().toString());
+
+
+// 저는이미 TextView 에 String 을 넣었기 때문에 위와 같이 TextView.getText().toString() 했음
+
+                content.setSpan(new UnderlineSpan(), 0, content.length(),0);
+                content.setSpan(new StyleSpan(Typeface.ITALIC), 0, content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                date.setText(content);
+
+                BarChart mBarChart = (BarChart) view.findViewById(R.id.barchart);
+
+//        mBarChart.addBar(new BarModel(2.3f, 0xFF123456));
+                mBarChart.startAnimation();
+
+                ////
+                final PieChart mPieChart = (PieChart) view.findViewById(R.id.piechart);
+
+
 
                 StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear, 10), Integer.parseInt(yesterDateMonth, 10), Integer.parseInt(yesterDateDay, 10), new StatisticsApi.MyCallback() {
                     @Override
@@ -198,6 +217,7 @@ public class ResAccountBookFragment extends Fragment {
                             total1+=sum.get(i);
                         }
                         Log.d("뿌슝1",Integer.toString(total1)+" "+sum);
+                        yesterdayCost.setText(total1+"원");
                     }
 
                     @Override
@@ -214,7 +234,7 @@ public class ResAccountBookFragment extends Fragment {
                             total2+=sum.get(i);
                         }
                         Log.d("뿌슝2",Integer.toString(total2)+" "+sum);
-
+                        todayCost.setText(total2+"원");
                     }
 
                     @Override
@@ -232,6 +252,7 @@ public class ResAccountBookFragment extends Fragment {
                         }
                         Log.d("뿌슝3",Integer.toString(total3)+" "+sum);
 
+                        monthCost.setText(total3+"원");
                     }
 
                     @Override
@@ -249,6 +270,7 @@ public class ResAccountBookFragment extends Fragment {
                         }
                         Log.d("뿌슝4",Integer.toString(total4)+" "+sum);
 
+                        totalCost.setText(total4+"원");
                     }
 
                     @Override
@@ -276,6 +298,30 @@ public class ResAccountBookFragment extends Fragment {
                         for (int i=0; i<sum4.size(); i++){
                             age40+=sum4.get(i);
                         }
+                        ///
+                        StackedBarChart mStackedBarChart = (StackedBarChart) view.findViewById(R.id.stackedbarchart);
+
+                        StackedBarModel s1 = new StackedBarModel("10대");
+
+                        s1.addBar(new BarModel(age10, 0xFF63CBB0));
+
+                        StackedBarModel s2 = new StackedBarModel("20대");
+                        s2.addBar(new BarModel(age20, 0xFF63CBB0));
+
+                        StackedBarModel s3 = new StackedBarModel("30대");
+
+                        s3.addBar(new BarModel(age30, 0xFF63CBB0));
+
+                        StackedBarModel s4 = new StackedBarModel("40대 이상");
+                        s4.addBar(new BarModel(age40, 0xFF63CBB0));
+
+                        mStackedBarChart.addBar(s1);
+                        mStackedBarChart.addBar(s2);
+                        mStackedBarChart.addBar(s3);
+                        mStackedBarChart.addBar(s4);
+
+                        mStackedBarChart.startAnimation();
+
                     }
 
                     @Override
@@ -288,11 +334,127 @@ public class ResAccountBookFragment extends Fragment {
                 StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear1, 10), Integer.parseInt(yesterDateMonth1, 10), Integer.parseInt(yesterDateDay1, 10), new StatisticsApi.MyCallback() {
                     @Override
                     public void onSuccess(ArrayList<Integer> sum) {
+                        ////
+                        ValueLineChart mCubicValueLineChart = (ValueLineChart) view.findViewById(R.id.cubiclinechart);
+
+                        final ValueLineSeries series = new ValueLineSeries();
+                        series.setColor(0xFF56B7F1);
+                        series.addPoint(new ValueLinePoint("", 0));
+
+                        StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear2, 10), Integer.parseInt(yesterDateMonth2, 10), Integer.parseInt(yesterDateDay2, 10), new StatisticsApi.MyCallback() {
+                            @Override
+                            public void onSuccess(ArrayList<Integer> sum) {
+                                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear3, 10), Integer.parseInt(yesterDateMonth3, 10), Integer.parseInt(yesterDateDay3, 10), new StatisticsApi.MyCallback() {
+                                    @Override
+                                    public void onSuccess(ArrayList<Integer> sum) {
+                                        StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear4, 10), Integer.parseInt(yesterDateMonth4, 10), Integer.parseInt(yesterDateDay4, 10), new StatisticsApi.MyCallback() {
+                                            @Override
+                                            public void onSuccess(ArrayList<Integer> sum) {
+                                                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear5, 10), Integer.parseInt(yesterDateMonth5, 10), Integer.parseInt(yesterDateDay5, 10), new StatisticsApi.MyCallback() {
+                                                    @Override
+                                                    public void onSuccess(ArrayList<Integer> sum) {
+                                                        StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear6, 10), Integer.parseInt(yesterDateMonth6, 10), Integer.parseInt(yesterDateDay6, 10), new StatisticsApi.MyCallback() {
+                                                            @Override
+                                                            public void onSuccess(ArrayList<Integer> sum) {
+                                                                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear7, 10), Integer.parseInt(yesterDateMonth7, 10), Integer.parseInt(yesterDateDay7, 10), new StatisticsApi.MyCallback() {
+                                                                    @Override
+                                                                    public void onSuccess(ArrayList<Integer> sum) {
+                                                                        total11=0;
+                                                                        for (int i=0; i<sum.size(); i++){
+                                                                            total11+=sum.get(i);
+                                                                        }
+                                                                        Log.d("뿌슝1",Integer.toString(total11)+" "+sum);
+                                                                   }
+
+                                                                    @Override
+                                                                    public void onFail(int errorCode, Exception e) {
+
+                                                                    }
+                                                                });
+
+                                                                total10=0;
+                                                                for (int i=0; i<sum.size(); i++){
+                                                                    total10+=sum.get(i);
+                                                                }
+                                                                Log.d("뿌슝1",Integer.toString(total10)+" "+sum);
+
+                                                            }
+
+                                                            @Override
+                                                            public void onFail(int errorCode, Exception e) {
+
+                                                            }
+                                                        });
+                                                        total9=0;
+                                                        for (int i=0; i<sum.size(); i++){
+                                                            total9+=sum.get(i);
+                                                        }
+                                                        Log.d("뿌슝1",Integer.toString(total9)+" "+sum);
+
+                                                    }
+
+                                                    @Override
+                                                    public void onFail(int errorCode, Exception e) {
+
+                                                    }
+                                                });
+                                                total8=0;
+                                                for (int i=0; i<sum.size(); i++){
+                                                    total8+=sum.get(i);
+                                                }
+                                                Log.d("뿌슝1",Integer.toString(total8)+" "+sum);
+
+                                            }
+
+                                            @Override
+                                            public void onFail(int errorCode, Exception e) {
+
+                                            }
+                                        });
+                                        total7=0;
+                                        for (int i=0; i<sum.size(); i++){
+                                            total7+=sum.get(i);
+                                        }
+                                        Log.d("뿌슝1",Integer.toString(total7)+" "+sum);
+
+                                    }
+
+                                    @Override
+                                    public void onFail(int errorCode, Exception e) {
+
+                                    }
+                                });
+                                total6=0;
+                                for (int i=0; i<sum.size(); i++){
+                                    total6+=sum.get(i);
+                                }
+                                Log.d("뿌슝1",Integer.toString(total6)+" "+sum);
+
+                            }
+
+                            @Override
+                            public void onFail(int errorCode, Exception e) {
+
+                            }
+                        });
                         total5=0;
                         for (int i=0; i<sum.size(); i++){
                             total5+=sum.get(i);
                         }
                         Log.d("뿌슝1",Integer.toString(total5)+" "+sum);
+                        series.addPoint(new ValueLinePoint(yesterDateMonth7+"/"+yesterDateDay7, (float)total11));
+                        series.addPoint(new ValueLinePoint(yesterDateMonth6+"/"+yesterDateDay6, (float)total10));
+                        series.addPoint(new ValueLinePoint(yesterDateMonth5+"/"+yesterDateDay5, (float)total9));
+                        series.addPoint(new ValueLinePoint(yesterDateMonth4+"/"+yesterDateDay4, (float)total8));
+                        series.addPoint(new ValueLinePoint(yesterDateMonth3+"/"+yesterDateDay3, (float)total7));
+                        series.addPoint(new ValueLinePoint(yesterDateMonth2+"/"+yesterDateDay2, (float)total6));
+                        series.addPoint(new ValueLinePoint(yesterDateMonth1+"/"+yesterDateDay1, (float)total5));
+                        series.addPoint(new ValueLinePoint(yesterDateMonth+"/"+yesterDateDay, (float)total1));
+                        series.addPoint(new ValueLinePoint(todayDateMonth+"/"+todayDateDay, (float)total2));
+                        series.addPoint(new ValueLinePoint("", 0));
+
+                        mCubicValueLineChart.addSeries(series);
+                        mCubicValueLineChart.startAnimation();
                     }
 
                     @Override
@@ -301,101 +463,7 @@ public class ResAccountBookFragment extends Fragment {
                     }
                 });
 
-                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear2, 10), Integer.parseInt(yesterDateMonth2, 10), Integer.parseInt(yesterDateDay2, 10), new StatisticsApi.MyCallback() {
-                    @Override
-                    public void onSuccess(ArrayList<Integer> sum) {
-                        total6=0;
-                        for (int i=0; i<sum.size(); i++){
-                            total6+=sum.get(i);
-                        }
-                        Log.d("뿌슝1",Integer.toString(total6)+" "+sum);
-                    }
 
-                    @Override
-                    public void onFail(int errorCode, Exception e) {
-
-                    }
-                });
-
-                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear3, 10), Integer.parseInt(yesterDateMonth3, 10), Integer.parseInt(yesterDateDay3, 10), new StatisticsApi.MyCallback() {
-                    @Override
-                    public void onSuccess(ArrayList<Integer> sum) {
-                        total7=0;
-                        for (int i=0; i<sum.size(); i++){
-                            total7+=sum.get(i);
-                        }
-                        Log.d("뿌슝1",Integer.toString(total7)+" "+sum);
-                    }
-
-                    @Override
-                    public void onFail(int errorCode, Exception e) {
-
-                    }
-                });
-
-                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear4, 10), Integer.parseInt(yesterDateMonth4, 10), Integer.parseInt(yesterDateDay4, 10), new StatisticsApi.MyCallback() {
-                    @Override
-                    public void onSuccess(ArrayList<Integer> sum) {
-                        total8=0;
-                        for (int i=0; i<sum.size(); i++){
-                            total8+=sum.get(i);
-                        }
-                        Log.d("뿌슝1",Integer.toString(total8)+" "+sum);
-                    }
-
-                    @Override
-                    public void onFail(int errorCode, Exception e) {
-
-                    }
-                });
-
-                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear5, 10), Integer.parseInt(yesterDateMonth5, 10), Integer.parseInt(yesterDateDay5, 10), new StatisticsApi.MyCallback() {
-                    @Override
-                    public void onSuccess(ArrayList<Integer> sum) {
-                        total9=0;
-                        for (int i=0; i<sum.size(); i++){
-                            total9+=sum.get(i);
-                        }
-                        Log.d("뿌슝1",Integer.toString(total9)+" "+sum);
-                    }
-
-                    @Override
-                    public void onFail(int errorCode, Exception e) {
-
-                    }
-                });
-
-                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear6, 10), Integer.parseInt(yesterDateMonth6, 10), Integer.parseInt(yesterDateDay6, 10), new StatisticsApi.MyCallback() {
-                    @Override
-                    public void onSuccess(ArrayList<Integer> sum) {
-                        total10=0;
-                        for (int i=0; i<sum.size(); i++){
-                            total10+=sum.get(i);
-                        }
-                        Log.d("뿌슝1",Integer.toString(total10)+" "+sum);
-                    }
-
-                    @Override
-                    public void onFail(int errorCode, Exception e) {
-
-                    }
-                });
-
-                StatisticsApi.getYesterdayCost(uid, 1, Integer.parseInt(yesterDateYear7, 10), Integer.parseInt(yesterDateMonth7, 10), Integer.parseInt(yesterDateDay7, 10), new StatisticsApi.MyCallback() {
-                    @Override
-                    public void onSuccess(ArrayList<Integer> sum) {
-                        total11=0;
-                        for (int i=0; i<sum.size(); i++){
-                            total11+=sum.get(i);
-                        }
-                        Log.d("뿌슝1",Integer.toString(total11)+" "+sum);
-                    }
-
-                    @Override
-                    public void onFail(int errorCode, Exception e) {
-
-                    }
-                });
 
                 StatisticsApi.getMen(new StatisticsApi.MyCallback() {
                     @Override
@@ -404,21 +472,14 @@ public class ResAccountBookFragment extends Fragment {
                         for (int i=0; i<sum.size(); i++){
                             man+=sum.get(i);
                         }
-                    }
-
-                    @Override
-                    public void onFail(int errorCode, Exception e) {
-
-                    }
-                });
-
-                StatisticsApi.getWomen(new StatisticsApi.MyCallback() {
-                    @Override
-                    public void onSuccess(ArrayList<Integer> sum) {
                         woman=0;
                         for (int i=0; i<sum.size(); i++){
                             woman+=sum.get(i);
                         }
+                        mPieChart.addPieSlice(new PieModel("남자", man, Color.parseColor("#FE6DA8")));
+                        mPieChart.addPieSlice(new PieModel("여자", woman, Color.parseColor("#56B7F1")));
+
+                        mPieChart.startAnimation();
                     }
 
                     @Override
@@ -426,13 +487,6 @@ public class ResAccountBookFragment extends Fragment {
 
                     }
                 });
-
-                yesterdayCost.setText(total1+"원");
-                todayCost.setText(total2+"원");
-                monthCost.setText(total3+"원");
-                totalCost.setText(total4+"원");
-
-
 
             }
 
@@ -443,71 +497,9 @@ public class ResAccountBookFragment extends Fragment {
         });
 
 
-        SpannableString content = new SpannableString(date.getText().toString());
-
-
-// 저는이미 TextView 에 String 을 넣었기 때문에 위와 같이 TextView.getText().toString() 했음
-
-        content.setSpan(new UnderlineSpan(), 0, content.length(),0);
-        content.setSpan(new StyleSpan(Typeface.ITALIC), 0, content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        date.setText(content);
-
-        BarChart mBarChart = (BarChart) view.findViewById(R.id.barchart);
-
-//        mBarChart.addBar(new BarModel(2.3f, 0xFF123456));
-        mBarChart.startAnimation();
-
-        ///
-        StackedBarChart mStackedBarChart = (StackedBarChart) view.findViewById(R.id.stackedbarchart);
-
-        StackedBarModel s1 = new StackedBarModel("10대");
-
-        s1.addBar(new BarModel(age10, 0xFF63CBB0));
-
-        StackedBarModel s2 = new StackedBarModel("20대");
-        s2.addBar(new BarModel(age20, 0xFF63CBB0));
-
-        StackedBarModel s3 = new StackedBarModel("30대");
-
-        s3.addBar(new BarModel(age30, 0xFF63CBB0));
-
-        StackedBarModel s4 = new StackedBarModel("40대 이상");
-        s4.addBar(new BarModel(age40, 0xFF63CBB0));
-
-        mStackedBarChart.addBar(s1);
-        mStackedBarChart.addBar(s2);
-        mStackedBarChart.addBar(s3);
-        mStackedBarChart.addBar(s4);
-
-        mStackedBarChart.startAnimation();
-
         ////
-        PieChart mPieChart = (PieChart) view.findViewById(R.id.piechart);
 
-        mPieChart.addPieSlice(new PieModel("남자", man, Color.parseColor("#FE6DA8")));
-        mPieChart.addPieSlice(new PieModel("여자", woman, Color.parseColor("#56B7F1")));
 
-        mPieChart.startAnimation();
-        ////
-        ValueLineChart mCubicValueLineChart = (ValueLineChart) view.findViewById(R.id.cubiclinechart);
-
-        ValueLineSeries series = new ValueLineSeries();
-        series.setColor(0xFF56B7F1);
-
-        series.addPoint(new ValueLinePoint("", 0));
-        series.addPoint(new ValueLinePoint(yesterDateMonth7+"/"+yesterDateDay7, (float)total11));
-        series.addPoint(new ValueLinePoint(yesterDateMonth6+"/"+yesterDateDay6, (float)total10));
-        series.addPoint(new ValueLinePoint(yesterDateMonth5+"/"+yesterDateDay5, (float)total9));
-        series.addPoint(new ValueLinePoint(yesterDateMonth4+"/"+yesterDateDay4, (float)total8));
-        series.addPoint(new ValueLinePoint(yesterDateMonth3+"/"+yesterDateDay3, (float)total7));
-        series.addPoint(new ValueLinePoint(yesterDateMonth2+"/"+yesterDateDay2, (float)total6));
-        series.addPoint(new ValueLinePoint(yesterDateMonth1+"/"+yesterDateDay1, (float)total5));
-        series.addPoint(new ValueLinePoint(yesterDateMonth+"/"+yesterDateDay, (float)total1));
-        series.addPoint(new ValueLinePoint(todayDateMonth+"/"+todayDateDay, (float)total2));
-        series.addPoint(new ValueLinePoint("", 0));
-
-        mCubicValueLineChart.addSeries(series);
-        mCubicValueLineChart.startAnimation();
         return view;
 
 

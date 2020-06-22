@@ -240,10 +240,8 @@ public class ProductUploadActivity extends AppCompatActivity {
                 userProductModel.saleDateYear=-1;
                 userProductModel.saleDateMonth=-1;
                 userProductModel.saleDateDay=-1;
-
-                Integer i = Integer.parseInt(qualityText.getText().toString());
-                userProductModel.quality = i;
                 postUserProduct(userProductModel);
+
             }
         });
 
