@@ -463,7 +463,7 @@ public class RestaurantProductApi {
     }
     /*
     입력: 상품의 모델 리스트와, 구독 모델의 리스트.
-    동작: 상품의 모델 리스트 중, 구독과 관련있는 상품들만 걸러냅니다.
+    동작: 상품의 모델 리스트 중, 구독과 관련있는 상품들만 걸러내서 반환합니다.
      */
 
     public static void deleteDuplicated(ArrayList<RestaurantProductModel> reference, ArrayList<RestaurantProductModel> target) {
@@ -539,7 +539,7 @@ public class RestaurantProductApi {
      */
 
     public static void deleteProduct(final String id, final MyCallback myCallback) {
-        db.collection("Subscription").document(id).delete()
+        db.collection("ResProducts").document(id).delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

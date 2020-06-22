@@ -52,7 +52,7 @@ public class CommonTestFunction {
                 dummyUserUid1 = "UfacjQiR5DNrPCTqqx2wFpawa6H3";
                 dummyUserId2 = "userc2@naver.com";
                 dummyUserUid2 = "PmhxlSW590cTjqd93Xq72LNYkRa2";
-                dummyResId = "resc01@naver.com";
+                dummyResId = "resc@naver.com";
                 dummyResUid = "FQx9gpHXumfDEAnbRquzobWxWt33";
                 break;
             case "이레":
@@ -107,13 +107,16 @@ public class CommonTestFunction {
             @Override
             public void onSuccess() {
                 unlock();
+                Log.d("Test Login Process", "unlock on onSuccess");
             }
             @Override
-            public void onFail(int errorCode, Error e) {
+            public void onFail(int errorCode, Error e, String msg) {
                 unlock();
+                Log.d("Test Login Process", "unlock on onFail bcz of " + msg.toString());
             }
         });
-        waitUnlock(500);
+        waitUnlock(5000);
+        Log.d("Test Login Process", "Login Success");
         waitForFirebase(3000);
 
     }
