@@ -129,7 +129,9 @@ public class SaleApi {
     public static void updateSales(final SaleModel saleModel, final MyCallback myCallback) {
         db.collection("Sales").document(saleModel.sales_id).
                 update(
-                        "review", saleModel.review
+                        "review", saleModel.review,
+                        "ratingScore", saleModel.ratingScore
+
                 ).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
