@@ -139,14 +139,14 @@ public class ResAccountFragment extends Fragment {
         notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), HelpActivity.class));
+                startActivity(new Intent(getActivity(), NoticeActivity.class));
             }
         });
 
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), NoticeActivity.class));
+                startActivity(new Intent(getActivity(), HelpActivity.class));
             }
         });
 
