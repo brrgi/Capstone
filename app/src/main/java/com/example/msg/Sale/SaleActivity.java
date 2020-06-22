@@ -30,6 +30,7 @@ import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.RestaurantProductApi;
 import com.example.msg.Api.SaleApi;
 import com.example.msg.Api.ShareApi;
+import com.example.msg.Api.UserApi;
 import com.example.msg.Api.UserProductApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
@@ -92,6 +93,7 @@ public class SaleActivity extends AppCompatActivity {
     private Button QRcode;
     private RatingBar rating;
     private String name;
+    private String user_name;
     String r_sub = "";
 
 
@@ -100,11 +102,14 @@ public class SaleActivity extends AppCompatActivity {
     private ResInfoFragment resInfoFragment;
     private ResReviewsFragment resReviewsFragment;
 
-    private void processSale(final RestaurantProductModel restaurantProductModel) {
+    private void processSale(final RestaurantProductModel restaurantProductModel,String user_name) {
         SaleModel saleModel = new SaleModel();
         saleModel.res_id = restaurantProductModel.res_id;
         saleModel.user_id = AuthenticationApi.getCurrentUid();
         saleModel.product_id = restaurantProductModel.rproduct_id;
+        saleModel.categorySmall=restaurantProductModel.categorySmall;
+        saleModel.user_name=user_name;
+
         //재고
         restaurantProductModel.stock-=1;
         restaurantProductModel.completed = 0;
@@ -274,6 +279,18 @@ public class SaleActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
 
+        UserApi.getUserById(uid, new UserApi.MyCallback() {
+            @Override
+            public void onSuccess(UserModel userModel) {
+                user_name=userModel.user_name;
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
+
         if(uid.equals(restaurantProductModel.res_id)) {
             btn_buy.setVisibility(View.INVISIBLE);
             btn_chat.setVisibility(View.INVISIBLE);
@@ -353,6 +370,8 @@ public class SaleActivity extends AppCompatActivity {
 
         Glide.with(getApplicationContext()).load(restaurantProductModel.p_imageURL).into(image_product);
 
+
+
         btn_subscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -364,7 +383,7 @@ public class SaleActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                processSale(restaurantProductModel);
+                processSale(restaurantProductModel,user_name);
                 Intent intent = new Intent(getApplicationContext(), PayActivity.class);
                 intent.putExtra("Model", restaurantProductModel);
                 startActivity(intent);

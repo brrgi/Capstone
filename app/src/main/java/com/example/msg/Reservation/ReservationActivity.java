@@ -3,7 +3,9 @@ package com.example.msg.Reservation;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +20,7 @@ import com.example.msg.DatabaseModel.ReserveModel;
 import com.example.msg.Api.ReserveApi;
 
 import com.example.msg.R;
+import com.example.msg.UserFragment.ReservationFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -37,6 +40,8 @@ public class ReservationActivity extends AppCompatActivity {
     private EditText editText;
     static String user_token = "";
     Spinner spinner;
+    //두번 클릭 방지
+    private long mLastClickTime = 0;
 
     String msg = "예약이 완료되었습니다.";
     String tmp;
@@ -71,6 +76,12 @@ public class ReservationActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //두번 클릭 방지 threshold 1초
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+                //
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 final String uid = user.getUid();
                 final ReserveModel reserveModel = new ReserveModel();
@@ -97,7 +108,8 @@ public class ReservationActivity extends AppCompatActivity {
                         ReserveApi.postReservation(reserveModel, new ReserveApi.MyCallback() {
                             @Override
                             public void onSuccess(ReserveModel reserveModel) {
-
+                                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                                finish();
                             }
 
                             @Override

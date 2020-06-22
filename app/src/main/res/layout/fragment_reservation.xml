@@ -74,6 +74,11 @@
         android:layout_marginBottom="5dp"
         android:background="#D3D3D3"/>
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/reservation_swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -98,6 +103,7 @@
             android:text="예약 추가" />
     </LinearLayout>
 
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 

@@ -131,7 +131,7 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_rating = (Button)findViewById(R.id.saleUserActivity_button_evaluate);
         share=(Button)findViewById(R.id.saleUserActivity_button_share);
         ban = (TextView) findViewById(R.id.saleUserActivity_textView_ban);
-        grade=(RatingBar)findViewById(R.id.saleUserActivity_ratingBar_grade);
+        grade=(RatingBar)findViewById(R.id.saleUserActivity_item_ratingBar_grade);
         txt_rating=(TextView) findViewById(R.id.saleUserActivity_textView_ratingText);
         Intent intent = getIntent();
         final UserProductModel userProductModel = (UserProductModel)intent.getSerializableExtra("Model");
@@ -159,7 +159,7 @@ public class SaleUserActivity extends AppCompatActivity {
                 u_name = userModel.user_name;
                 u_address=userModel.user_address;
                 u_uid = userModel.user_id;
-                txt_salesman.setText(u_name);
+                txt_salesman.setText(u_name+" (프로필 확인)");
                 ban.setText("신고 횟수 "+userModel.ban_count+"회");
                 grade.setRating(userModel.user_rating);
                 txt_rating.setText(Float.toString(userModel.user_rating));

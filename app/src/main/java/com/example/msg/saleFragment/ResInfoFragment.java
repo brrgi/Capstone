@@ -21,7 +21,7 @@ import com.example.msg.R;
 
 public class ResInfoFragment extends Fragment {
     private View view;
-    private static final String TAG = "ProductInfo";
+    private static final String TAG = "ResInfoFragment";
 
     private ImageView profile;
     private TextView name;

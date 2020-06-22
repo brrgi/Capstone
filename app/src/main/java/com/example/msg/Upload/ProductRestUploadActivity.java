@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.msg.Api.RestaurantApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
@@ -114,6 +115,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         RestaurantProductApi.postProduct(restaurantProductModel, imageUri, new RestaurantProductApi.MyCallback() {
             @Override
             public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                Toast.makeText(getApplicationContext(), "상품 등록이 완료되었습니다.", Toast.LENGTH_LONG).show();
                 finish();
             }
 
