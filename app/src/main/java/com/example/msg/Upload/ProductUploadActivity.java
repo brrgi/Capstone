@@ -70,6 +70,7 @@ public class ProductUploadActivity extends AppCompatActivity {
     private double latitude=0.0;
     private double altitude;
     private final UserProductModel userProductModel = new UserProductModel();
+
     private void postUserProduct(final UserProductModel userProductModel) {
         UserApi.getUserById(AuthenticationApi.getCurrentUid(), new UserApi.MyCallback() {
             @Override
