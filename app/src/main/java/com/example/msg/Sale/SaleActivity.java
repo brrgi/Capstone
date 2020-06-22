@@ -97,36 +97,85 @@ public class SaleActivity extends AppCompatActivity {
     private ResReviewsFragment resReviewsFragment;
 
     private void processSale(final RestaurantProductModel restaurantProductModel) {
-        SaleModel saleModel = new SaleModel();
+        final SaleModel saleModel = new SaleModel();
         saleModel.res_id = restaurantProductModel.res_id;
         saleModel.user_id = AuthenticationApi.getCurrentUid();
         saleModel.product_id = restaurantProductModel.rproduct_id;
         //재고
         restaurantProductModel.stock-=1;
-        restaurantProductModel.completed = 0;
+        if(restaurantProductModel.stock > 1) {
+            restaurantProductModel.completed = -1;
+            RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
+                @Override
+                public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                    RestaurantProductModel cloneModel;
+                    cloneModel=restaurantProductModel;
+                    cloneModel.stock=0;
+                    cloneModel.completed=0;
+                    Log.d("test2forsale", "before postproductwithnoimage");
+                    RestaurantProductApi.postProductWithNoImage(cloneModel, new RestaurantProductApi.MyCallback() {
+                        @Override
+                        public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                            SaleModel saleModel1 = new SaleModel();
+                            saleModel1.res_id = restaurantProductModel.res_id;
+                            saleModel1.user_id = AuthenticationApi.getCurrentUid();
+                            saleModel1.product_id = restaurantProductModel.rproduct_id;
+                            Log.d("test2forsale", "on resproduct post finish");
+                            SaleApi.postSale(saleModel1, new SaleApi.MyCallback() {
+                                @Override
+                                public void onSuccess(SaleModel saleModel) {
+                                    Log.d("test2forsale", "on sale finish");
+                                    finish();
+                                }
 
-        SaleApi.postSale(saleModel, new SaleApi.MyCallback() {
-            @Override
-            public void onSuccess(SaleModel saleModel) {
-                RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
-                    @Override
-                    public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                                @Override
+                                public void onFail(int errorCode, Exception e) {
+                                    Log.d("stock",e.toString()+Integer.toString(errorCode));
+                                }
+                            });
+                        }
 
-                        finish();
-                    }
+                        @Override
+                        public void onFail(int errorCode, Exception e) {
 
-                    @Override
-                    public void onFail(int errorCode, Exception e) {
-                        Log.d(TAG,"RestaurantProductApi.updateProduct fail");
-                    }
-                });
-            }
+                            Log.d("stock",e.toString()+Integer.toString(errorCode));
+                        }
+                    });
 
-            @Override
-            public void onFail(int errorCode, Exception e) {
+                }
 
-            }
-        });
+                @Override
+                public void onFail(int errorCode, Exception e) {
+
+                    Log.d("stock",e.toString()+Integer.toString(errorCode));
+                }
+            });
+        }
+        else{
+            SaleApi.postSale(saleModel, new SaleApi.MyCallback() {
+                @Override
+                public void onSuccess(SaleModel saleModel) {
+                    RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
+                        @Override
+                        public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                            finish();
+                        }
+
+                        @Override
+                        public void onFail(int errorCode, Exception e) {
+                            Log.d(TAG,"RestaurantProductApi.updateProduct fail");
+                        }
+                    });
+                }
+
+                @Override
+                public void onFail(int errorCode, Exception e) {
+
+                }
+            });
+        }
+
+
     }
 
     private void getSubscribeCheck(RestaurantProductModel restaurantProductModel) {
@@ -346,6 +395,7 @@ public class SaleActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), PayActivity.class);
                 intent.putExtra("Model", restaurantProductModel);
                 startActivity(intent);
+
                 finish();
             }
         });

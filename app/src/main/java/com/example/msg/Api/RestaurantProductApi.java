@@ -78,6 +78,31 @@ public class RestaurantProductApi {
          성공할시에는 콜백함수 onSuccess를 호출하고, 성공한 객체를 돌려줍니다.(해당 객체는 product_id를 가진 상태)
      */
 
+    public static void postProductWithNoImage(final RestaurantProductModel restaurantProductModel,final MyCallback myCallback) {
+        db.collection("ResProducts").add(restaurantProductModel)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        db.collection("ResProducts").document(documentReference.getId())
+                                .update("rproduct_id", documentReference.getId());
+                        restaurantProductModel.rproduct_id = documentReference.getId();
+                        Log.d("resTest", restaurantProductModel.rproduct_id);
+                        myCallback.onSuccess(restaurantProductModel);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                myCallback.onFail(0, e);
+            }
+        });
+    }
+    /*
+    입력: RestaurantProductModel
+    출력: 없음.
+    동작: RestaurantProductModel을 받아서 데이터베이스에 추가합니다. 실패할경우 콜백함수 onFail을 호출합니다.
+         성공할시에는 콜백함수 onSuccess를 호출하고, 성공한 객체를 돌려줍니다.(해당 객체는 product_id를 가진 상태)
+     */
+
     public static void postImage(final RestaurantProductModel restaurantProductModel, final Uri imageUri, final MyCallback myCallback){
         final String directory = "ResProducts/";
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
