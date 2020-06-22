@@ -74,7 +74,7 @@ public class ProductInfoFragment extends Fragment {
                 txt_cost.setText(c);
 
 
-                /*MapView mapView = new MapView(getActivity());
+                MapView mapView = new MapView(getActivity());
                 ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.productInfo_map_view);
                 mapViewContainer.addView(mapView);
                 mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(lati, longi), 1, true);
@@ -89,7 +89,7 @@ public class ProductInfoFragment extends Fragment {
                 customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
                 customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
 
-                mapView.addPOIItem(customMarker);*/
+                mapView.addPOIItem(customMarker);
             }
 
             @Override
