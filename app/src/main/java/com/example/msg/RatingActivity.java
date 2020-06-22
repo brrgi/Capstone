@@ -66,15 +66,15 @@ public class RatingActivity extends AppCompatActivity {
     private void ratingResCalculate(RestaurantProductModel restaurantProductModel, final float ratingScore) {
         RestaurantApi.getUserById(restaurantProductModel.res_id, new RestaurantApi.MyCallback() {
             @Override
-            public void onSuccess(RestaurantModel restaurantModel) {
-                ratingSum = (restaurantModel.res_rating)*((restaurantModel.ratingCount)-1);
-                restaurantModel.res_rating = Math.round(((ratingSum + ratingScore)/(restaurantModel.ratingCount))*10)/10;
-                restaurantModel.ratingCount++;
-                RestaurantApi.updateRestaurant(restaurantModel, new RestaurantApi.MyCallback() {
-                    @Override
-                    public void onSuccess(RestaurantModel restaurantModel) { }
+                    public void onSuccess(RestaurantModel restaurantModel) {
+                        ratingSum = (restaurantModel.res_rating)*((restaurantModel.ratingCount)-1);
+                        restaurantModel.res_rating = Math.round(((ratingSum + ratingScore)/(restaurantModel.ratingCount))*10)/10;
+                        restaurantModel.ratingCount++;
+                        RestaurantApi.updateRestaurant(restaurantModel, new RestaurantApi.MyCallback() {
+                            @Override
+                            public void onSuccess(RestaurantModel restaurantModel) { }
 
-                    @Override
+                            @Override
                     public void onFail(int errorCode, Exception e) { }
                 });
             }

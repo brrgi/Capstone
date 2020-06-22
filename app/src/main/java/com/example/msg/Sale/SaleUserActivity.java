@@ -240,8 +240,6 @@ public class SaleUserActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(SaleUserActivity.this, PayActivity.class);
-                //startActivity(intent);
                 UserModel userModel = new UserModel();
                 userModel.user_id = u_uid;
                 userModel.mileage-=1;
