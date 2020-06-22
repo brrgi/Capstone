@@ -69,7 +69,7 @@
             android:text="상세설명  "
             android:fontFamily="@font/font_baemin5"
             android:textSize="20sp"
-            android:paddingBottom="130sp"
+            android:paddingBottom="200sp"
             />
 
     </LinearLayout>
@@ -143,7 +143,7 @@
             android:hint="내용"
             android:fontFamily="@font/font_baemin5"
             android:textSize="20sp"
-            android:paddingBottom="130sp"
+            android:paddingBottom="200sp"
             />
 
     </LinearLayout>
