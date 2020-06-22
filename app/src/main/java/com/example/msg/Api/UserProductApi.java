@@ -357,10 +357,6 @@ public class UserProductApi {
        return : userproductArraylist 담겨있는 newModelList
      */
 
-    public static void sortByDistance(ArrayList<UserProductModel> modelList, double curLatitude, double curLongitude) {
-        final double finalCurLatitude = curLatitude;
-        final double finalCurLongitude = curLongitude;
-
     public static void sortByDistance(ArrayList<UserProductModel> modelList, final double curLatitude, final double curLongitude) {
         Comparator<UserProductModel> myComparator = new Comparator<UserProductModel>() {
             @Override
