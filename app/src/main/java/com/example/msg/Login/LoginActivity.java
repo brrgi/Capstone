@@ -75,12 +75,12 @@ public class LoginActivity extends AppCompatActivity {
                     //로그인
 
                     FirebaseFirestore db=FirebaseFirestore.getInstance();
-                    //먼저 user 검사
-                    DocumentReference docRef=db.collection("User").document(user.getUid());
-                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if(task.isSuccessful()){
+                                //먼저 user 검사
+                                DocumentReference docRef=db.collection("User").document(user.getUid());
+                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
                                 DocumentSnapshot document=task.getResult();
                                 if(document.exists()){
                                     Log.d(TAG,"user "+document.getData());
