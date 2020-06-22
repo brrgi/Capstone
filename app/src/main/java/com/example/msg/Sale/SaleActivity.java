@@ -95,38 +95,49 @@ public class SaleActivity extends AppCompatActivity {
     private String name;
     private String user_name;
     String r_sub = "";
-
+    FirebaseUser user;
 
 
     private ProductInfoFragment productInfoFragment;
     private ResInfoFragment resInfoFragment;
     private ResReviewsFragment resReviewsFragment;
 
-    private void processSale(final RestaurantProductModel restaurantProductModel,String user_name) {
-        SaleModel saleModel = new SaleModel();
-        saleModel.res_id = restaurantProductModel.res_id;
-        saleModel.user_id = AuthenticationApi.getCurrentUid();
-        saleModel.product_id = restaurantProductModel.rproduct_id;
-        saleModel.categorySmall=restaurantProductModel.categorySmall;
-        saleModel.user_name=user_name;
-
-        //재고
-        restaurantProductModel.stock-=1;
-        restaurantProductModel.completed = 0;
-
-        SaleApi.postSale(saleModel, new SaleApi.MyCallback() {
+    private void processSale(final RestaurantProductModel restaurantProductModel) {
+        UserApi.getUserById(user.getUid(), new UserApi.MyCallback() {
+            SaleModel saleModel;
             @Override
-            public void onSuccess(SaleModel saleModel) {
-                RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
-                    @Override
-                    public void onSuccess(RestaurantProductModel restaurantProductModel) {
+            public void onSuccess(UserModel userModel) {
+                saleModel = new SaleModel();
+                saleModel.res_id = restaurantProductModel.res_id;
+                saleModel.user_id = AuthenticationApi.getCurrentUid();
+                saleModel.product_id = restaurantProductModel.rproduct_id;
+                saleModel.categorySmall=restaurantProductModel.categorySmall;
+                saleModel.user_name=userModel.user_name;
 
-                        finish();
+                //재고
+                restaurantProductModel.stock-=1;
+                restaurantProductModel.completed = 0;
+
+                SaleApi.postSale(saleModel, new SaleApi.MyCallback() {
+                    @Override
+                    public void onSuccess(SaleModel saleModel) {
+                        RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
+                            @Override
+                            public void onSuccess(RestaurantProductModel restaurantProductModel) {
+
+                                finish();
+                            }
+
+                            @Override
+                            public void onFail(int errorCode, Exception e) {
+                                Log.d(TAG,"RestaurantProductApi.updateProduct fail");
+                            }
+                        });
                     }
 
                     @Override
                     public void onFail(int errorCode, Exception e) {
-                        Log.d(TAG,"RestaurantProductApi.updateProduct fail");
+
                     }
                 });
             }
@@ -136,6 +147,10 @@ public class SaleActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+
     }
 
     private void getSubscribeCheck(RestaurantProductModel restaurantProductModel) {
@@ -276,20 +291,10 @@ public class SaleActivity extends AppCompatActivity {
         QRcode = (Button) findViewById(R.id.saleActivity_button_QRcode);
 
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
 
-        UserApi.getUserById(uid, new UserApi.MyCallback() {
-            @Override
-            public void onSuccess(UserModel userModel) {
-                user_name=userModel.user_name;
-            }
 
-            @Override
-            public void onFail(int errorCode, Exception e) {
-
-            }
-        });
 
         if(uid.equals(restaurantProductModel.res_id)) {
             btn_buy.setVisibility(View.INVISIBLE);
@@ -366,7 +371,7 @@ public class SaleActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                processSale(restaurantProductModel,user_name);
+                processSale(restaurantProductModel);
                 Intent intent = new Intent(getApplicationContext(), PayActivity.class);
                 intent.putExtra("Model", restaurantProductModel);
                 startActivity(intent);
