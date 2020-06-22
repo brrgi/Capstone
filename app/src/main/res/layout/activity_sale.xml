@@ -265,7 +265,7 @@
                     android:textStyle="bold" />
                 <Button
                     android:id="@+id/saleActivity_button_buyerInfo"
-                    android:layout_width="60sp"
+                    android:layout_width="90sp"
                     android:layout_height="50sp"
                     android:background="@drawable/bin_blue"
                     android:text="구매자 정보"

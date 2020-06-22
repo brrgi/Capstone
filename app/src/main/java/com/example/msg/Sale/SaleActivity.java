@@ -342,7 +342,6 @@ public class SaleActivity extends AppCompatActivity {
 
         if(uid.equals(restaurantProductModel.res_id)) {
             btn_buy.setVisibility(View.INVISIBLE);
-            btn_chat.setVisibility(View.INVISIBLE);
             btn_evaluate.setVisibility(View.INVISIBLE);
             btn_subscription.setVisibility(View.INVISIBLE);
         }
@@ -352,14 +351,10 @@ public class SaleActivity extends AppCompatActivity {
         }
 
 
-        if(restaurantProductModel.completed!=-1) {
-            btn_buy.setVisibility(View.INVISIBLE);
-            btn_chat.setVisibility(View.INVISIBLE);
-        }
-
         if(restaurantProductModel.completed==0){
             if(uid.equals(restaurantProductModel.res_id)) {
                 btn_buyerInfo.setVisibility(View.VISIBLE);
+                btn_chat.setVisibility(View.VISIBLE);
                 btn_evaluate.setVisibility(View.INVISIBLE);
                 QRcode.setVisibility(View.INVISIBLE);
             }
