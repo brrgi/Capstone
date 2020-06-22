@@ -47,7 +47,7 @@
                     android:id="@+id/account_textView_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="평점"
+                    android:text="평점·마일리지"
                     android:fontFamily="@font/font_baemin5"
                     android:textSize="15sp"
                     android:layout_margin="5sp"/>
