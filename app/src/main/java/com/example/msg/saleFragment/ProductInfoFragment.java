@@ -70,8 +70,7 @@ public class ProductInfoFragment extends Fragment {
                 txt_description.setText(restaurantProductModel.p_description);
                 String c=Integer.toString(restaurantProductModel.cost);
 
-                lati=restaurantProductModel.latitude;
-                longi=restaurantProductModel.latitude;
+
                 txt_cost.setText(c);
 
 

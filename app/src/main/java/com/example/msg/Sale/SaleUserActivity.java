@@ -252,7 +252,6 @@ public class SaleUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RatingActivity.class);
                 intent.putExtra("Model", userProductModel);
-
                 intent.putExtra("mLat",defaultLatitude);
                 intent.putExtra("mLng", defaultLongitude);
                 startActivity(intent);
