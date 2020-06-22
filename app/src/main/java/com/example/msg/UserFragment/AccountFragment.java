@@ -92,7 +92,7 @@ public class AccountFragment extends Fragment {
         UserApi.getUserById(AuthenticationApi.getCurrentUid(), new UserApi.MyCallback() {
             @Override
             public void onSuccess(UserModel userModel) {
-                txt_user_rating.setText("평점·마일리지 : "+ userModel.user_rating+","+userModel.mileage);
+                txt_user_rating.setText("평점·마일리지 : "+ userModel.user_rating+" · "+userModel.mileage);
                 txt_username.setText(userModel.user_name);
             }
 
