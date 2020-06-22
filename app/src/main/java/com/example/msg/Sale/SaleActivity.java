@@ -114,7 +114,6 @@ public class SaleActivity extends AppCompatActivity {
                 saleModel = new SaleModel();
                 saleModel.res_id = restaurantProductModel.res_id;
                 saleModel.user_id = AuthenticationApi.getCurrentUid();
-                saleModel.product_id = restaurantProductModel.rproduct_id;
                 saleModel.categorySmall = restaurantProductModel.categorySmall;
                 saleModel.user_name = userModel.user_name;
 
@@ -131,12 +130,10 @@ public class SaleActivity extends AppCompatActivity {
                             RestaurantProductApi.postProductWithNoImage(cloneModel, new RestaurantProductApi.MyCallback() {
                                 @Override
                                 public void onSuccess(RestaurantProductModel restaurantProductModel) {
-                                    SaleModel saleModel1 = new SaleModel();
-                                    saleModel1.res_id = restaurantProductModel.res_id;
-                                    saleModel1.user_id = AuthenticationApi.getCurrentUid();
-                                    saleModel1.product_id = restaurantProductModel.rproduct_id;
+                                    saleModel.product_id = restaurantProductModel.rproduct_id;
+
                                     Log.d("test2forsale", "on resproduct post finish");
-                                    SaleApi.postSale(saleModel1, new SaleApi.MyCallback() {
+                                    SaleApi.postSale(saleModel, new SaleApi.MyCallback() {
                                         @Override
                                         public void onSuccess(SaleModel saleModel) {
                                             Log.d("test2forsale", "on sale finish");
@@ -166,6 +163,7 @@ public class SaleActivity extends AppCompatActivity {
                         }
                     });
                 } else {
+                    saleModel.product_id = restaurantProductModel.rproduct_id;
                     SaleApi.postSale(saleModel, new SaleApi.MyCallback() {
                         @Override
                         public void onSuccess(SaleModel saleModel) {
