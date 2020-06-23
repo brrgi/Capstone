@@ -12,18 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Sale.EditSaleActivity"></activity>
+        <activity android:name=".Subscription.SubscriptionActivity"></activity>
+        <activity android:name=".Sale.EditSaleActivity" />
         <activity android:name=".EditProfile.EditProfileActivity" />
         <activity android:name=".EditProfile.EditResProfileActivity" />
         <activity android:name=".QRcode.ResQrcodeActivity" />
         <activity
             android:name=".QRcode.QrCodeReaderActivity"
             android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation"/>
-        <activity android:name=".Filter.FilterSelectActivity"></activity>
+            tools:replace="screenOrientation" />
+        <activity android:name=".Filter.FilterSelectActivity" />
         <activity android:name=".ban.BanActivity" />
-        <activity android:name=".Sale.UserSaleProductsActivity"/>
-        <activity android:name=".Review.ResReviewsActivity"/>
+        <activity android:name=".Sale.UserSaleProductsActivity" />
+        <activity android:name=".Review.ResReviewsActivity" />
         <activity android:name=".Profile.UserProfileActivity" />
         <activity android:name=".Sale.PurchaseHistoryActivity" />
         <activity android:name=".Sale.SalesHistoryActivity" />
@@ -47,8 +48,8 @@
         <activity android:name=".RatingActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ResMainActivity" />
-        <activity android:name=".menu.HelpActivity"/>
-        <activity android:name=".menu.NoticeActivity"/>
+        <activity android:name=".menu.HelpActivity" />
+        <activity android:name=".menu.NoticeActivity" />
         <activity android:name=".SignUp.SignupActivity" />
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".Login.SplashActivity">
@@ -86,10 +87,11 @@
             android:required="false" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -27,6 +27,7 @@ import com.example.msg.Map.MapActivity;
 import com.example.msg.R;
 import com.example.msg.Sale.PurchaseHistoryActivity;
 import com.example.msg.Sale.SalesHistoryActivity;
+import com.example.msg.Subscription.SubscriptionActivity;
 import com.example.msg.menu.HelpActivity;
 import com.example.msg.menu.NoticeActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -114,6 +115,14 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), PurchaseHistoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        subscribehistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SubscriptionActivity.class);
                 startActivity(intent);
             }
         });
