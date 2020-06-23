@@ -164,7 +164,7 @@ public class HomeFragment extends Fragment  {
             public void onSuccess(ArrayList<UserProductModel> userProductModels) {
                 recyclerView.setAdapter(userAdapter);
                 userProductModelArrayList.clear();
-                userProductModelArrayList.addAll(userProductModels);
+                userProductModelArrayList.addAll(UserProductApi.filterMyModels(userProductModels));
                 filteredUserModels.clear();
                 filteredUserModels.addAll(userProductModels);
                 userAdapter.notifyDataSetChanged();
@@ -223,7 +223,7 @@ public class HomeFragment extends Fragment  {
                         for(int i = 0; i < restaurantModelArrayList.size(); i++) {
                             restaurantModelArrayList.get(i).title += "(구독중)";
                         }
-
+                        restaurantProductModels.clear();
                         restaurantProductModels.addAll(restaurantModelArrayList);
                         restaurantProductModels.addAll(temps);
 
