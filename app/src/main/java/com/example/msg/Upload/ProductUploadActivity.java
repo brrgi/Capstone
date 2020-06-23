@@ -17,6 +17,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -70,6 +71,10 @@ public class ProductUploadActivity extends AppCompatActivity {
     private double latitude=0.0;
     private double altitude;
     private int quality=-1;
+
+    //두번 클릭 방지
+    private long mLastClickTime = 0;
+
     private final UserProductModel userProductModel = new UserProductModel();
 
     private void postUserProduct(final UserProductModel userProductModel) {
@@ -163,6 +168,13 @@ public class ProductUploadActivity extends AppCompatActivity {
         qualityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //두번 클릭 방지 threshold 3초
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 5000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+                //
+
                 Intent intent = new Intent(ProductUploadActivity.this, QualitySelectActivity.class);
                 intent.putExtra("category", smallSpinner.getSelectedItem().toString());
                 startActivityForResult(intent, QUALITY_SELECT);
@@ -229,6 +241,14 @@ public class ProductUploadActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //두번 클릭 방지 threshold 5초
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 5000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
+                //
+                Toast.makeText(getApplicationContext(), "상품 등록 중 입니다.", Toast.LENGTH_SHORT).show();
                 userProductModel.title = title.getText().toString();
                 userProductModel.p_description = specification.getText().toString();
                 userProductModel.categorySmall = smallSpinner.getSelectedItem().toString();

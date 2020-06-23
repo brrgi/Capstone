@@ -4,6 +4,7 @@ package com.example.msg.UserFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,9 @@ public class ReservationFragment extends Fragment {
 
     //refreshLayout 변수
     private SwipeRefreshLayout refreshLayout;
+
+    //두번 클릭 방지
+    private long mLastClickTime = 0;
 
     private void initializeLayout(final Context context) {
         //refreshLayout 초기화
@@ -95,6 +99,14 @@ public class ReservationFragment extends Fragment {
         btn_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //두번 클릭 방지 threshold 1초
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+                //
+
                 Intent intent = new Intent(getContext(),ReservationActivity.class);
                 startActivity(intent);
             }

@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -62,6 +63,9 @@ public class ProductRestUploadActivity extends AppCompatActivity {
     private Uri imageUri = null;
 
     private final int PICK_FROM_ALBUM =100, QUALITY_SELECT = 101;
+
+    //두번 클릭 방지
+    private long mLastClickTime = 0;
 
     private void initialize() {
         productImage = (ImageView)findViewById(R.id.product_rest_imageView_product);
@@ -178,6 +182,12 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         qualityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //두번 클릭 방지 threshold 1초
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+                //
                 Intent intent = new Intent(ProductRestUploadActivity.this, QualitySelectActivity.class);
                 intent.putExtra("category", smallCategory.getSelectedItem().toString());
                 startActivityForResult(intent, QUALITY_SELECT);
@@ -188,8 +198,14 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //두번 클릭 방지 threshold 5초
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 5000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+                //
+                Toast.makeText(getApplicationContext(), "상품 등록 중 입니다.", Toast.LENGTH_SHORT).show();
                 setRestaurantProductModelFromUI();
-                Log.d("GOS", "제발"+defaultLongitude);
                 restaurantProductModel.fast = false;
                 restaurantProductModel.longitude = defaultLongitude;
                 restaurantProductModel.latitude = defaultLatitude;
@@ -200,6 +216,12 @@ public class ProductRestUploadActivity extends AppCompatActivity {
         fast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //두번 클릭 방지 threshold 1초
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+                //
                 setRestaurantProductModelFromUI();
                 restaurantProductModel.fast = true;
                 postRestProduct(restaurantProductModel);

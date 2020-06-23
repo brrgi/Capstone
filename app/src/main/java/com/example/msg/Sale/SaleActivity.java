@@ -95,7 +95,7 @@ public class SaleActivity extends AppCompatActivity {
     private Button btn_edit;
     private Button dummy;
     private String name;
-    private Button btn_buyerInfo;
+    //private Button btn_buyerInfo;
     private String user_name;
     String r_sub = "";
     FirebaseUser user;
@@ -335,7 +335,7 @@ public class SaleActivity extends AppCompatActivity {
         btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
         btn_evaluate = (Button) findViewById(R.id.saleActivity_button_rating);
         QRcode = (Button) findViewById(R.id.saleActivity_button_QRcode);
-        btn_buyerInfo = (Button) findViewById(R.id.saleActivity_button_buyerInfo);
+        //btn_buyerInfo = (Button) findViewById(R.id.saleActivity_button_buyerInfo);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
@@ -353,7 +353,7 @@ public class SaleActivity extends AppCompatActivity {
 
         if(restaurantProductModel.completed==0){
             if(uid.equals(restaurantProductModel.res_id)) {
-                btn_buyerInfo.setVisibility(View.VISIBLE);
+                //btn_buyerInfo.setVisibility(View.VISIBLE);
                 btn_chat.setVisibility(View.VISIBLE);
                 btn_evaluate.setVisibility(View.INVISIBLE);
                 QRcode.setVisibility(View.INVISIBLE);
