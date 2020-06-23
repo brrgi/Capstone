@@ -303,7 +303,8 @@ public class UserProductApi {
     public static ArrayList<UserProductModel> filterByKeyWord(final ArrayList<UserProductModel> modelList,final FoodModel foodModel) {
         ArrayList<UserProductModel> newModelList = new ArrayList<UserProductModel>();
         UserProductModel userProductModel;
-        if(foodModel.ingredients.size()==0) {
+
+        if(foodModel.ingredients == null) {
             return newModelList;
         }
         else {
@@ -417,6 +418,19 @@ public class UserProductApi {
     출력 및 동작: 입력으로 받은 모델을 allow 값에 따라 필터링해서 돌려줍니다.
      */
 
+    public static ArrayList<UserProductModel> filterMyModels(ArrayList<UserProductModel> userProductModels) {
+        String myId =AuthenticationApi.getCurrentUid();
+        ArrayList<UserProductModel> filterdModel = new ArrayList<>();
 
+        for(int i = 0; i < userProductModels.size(); i++) {
+            if(userProductModels.get(i).user_id.equals(myId)) {
+                filterdModel.add(userProductModels.get(i));
+            }
+        }
+        return filterdModel;
+    }
+    /*
+    입출력 및 동작: 입력으로 받은 모델 중, 현재 로그인 된 아이디가 등록한 모델들을 필터링해서 제거한뒤 반환합니다.
+     */
 
 }

@@ -38,6 +38,7 @@ public class AuthenticationApi {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()) {
+                    Log.d("AuthenticationApi", String.format("task fail by: %s", task.getException().getMessage()));
                     myCallback.onFail(0, null, task.getException().getMessage());
                 } else {
                     myCallback.onSuccess();

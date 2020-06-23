@@ -11,6 +11,7 @@ import com.example.msg.DatabaseModel.FoodModel;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
+import com.example.msg.DatabaseModel.UserProductModel;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -357,6 +358,9 @@ public class RestaurantProductApi {
     public static ArrayList<RestaurantProductModel> filterByKeyWord(ArrayList<RestaurantProductModel> modelList, FoodModel foodModel) {
         ArrayList<RestaurantProductModel> newModelList = new ArrayList<RestaurantProductModel>();
         RestaurantProductModel restaurantProductModel = null;
+
+        if(foodModel.ingredients == null) return newModelList;
+
         for(int j = 0; j<foodModel.ingredients.size()-1; j++) {
             String keyword = foodModel.ingredients.get(j);
             for(int i =0; i< modelList.size(); i++) {
@@ -374,6 +378,19 @@ public class RestaurantProductApi {
     출력: 필터링된 모델 리스트
     동작: 모델 리스트에서 키워드와 매칭되는 모델만 필터링해서 반환합니다. 얕은 복사를 일으키므로 주의하십시오.
      */
+
+    public static ArrayList<RestaurantProductModel> filterByKeyWord2(final ArrayList<RestaurantProductModel> modelList, String keyword) {
+        ArrayList<RestaurantProductModel> newModelList = new ArrayList<>();
+        RestaurantProductModel restaurantProductModel;
+        for(int i =0; i< modelList.size(); i++) {
+            restaurantProductModel = modelList.get(i);
+            if(restaurantProductModel.title.contains(keyword) || restaurantProductModel.p_description.contains(keyword)
+                    || restaurantProductModel.categoryBig.contains(keyword) || restaurantProductModel.categorySmall.contains(keyword)) {
+                newModelList.add(restaurantProductModel);
+            }
+        }
+        return newModelList;
+    }
 
     public static void sortByDistance(ArrayList<RestaurantProductModel> modelList, final double curLatitude, final double curLongitude) {
         Comparator<RestaurantProductModel> myComparator = new Comparator<RestaurantProductModel>() {
@@ -562,6 +579,27 @@ public class RestaurantProductApi {
     동작: id와 관련된 모델을 삭제합니다. 성공이나 실패시 콜백함수를 호출합니다.
      */
 
+    public static void extractSubscribedModel(final ArrayList<RestaurantProductModel> restaurantProductModels, final MyListCallback myCallback) {
+        final ArrayList<RestaurantProductModel> extractedModel = new ArrayList<>();
+        String myId = AuthenticationApi.getCurrentUid();
 
+        SubscriptionApi.getSubscriptionListByUserId(myId, new SubscriptionApi.MyListCallback() {
+            @Override
+            public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
+                extractedModel.addAll(filterBySubscription(restaurantProductModels, subscriptionModelArrayList));
+                deleteDuplicated(extractedModel, restaurantProductModels);
+                myCallback.onSuccess(extractedModel);
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+                myCallback.onFail(errorCode, e);
+            }
+        });
+    }
+    /*
+    입력: 모델리스트와 콜백
+    출력 및 동작: 입력으로 들어온 모델들 중, 현재 로그인 된 id로 구독 된 식당의 모델만을 추출(원본에서는 삭제/deleteDuplicated함수가 쓰임)해서 콜백함수를 통해서 돌려줍니다.
+     */
 
 }

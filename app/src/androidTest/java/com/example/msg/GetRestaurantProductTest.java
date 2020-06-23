@@ -32,6 +32,7 @@ import static org.junit.Assert.*;
 public class GetRestaurantProductTest {
     private ArrayList<RestaurantProductModel> restaurantProductModels = new ArrayList<>();
     private ArrayList<String> restaurantProductModelIds = new ArrayList<>();
+    private ArrayList<String> subscriptionIds = new ArrayList<>();
     private CommonTestFunction commonTestFunction = new CommonTestFunction("천윤서");
 
     //공통: 식당으로 레스토랑 모델을 등록한다.
@@ -64,14 +65,11 @@ public class GetRestaurantProductTest {
             commonTestFunction.waitUnlock(5000);
             Log.d("logofrpt", "here i m");
         }
-        assertEquals(3, restaurantProductModels.size());
+        assertEquals("Setup이 네트워크 문제 등으로 되지 않으면 테스트가 진행되는 것을 막습니다.",3, restaurantProductModels.size());
         AuthenticationApi.logout();
 
     }
 
-    //공통: 식당으로 로그인한다.
-    //공통: 식당으로 레스토랑 모델을 삭제한다.
-    //공통: 식당으로 로그아웃 한다.
     @After
     public void commonCleaningFixture() {
         commonTestFunction.commonLoginSetup(true, 0);
@@ -89,24 +87,65 @@ public class GetRestaurantProductTest {
                 @Override
                 public void onFail(int errorCode, Exception e) {
                     commonTestFunction.unlock();
-                    Log.d("logofrpt", "here fail");
+                    Log.d("logofrpt", String.format("here fail: %d", errorCode));
+                    if(e != null) Log.d("logofrpt", "error msg is:" + e.getMessage());
                 }
             });
             Log.d("logofrpt", "here wait");
             commonTestFunction.waitUnlock(5000);
-            AuthenticationApi.logout();
         }
-
+        AuthenticationApi.logout();
     }
 
     @Test
     public void testSubscribe() {
-        //유저로 로그인한다.
+        //Setup Fixture: 로그인 이후 더미 구독 모델 생성.
+        ArrayList<RestaurantProductModel> extractedModel = new ArrayList<>();
+        boolean isSuccess;
+
         commonTestFunction.commonLoginSetup(false, 1);
         final SubscriptionModel subscriptionModel = getDummySubscriptionModel();
 
+        //Exercise SUT Step1: 더미 구독 모델로 식당을 구독.
+        isSuccess = subscribeRestaurantWithSpinLock(subscriptionModel);
+
+        //Verify OutCome
+        assertEquals(true , isSuccess);
+
+        //Exercise SUT Step2: 자신이 구독한 식당의 모델들만 따로 반환.
+        extractedModel.addAll(extractSubscribedModelWithSpinlock(restaurantProductModels));
+
+        //Verify OutCome
+        for(int i = 0; i < extractedModel.size(); i++) {
+            Log.d("임시테스트", extractedModel.get(i).categorySmall);
+        }
+        assertEquals("구독된 식당의 상품은 양파와 닭고기만 있음", 2, extractedModel.size());
+        assertEquals("구독 안된 식당의 상품은 양배추만 있음", 1, restaurantProductModels.size());
+
+        String[] noSubscribed = {"양배추"};
+        String[] subscribed = {"양파", "닭고기"};
+
+        assertContain("구독된 식당의 상품은 양파와 닭고기만 있음", extractedModel, subscribed);
+        assertContain("구독 안된 식당의 상품은 양배추만 있음", restaurantProductModels, noSubscribed);
+
+        //Cleaning Fixture
+        unSubscribe();
+        AuthenticationApi.logout();
+    }
+
+    @Test
+    public void getProductInformationTest() {
+
+    }
+
+    @Test
+    public void EvaluateTest() {
+
+    }
+
+    private void unSubscribe() {
         commonTestFunction.lock();
-        SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
+        SubscriptionApi.deleteSubscriptionBySubsId(subscriptionIds.get(0), new SubscriptionApi.MyCallback() {
             @Override
             public void onSuccess(SubscriptionModel subscriptionModel) {
                 commonTestFunction.unlock();
@@ -118,14 +157,15 @@ public class GetRestaurantProductTest {
             }
         });
         commonTestFunction.waitUnlock(5000);
-        //유저로 식당을 구독한다.
+    }
 
+    private ArrayList<RestaurantProductModel> extractSubscribedModelWithSpinlock(final ArrayList<RestaurantProductModel> restaurantProductModels) {
+        final ArrayList<RestaurantProductModel> extractedModel = new ArrayList<>();
         commonTestFunction.lock();
-        final ArrayList<SubscriptionModel> subscriptionModels = new ArrayList<>();
-        SubscriptionApi.getSubscriptionListByUserId(AuthenticationApi.getCurrentUid(), new SubscriptionApi.MyListCallback() {
+        RestaurantProductApi.extractSubscribedModel(restaurantProductModels, new RestaurantProductApi.MyListCallback() {
             @Override
-            public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
-                subscriptionModels.addAll(subscriptionModelArrayList);
+            public void onSuccess(ArrayList<RestaurantProductModel> restaurantModelArrayList) {
+                extractedModel.addAll(restaurantModelArrayList);
                 commonTestFunction.unlock();
             }
 
@@ -135,38 +175,40 @@ public class GetRestaurantProductTest {
             }
         });
         commonTestFunction.waitUnlock(5000);
+        return extractedModel;
+    }
 
-        ArrayList<RestaurantProductModel> modelList = new ArrayList<>();
-        modelList = RestaurantProductApi.filterBySubscription(restaurantProductModels, subscriptionModels);
+    private boolean subscribeRestaurantWithSpinLock(SubscriptionModel subscriptionModel) {
 
-        RestaurantProductApi.deleteDuplicated(modelList, restaurantProductModels);
+        final boolean[] isSuccess = new boolean[1];
+        isSuccess[0] = false;
+        commonTestFunction.lock();
+        SubscriptionApi.postSubscription(subscriptionModel, new SubscriptionApi.MyCallback() {
+            @Override
+            public void onSuccess(SubscriptionModel subscriptionModel) {
+                isSuccess[0] = true;
+                subscriptionIds.add(subscriptionModel.subs_id);
+                commonTestFunction.unlock();
+            }
 
-        for(int i = 0; i < modelList.size(); i++) {
-            Log.d("logofrpt", modelList.get(i).categorySmall);
+            @Override
+            public void onFail(int errorCode, Exception e) {
+                commonTestFunction.unlock();
+            }
+        });
+        commonTestFunction.waitUnlock(5000);
+        return isSuccess[0];
+    }
+
+    private void assertContain(String msg, ArrayList<RestaurantProductModel> restaurantProductModels, String[] actualExist) {
+        boolean flag;
+        for(int i =0; i < actualExist.length; i++) {
+            flag = false;
+            for(int j = 0; j < restaurantProductModels.size(); j++) {
+                if(actualExist[i].equals(restaurantProductModels.get(j).categorySmall)) flag = true;
+            }
+            assertEquals(true, flag);
         }
-
-
-        //유저로 식당 필터링을 한다.
-        //식당을 구독해제한다.
-        //로그아웃한다.
-
-
-        //ArrayList<RestaurantProductModel> subscribedModel = new ArrayList<>();
-        //subscribedModel.add(restaurantProductModels.get(0));
-
-        //RestaurantProductApi.deleteDuplicated(subscribedModel, restaurantProductModels);
-        //assertEquals(2, restaurantProductModels.size());
-
-    }
-
-    @Test
-    public void getProductInformationTest() {
-
-    }
-
-    @Test
-    public void EvaluateTest() {
-
     }
 
     private ArrayList<RestaurantProductModel> getDummyProductModels() {
