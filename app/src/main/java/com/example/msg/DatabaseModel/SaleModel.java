@@ -1,7 +1,5 @@
 package com.example.msg.DatabaseModel;
 
-import android.widget.RatingBar;
-
 import com.google.firebase.Timestamp;
 
 public class SaleModel {

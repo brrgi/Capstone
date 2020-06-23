@@ -27,11 +27,6 @@ public class ResReviewsActivity extends AppCompatActivity {
     private RecyclerView.Adapter saleAdapter;
     private ArrayList<SaleModel> saleModelArrayList = new ArrayList<SaleModel>();
 
-    private void initializeLayout(final Context context) {
-
-
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

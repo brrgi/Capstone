@@ -22,6 +22,7 @@
             tools:replace="screenOrientation"/>
         <activity android:name=".Filter.FilterSelectActivity"></activity>
         <activity android:name=".ban.BanActivity" />
+        <activity android:name=".Profile.ViewUserProfileActivity" />
         <activity android:name=".Sale.UserSaleProductsActivity"/>
         <activity android:name=".Review.ResReviewsActivity"/>
         <activity android:name=".Profile.UserProfileActivity" />

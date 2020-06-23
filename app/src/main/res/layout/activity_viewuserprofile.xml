@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="150sp"
+        android:layout_height="50sp"
+        android:text="프로필"
+        android:fontFamily="@font/font_baemin5"
+        android:textSize="30sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_centerInParent="true"
+        android:background="#D3D3D3"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:singleLine="true"
+            android:lines="1"
+            android:text="이름 : "
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/viewUserProfileActivity_textView_name"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="이름"
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:singleLine="true"
+            android:lines="1"
+            android:text="성별 : "
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/viewUserProfileActivity_textView_sex"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="성별"
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:singleLine="true"
+            android:lines="1"
+            android:text="나이 : "
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/viewUserProfileActivity_textView_age"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="나이"
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:singleLine="true"
+            android:lines="1"
+            android:text="번호 : "
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/viewUserProfileActivity_textView_number"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="번호"
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:singleLine="true"
+            android:lines="1"
+            android:text="평점 : "
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+
+        <RatingBar
+            android:id="@+id/viewUserProfileActivity_ratingBar_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:numStars="5"
+            style="?android:attr/ratingBarStyleSmall" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:singleLine="true"
+            android:lines="1"
+            android:text="주소 : "
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/viewUserProfileActivity_textView_address"
+            android:singleLine="true"
+            android:lines="1"
+            android:hint="주소"
+            android:fontFamily="@font/font_baemin5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"/>
+    </LinearLayout>
+</LinearLayout>
