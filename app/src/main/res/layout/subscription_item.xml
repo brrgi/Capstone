@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/subscription_item_imageView_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/home_black_18dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/subscription_item_textView_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="25sp"
+                android:background="#00ffffff"
+                android:fontFamily="@font/font_baemin5"
+                android:text="타이틀" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/subscription_item_textView_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/font_baemin5"
+                    android:background="#00ffffff"
+                    android:text="주소" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/subscription_item_textView_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+
+                android:fontFamily="@font/font_baemin5"
+                android:background="#00ffffff"
+                android:text="name" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <RatingBar
+                    android:id="@+id/subscription_item_ratingBar_grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    style="?android:attr/ratingBarStyleSmall"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10sp"
+        android:background="#D3D3D3"
+        android:layout_marginBottom="10sp"
+        />
+</LinearLayout>

@@ -118,18 +118,20 @@ public class EditSaleActivity extends AppCompatActivity {
         restaurantProductModel = (RestaurantProductModel) intent.getSerializableExtra("Models");
 
         Log.d("hihi1 : ",restaurantProductModel.res_id);
-        RestaurantProductApi.getProduct(restaurantProductModel.res_id, new RestaurantProductApi.MyCallback() {
+        RestaurantProductApi.getProduct(restaurantProductModel.rproduct_id, new RestaurantProductApi.MyCallback() {
             @Override
             public void onSuccess(RestaurantProductModel restaurantProductModel) {
                 Log.d("hihi2 : ",restaurantProductModel.res_id);
 
-                title.setText("디버그용");
+                title.setText(restaurantProductModel.title);
                 quantity.setText(restaurantProductModel.quantity);
+                Log.d("hihi2 : ",restaurantProductModel.p_description);
+
                 expireDate.setText(restaurantProductModel.expiration_date);
-                cost.setText(restaurantProductModel.cost);
+                cost.setText(Integer.toString(restaurantProductModel.cost));
                 description.setText(restaurantProductModel.p_description);
-                stock.setText(restaurantProductModel.stock);
-                qualityText.setText(restaurantProductModel.quality);
+                stock.setText(Integer.toString(restaurantProductModel.stock));
+                qualityText.setText(Integer.toString(restaurantProductModel.quality));
                 Glide.with(EditSaleActivity.this).load(restaurantProductModel.p_imageURL).into(productImage);
             }
 
