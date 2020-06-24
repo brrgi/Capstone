@@ -25,6 +25,7 @@ import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.MainActivity;
 import com.example.msg.Map.DaumWebViewActivity;
 import com.example.msg.R;
+import com.example.msg.ResMainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -183,7 +184,7 @@ public class EditResProfileActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     Toast.makeText(getApplicationContext(), "식당정보 수정이 완료되었습니다.", Toast.LENGTH_LONG).show();
-                                                    startActivity(new Intent(EditResProfileActivity.this, MainActivity.class));
+                                                    //startActivity(new Intent(EditResProfileActivity.this, ResMainActivity.class));
                                                     finish();
                                                 } else {
                                                     Log.d(TAG, "Error password not updated");
