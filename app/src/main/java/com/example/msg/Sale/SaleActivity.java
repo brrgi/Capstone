@@ -119,7 +119,7 @@ public class SaleActivity extends AppCompatActivity {
                 saleModel.categorySmall = restaurantProductModel.categorySmall;
                 saleModel.user_name = userModel.user_name;
 
-                if (restaurantProductModel.stock > 1) {
+                if (restaurantProductModel.stock > 0) {
                     restaurantProductModel.completed = -1;
                     RestaurantProductApi.updateProduct(restaurantProductModel, new RestaurantProductApi.MyCallback() {
                         @Override
@@ -166,6 +166,7 @@ public class SaleActivity extends AppCompatActivity {
                     });
                 } else {
                     saleModel.product_id = restaurantProductModel.rproduct_id;
+                    restaurantProductModel.completed=0;
                     SaleApi.postSale(saleModel, new SaleApi.MyCallback() {
                         @Override
                         public void onSuccess(SaleModel saleModel) {
