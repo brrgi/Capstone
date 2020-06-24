@@ -80,7 +80,6 @@ public class AccountFragment extends Fragment {
         txt_user_rating = view.findViewById(R.id.account_textView_rating);
         txt_username = view.findViewById(R.id.account_textView_UID);
         editProfile = view.findViewById(R.id.account_textView_editprofile);
-        map= view.findViewById(R.id.account_button_map);
         help= view.findViewById(R.id.account_button_help);
         notice= view.findViewById(R.id.account_button_notice);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -150,12 +149,6 @@ public class AccountFragment extends Fragment {
         });
 
 
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), DaumWebViewActivity.class));
-            }
-        });
 
         return view;
     }
