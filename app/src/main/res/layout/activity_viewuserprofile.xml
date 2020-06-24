@@ -161,8 +161,6 @@
 
         <TextView
             android:id="@+id/viewUserProfileActivity_textView_address"
-            android:singleLine="true"
-            android:lines="1"
             android:hint="주소"
             android:fontFamily="@font/font_baemin5"
             android:layout_width="wrap_content"
