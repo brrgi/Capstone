@@ -418,12 +418,12 @@ public class UserProductApi {
     출력 및 동작: 입력으로 받은 모델을 allow 값에 따라 필터링해서 돌려줍니다.
      */
 
-    public static ArrayList<UserProductModel> filterMyModels(ArrayList<UserProductModel> userProductModels) {
-        String myId =AuthenticationApi.getCurrentUid();
+    public static ArrayList<UserProductModel> filterMyModels(ArrayList<UserProductModel> userProductModels, String currentId) {
+        String myId = currentId;
         ArrayList<UserProductModel> filterdModel = new ArrayList<>();
 
         for(int i = 0; i < userProductModels.size(); i++) {
-            if(userProductModels.get(i).user_id.equals(myId)) {
+            if(!userProductModels.get(i).user_id.equals(myId)) {
                 filterdModel.add(userProductModels.get(i));
             }
         }

@@ -50,7 +50,7 @@ public class ResChatFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Context context = view.getContext();
-
+        initializeLayout(view);
 
 
     }

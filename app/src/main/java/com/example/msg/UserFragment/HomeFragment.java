@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.RestaurantApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.Filter.FilterModel;
@@ -159,14 +160,16 @@ public class HomeFragment extends Fragment  {
     //해당 프래그먼트에서 사용되는 레이아웃 등을 초기화 하는 함수입니다.
 
     private void refreshItemOfUserProducts() {
+        final String myId = AuthenticationApi.getCurrentUid();
         UserProductApi.getProductList(defaultLatitude, defaultLongitude, range, new UserProductApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<UserProductModel> userProductModels) {
+                Log.d("refreshItem", String.format("upms: %d", userProductModels.size()));
                 recyclerView.setAdapter(userAdapter);
                 userProductModelArrayList.clear();
-                userProductModelArrayList.addAll(UserProductApi.filterMyModels(userProductModels));
+                userProductModelArrayList.addAll(UserProductApi.filterMyModels(userProductModels, myId));
                 filteredUserModels.clear();
-                filteredUserModels.addAll(userProductModels);
+                filteredUserModels.addAll(userProductModelArrayList);
                 userAdapter.notifyDataSetChanged();
             }
 
@@ -477,7 +480,7 @@ public class HomeFragment extends Fragment  {
    public void filteringUserProduct(FilterModel filterModel) {
         ArrayList<UserProductModel> temps = new ArrayList<>();
         temps.addAll(userProductModelArrayList);
-        if(filterModel.getCategory() != null) temps = UserProductApi.filterByCategory(temps, filterModel.getCategory());
+        if(filterModel.getCategory() != null && !filterModel.getCategory().equals("선택없음")) temps = UserProductApi.filterByCategory(temps, filterModel.getCategory());
         temps = UserProductApi.filterByDistance(temps, defaultLatitude, defaultLongitude, filterModel.getRange());
         temps = UserProductApi.filterByQuality(temps, filterModel.isSearchLowQuality(), filterModel.isSearchMidQuality(), filterModel.isSearchHighQuality());
 
@@ -493,7 +496,7 @@ public class HomeFragment extends Fragment  {
         ArrayList<RestaurantProductModel> temps = new ArrayList<>();
         temps.addAll(restaurantProductModels);
 
-        if(filterModel.getCategory() != null) temps =  RestaurantProductApi.filterByCategory(temps, filterModel.getCategory());
+        if(filterModel.getCategory() != null && !filterModel.getCategory().equals("선택없음")) temps =  RestaurantProductApi.filterByCategory(temps, filterModel.getCategory());
         temps = RestaurantProductApi.filterByDistance(temps, defaultLatitude, defaultLongitude, filterModel.getRange());
         temps = RestaurantProductApi.filterByPrice(temps, filterModel.getPrice());
         temps = RestaurantProductApi.filterByQuality(temps, filterModel.isSearchLowQuality(), filterModel.isSearchMidQuality(), filterModel.isSearchHighQuality());

@@ -90,7 +90,6 @@ public class ResAccountFragment extends Fragment {
         reviews=view.findViewById(R.id.resaccount_button_review);
         notice=view.findViewById(R.id.resaccount_button_notice);
         help=view.findViewById(R.id.resaccount_button_help);
-        map=view.findViewById(R.id.resaccount_button_map);
         RestaurantApi.getUserById(AuthenticationApi.getCurrentUid(), new RestaurantApi.MyCallback() {
             @Override
             public void onSuccess(RestaurantModel restaurantModel) {
@@ -150,13 +149,6 @@ public class ResAccountFragment extends Fragment {
             }
         });
 
-
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), DaumWebViewActivity.class));
-            }
-        });
 
         return view;
     }

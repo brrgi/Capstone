@@ -75,7 +75,7 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
         holder.title.setText(arrayList.get(position).title);
 
         holder.cost.setText(arrayList.get(position).cost + "원");
-        holder.stock.setText(arrayList.get(position).stock+"개");
+        holder.stock.setText("재고 : "+arrayList.get(position).stock+"개");
         RestaurantProductModel item = arrayList.get(position);
 
         String addressString = null;
@@ -92,8 +92,6 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
