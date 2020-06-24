@@ -313,6 +313,7 @@
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
+
             <Button
                 android:id="@+id/saleActivity_button_QRcode"
                 android:layout_width="60sp"

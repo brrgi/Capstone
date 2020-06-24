@@ -2,6 +2,7 @@ package com.example.msg.Sale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,6 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -19,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -105,8 +108,8 @@ public class SaleActivity extends AppCompatActivity {
     private ResInfoFragment resInfoFragment;
     private ResReviewsFragment resReviewsFragment;
 
-    private void processSale(final RestaurantProductModel restaurantProductModel) {
-        restaurantProductModel.stock -= 1;
+    private void processSale(final RestaurantProductModel restaurantProductModel, final int buystock) {
+        restaurantProductModel.stock -= buystock;
         UserApi.getUserById(user.getUid(), new UserApi.MyCallback() {
             SaleModel saleModel = new SaleModel();
 
@@ -125,7 +128,7 @@ public class SaleActivity extends AppCompatActivity {
                         public void onSuccess(RestaurantProductModel restaurantProductModel) {
                             RestaurantProductModel cloneModel;
                             cloneModel = restaurantProductModel;
-                            cloneModel.stock = 0;
+                            cloneModel.stock = buystock;
                             cloneModel.completed = 0;
                             Log.d("test2forsale", "before postproductwithnoimage");
                             RestaurantProductApi.postProductWithNoImage(cloneModel, new RestaurantProductApi.MyCallback() {
@@ -416,12 +419,36 @@ public class SaleActivity extends AppCompatActivity {
         btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                processSale(restaurantProductModel);
-                Intent intent = new Intent(getApplicationContext(), PayActivity.class);
-                intent.putExtra("Model", restaurantProductModel);
-                startActivity(intent);
-
-                finish();
+                AlertDialog.Builder stockCheck = new AlertDialog.Builder(SaleActivity.this);
+                stockCheck.setTitle("수량을 입력해주세요");
+                stockCheck.setMessage("숫자만 써주세요!");
+                final EditText et = new EditText(SaleActivity.this);
+                stockCheck.setView(et);
+                stockCheck.setPositiveButton("결제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        int buystock = Integer.parseInt(et.getText().toString());
+                        if(buystock>restaurantProductModel.stock) {
+                            Toast.makeText(getApplicationContext(), "재고보다 많은 수량을 입력했어요!", Toast.LENGTH_LONG).show();
+                            dialogInterface.dismiss();
+                        }
+                        else {
+                            processSale(restaurantProductModel,buystock);
+                            Intent intent = new Intent(getApplicationContext(), PayActivity.class);
+                            intent.putExtra("Model", restaurantProductModel);
+                            startActivity(intent);
+                            finish();
+                            dialogInterface.dismiss();
+                        }
+                    }
+                });
+                stockCheck.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                stockCheck.show();
             }
         });
 
