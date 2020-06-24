@@ -2,6 +2,7 @@ package com.example.msg.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -56,6 +58,9 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
             public void onSuccess(RestaurantModel restaurantModel) {
                 holder.name.setText(restaurantModel.res_name);
                 holder.grade.setRating(restaurantModel.res_rating);
+                if(restaurantModel.res_name.contains("(구독중)")) {
+                    holder.background.setBackgroundColor(Color.YELLOW);
+                }
             }
 
             @Override
@@ -105,6 +110,7 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
         RatingBar grade;
         TextView dong;
         TextView stock;
+        LinearLayout background;
         public ProductsViewHolder(@NonNull View itemView) {
             super(itemView);
             this.image=itemView.findViewById(R.id.resproduct_item_imageView_image);
@@ -114,6 +120,7 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
             this.name=itemView.findViewById(R.id.resproduct_item_textView_name);
             this.dong=itemView.findViewById(R.id.resproduct_item_textView_dong);
             this.stock=itemView.findViewById(R.id.resproduct_item_textView_stock);
+
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
