@@ -88,7 +88,7 @@ public class SaleActivity extends AppCompatActivity {
     private Button love;
     private Button share;
     private final SubscriptionModel subscriptionModel = new SubscriptionModel();
-    static int state = -1;
+    private int state = -1;
     private Button btn_evaluate;
     private Button QRcode;
     private RatingBar rating;
@@ -217,8 +217,6 @@ public class SaleActivity extends AppCompatActivity {
                         subscriptionModel.subs_id = subscriptionModelArrayList.get(i).subs_id;
 
                         state = 1;
-
-
                     }
                     else {
                         Log.d("subfailnew", "else state");
