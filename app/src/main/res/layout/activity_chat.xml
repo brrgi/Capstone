@@ -32,6 +32,7 @@ android:orientation="vertical">
         android:id="@+id/chat_sent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bin_blue"
         android:text="send" />
 </LinearLayout>
 

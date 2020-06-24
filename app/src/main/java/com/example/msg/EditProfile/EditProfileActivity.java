@@ -138,7 +138,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
                                             Toast.makeText(getApplicationContext(), "회원정보 수정이 완료되었습니다.", Toast.LENGTH_LONG).show();
-                                            startActivity(new Intent(EditProfileActivity.this, MainActivity.class));
+                                            //startActivity(new Intent(EditProfileActivity.this, MainActivity.class));
                                             finish();
                                         }
                                         else{

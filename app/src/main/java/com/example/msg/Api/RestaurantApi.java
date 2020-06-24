@@ -73,7 +73,6 @@ public class RestaurantApi {
     public static void updateRestaurant(final RestaurantModel restaurantModel, final MyCallback myCallback) {
         db.collection("Restaurant").document(restaurantModel.res_id).
                 update(
-                        "res_id", restaurantModel.res_id,
                         "res_name", restaurantModel.res_name,
                         "res_address", restaurantModel.res_address,
                         "res_address_detail", restaurantModel.res_address_detail,
@@ -81,11 +80,8 @@ public class RestaurantApi {
                         "res_description", restaurantModel.res_description,
                         "pickup_start_time", restaurantModel.pickup_start_time,
                         "pickup_end_time", restaurantModel.pickup_end_time,
-                        "res_longitude", restaurantModel.res_longitude,
-                        "res_latitude", restaurantModel.res_latitude,
-                        "res_rating",restaurantModel.res_rating,
-                        "ratingCount",restaurantModel.ratingCount,
-                        "res_phone", restaurantModel.res_phone
+                        "res_phone", restaurantModel.res_phone,
+                        "res_email", restaurantModel.res_email
                 ).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
