@@ -27,11 +27,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.msg.Api.AuthenticationApi;
+import com.example.msg.Api.ChatRoomApi;
 import com.example.msg.Api.RestaurantProductApi;
 import com.example.msg.Api.SaleApi;
 import com.example.msg.Api.ShareApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.Api.UserProductApi;
+import com.example.msg.ChatRoom.ChatRoomActivity;
+import com.example.msg.DatabaseModel.ChatRoomModel;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SaleModel;
@@ -96,6 +99,7 @@ public class SaleActivity extends AppCompatActivity {
     private Button dummy;
     private String name;
     private Button btn_del;
+    private Button chat;
     //private Button btn_buyerInfo;
     private String user_name;
     String r_sub = "";
@@ -473,6 +477,25 @@ public class SaleActivity extends AppCompatActivity {
             }
         });
 
+        btn_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(SaleActivity.this, ChatRoomActivity.class);
+
+                ChatRoomApi.makeChatRoomModelById(restaurantProductModel.res_id, false, new ChatRoomApi.MyCallback() {
+                    @Override
+                    public void onSuccess(ChatRoomModel chatRoomModel) {
+                        intent.putExtra("object", chatRoomModel);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+            }
+        });
 
     }
 

@@ -137,6 +137,7 @@ public class FilterSelectActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 smallCategories.clear();
+                smallCategories.add("선택없음");
                 smallCategories.addAll(GuideLineApi.getSmallCategoryList((String)parent.getItemAtPosition(position)));
                 smallCategoriesAdapter.notifyDataSetChanged();
             }
