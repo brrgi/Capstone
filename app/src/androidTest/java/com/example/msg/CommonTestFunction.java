@@ -56,28 +56,28 @@ public class CommonTestFunction {
                 dummyResUid = "FQx9gpHXumfDEAnbRquzobWxWt33";
                 break;
             case "이레":
-                dummyUserId1 = "";
-                dummyUserUid1 = "3";
+                dummyUserId1 = "useri1@naver.com;
+                dummyUserUid1 = "bbsEgWINwUSZFt2941NTDGR6lkI2";
                 dummyUserId2 = "";
                 dummyUserUid2 = "";
-                dummyResId = "";
-                dummyResUid = "";
+                dummyResId = "resi@naver.com";
+                dummyResUid = "Gi0ObXrWTJf0WtJqk1u90NWIAKq2";
                 break;
             case "박규동":
                 dummyUserId1 = "";
                 dummyUserUid1 = "2";
                 dummyUserId2 = "";
                 dummyUserUid2 = "";
-                dummyResId = "";
-                dummyResUid = "";
+                dummyResId = "resb@naver.com";
+                dummyResUid = "Agv6ejVEoXQRa7kim37u8C8neEz1";
                 break;
             case "한우석":
                 dummyUserId1 = "1";
                 dummyUserUid1 = "";
                 dummyUserId2 = "";
                 dummyUserUid2 = "";
-                dummyResId = "";
-                dummyResUid = "";
+                dummyResId = "resh@naver.com";
+                dummyResUid = "tw2SHeC2WWZ88ZUHzJMW8l7ko0O2";
                 break;
             default:
                 throw new IllegalArgumentException();
