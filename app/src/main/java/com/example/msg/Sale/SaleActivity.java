@@ -432,6 +432,7 @@ public class SaleActivity extends AppCompatActivity {
                             processSale(restaurantProductModel,buystock);
                             Intent intent = new Intent(getApplicationContext(), PayActivity.class);
                             intent.putExtra("Model", restaurantProductModel);
+                            intent.putExtra("stock",buystock);
                             startActivity(intent);
                             finish();
                             dialogInterface.dismiss();
