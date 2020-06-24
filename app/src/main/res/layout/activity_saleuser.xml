@@ -304,22 +304,19 @@
             android:background="#D3D3D3"/>
 
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            >
+            android:gravity="center">
 
             <Button
                 android:id="@+id/saleUserActivity_button_buy"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
-                android:background="@drawable/bin_blue"
-                android:text="구매"
-                android:fontFamily="@font/font_baemin5"
                 android:layout_marginLeft="10sp"
+                android:background="@drawable/bin_blue"
+                android:fontFamily="@font/font_baemin5"
+                android:text="구매"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
@@ -327,24 +324,24 @@
                 android:id="@+id/saleUserActivity_button_chat"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
+                android:layout_marginLeft="20sp"
                 android:background="@drawable/bin_blue"
                 android:fontFamily="@font/font_baemin5"
                 android:text="채팅"
                 android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:layout_marginLeft="20sp"/>
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/saleUserActivity_button_evaluate"
                 android:layout_width="wrap_content"
                 android:layout_height="50sp"
+                android:layout_marginLeft="20sp"
                 android:background="@drawable/bin_blue"
-                android:text="평가"
                 android:fontFamily="@font/font_baemin5"
+                android:text="평가"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
-                android:visibility="invisible"
-                android:layout_marginLeft="20sp" />
+                android:visibility="invisible" />
 
 
         </LinearLayout>

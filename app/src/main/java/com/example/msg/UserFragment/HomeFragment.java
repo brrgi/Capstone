@@ -33,6 +33,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.RestaurantApi;
+import com.example.msg.Api.StatisticsApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.Filter.FilterModel;
 import com.example.msg.DatabaseModel.FoodModel;
@@ -280,7 +281,17 @@ public class HomeFragment extends Fragment  {
         getAddress(uid);
 
 //    UserApi
-        getLocation(defaultLatitude,defaultLongitude);
+        StatisticsApi.getMen(new StatisticsApi.MyCallback() {
+            @Override
+            public void onSuccess(ArrayList<Integer> sum) {
+                getLocation(defaultLatitude,defaultLongitude);
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
         //스피너 선택
 
         filter.setOnClickListener(new View.OnClickListener() {

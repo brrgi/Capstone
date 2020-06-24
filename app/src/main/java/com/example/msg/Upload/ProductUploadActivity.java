@@ -31,6 +31,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.msg.Api.StatisticsApi;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
@@ -80,12 +81,14 @@ public class ProductUploadActivity extends AppCompatActivity {
     private void postUserProduct(final UserProductModel userProductModel) {
         UserApi.getUserById(AuthenticationApi.getCurrentUid(), new UserApi.MyCallback() {
             @Override
-            public void onSuccess(UserModel userModel) {
+            public void onSuccess(final UserModel userModel) {
                 userProductModel.user_id = userModel.user_id;
                 UserProductApi.postProduct(userProductModel, imageUri, new UserProductApi.MyCallback() {
                    @Override
                    public void onSuccess(UserProductModel userProductModel) {
                        Toast.makeText(getApplicationContext(), "상품 등록이 완료되었습니다.", Toast.LENGTH_LONG).show();
+                       latitude=userModel.latitude;
+                       longitude=userModel.longitude;
                        finish();
                    }
 
@@ -128,6 +131,28 @@ public class ProductUploadActivity extends AppCompatActivity {
         quantity = (EditText)findViewById(R.id.product_upload_editText_quantity);
         address1=(Button)findViewById(R.id.product_upload_button_address);
         address2=(Button)findViewById(R.id.product_upload_button_address2);
+        UserApi.getUserById(AuthenticationApi.getCurrentUid(), new UserApi.MyCallback() {
+            @Override
+            public void onSuccess(final UserModel userModel) {
+                StatisticsApi.getMen(new StatisticsApi.MyCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<Integer> sum) {
+                        latitude=userModel.latitude;
+                        longitude=userModel.longitude;
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onFail(int errorCode, Exception e) {
+
+            }
+        });
 
         this.InitializeListener();
         final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
