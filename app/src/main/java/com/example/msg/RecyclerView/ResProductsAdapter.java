@@ -70,7 +70,7 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
         holder.title.setText(arrayList.get(position).title);
 
         holder.cost.setText(arrayList.get(position).cost + "원");
-
+        holder.stock.setText(arrayList.get(position).stock+"개");
         RestaurantProductModel item = arrayList.get(position);
 
         String addressString = null;
@@ -104,6 +104,7 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
         TextView name;
         RatingBar grade;
         TextView dong;
+        TextView stock;
         public ProductsViewHolder(@NonNull View itemView) {
             super(itemView);
             this.image=itemView.findViewById(R.id.resproduct_item_imageView_image);
@@ -112,6 +113,7 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
             this.grade=itemView.findViewById(R.id.resproduct_item_ratingBar_grade);
             this.name=itemView.findViewById(R.id.resproduct_item_textView_name);
             this.dong=itemView.findViewById(R.id.resproduct_item_textView_dong);
+            this.stock=itemView.findViewById(R.id.resproduct_item_textView_stock);
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
