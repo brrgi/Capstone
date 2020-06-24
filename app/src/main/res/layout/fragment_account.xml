@@ -12,6 +12,7 @@
         <TextView
             android:layout_width="150sp"
             android:layout_height="50sp"
+            android:layout_marginLeft="10sp"
             android:text="내 정보"
             android:fontFamily="@font/font_baemin5"
             android:textSize="30sp"/>
