@@ -122,6 +122,7 @@
         android:layout_width="50sp"
         android:layout_height="50sp"
         android:layout_marginBottom="10sp"
+        android:background="#00ffffff"
         android:src="@drawable/filter"
         android:scaleType="centerInside"
         />
