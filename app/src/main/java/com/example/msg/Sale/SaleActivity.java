@@ -95,6 +95,7 @@ public class SaleActivity extends AppCompatActivity {
     private Button btn_edit;
     private Button dummy;
     private String name;
+    private Button btn_del;
     //private Button btn_buyerInfo;
     private String user_name;
     String r_sub = "";
@@ -334,6 +335,7 @@ public class SaleActivity extends AppCompatActivity {
         btn_buy = (Button) findViewById(R.id.saleActivity_button_buy);
         btn_chat = (Button) findViewById(R.id.saleActivity_button_chat);
         btn_evaluate = (Button) findViewById(R.id.saleActivity_button_rating);
+        btn_del=(Button) findViewById(R.id.saleActivity_button_del);
         QRcode = (Button) findViewById(R.id.saleActivity_button_QRcode);
         //btn_buyerInfo = (Button) findViewById(R.id.saleActivity_button_buyerInfo);
 
@@ -357,10 +359,12 @@ public class SaleActivity extends AppCompatActivity {
                 btn_chat.setVisibility(View.VISIBLE);
                 btn_evaluate.setVisibility(View.INVISIBLE);
                 QRcode.setVisibility(View.INVISIBLE);
+                btn_del.setVisibility(View.INVISIBLE);
             }
             else{
                 btn_evaluate.setVisibility(View.VISIBLE);
                 QRcode.setVisibility(View.VISIBLE);
+                btn_del.setVisibility(View.INVISIBLE);
             }
         }
 
