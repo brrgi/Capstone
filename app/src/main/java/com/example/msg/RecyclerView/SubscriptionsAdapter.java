@@ -16,9 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.ReserveApi;
+import com.example.msg.Api.SubscriptionApi;
 import com.example.msg.DatabaseModel.ReserveModel;
 import com.example.msg.DatabaseModel.RestaurantModel;
+import com.example.msg.DatabaseModel.SubscriptionModel;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.R;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -88,7 +91,34 @@ public class SubscriptionsAdapter extends RecyclerView.Adapter<SubscriptionsAdap
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch(menuItem.getItemId()) {
                     case 1001:
+                        SubscriptionApi.getSubscriptionListByUserId(AuthenticationApi.getCurrentUid(), new SubscriptionApi.MyListCallback() {
+                            @Override
+                            public void onSuccess(ArrayList<SubscriptionModel> subscriptionModelArrayList) {
+                                for(int i=0;i<subscriptionModelArrayList.size();i++) {
+                                    if(subscriptionModelArrayList.get(i).res_id.equals(arrayList.get(getAdapterPosition()).res_id)) {
+                                        SubscriptionApi.deleteSubscriptionBySubsId(subscriptionModelArrayList.get(i).subs_id, new SubscriptionApi.MyCallback() {
+                                            @Override
+                                            public void onSuccess(SubscriptionModel subscriptionModel) {
+                                                FirebaseMessaging.getInstance().unsubscribeFromTopic(arrayList.get(getAdapterPosition()).res_id);
+                                                arrayList.remove(getAdapterPosition());
+                                                notifyItemRemoved(getAdapterPosition());
+                                                notifyItemRangeChanged(getAdapterPosition(),arrayList.size());
+                                            }
 
+                                            @Override
+                                            public void onFail(int errorCode, Exception e) {
+
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int errorCode, Exception e) {
+
+                            }
+                        });
                         break;
                 }
                 return true;
