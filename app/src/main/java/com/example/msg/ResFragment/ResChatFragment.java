@@ -3,7 +3,6 @@ package com.example.msg.ResFragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.ChatRoomApi;
-import com.example.msg.ChatRoom.ChatListSqlManager;
 import com.example.msg.ChatRoom.ChatRoomAdapter;
 import com.example.msg.DatabaseModel.ChatRoomModel;
 import com.example.msg.R;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 

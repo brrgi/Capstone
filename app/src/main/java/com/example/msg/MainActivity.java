@@ -1,10 +1,5 @@
 package com.example.msg;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -15,13 +10,15 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 
-import com.example.msg.ChatRoom.ChatRoomActivity;
-import com.example.msg.DatabaseModel.UserModel;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.UserApi;
+import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.Sale.PopupSearchActivity;
-import com.example.msg.Upload.ProductRestUploadActivity;
-import com.example.msg.Upload.ProductUploadActivity;
 import com.example.msg.UserFragment.AccountFragment;
 import com.example.msg.UserFragment.ChatFragment;
 import com.example.msg.UserFragment.HomeFragment;

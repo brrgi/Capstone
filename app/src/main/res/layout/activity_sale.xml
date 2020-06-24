@@ -275,7 +275,9 @@
 
             </FrameLayout>
 
-
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
             <Button
                 android:id="@+id/saleActivity_button_buy"
                 android:layout_width="60sp"
@@ -286,6 +288,19 @@
                 android:fontFamily="@font/font_baemin5"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
+            <Button
+                android:id="@+id/saleActivity_button_del"
+                android:layout_width="40sp"
+                android:layout_height="50sp"
+                android:background="@drawable/bin_blue"
+                android:text="삭제"
+                android:fontFamily="@font/font_baemin5"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_marginLeft="10sp"
+                android:visibility="gone"/>
+
+            </FrameLayout>
 
             <Button
                 android:id="@+id/saleActivity_button_chat"
@@ -298,16 +313,7 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="10sp"/>
 
-            <Button
-                android:id="@+id/saleActivity_button_del"
-                android:layout_width="40sp"
-                android:layout_height="50sp"
-                android:background="@drawable/bin_blue"
-                android:text="삭제"
-                android:fontFamily="@font/font_baemin5"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:layout_marginLeft="10sp"/>
+
 
             <Button
                 android:id="@+id/saleActivity_button_rating"

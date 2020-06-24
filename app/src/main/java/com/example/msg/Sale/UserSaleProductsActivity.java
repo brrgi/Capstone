@@ -1,6 +1,5 @@
 package com.example.msg.Sale;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.UserProductApi;
 import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.R;

@@ -9,12 +9,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.ChatRoomApi;
+import com.example.msg.Api.ShareApi;
+import com.example.msg.Api.UserApi;
+import com.example.msg.Api.UserProductApi;
 import com.example.msg.ChatRoom.ChatRoomActivity;
 import com.example.msg.DatabaseModel.ChatRoomModel;
 import com.example.msg.DatabaseModel.RestaurantModel;
@@ -23,11 +26,6 @@ import com.example.msg.DatabaseModel.SaleModel;
 import com.example.msg.DatabaseModel.ShareModel;
 import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.DatabaseModel.UserProductModel;
-import com.example.msg.Api.AuthenticationApi;
-import com.example.msg.Api.ShareApi;
-import com.example.msg.Api.UserApi;
-import com.example.msg.Api.UserProductApi;
-import com.example.msg.Map.MapActivity;
 import com.example.msg.Profile.UserProfileActivity;
 import com.example.msg.R;
 import com.example.msg.RatingActivity;

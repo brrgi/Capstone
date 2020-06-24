@@ -17,22 +17,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-
-
-import com.example.msg.Api.UserApi;
-import com.example.msg.DatabaseModel.UserModel;
-
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.RestaurantApi;
+import com.example.msg.Api.UserApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
-
+import com.example.msg.DatabaseModel.UserModel;
 import com.example.msg.EditProfile.EditResProfileActivity;
-import com.example.msg.Map.DaumWebViewActivity;
 import com.example.msg.QRcode.QrCodeReaderActivity;
 import com.example.msg.R;
 import com.example.msg.Review.ResReviewsActivity;
 import com.example.msg.Sale.ResSalesHistoryActivity;
-import com.example.msg.SignUp.SignupActivity;
 import com.example.msg.menu.HelpActivity;
 import com.example.msg.menu.NoticeActivity;
 
