@@ -16,6 +16,7 @@
             android:layout_width="200sp"
             android:layout_height="50sp"
             android:text="식재료 등록"
+            android:layout_marginLeft="10sp"
             android:fontFamily="@font/font_baemin5"
             android:textSize="30sp"/>
 

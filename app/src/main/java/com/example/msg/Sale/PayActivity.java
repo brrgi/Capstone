@@ -30,7 +30,7 @@ public class PayActivity extends AppCompatActivity {
     private View v;
     private int stuck = 10;
     private Button gotoHome;
-    final int stock = (int) getIntent().getSerializableExtra("stock");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class PayActivity extends AppCompatActivity {
     public void onClick_request(View v) {
         // 결제호출
         Intent intent = getIntent();
+        int stock = intent.getExtras().getInt("stock");
         final RestaurantProductModel restaurantProductModel = (RestaurantProductModel) intent.getSerializableExtra("Model");
         BootUser bootUser = new BootUser().setPhone("010-2237-4777");
         BootExtra bootExtra = new BootExtra().setQuotas(new int[]{0, 2, 3});

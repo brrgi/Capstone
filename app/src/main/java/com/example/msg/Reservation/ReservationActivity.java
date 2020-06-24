@@ -46,7 +46,7 @@ public class ReservationActivity extends AppCompatActivity {
     String msg = "예약이 완료되었습니다.";
     String tmp;
 
-    String[] categories = {"육류","어류","채소","향신료"};
+    String[] categories = {"육류","채소","향신료","과일"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

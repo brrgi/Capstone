@@ -249,8 +249,6 @@ public class ProductUploadActivity extends AppCompatActivity {
                             1,
                             gpsLocationListener);
                 }
-
-
             }
         });
 
@@ -323,7 +321,6 @@ public class ProductUploadActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 monthOfYear++;
                 expireDate.setText(year + "년" + monthOfYear + "월" + dayOfMonth + "일");
-
             }
         };
     }

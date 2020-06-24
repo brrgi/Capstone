@@ -53,7 +53,11 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginEvent();
+                try {
+                    loginEvent();
+                }catch (Exception e){
+
+                }
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
