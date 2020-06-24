@@ -30,6 +30,7 @@ public class PayActivity extends AppCompatActivity {
     private View v;
     private int stuck = 10;
     private Button gotoHome;
+    final int stock = (int) getIntent().getSerializableExtra("stock");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class PayActivity extends AppCompatActivity {
 //                .setUserPhone("010-1234-5678") // 구매자 전화번호
                 .setName(restaurantProductModel.title) // 결제할 상품명
                 .setOrderId(restaurantProductModel.res_id) // 결제 고유번호 expire_month
-                .setPrice(restaurantProductModel.cost) // 결제할 금액
+                .setPrice((restaurantProductModel.cost)*stock) // 결제할 금액
                 .onConfirm(new ConfirmListener() { // 결제가 진행되기 바로 직전 호출되는 함수로, 주로 재고처리 등의 로직이 수행
                     @Override
                     public void onConfirm(@Nullable String message) {
