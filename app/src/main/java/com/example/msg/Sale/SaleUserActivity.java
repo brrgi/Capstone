@@ -60,9 +60,9 @@ public class SaleUserActivity extends AppCompatActivity {
     private TextView ban;
     private RatingBar grade;
     private Button love;
-    private Button share;
-    private double defaultLongitude = 0;
+    private Button share;    private double defaultLongitude = 0;
     private double defaultLatitude = 0;
+
     String u_name = "";
     String u_address="";
     String u_uid;

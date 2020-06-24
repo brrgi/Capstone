@@ -69,6 +69,7 @@ public class EditProfileActivity extends AppCompatActivity {
         name = (EditText) findViewById(R.id.editProfileActivity_edittext_name);
         phone = (EditText) findViewById(R.id.editProfileActivity_edittext_phone);
         edit = (Button) findViewById(R.id.editProfileActivity_button_edit);
+
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         //초기 세팅값
@@ -127,7 +128,8 @@ public class EditProfileActivity extends AppCompatActivity {
                         userModel.user_phone = phone.getText().toString();
                         userModel.user_address = et_address.getText().toString();
                         userModel.user_address_detail = et_address_detail.getText().toString();
-
+                        userModel.latitude=lati;
+                        userModel.longitude=longi;
                         UserApi.updateUser(userModel, new UserApi.MyCallback() {
                             @Override
                             public void onSuccess(UserModel userModel) {

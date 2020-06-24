@@ -58,8 +58,6 @@ public class AccountFragment extends Fragment {
             public void onSuccess(UserModel userModel) {
                 defaultLatitude=userModel.latitude;
                 defaultLongitude=userModel.longitude;
-                //Toast.makeText(getActivity(), defaultLatitude+" "+defaultLongitude, Toast.LENGTH_LONG).show();
-
             }
 
             @Override

@@ -172,6 +172,8 @@ public class EditResProfileActivity extends AppCompatActivity {
                                 restaurantModel.pickup_end_time = pickup_end_time.getText().toString();
                                 restaurantModel.res_description = res_description.getText().toString();
                                 restaurantModel.res_imageURL = (imageUrl.getResult().toString());
+                                restaurantModel.res_longitude=longi;
+                                restaurantModel.res_latitude=lati;
                                 Log.d(TAG,"update restaurantModel ");
 
                                 RestaurantApi.updateRestaurant(restaurantModel, new RestaurantApi.MyCallback() {
