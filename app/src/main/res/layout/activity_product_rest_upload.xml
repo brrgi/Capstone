@@ -117,7 +117,8 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/font_baemin5"
                 android:textSize="30sp"
-                android:background="@null"/>
+                android:background="@null"
+                android:inputType="number"/>
 
         </LinearLayout>
         <View
@@ -186,9 +187,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:hint="가격"
+            android:hint="가격 (원)"
             android:fontFamily="@font/font_baemin5"
-            android:background="@null"/>
+            android:background="@null"
+            android:inputType="number"/>
 
         <View
             android:layout_width="match_parent"
