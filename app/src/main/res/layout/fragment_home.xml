@@ -123,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10sp"
         android:background="#00ffffff"
-        android:src="@drawable/k"
+        android:src="@drawable/kkk"
         android:layout_marginLeft="10sp"
         android:scaleType="centerInside"
         />
