@@ -1,7 +1,5 @@
 package com.example.msg.RecyclerView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +8,10 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.example.msg.DatabaseModel.GuideLineModel;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.msg.Api.GuideLineApi;
+import com.example.msg.DatabaseModel.GuideLineModel;
 import com.example.msg.R;
 
 public class QualitySelectActivity extends AppCompatActivity {

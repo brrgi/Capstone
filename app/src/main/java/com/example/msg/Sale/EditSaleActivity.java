@@ -1,8 +1,5 @@
 package com.example.msg.Sale;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.GuideLineApi;
@@ -30,11 +30,8 @@ import com.example.msg.Api.RestaurantApi;
 import com.example.msg.Api.RestaurantProductApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
-import com.example.msg.DatabaseModel.UserProductModel;
-import com.example.msg.EditProfile.EditResProfileActivity;
 import com.example.msg.R;
 import com.example.msg.RecyclerView.QualitySelectActivity;
-import com.example.msg.Upload.ProductRestUploadActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

@@ -1,10 +1,9 @@
 package com.example.msg.Sale;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.msg.R;
 

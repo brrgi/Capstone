@@ -14,9 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.msg.Api.RestaurantApi;
-import com.example.msg.Api.RestaurantProductApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
-import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.R;
 
 public class ResInfoFragment extends Fragment {
