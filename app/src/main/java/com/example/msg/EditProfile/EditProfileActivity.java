@@ -18,16 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.DatabaseModel.UserModel;
-import com.example.msg.MainActivity;
 import com.example.msg.Map.DaumWebViewActivity;
 import com.example.msg.R;
-import com.example.msg.UserFragment.AccountFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 
 public class EditProfileActivity extends AppCompatActivity {

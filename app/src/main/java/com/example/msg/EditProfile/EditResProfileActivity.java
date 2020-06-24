@@ -22,17 +22,13 @@ import com.bumptech.glide.Glide;
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.RestaurantApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
-import com.example.msg.MainActivity;
 import com.example.msg.Map.DaumWebViewActivity;
 import com.example.msg.R;
-import com.example.msg.ResMainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
