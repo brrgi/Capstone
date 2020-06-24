@@ -356,6 +356,7 @@ public class SaleActivity extends AppCompatActivity {
 
         if(uid.equals(restaurantProductModel.res_id)&&restaurantProductModel.completed==-1) {
             btn_edit.setVisibility(View.VISIBLE);
+            btn_del.setVisibility(View.VISIBLE);
         }
 
 
@@ -365,12 +366,12 @@ public class SaleActivity extends AppCompatActivity {
                 btn_chat.setVisibility(View.VISIBLE);
                 btn_evaluate.setVisibility(View.INVISIBLE);
                 QRcode.setVisibility(View.INVISIBLE);
-                btn_del.setVisibility(View.INVISIBLE);
+
             }
             else{
                 btn_evaluate.setVisibility(View.VISIBLE);
                 QRcode.setVisibility(View.VISIBLE);
-                btn_del.setVisibility(View.INVISIBLE);
+
             }
         }
 
@@ -513,6 +514,22 @@ public class SaleActivity extends AppCompatActivity {
                     public void onSuccess(ChatRoomModel chatRoomModel) {
                         intent.putExtra("object", chatRoomModel);
                         startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+            }
+        });
+        btn_del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RestaurantProductApi.deleteProduct(restaurantProductModel.rproduct_id, new RestaurantProductApi.MyCallback() {
+                    @Override
+                    public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                        finish();
                     }
 
                     @Override
