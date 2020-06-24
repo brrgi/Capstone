@@ -152,7 +152,10 @@ public class SaleUserActivity extends AppCompatActivity {
             btn_chat.setVisibility(View.INVISIBLE);
             btn_buy.setVisibility(View.INVISIBLE);
         }
-        if(userProductModel.completed==0) btn_rating.setVisibility(View.VISIBLE);
+        if(userProductModel.completed==0){
+            btn_chat.setVisibility(View.VISIBLE);
+            btn_rating.setVisibility(View.VISIBLE);
+        }
 
         getAddress(uid);
         UserApi.getUserById(userProductModel.user_id, new UserApi.MyCallback() {

@@ -30,7 +30,6 @@ import static org.junit.Assert.*;
 public class FilterTest {
 
     //Common used Test Model.
-    private CommonTestFunction commonTestFunction = new CommonTestFunction("천윤서");
     private ArrayList<RestaurantProductModel> restaurantProductModels = new ArrayList<>();
 
     @Before
@@ -39,38 +38,41 @@ public class FilterTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.msg", appContext.getPackageName());
 
-       //common setup
+       //common Setup Fixture
        restaurantProductModels = new ArrayList<>();
        restaurantProductModels.addAll(getTestRestaurantProductModelList());
     }
 
     @After
-    public void commonTearDown() {
-        //필요하면 작성.
+    public void commonCleaningUpFixture() {
+        //common Cleaning up fixture
     }
 
     @Test
     public void testSortingByDistance() {
+        //Exercise SUT
         RestaurantProductApi.sortByDistance(restaurantProductModels, 0, 0);
-        //소트 실행.
-        assertSortByDistance(restaurantProductModels);
-        //검증 실행
+
+        //Verify OutCome
+        assertSortByDistance("거리순으로 정렬됐는지 검증.",restaurantProductModels);
+
     }
 
     @Test
     public void testSortingByPrice() {
+        //Exercise SUT
         RestaurantProductApi.sortByPrice(restaurantProductModels);
-        //소트 실행.
-        assertSortByPrice(restaurantProductModels);
-        //검증 실행
+
+        //Verify OutCome
+        assertSortByPrice("가격순으로 정렬됐는지 검증.",restaurantProductModels);
     }
 
     @Test
     public void testSortingByStock() {
+        //Exercise SUT
         RestaurantProductApi.sortByStock(restaurantProductModels);
-        //소트 실행
-        assertSortByStock(restaurantProductModels);
-        //검증실행
+        //Verify OutCome
+        assertSortByStock("재고순으로 정렬됐는지 검증", restaurantProductModels);
     }
 
 
@@ -78,57 +80,58 @@ public class FilterTest {
 
     @Test
     public void testFilteringByCategory() {
+        //Exercise SUT
         restaurantProductModels = RestaurantProductApi.filterByCategory(restaurantProductModels, "닭고기");
-        //필터링 실행
 
-        assertEquals(1, restaurantProductModels.size());
-        assertEquals("닭고기", restaurantProductModels.get(0).categorySmall);
-        //검증. 닭고기만 걸려야함.
+        //Verify OutCome
+        assertEquals("닭고기만 걸러지므로 모델은 단 한개다.",1, restaurantProductModels.size());
+        assertEquals("닭고기만 걸러지므로 첫 번째 원소가 닭고기다.","닭고기", restaurantProductModels.get(0).categorySmall);
     }
 
     @Test
     public void testFilteringByDistance() {
+        //Exercise SUT: 반경 300m로 필터링 실행.
         restaurantProductModels = RestaurantProductApi.filterByDistance(restaurantProductModels, 0.0, 0.0, 300);
-        //필터링 실행. 300미터 이내에 있는 것만 가져옴 300미터 이내에는 닭고기와 딸기만 있음.
 
-        assertEquals(2, restaurantProductModels.size());
+        //Verify OutCome
         String mustExistCategory[] = {"닭고기", "딸기"};
-        assertContain(restaurantProductModels, mustExistCategory);
-        //mustExistCategory의 내용물을 포함하는지 검증.
+        assertEquals("반경 300m 이내에는 물품이 닭고기와 딸기 밖에 없다.",2, restaurantProductModels.size());
+        assertContain("위 물품이 포함돼있는지 검증.",restaurantProductModels, mustExistCategory);
 
     }
 
     @Test
     public void testFilteringByPrice() {
+        //Exercise SUT: 가격 1500이하만 필터링.
         restaurantProductModels = RestaurantProductApi.filterByPrice(restaurantProductModels, 1500);
-        //필터링 실행. 감자와 딸기만 1500원 이하임.
 
-        assertEquals(2, restaurantProductModels.size());
+        //Verify Outcome
+        assertEquals("1500원 이하는 감자와 딸기만 있다.",2, restaurantProductModels.size());
         String mustExistCategory[] = {"감자", "딸기"};
-        assertContain(restaurantProductModels, mustExistCategory);
-        //mustExistCategory의 내용물을 포함하는지 검증.
+        assertContain("위 물품을 포함하는지 확인한다.",restaurantProductModels, mustExistCategory);
     }
 
     @Test
     public void testFilteringByQuality() {
+        //Exercise SUT: 품질 '하'만 걸러내기.
         restaurantProductModels = RestaurantProductApi.filterByQuality(restaurantProductModels, false, true, true);
-        //필터링 실행. 감자는 품질이 하, 비허용(false)이므로 걸러져야함.
 
-        assertEquals(3, restaurantProductModels.size());
+        //Verify Outcome
+        assertEquals("4가지 더미 중에 감자만 품질 '하'",3, restaurantProductModels.size());
         String mustExistCategory[] = {"닭고기", "딸기", "양파"};
-        assertContain(restaurantProductModels, mustExistCategory);
-        //mustExistCategory의 내용물을 포함하는지 검증.
+        assertContain("위 물품을 포함하는지 확인한다.",restaurantProductModels, mustExistCategory);
     }
 
     @Test
     public void sortByFast() {
+        //Exercise SUT: 딸기만 급처가 켜져있음.
         RestaurantProductApi.sortByFast(restaurantProductModels);
-        //소팅 실행. 딸기만 급처가 켜져있음.
 
-        assertEquals("딸기", restaurantProductModels.get(0).categorySmall);
+        assertEquals("급처가 켜진 딸기가 최상단에 와야한다.","딸기", restaurantProductModels.get(0).categorySmall);
     }
 
-    private void assertContain(ArrayList<RestaurantProductModel> restaurantProductModels, String[] actualExist) {
+
+    private void assertContain(String msg, ArrayList<RestaurantProductModel> restaurantProductModels, String[] actualExist) {
         boolean flag;
         for(int i =0; i < actualExist.length; i++) {
             flag = false;
@@ -139,7 +142,7 @@ public class FilterTest {
         }
     }
 
-    private void assertSortByStock(ArrayList<RestaurantProductModel> restaurantProductModels) {
+    private void assertSortByStock(String msg, ArrayList<RestaurantProductModel> restaurantProductModels) {
         //재고: 딸기(20) > 감자(10) > 양파(5) > 닭고기(1)
         assertEquals("딸기", restaurantProductModels.get(0).categorySmall);
         assertEquals("감자", restaurantProductModels.get(1).categorySmall);
@@ -147,7 +150,7 @@ public class FilterTest {
         assertEquals("닭고기", restaurantProductModels.get(3).categorySmall);
     }
 
-    private void assertSortByDistance(ArrayList<RestaurantProductModel> restaurantProductModels) {
+    private void assertSortByDistance(String msg, ArrayList<RestaurantProductModel> restaurantProductModels) {
         //거리: 양파(meter300*3) > 감자(meter300*2) > 닭고기(meter300/3) > 딸기(1)
         assertEquals("딸기", restaurantProductModels.get(0).categorySmall);
         assertEquals("닭고기", restaurantProductModels.get(1).categorySmall);
@@ -155,13 +158,15 @@ public class FilterTest {
         assertEquals("양파",restaurantProductModels.get(3).categorySmall);
     }
 
-    private void assertSortByPrice(ArrayList<RestaurantProductModel> restaurantProductModels) {
+    private void assertSortByPrice(String msg, ArrayList<RestaurantProductModel> restaurantProductModels) {
         //가격: 닭고기(6000) > 양파(3000) > 감자(1000) > 딸기(500)
         assertEquals("딸기", restaurantProductModels.get(0).categorySmall);
         assertEquals("감자", restaurantProductModels.get(1).categorySmall);
         assertEquals("양파", restaurantProductModels.get(2).categorySmall);
         assertEquals("닭고기", restaurantProductModels.get(3).categorySmall);
     }
+
+
 
 
     private ArrayList<RestaurantProductModel> getTestRestaurantProductModelList() {

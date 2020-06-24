@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/resproduct_item_background"
     android:orientation="vertical">
 
     <LinearLayout
@@ -101,6 +102,16 @@
                     />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/resproduct_item_textView_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:fontFamily="@font/font_baemin5"
+                android:layout_weight="1"
+                android:background="#00ffffff"
+                android:text="재고" />
 
         </LinearLayout>
 

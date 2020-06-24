@@ -1,5 +1,6 @@
 package com.example.msg.Api;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ public class AuthenticationApi {
 
     public interface MyCallback {
         void onSuccess();
-        void onFail(int errorCode, Error e);
+        void onFail(int errorCode, Error e, String str);
     }
 
     public static boolean isLogin() {
@@ -37,7 +38,8 @@ public class AuthenticationApi {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()) {
-                    myCallback.onFail(0, null);
+                    Log.d("AuthenticationApi", String.format("task fail by: %s", task.getException().getMessage()));
+                    myCallback.onFail(0, null, task.getException().getMessage());
                 } else {
                     myCallback.onSuccess();
                 }

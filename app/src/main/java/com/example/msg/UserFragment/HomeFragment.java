@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.msg.Api.RestaurantApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.Filter.FilterModel;
 import com.example.msg.DatabaseModel.FoodModel;
@@ -163,7 +164,7 @@ public class HomeFragment extends Fragment  {
             public void onSuccess(ArrayList<UserProductModel> userProductModels) {
                 recyclerView.setAdapter(userAdapter);
                 userProductModelArrayList.clear();
-                userProductModelArrayList.addAll(userProductModels);
+                userProductModelArrayList.addAll(UserProductApi.filterMyModels(userProductModels));
                 filteredUserModels.clear();
                 filteredUserModels.addAll(userProductModels);
                 userAdapter.notifyDataSetChanged();
@@ -205,15 +206,38 @@ public class HomeFragment extends Fragment  {
 
 
     private void refreshItemOfResProducts() {
+        final ArrayList<RestaurantProductModel> temps = new ArrayList<>();
+
         RestaurantProductApi.getProductList(defaultLatitude, defaultLongitude, range, new RestaurantProductApi.MyListCallback() {
             @Override
             public void onSuccess(ArrayList<RestaurantProductModel> restaurantModelArrayList) {
                 recyclerView.setAdapter(resAdapter);
-                restaurantProductModels.clear();
-                restaurantProductModels.addAll(restaurantModelArrayList);
-                filteredResModels.clear();
-                filteredResModels.addAll(restaurantProductModels);
-                resAdapter.notifyDataSetChanged();
+
+                temps.addAll(restaurantModelArrayList);
+                RestaurantProductApi.sortByFast(temps);
+
+
+                RestaurantProductApi.extractSubscribedModel(temps, new RestaurantProductApi.MyListCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<RestaurantProductModel> restaurantModelArrayList) {
+                        for(int i = 0; i < restaurantModelArrayList.size(); i++) {
+                            restaurantModelArrayList.get(i).title += "(구독중)";
+                        }
+                        restaurantProductModels.clear();
+                        restaurantProductModels.addAll(restaurantModelArrayList);
+                        restaurantProductModels.addAll(temps);
+
+                        filteredResModels.clear();
+                        filteredResModels.addAll(restaurantProductModels);
+                        resAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFail(int errorCode, Exception e) {
+
+                    }
+                });
+
             }
 
             @Override
@@ -221,7 +245,6 @@ public class HomeFragment extends Fragment  {
 
             }
         });
-        //TODO: curLatitude와 curLongitude를 지도에서 받아온 값으로 바꾸고, range 또한 받는 인터페이스가 필요함.
 
 
     }
@@ -260,6 +283,12 @@ public class HomeFragment extends Fragment  {
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(isShowingUserProduct) {
+                    refreshItemOfUserProducts();
+
+                } else {
+                    refreshItemOfResProducts();
+                }
                 Intent intent = new Intent(getActivity(), FilterSelectActivity.class);
                 intent.putExtra("isShowingUserProduct", isShowingUserProduct);
                 startActivityForResult(intent, FILTER_CODE);
@@ -293,6 +322,7 @@ public class HomeFragment extends Fragment  {
                             @Override
                             public void onSuccess(FoodModel foodModel) {
                                 filteredResModels.addAll(RestaurantProductApi.filterByKeyWord(restaurantProductModels, foodModel));
+                                filteredResModels.addAll(RestaurantProductApi.filterByKeyWord2(restaurantProductModels, searchText.getText().toString()));
                                 resAdapter.notifyDataSetChanged();
                             }
 
@@ -445,11 +475,20 @@ public class HomeFragment extends Fragment  {
     }
 
    public void filteringUserProduct(FilterModel filterModel) {
+        ArrayList<UserProductModel> temps = new ArrayList<>();
+        temps.addAll(userProductModelArrayList);
+        if(filterModel.getCategory() != null) temps = UserProductApi.filterByCategory(temps, filterModel.getCategory());
+        temps = UserProductApi.filterByDistance(temps, defaultLatitude, defaultLongitude, filterModel.getRange());
+        temps = UserProductApi.filterByQuality(temps, filterModel.isSearchLowQuality(), filterModel.isSearchMidQuality(), filterModel.isSearchHighQuality());
 
+        userProductModelArrayList.clear();
+        userProductModelArrayList.addAll(temps);
+        filteredUserModels.clear();
+        filteredUserModels.addAll(temps);
+        userAdapter.notifyDataSetChanged();
    }
 
    public void filteringResProduct(FilterModel filterModel) {
-        refreshItemOfResProducts();
 
         ArrayList<RestaurantProductModel> temps = new ArrayList<>();
         temps.addAll(restaurantProductModels);
@@ -459,6 +498,8 @@ public class HomeFragment extends Fragment  {
         temps = RestaurantProductApi.filterByPrice(temps, filterModel.getPrice());
         temps = RestaurantProductApi.filterByQuality(temps, filterModel.isSearchLowQuality(), filterModel.isSearchMidQuality(), filterModel.isSearchHighQuality());
 
+        restaurantProductModels.clear();
+        restaurantProductModels.addAll(temps);
         filteredResModels.clear();
         filteredResModels.addAll(temps);
         resAdapter.notifyDataSetChanged();
