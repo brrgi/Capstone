@@ -2,26 +2,22 @@ package com.example.msg.ResFragment;
 
 
 import android.graphics.Color;
-        import android.graphics.Typeface;
-        import android.os.Bundle;
-        import android.text.Html;
-        import android.text.SpannableString;
-        import android.text.Spanned;
-        import android.text.style.ForegroundColorSpan;
-        import android.text.style.StyleSpan;
-        import android.text.style.UnderlineSpan;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.EditText;
-        import android.widget.TextView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-        import androidx.annotation.NonNull;
-        import androidx.annotation.Nullable;
-        import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.RestaurantApi;
 import com.example.msg.Api.StatisticsApi;
 import com.example.msg.DatabaseModel.RestaurantModel;

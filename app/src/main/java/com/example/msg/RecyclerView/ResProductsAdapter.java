@@ -21,15 +21,13 @@ import com.bumptech.glide.Glide;
 import com.example.msg.Api.RestaurantApi;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
-import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.R;
+import com.example.msg.Sale.SaleActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import com.example.msg.Sale.SaleActivity;
 
 
 public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.ProductsViewHolder> {

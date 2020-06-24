@@ -11,11 +11,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.msg.R;
-import com.example.msg.accountFragment.CompletedSaleFagment;
 import com.example.msg.accountFragment.CompletedSaleResFagment;
-import com.example.msg.accountFragment.OnSaleFagment;
 import com.example.msg.accountFragment.OnSaleResFagment;
-import com.example.msg.accountFragment.TradingFagment;
 import com.example.msg.accountFragment.TradingResFagment;
 import com.google.android.material.tabs.TabLayout;
 

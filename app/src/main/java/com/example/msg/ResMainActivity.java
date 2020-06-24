@@ -1,7 +1,6 @@
 
 package com.example.msg;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -11,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.msg.Upload.ProductRestUploadActivity;
 import com.example.msg.ResFragment.ResAccountBookFragment;
 import com.example.msg.ResFragment.ResAccountFragment;
 import com.example.msg.ResFragment.ResChatFragment;

@@ -1,16 +1,9 @@
 package com.example.msg.Upload;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -31,23 +24,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.msg.Api.StatisticsApi;
-import com.example.msg.DatabaseModel.RestaurantProductModel;
-import com.example.msg.DatabaseModel.UserModel;
-import com.example.msg.DatabaseModel.UserProductModel;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.GuideLineApi;
+import com.example.msg.Api.StatisticsApi;
 import com.example.msg.Api.UserApi;
 import com.example.msg.Api.UserProductApi;
+import com.example.msg.DatabaseModel.UserModel;
+import com.example.msg.DatabaseModel.UserProductModel;
 import com.example.msg.R;
 import com.example.msg.RecyclerView.QualitySelectActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class ProductUploadActivity extends AppCompatActivity {
 

@@ -2,8 +2,6 @@ package com.example.msg.ChatRoom;
 
 import com.example.msg.DatabaseModel.ChatModel;
 
-import java.util.Date;
-
 public class Chat {
     private ChatModel chatModel;
     private String chatId;

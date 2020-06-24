@@ -1,5 +1,21 @@
 package com.example.msg.Sale;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -9,47 +25,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.ChatRoomApi;
+import com.example.msg.Api.RestaurantApi;
 import com.example.msg.Api.RestaurantProductApi;
 import com.example.msg.Api.SaleApi;
-import com.example.msg.Api.ShareApi;
+import com.example.msg.Api.SubscriptionApi;
 import com.example.msg.Api.UserApi;
-import com.example.msg.Api.UserProductApi;
 import com.example.msg.ChatRoom.ChatRoomActivity;
 import com.example.msg.DatabaseModel.ChatRoomModel;
 import com.example.msg.DatabaseModel.RestaurantModel;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.DatabaseModel.SaleModel;
-import com.example.msg.DatabaseModel.ShareModel;
 import com.example.msg.DatabaseModel.SubscriptionModel;
-
-import com.example.msg.Api.RestaurantApi;
-import com.example.msg.Api.SubscriptionApi;
-
 import com.example.msg.DatabaseModel.UserModel;
-import com.example.msg.DatabaseModel.UserProductModel;
-import com.example.msg.Map.MapActivity;
 import com.example.msg.QRcode.ResQrcodeActivity;
 import com.example.msg.R;
 import com.example.msg.RatingActivity;
@@ -62,10 +52,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import net.daum.mf.map.api.MapPOIItem;
-import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -446,6 +432,7 @@ public class SaleActivity extends AppCompatActivity {
                             processSale(restaurantProductModel,buystock);
                             Intent intent = new Intent(getApplicationContext(), PayActivity.class);
                             intent.putExtra("Model", restaurantProductModel);
+                            intent.putExtra("stock",buystock);
                             startActivity(intent);
                             finish();
                             dialogInterface.dismiss();
