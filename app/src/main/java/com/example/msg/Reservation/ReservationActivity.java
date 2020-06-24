@@ -80,6 +80,11 @@ public class ReservationActivity extends AppCompatActivity {
                 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
                     return;
                 }
+
+                if(editText.getText().toString() == null | editText.getText().toString() == "") {
+                    Toast.makeText(getApplicationContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                }
+
                 mLastClickTime = SystemClock.elapsedRealtime();
                 //
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

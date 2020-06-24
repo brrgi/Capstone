@@ -255,35 +255,63 @@ public class ProductUploadActivity extends AppCompatActivity {
         });
 
 
-
-
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    //두번 클릭 방지 threshold 5초
-                    if (SystemClock.elapsedRealtime() - mLastClickTime < 5000) {
-                        return;
-                    }
-                    mLastClickTime = SystemClock.elapsedRealtime();
-
-                    //
-                    Toast.makeText(getApplicationContext(), "상품 등록 중 입니다.", Toast.LENGTH_SHORT).show();
-                    userProductModel.title = title.getText().toString();
-                    userProductModel.p_description = specification.getText().toString();
-                    userProductModel.categorySmall = smallSpinner.getSelectedItem().toString();
-                    userProductModel.categoryBig = bigSpinner.getSelectedItem().toString();
-                    userProductModel.quantity = quantity.getText().toString();
-                    userProductModel.expiration_date = expireDate.getText().toString();
-                    userProductModel.completed = -1;
-                    userProductModel.longitude = longitude;
-                    userProductModel.latitude = latitude;
-                    userProductModel.saleDateYear = -1;
-                    userProductModel.saleDateMonth = -1;
-                    userProductModel.saleDateDay = -1;
-                    userProductModel.quality = quality;
-                    postUserProduct(userProductModel);
-
+                //두번 클릭 방지 threshold 5초
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 5000) {
+                    return;
                 }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
+                if (title.getText().toString() == null) {
+                    Toast.makeText(getApplicationContext(), "제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (imageUri == null) {
+                    Toast.makeText(getApplicationContext(), "사진을 등록해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+                if (quantity.getText().toString() == null) {
+                    Toast.makeText(getApplicationContext(), "양을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (expireDate.getText().toString() == null) {
+                    Toast.makeText(getApplicationContext(), "유통기한을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (quality == -1) {
+                    Toast.makeText(getApplicationContext(), "품질을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (specification.getText().toString() == null) {
+                    Toast.makeText(getApplicationContext(), "상세내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Toast.makeText(getApplicationContext(), "상품 등록 중 입니다.", Toast.LENGTH_SHORT).show();
+                userProductModel.title = title.getText().toString();
+                userProductModel.p_description = specification.getText().toString();
+                userProductModel.categorySmall = smallSpinner.getSelectedItem().toString();
+                userProductModel.categoryBig = bigSpinner.getSelectedItem().toString();
+                userProductModel.quantity = quantity.getText().toString();
+                userProductModel.expiration_date = expireDate.getText().toString();
+                userProductModel.completed = -1;
+                userProductModel.longitude = longitude;
+                userProductModel.latitude = latitude;
+                userProductModel.saleDateYear = -1;
+                userProductModel.saleDateMonth = -1;
+                userProductModel.saleDateDay = -1;
+                userProductModel.quality = quality;
+                postUserProduct(userProductModel);
+
+            }
         });
 
 

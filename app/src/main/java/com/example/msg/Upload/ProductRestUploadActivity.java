@@ -197,6 +197,47 @@ public class ProductRestUploadActivity extends AppCompatActivity {
                 }
                 mLastClickTime = SystemClock.elapsedRealtime();
                 //
+
+                if(title.getText().toString() == null) {
+                    Toast.makeText(getApplicationContext(), "제목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(imageUri == null) {
+                    Toast.makeText(getApplicationContext(), "이미지를 선택해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(expireDate.getText().toString() == null) {
+                    Toast.makeText(getApplicationContext(), "유통기한을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(quality == -1) {
+                    Toast.makeText(getApplicationContext(), "품질을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(cost.getText().toString() == null) {
+                    Toast.makeText(getApplicationContext(), "가격을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(description.getText().toString() == null) {
+                    Toast.makeText(getApplicationContext(), "상세설명을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(quantity.getText().toString() == null) {
+                    Toast.makeText(getApplicationContext(), "양을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(stock.getText().toString() == null) {
+                    Toast.makeText(getApplicationContext(), "재고를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Toast.makeText(getApplicationContext(), "상품 등록 중 입니다.", Toast.LENGTH_SHORT).show();
                 setRestaurantProductModelFromUI();
                 restaurantProductModel.fast = false;
@@ -235,6 +276,7 @@ public class ProductRestUploadActivity extends AppCompatActivity {
             }
         };
     }
+
 
 
 
