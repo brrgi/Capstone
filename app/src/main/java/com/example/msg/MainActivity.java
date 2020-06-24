@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getAppKeyHash();      //키해시 구하기
         /*
         dummy code in here
         UserModel userModel = new UserModel();
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 ////                finish();
 //            }
 //        });
-//        getAppKeyHash();      //키해시 구하기
+
 //        map=(Button)findViewById(R.id.mainActivity_button_map);
 //        map.setOnClickListener(new View.OnClickListener() {
 //            @Override
