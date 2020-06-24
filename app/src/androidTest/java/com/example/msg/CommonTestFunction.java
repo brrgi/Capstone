@@ -56,7 +56,7 @@ public class CommonTestFunction {
                 dummyResUid = "FQx9gpHXumfDEAnbRquzobWxWt33";
                 break;
             case "이레":
-                dummyUserId1 = "useri1@naver.com;
+                dummyUserId1 = "useri1@naver.com";
                 dummyUserUid1 = "bbsEgWINwUSZFt2941NTDGR6lkI2";
                 dummyUserId2 = "";
                 dummyUserUid2 = "";
