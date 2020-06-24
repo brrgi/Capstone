@@ -1,23 +1,15 @@
 package com.example.msg.Upload;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,18 +21,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.msg.Api.RestaurantApi;
-import com.example.msg.DatabaseModel.RestaurantModel;
-import com.example.msg.DatabaseModel.RestaurantProductModel;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.GuideLineApi;
+import com.example.msg.Api.RestaurantApi;
 import com.example.msg.Api.RestaurantProductApi;
+import com.example.msg.DatabaseModel.RestaurantModel;
+import com.example.msg.DatabaseModel.RestaurantProductModel;
 import com.example.msg.R;
 import com.example.msg.RecyclerView.QualitySelectActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
