@@ -92,8 +92,6 @@ public class ResProductsAdapter extends RecyclerView.Adapter<ResProductsAdapter.
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
