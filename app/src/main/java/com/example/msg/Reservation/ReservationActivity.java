@@ -83,6 +83,7 @@ public class ReservationActivity extends AppCompatActivity {
 
                 if(editText.getText().toString() == null | editText.getText().toString() == "") {
                     Toast.makeText(getApplicationContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 mLastClickTime = SystemClock.elapsedRealtime();
