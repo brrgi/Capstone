@@ -105,23 +105,30 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        chatRoomModel.lastChat = chats.get(chats.size() -1).takeContent();
-        chatRoomModel.lastDate = chats.get(chats.size() -1).getDate();
-        chatRoomModel.id1 = myId;
-        chatRoomModel.id2 = opponentId;
-        chatRoomModel.pictureUrl = "";
+        try {
+            chatRoomModel.lastChat = chats.get(chats.size() -1).takeContent();
+            chatRoomModel.lastDate = chats.get(chats.size() -1).getDate();
+            chatRoomModel.id1 = myId;
+            chatRoomModel.id2 = opponentId;
+            chatRoomModel.pictureUrl = "";
 
-        ChatRoomApi.postOrUpdateChatRoom(chatRoomModel, new ChatRoomApi.MyCallback() {
-            @Override
-            public void onSuccess(ChatRoomModel chatRoomModel) {
+            ChatRoomApi.postOrUpdateChatRoom(chatRoomModel, new ChatRoomApi.MyCallback() {
+                @Override
+                public void onSuccess(ChatRoomModel chatRoomModel) {
 
-            }
+                }
 
-            @Override
-            public void onFail(int errorCode, Exception e) {
+                @Override
+                public void onFail(int errorCode, Exception e) {
 
-            }
-        });
+                }
+            });
+        } catch(Exception e ) {
+        }
+
+
+
+
 
         /*
         ChatListSqlManager chatListSqlManager = new ChatListSqlManager();
