@@ -118,6 +118,11 @@ public class SignupRestActivity extends AppCompatActivity {
                     }
                 });
 
+                if(imageUri == null) {
+                    Toast.makeText(getApplicationContext(), "이미지를 등록해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 FirebaseAuth.getInstance()
                         .createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
                         .addOnCompleteListener(SignupRestActivity.this, new OnCompleteListener<AuthResult>() {
