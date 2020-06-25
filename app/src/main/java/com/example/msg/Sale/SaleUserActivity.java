@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -248,6 +249,7 @@ public class SaleUserActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(UserModel userModel) {
                         userModel.mileage-=1;
+                        Toast.makeText(getApplicationContext(), "요청하신 작업이 성공했습니다. 내 정보에서 확인해주세요.", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
