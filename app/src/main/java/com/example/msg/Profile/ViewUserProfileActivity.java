@@ -48,7 +48,7 @@ public class ViewUserProfileActivity extends AppCompatActivity {
                     sex.setText("남자");
                 else
                     sex.setText("여자");
-                age.setText(Integer.toString(2019 - userModel.age));
+                age.setText(Integer.toString(2021 - userModel.age));
                 number.setText(userModel.user_phone);
                 grade.setRating(userModel.user_rating);
                 address.setText(userModel.user_address);
