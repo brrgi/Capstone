@@ -13,6 +13,7 @@ import com.example.msg.DatabaseModel.ChatRoomModel;
 import com.example.msg.DatabaseModel.ShareModel;
 import com.google.android.gms.auth.api.Auth;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,43 +38,66 @@ public class ChatTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.msg", appContext.getPackageName());
 
+        //Common Setup Fixture in this context
+    }
+
+    @After
+    public void commonCleaningFixture() {
         AuthenticationApi.logout();
+        //Common Cleaning Fixture in this context
     }
 
     @Test
     public void testChatRoomCreation() {
+        //Setup Fixture
 
+        //유저 1로 로그인을 한다.
         commonTestFunction.commonLoginSetup(false, 1);
         assertEquals(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyUserUid1());
-        //유저 1로 로그인을 한다.
 
-        //더미유저2를 타겟으로 채팅방을 생성한다.
+        //User2를 대상으로 한 챗룸 더미 모델을 셋업한다.
         ChatRoomModel modelForCreation = makeDummyChatRoom(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyUserUid2());
         ChatRoomModel modelForAssert = makeDummyChatRoom(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyUserUid2());
+
+
+        //Exercise SUT
+
+        //챗룸을 만들어서 데이터베이스에 올린다.
         makeChatRoom(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyUserUid2(), modelForCreation);
 
-        //유저 2로 로그인하고, 로그인이 성공했는지 검증한다.
+
+        //Verify OutCome
+
+        //유저 2로 로그인한다.
         commonTestFunction.commonLoginSetup(false, 2);
         assertEquals(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyUserUid2());
 
 
-        //유저 2의 계정을 이용해서 채팅방을 불러오고, 검증용 모델과 비교하여 정상적으로 채팅방이 생성됐나 확인한다.
-        commonTestFunction.lock();
-        final ArrayList<ChatRoomModel> chatRoomModelArrayList = new ArrayList<>();
-        ChatRoomApi.getChatRoomById(AuthenticationApi.getCurrentUid(), new ChatRoomApi.MyListCallback() {
-            @Override
-            public void onSuccess(ArrayList<ChatRoomModel> chatRoomModels) {
-                chatRoomModelArrayList.addAll(chatRoomModels);
-                commonTestFunction.unlock();
-            }
+        //유저 2의 계정으로 채팅방을 불러온다
+        ChatRoomModel realChatRoomModel = getChatRoomByUser();
 
-            @Override
-            public void onFail(int errorCode, Exception e) {
-                commonTestFunction.unlock();
-            }
-        });
-        commonTestFunction.waitForFirebase(2000);
-        assertEqualsModel(modelForAssert, chatRoomModelArrayList.get(0));
+        //Assert전용 더미 모델과 불러온 모델이 같은지 검증한다.
+        assertEqualsModel(modelForAssert, realChatRoomModel);
+    }
+
+
+    private ChatRoomModel  getChatRoomByUser() {
+            commonTestFunction.lock();
+            final ArrayList<ChatRoomModel> chatRoomModelArrayList = new ArrayList<>();
+            ChatRoomApi.getChatRoomById(AuthenticationApi.getCurrentUid(), new ChatRoomApi.MyListCallback() {
+                @Override
+                public void onSuccess(ArrayList<ChatRoomModel> chatRoomModels) {
+                    chatRoomModelArrayList.addAll(chatRoomModels);
+                    commonTestFunction.unlock();
+                }
+
+                @Override
+                public void onFail(int errorCode, Exception e) {
+                    commonTestFunction.unlock();
+                }
+            });
+            commonTestFunction.waitUnlock(5000);
+            return chatRoomModelArrayList.get(0);
     }
 
     private void assertEqualsModel(ChatRoomModel expected, ChatRoomModel actual) {
@@ -103,7 +127,6 @@ public class ChatTest {
         chatRoomModel.id1 = id1;
         chatRoomModel.id2 = id2;
         chatRoomModel.lastChat = "안녕하세요";
-        //chatRoomModel.opponentName = "김규동";
         chatRoomModel.lastDate = "06:02";
         chatRoomModel.pictureUrl = null;
         return chatRoomModel;
