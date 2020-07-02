@@ -43,57 +43,23 @@ public class GetRestaurantProductTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.msg", appContext.getPackageName());
 
-        //common setup fixture: 식당으로 로그인 한 뒤 더미 모델을 올리고 다시 로그아웃한다.
+        //common setup fixture: 식당으로 로그인 한 뒤, 더미 모델을 올리고, 다시 로그아웃한다.
         commonTestFunction.commonLoginSetup(true, 0);
         assertEquals(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyResUid());
-        restaurantProductModels.addAll(getDummyProductModels());
 
-        for(int i =0; i < restaurantProductModels.size(); i++) {
-            commonTestFunction.lock();
-            RestaurantProductApi.postProductWithNoImage(restaurantProductModels.get(i), new RestaurantProductApi.MyCallback() {
-                @Override
-                public void onSuccess(RestaurantProductModel restaurantProductModel) {
-                    restaurantProductModelIds.add(restaurantProductModel.rproduct_id); //나중에 지우기 위해서 아이디를 받아서 보관합니다.
-                    commonTestFunction.unlock();
-                }
+        uploadDummyModelBySignedUser();
 
-                @Override
-                public void onFail(int errorCode, Exception e) {
-                    commonTestFunction.unlock();
-                }
-            });
-            commonTestFunction.waitUnlock(5000);
-            Log.d("logofrpt", "here i m");
-        }
-        assertEquals("Setup이 네트워크 문제 등으로 되지 않으면 테스트가 진행되는 것을 막습니다.",3, restaurantProductModels.size());
         AuthenticationApi.logout();
-
     }
 
     @After
     public void commonCleaningFixture() {
+        //commonCleaningFixture: 식당으로 로그인 한 뒤 올라간 더미 모델을 전부 지우고 다시 로그아웃한다.
         commonTestFunction.commonLoginSetup(true, 0);
         assertEquals(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyResUid());
-        //commonCleaningFixture: 식당으로 로그인 한 뒤 올라간 더미 모델을 전부 지우고 다시 로그아웃한다.
-        for(int i =0; i < restaurantProductModelIds.size(); i++) {
-            commonTestFunction.lock();
-            RestaurantProductApi.deleteProduct(restaurantProductModelIds.get(i), new RestaurantProductApi.MyCallback() {
-                @Override
-                public void onSuccess(RestaurantProductModel restaurantProductModel) {
-                    commonTestFunction.unlock();
-                    Log.d("logofrpt", "here delete");
-                }
 
-                @Override
-                public void onFail(int errorCode, Exception e) {
-                    commonTestFunction.unlock();
-                    Log.d("logofrpt", String.format("here fail: %d", errorCode));
-                    if(e != null) Log.d("logofrpt", "error msg is:" + e.getMessage());
-                }
-            });
-            Log.d("logofrpt", "here wait");
-            commonTestFunction.waitUnlock(5000);
-        }
+        deleteDummyModelBySignedUser();
+
         AuthenticationApi.logout();
     }
 
@@ -240,6 +206,46 @@ public class GetRestaurantProductTest {
         subscriptionModel.user_id = AuthenticationApi.getCurrentUid();
         subscriptionModel.res_id = commonTestFunction.getDummyResUid();
         return subscriptionModel;
+    }
+
+    private void uploadDummyModelBySignedUser() {
+        restaurantProductModels.addAll(getDummyProductModels());
+
+        for(int i =0; i < restaurantProductModels.size(); i++) {
+            commonTestFunction.lock();
+            RestaurantProductApi.postProductWithNoImage(restaurantProductModels.get(i), new RestaurantProductApi.MyCallback() {
+                @Override
+                public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                    restaurantProductModelIds.add(restaurantProductModel.rproduct_id); //나중에 지우기 위해서 아이디를 받아서 보관합니다.
+                    commonTestFunction.unlock();
+                }
+
+                @Override
+                public void onFail(int errorCode, Exception e) {
+                    commonTestFunction.unlock();
+                }
+            });
+            commonTestFunction.waitUnlock(5000);
+        }
+        assertEquals("Setup이 네트워크 문제 등으로 되지 않으면 테스트가 진행되는 것을 막습니다.",3, restaurantProductModels.size());
+    }
+
+    private void deleteDummyModelBySignedUser() {
+        for(int i =0; i < restaurantProductModelIds.size(); i++) {
+            commonTestFunction.lock();
+            RestaurantProductApi.deleteProduct(restaurantProductModelIds.get(i), new RestaurantProductApi.MyCallback() {
+                @Override
+                public void onSuccess(RestaurantProductModel restaurantProductModel) {
+                    commonTestFunction.unlock();
+                }
+
+                @Override
+                public void onFail(int errorCode, Exception e) {
+                    commonTestFunction.unlock();
+                }
+            });
+            commonTestFunction.waitUnlock(5000);
+        }
     }
 
 }
