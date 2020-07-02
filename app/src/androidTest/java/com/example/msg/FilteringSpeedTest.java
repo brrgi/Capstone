@@ -63,7 +63,7 @@ public class FilteringSpeedTest {
 
         //Verify OutCome
         Log.d("SortSpeedTest", String.format("Type: Filtering, Time: %d(ms)", measuredTime));
-        assertTrue("3초 이하인지 검증", measuredTime < 3000);
+        assertTrue("3초 이하인지 검증", measuredTime < 1000);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class FilteringSpeedTest {
 
         //Verify OutCome
         Log.d("SortSpeedTest", String.format("Type: Distance, Time: %d(ms)", measuredTime));
-        assertTrue("3초 이하인지 검증", measuredTime < 3000);
+        assertTrue("3초 이하인지 검증", measuredTime < 1000);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class FilteringSpeedTest {
 
         //Verify OutCome
         Log.d("SortSpeedTest", String.format("Type: Stock, Time: %d(ms)", measuredTime));
-        assertTrue("3초 이하인지 검증", measuredTime < 3000);
+        assertTrue("3초 이하인지 검증", measuredTime < 1000);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class FilteringSpeedTest {
 
         //Verify OutCome
         Log.d("SortSpeedTest", String.format("Type: Price, Time: %d(ms)", measuredTime));
-        assertTrue("3초 이하인지 검증", measuredTime < 3000);
+        assertTrue("3초 이하인지 검증", measuredTime < 1000);
     }
 
 

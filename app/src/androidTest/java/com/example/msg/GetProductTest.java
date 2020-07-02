@@ -95,15 +95,6 @@ public class GetProductTest {
         AuthenticationApi.logout();
     }
 
-    @Test
-    public void getProductInformationTest() {
-
-    }
-
-    @Test
-    public void EvaluateTest() {
-
-    }
 
     private void unSubscribe() {
         commonTestFunction.lock();

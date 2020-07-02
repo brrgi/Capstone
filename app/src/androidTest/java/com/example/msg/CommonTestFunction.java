@@ -170,6 +170,6 @@ public class CommonTestFunction {
     테스트 코드의 가독성을 해치기 떄문에 사용하는 것을 권장하지 않습니다.
      */
 
-  
+
 
 }
