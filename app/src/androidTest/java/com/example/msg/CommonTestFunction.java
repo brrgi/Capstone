@@ -170,50 +170,6 @@ public class CommonTestFunction {
     테스트 코드의 가독성을 해치기 떄문에 사용하는 것을 권장하지 않습니다.
      */
 
-    public  void killNull() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        lock();
-        db.collection("ResProducts")
-                .whereEqualTo("cost", -1)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        RestaurantProductModel restaurantProductModel = null;
-                        ArrayList<RestaurantProductModel> restaurantProductModelArrayList = new ArrayList<RestaurantProductModel>();
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                restaurantProductModel = document.toObject(RestaurantProductModel.class);
-                                restaurantProductModelArrayList.add(restaurantProductModel);
-                            }
-                            for(int i =0; i<restaurantProductModelArrayList.size(); i++) {
-                                RestaurantProductApi.deleteProduct(restaurantProductModelArrayList.get(i).rproduct_id, new RestaurantProductApi.MyCallback() {
-                                    @Override
-                                    public void onSuccess(RestaurantProductModel restaurantProductModel) {
-                                        //
-                                    }
-                                    @Override
-                                    public void onFail(int errorCode, Exception e) {
-                                        //
-                                    }
-                                });
-
-                            }
-                            unlock();
-                        } else {
-                        }
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-            }
-        });
-        waitUnlock(1000000);
-    }
-    /*
-    dummy product를 가능한 만큼 삭제합니다.
-     */
+  
 
 }
