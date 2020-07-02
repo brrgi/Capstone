@@ -56,7 +56,6 @@ public class FilteringSpeedTest {
     public void worstFilterSpeedTest() {
         //SetupFixture
         long measuredTime;
-        long timeout = 3000;
 
         //Exercise SUT : 복합 필터링 적용
         measuredTime = checkFiltering();
@@ -70,7 +69,6 @@ public class FilteringSpeedTest {
     public void distanceSortSpeedTest() {
         //SetupFixture
         long measuredTime;
-        long timeout = 3000;
 
         //Exercise SUT1 : 거리순 정렬 시간 측정
         measuredTime = checkDistanceSort();
@@ -84,7 +82,6 @@ public class FilteringSpeedTest {
     public void StockSortSpeedTest() {
         //SetupFixture
         long measuredTime;
-        long timeout = 3000;
 
         //Exercise SUT1 : 재고순 정렬 시간 측정
         measuredTime = checkStockSort();
@@ -98,7 +95,6 @@ public class FilteringSpeedTest {
     public void PriceSortSpeedTest() {
         //SetupFixture
         long measuredTime;
-        long timeout = 3000;
 
         //Exercise SUT1 : 가격순 정렬 시간 측정
         measuredTime = checkPriceSort();
