@@ -29,32 +29,29 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class GetRestaurantProductTest {
+public class GetProductTest {
     private ArrayList<RestaurantProductModel> restaurantProductModels = new ArrayList<>();
     private ArrayList<String> restaurantProductModelIds = new ArrayList<>();
     private ArrayList<String> subscriptionIds = new ArrayList<>();
     private CommonTestFunction commonTestFunction = new CommonTestFunction("천윤서");
 
-    //공통: 식당으로 레스토랑 모델을 등록한다.
-    //공통: 식당으로 로그아웃 한다.
     @Before
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.example.msg", appContext.getPackageName());
 
-        //common setup fixture: 식당으로 로그인 한 뒤, 더미 모델을 올리고, 다시 로그아웃한다.
+        //common setup fixture: 식당으로 로그인해서 더미 모델들을 올리고 로그아웃한다.
         commonTestFunction.commonLoginSetup(true, 0);
         assertEquals(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyResUid());
 
         uploadDummyModelBySignedUser();
-
         AuthenticationApi.logout();
     }
 
     @After
     public void commonCleaningFixture() {
-        //commonCleaningFixture: 식당으로 로그인 한 뒤 올라간 더미 모델을 전부 지우고 다시 로그아웃한다.
+        //commonCleaningFixture:  올라간 더미 상품 모델을 지운다.
         commonTestFunction.commonLoginSetup(true, 0);
         assertEquals(AuthenticationApi.getCurrentUid(), commonTestFunction.getDummyResUid());
 
@@ -65,6 +62,8 @@ public class GetRestaurantProductTest {
 
     @Test
     public void testSubscribe() {
+
+
         //Setup Fixture: 로그인 이후 더미 구독 모델 생성.
         ArrayList<RestaurantProductModel> extractedModel = new ArrayList<>();
         boolean isSuccess;
@@ -82,9 +81,6 @@ public class GetRestaurantProductTest {
         extractedModel.addAll(extractSubscribedModelWithSpinlock(restaurantProductModels));
 
         //Verify OutCome
-        for(int i = 0; i < extractedModel.size(); i++) {
-            Log.d("임시테스트", extractedModel.get(i).categorySmall);
-        }
         assertEquals("구독된 식당의 상품은 양파와 닭고기만 있음", 2, extractedModel.size());
         assertEquals("구독 안된 식당의 상품은 양배추만 있음", 1, restaurantProductModels.size());
 
@@ -94,7 +90,7 @@ public class GetRestaurantProductTest {
         assertContain("구독된 식당의 상품은 양파와 닭고기만 있음", extractedModel, subscribed);
         assertContain("구독 안된 식당의 상품은 양배추만 있음", restaurantProductModels, noSubscribed);
 
-        //Cleaning Fixture
+        //Cleaning Fixture: 올라간 더미 구독 모델을 지운다.
         unSubscribe();
         AuthenticationApi.logout();
     }
@@ -247,5 +243,7 @@ public class GetRestaurantProductTest {
             commonTestFunction.waitUnlock(5000);
         }
     }
+
+
 
 }
