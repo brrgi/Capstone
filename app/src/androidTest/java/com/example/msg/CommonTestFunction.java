@@ -48,35 +48,35 @@ public class CommonTestFunction {
     public CommonTestFunction(String testerName) {
         switch(testerName) {
             case "천윤서":
-                dummyUserId1 = "utdd1@naver.com";
-                dummyUserUid1 = "";
-                dummyUserId2 = "utdd2@naver.com";
-                dummyUserUid2 = "";
-                dummyResId = "rtdd1@naver.com";
-                dummyResUid = "";
+                dummyUserId1 = "userc1@naver.com";
+                dummyUserUid1 = "UfacjQiR5DNrPCTqqx2wFpawa6H3";
+                dummyUserId2 = "userc2@naver.com";
+                dummyUserUid2 = "PmhxlSW590cTjqd93Xq72LNYkRa2";
+                dummyResId = "resc@naver.com";
+                dummyResUid = "FQx9gpHXumfDEAnbRquzobWxWt33";
                 break;
             case "이레":
-                dummyUserId1 = "utdd3@naver.com";
-                dummyUserUid1 = "";
-                dummyUserId2 = "utdd4@naver.com";
+                dummyUserId1 = "useri1@naver.com";
+                dummyUserUid1 = "bbsEgWINwUSZFt2941NTDGR6lkI2";
+                dummyUserId2 = "";
                 dummyUserUid2 = "";
-                dummyResId = "rtdd2@naver.com";
-                dummyResUid = "";
+                dummyResId = "resi@naver.com";
+                dummyResUid = "Gi0ObXrWTJf0WtJqk1u90NWIAKq2";
                 break;
             case "박규동":
-                dummyUserId1 = "utdd5@naver.com";
+                dummyUserId1 = "";
                 dummyUserUid1 = "2";
-                dummyUserId2 = "utdd6@naver.com";
+                dummyUserId2 = "";
                 dummyUserUid2 = "";
-                dummyResId = "rtdd3@naver.com";
+                dummyResId = "resb@naver.com";
                 dummyResUid = "Agv6ejVEoXQRa7kim37u8C8neEz1";
                 break;
             case "한우석":
-                dummyUserId1 = "utdd7@naver.com";
+                dummyUserId1 = "1";
                 dummyUserUid1 = "";
-                dummyUserId2 = "utdd8@naver.com";
+                dummyUserId2 = "";
                 dummyUserUid2 = "";
-                dummyResId = "rtdd4@naver.com";
+                dummyResId = "resh@naver.com";
                 dummyResUid = "tw2SHeC2WWZ88ZUHzJMW8l7ko0O2";
                 break;
             default:
