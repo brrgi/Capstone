@@ -602,4 +602,6 @@ public class RestaurantProductApi {
     출력 및 동작: 입력으로 들어온 모델들 중, 현재 로그인 된 id로 구독 된 식당의 모델만을 추출(원본에서는 삭제/deleteDuplicated함수가 쓰임)해서 콜백함수를 통해서 돌려줍니다.
      */
 
+
+
 }

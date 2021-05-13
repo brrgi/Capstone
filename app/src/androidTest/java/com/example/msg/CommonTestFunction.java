@@ -2,9 +2,18 @@ package com.example.msg;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.msg.Api.AuthenticationApi;
 import com.example.msg.Api.DistanceApi;
+import com.example.msg.Api.RestaurantProductApi;
 import com.example.msg.DatabaseModel.RestaurantProductModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -49,11 +58,11 @@ public class CommonTestFunction {
         switch(testerName) {
             case "천윤서":
                 dummyUserId1 = "userc1@naver.com";
-                dummyUserUid1 = "UfacjQiR5DNrPCTqqx2wFpawa6H3";
+                dummyUserUid1 = "CljLgkNI5SRHryZyIS27SX00TqB2";
                 dummyUserId2 = "userc2@naver.com";
-                dummyUserUid2 = "PmhxlSW590cTjqd93Xq72LNYkRa2";
-                dummyResId = "resc@naver.com";
-                dummyResUid = "FQx9gpHXumfDEAnbRquzobWxWt33";
+                dummyUserUid2 = "NfV3hMOHO9d5stAge9T8MBF3UdQ2";
+                dummyResId = "togo@naver.com";
+                dummyResUid = "g02ZnhhQrXhdBJNvxcDLHrynX5i2";
                 break;
             case "이레":
                 dummyUserId1 = "useri1@naver.com";
@@ -160,5 +169,7 @@ public class CommonTestFunction {
     따라서 간격을 주는 방식을 이용해서 이를 대체하는 것을 권장합니다. 물론, 다중콜백을 사용하는 방식도 있으나, 이는
     테스트 코드의 가독성을 해치기 떄문에 사용하는 것을 권장하지 않습니다.
      */
+
+
 
 }
